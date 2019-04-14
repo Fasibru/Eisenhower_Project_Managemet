@@ -62,6 +62,7 @@ class NewTask extends Component {
           </form>
           <button type="submit" onClick={(event) => { submitNewTask(event); }}>Add Task</button>
           <button type="button" onClick={toggleNewTaskPopup}>Close</button>
+          <button type="button" onClick={() => console.log('Todo: Delete Task')}>Delete</button>
         </div>
       </div>
     );
