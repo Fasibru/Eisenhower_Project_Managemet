@@ -1,0 +1,41 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "category": "A",
+      "title": "React Popup",
+      "description": "Implement a better solution for the popup"
+    },
+    {
+      "id": 2,
+      "title": "Data flow",
+      "category": "A",
+      "description": "Read data with remote API from MongoDB --> Express routes and Axios"
+    },
+    {
+      "id": 3,
+      "title": "Third task",
+      "category": "C",
+      "description": "Whatever your third task will be."
+    },
+    {
+      "id": 4,
+      "title": "State Management",
+      "category": "B",
+      "description": "Implement Redux"
+    },
+    {
+      "id": 5,
+      "title": "Fifth task",
+      "category": "D",
+      "description": "Whatever your fifth task will be."
+    },
+    {
+      "id": 6,
+      "title": "Edit",
+      "category": "A",
+      "description": "Make tasks editable"
+    }
+  ]
+
+}
