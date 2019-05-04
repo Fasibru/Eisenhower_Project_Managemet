@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import TestSchema from '../models/model';
+import TasksSchema from '../models/model';
 
-// create 'Dummy' collection by leveraging the TestSchema
-const Dummy = mongoose.model('Dummy', TestSchema);
+// create 'Dummy' collection by leveraging the TasksSchema
+const Dummy = mongoose.model('Dummy', TasksSchema);
 
 // for POST endpoint
 export const addNewDummy = (req, res) => {

@@ -1,18 +1,26 @@
 import { Schema } from 'mongoose';
 
-const TestSchema = new Schema({
-  testString: {
-    type: String,
-    required: 'Enter a string',
-  },
-  testNumber: {
+const TasksSchema = new Schema({
+  id: {
     type: Number,
-    required: 'Enter a number',
+    required: 'Provide a valid ID',
   },
-  testDate: {
+  category: {
+    type: String,
+    required: 'Provide valid category',
+  },
+  title: {
+    type: String,
+    required: 'Provide a title',
+  },
+  description: {
+    type: String,
+    required: 'Provide a description'
+  },
+  date: {
     type: Date,
     default: Date.now,
   },
 });
 
-export default TestSchema;
+export default TasksSchema;
