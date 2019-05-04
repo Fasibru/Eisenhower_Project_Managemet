@@ -15,7 +15,7 @@ const TasksSchema = new Schema({
   },
   description: {
     type: String,
-    required: 'Provide a description'
+    required: 'Provide a description',
   },
   date: {
     type: Date,
