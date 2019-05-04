@@ -1,26 +1,26 @@
 import mongoose from 'mongoose';
 import TasksSchema from '../models/model';
 
-// create 'Dummy' collection by leveraging the TasksSchema
-const Dummy = mongoose.model('Dummy', TasksSchema);
+// create 'Tasks' collection by leveraging the TasksSchema
+const Tasks = mongoose.model('Tasks', TasksSchema);
 
 // for POST endpoint
-export const addNewDummy = (req, res) => {
-  const newDummy = new Dummy(req.body);
-  newDummy.save((err, dummy) => {
+export const addNewTask = (req, res) => {
+  const newTask = new Tasks(req.body);
+  newTask.save((err, task) => {
     if (err) {
       res.send(err);
     }
-    res.json(dummy);
+    res.json(task);
   });
 };
 
 // for GET endpoint
-export const getDummies = (req, res) => {
-  Dummy.find({}, (err, dummies) => {
+export const getTasks = (req, res) => {
+  Tasks.find({}, (err, tasks) => {
     if (err) {
       res.send(err);
     }
-    res.json(dummies);
+    res.json(tasks);
   });
 };

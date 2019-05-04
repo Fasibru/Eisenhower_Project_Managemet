@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { addNewDummy, getDummies } from '../controllers/controllers';
+import { addNewTask, getTasks } from '../controllers/controllers';
 
 const router = Router();
 
-router.get('/dummy', getDummies);
+router.get('/tasks', getTasks);
 
-router.post('/dummy', addNewDummy);
+router.post('/task', addNewTask);
 
 export default router;
