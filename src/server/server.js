@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import os from 'os';
 
-import apiRouter from './routes/testRoutes';
+import apiRouter from './routes/routes';
 
 const app = express();
 const PORT = process.env.PORT || 8080;

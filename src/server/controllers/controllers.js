@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import TestSchema from '../models/testModel';
+import TestSchema from '../models/model';
 
 // create 'Dummy' collection by leveraging the TestSchema
 const Dummy = mongoose.model('Dummy', TestSchema);
