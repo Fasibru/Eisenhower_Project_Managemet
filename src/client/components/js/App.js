@@ -14,17 +14,18 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.newTask = {
-      title: '',
-      description: '',
-      category: 'A', // default category
-    };
+    // this.newTask = {
+    //   title: '',
+    //   description: '',
+    //   category: 'A', // default category
+    // };
 
     this.state = {
       /* filteredTasks will change depending on the filters set in Sidenav once implemented */
       filteredTasks: [],
       newTaskPopup: false,
-      newTask: this.newTask,
+      // newTask: this.newTask,
+      newTask: {},
     };
 
     /* Only necessary to bind 'this' for this method since all others are arrow functions.
@@ -54,16 +55,12 @@ class App extends Component {
     event.preventDefault();
     this.toggleNewTaskPopup();
 
-    const { filteredTasks } = this.state;
-
-    // need to develop a methodology to find highest rank in category
-    const maxRank = Math.max.apply(this, filteredTasks.map(task => task.rank));
-    this.newTask.rank = maxRank + 1;
+    const { newTask } = this.state;
 
     /* POST new task and update state afterwards
     This looks resource intensive (unnecessary GET for all tasks)
     --> think about better implementation */
-    axios.post('/api/task', this.newTask)
+    axios.post('/api/task', newTask)
       .then(axios.get('/api/tasks')
         .then((res) => {
           this.setState({
@@ -72,24 +69,20 @@ class App extends Component {
         }))
       .catch(console.error);
 
-    // reset newTask in class
-    this.newTask = {
-      title: '',
-      description: '',
-      category: 'A', // default category
-    };
-
+    // reset newTask
     this.setState({
-      // reset newTask in state
-      newTask: this.newTask,
+      newTask: {},
     });
   }
 
-  // define newTask object in state based on form input in NewTask component:
+  // update newTask object based on form input in NewTask component:
   handleNewTaskFormChange(event) {
-    this.newTask[event.target.name] = event.target.value;
+    const { newTask } = this.state;
+    newTask[event.target.name] = event.target.value;
+
+    // maybe this leads to unnecessary many re-renderings:
     this.setState({
-      newTask: this.newTask,
+      newTask,
     });
   }
 

@@ -3,7 +3,7 @@ import { Schema } from 'mongoose';
 const TasksSchema = new Schema({
   rank: {
     type: Number,
-    required: 'Provide a valid ID',
+    default: -999,
   },
   category: {
     type: String,

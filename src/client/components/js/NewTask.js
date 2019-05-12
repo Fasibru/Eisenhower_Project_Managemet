@@ -63,11 +63,16 @@ class NewTask extends Component {
 }
 
 NewTask.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  description: PropTypes.string,
   defineNewTask: PropTypes.func.isRequired,
   submitNewTask: PropTypes.func.isRequired,
   toggleNewTaskPopup: PropTypes.func.isRequired,
+};
+
+NewTask.defaultProps = {
+  title: '',
+  description: '',
 };
 
 export default NewTask;
