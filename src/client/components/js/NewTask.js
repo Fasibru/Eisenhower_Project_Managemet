@@ -1,10 +1,3 @@
-/*
-This component should probably be a form so the user can input data.
-The data that is submitted should be saved to the data warehouse.
-Adding data to warehouse should trigger rendering
---> e.g. via sockets or via GET request in handle submit
-*/
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../css/NewTask.css';

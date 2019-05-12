@@ -51,11 +51,14 @@ class App extends Component {
 
     const { filteredTasks } = this.state;
 
-    // need to understand why/how this works
-    const maxId = Math.max.apply(this, filteredTasks.map(task => task.id));
-    console.log(maxId);
+    // need to develop a methodology to find highest rank in category
+    const maxRank = Math.max.apply(this, filteredTasks.map(task => task.rank));
+    this.newTask.rank = maxRank + 1;
 
-    this.newTask.id = maxId + 1;
+    // POST method
+    axios.post('/api/task', this.newTask)
+      .catch(console.error);
+
     tasks.push(this.newTask);
     this.setState({
       filteredTasks: tasks,
@@ -67,7 +70,7 @@ class App extends Component {
       },
     });
 
-    // reset newTask in class
+    // reset newTask in class (move this above setState !!!)
     this.newTask = {
       title: '',
       description: '',
