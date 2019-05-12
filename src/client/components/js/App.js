@@ -44,6 +44,11 @@ class App extends Component {
       .catch(console.error);
   }
 
+  toggleNewTaskPopup = () => {
+    // callback is comparable to newTaskPopup: !this.state.newTaskPopup
+    this.setState(prevState => ({ newTaskPopup: !prevState.newTaskPopup }));
+  }
+
   // add new task to data warehouse on submit
   handleNewTaskFormSubmit = (event) => {
     event.preventDefault();
@@ -55,32 +60,29 @@ class App extends Component {
     const maxRank = Math.max.apply(this, filteredTasks.map(task => task.rank));
     this.newTask.rank = maxRank + 1;
 
-    // POST method
+    /* POST new task and update state afterwards
+    This looks resource intensive (unnecessary GET for all tasks)
+    --> think about better implementation */
     axios.post('/api/task', this.newTask)
+      .then(axios.get('/api/tasks')
+        .then((res) => {
+          this.setState({
+            filteredTasks: res.data,
+          });
+        }))
       .catch(console.error);
 
-    tasks.push(this.newTask);
-    this.setState({
-      filteredTasks: tasks,
-      // reset newTask in state
-      newTask: {
-        title: '',
-        description: '',
-        category: 'A', // default category
-      },
-    });
-
-    // reset newTask in class (move this above setState !!!)
+    // reset newTask in class
     this.newTask = {
       title: '',
       description: '',
       category: 'A', // default category
     };
-  }
 
-  toggleNewTaskPopup = () => {
-    // callback is comparable to newTaskPopup: !this.state.newTaskPopup
-    this.setState(prevState => ({ newTaskPopup: !prevState.newTaskPopup }));
+    this.setState({
+      // reset newTask in state
+      newTask: this.newTask,
+    });
   }
 
   // define newTask object in state based on form input in NewTask component:
