@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
 
 const TasksSchema = new Schema({
-  id: {
+  rank: {
     type: Number,
     required: 'Provide a valid ID',
   },
