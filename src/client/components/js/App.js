@@ -55,24 +55,33 @@ class App extends Component {
     event.preventDefault();
     this.toggleNewTaskPopup();
 
-    const { newTask } = this.state;
+    const { newTask, filteredTasks } = this.state;
+    const filteredTasksLength = filteredTasks.length;
 
-    /* POST new task and update state afterwards
-    This looks resource intensive (unnecessary GET for all tasks)
-    --> think about better implementation */
+    // POST new task and update state afterwards
     axios.post('/api/task', newTask)
-      .then(axios.get('/api/tasks')
-        .then((res) => {
-          this.setState({
-            filteredTasks: res.data,
-          });
-        }))
-      .catch(console.error);
+      .then((res) => {
+        // retrieve _id and rank from posted newTask
+        const newTaskID = res.data._id;
+        const newTaskRank = res.data.rank;
 
-    // reset newTask
-    this.setState({
-      newTask: {},
-    });
+        // instead of using a GET for all tasks I just add the new task to the filteredTasks array
+        // _id and rank updated manually
+        filteredTasks.push(newTask);
+        filteredTasks[filteredTasksLength]._id = newTaskID;
+        filteredTasks[filteredTasksLength].rank = newTaskRank;
+
+        // update state including the new task for re-render
+        this.setState({
+          filteredTasks,
+        });
+
+        // reset newTask
+        this.setState({
+          newTask: {},
+        });
+      })
+      .catch(console.error);
   }
 
   // update newTask object based on form input in NewTask component:

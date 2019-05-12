@@ -15,7 +15,7 @@ export const addNewTask = (req, res) => {
   });
 };
 
-// for GET endpoint
+// for GET all tasks endpoint
 export const getTasks = (req, res) => {
   Tasks.find({}, (err, tasks) => {
     if (err) {
@@ -23,4 +23,9 @@ export const getTasks = (req, res) => {
     }
     res.json(tasks);
   });
+};
+
+// for DELETE endpoint
+export const deleteTask = (req, res) => {
+  // ...
 };
