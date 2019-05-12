@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import bodyParser from 'body-parser';
 import os from 'os';
 
@@ -14,6 +15,9 @@ const mongoDatabaseURL = process.env.DB_URL;
 mongoose.connect(mongoDatabaseURL, { useNewUrlParser: true })
   .then(() => console.log(`Connected to mongodb: ${mongoDatabaseURL}`))
   .catch(() => console.error());
+
+// CORS
+app.use(cors());
 
 // bodyParser setup
 app.use(bodyParser.urlencoded({ extended: true }));

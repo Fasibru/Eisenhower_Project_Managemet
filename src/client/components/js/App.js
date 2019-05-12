@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 
 import Header from './Header';
 import Sidenav from './Sidenav';
@@ -21,9 +21,8 @@ class App extends Component {
     };
 
     this.state = {
-      /* filteredTasks will change depending on the filters set in Sidenav.
-      For now this is set to 'tasks' for static development purposes. */
-      filteredTasks: tasks,
+      /* filteredTasks will change depending on the filters set in Sidenav once implemented */
+      filteredTasks: [],
       newTaskPopup: false,
       newTask: this.newTask,
     };
@@ -36,22 +35,14 @@ class App extends Component {
 
   componentDidMount() {
     // read initial data from DB
-
-    // axios.get('/api/getUsername')
-    //   .then((res) => {
-    //     this.setState({
-    //       test: res.data,
-    //     });
-    //   })
-    //   .catch(console.error);
+    axios.get('/api/tasks')
+      .then((res) => {
+        this.setState({
+          filteredTasks: res.data,
+        });
+      })
+      .catch(console.error);
   }
-
-  // componentDidUpdate() {
-  //   /*
-  //   Maybe do the categorization of filtered tasks here? --> problem: setState would not work
-  //   */
-  //  console.log(this.state);
-  // }
 
   // add new task to data warehouse on submit
   handleNewTaskFormSubmit = (event) => {
@@ -75,7 +66,6 @@ class App extends Component {
         category: 'A', // default category
       },
     });
-    // console.log(this.state.filteredTasks);
 
     // reset newTask in class
     this.newTask = {

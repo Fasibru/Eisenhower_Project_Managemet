@@ -17,19 +17,19 @@ class Main extends Component {
     filteredTasks.forEach((task) => {
       switch (task.category) {
         case 'A':
-          categorizedFilteredTasks.TasksCatA.push(<Task key={task.id} className="task task-category-A" title={task.title} description={task.description} />);
+          categorizedFilteredTasks.TasksCatA.push(<Task key={task._id} className="task task-category-A" title={task.title} description={task.description} />);
           break;
 
         case 'B':
-          categorizedFilteredTasks.TasksCatB.push(<Task key={task.id} className="task task-category-B" title={task.title} description={task.description} />);
+          categorizedFilteredTasks.TasksCatB.push(<Task key={task._id} className="task task-category-B" title={task.title} description={task.description} />);
           break;
 
         case 'C':
-          categorizedFilteredTasks.TasksCatC.push(<Task key={task.id} className="task task-category-C" title={task.title} description={task.description} />);
+          categorizedFilteredTasks.TasksCatC.push(<Task key={task._id} className="task task-category-C" title={task.title} description={task.description} />);
           break;
 
         case 'D':
-          categorizedFilteredTasks.TasksCatD.push(<Task key={task.id} className="task task-category-D" title={task.title} description={task.description} />);
+          categorizedFilteredTasks.TasksCatD.push(<Task key={task._id} className="task task-category-D" title={task.title} description={task.description} />);
           break;
 
         default:
