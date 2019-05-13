@@ -27,5 +27,11 @@ export const getTasks = (req, res) => {
 
 // for DELETE endpoint
 export const deleteTask = (req, res) => {
-  // ...
+  // res.send(req.params);
+  Tasks.findByIdAndDelete({ _id: req.params.id }, (err) => {
+    if (err) {
+      res.send(err);
+    }
+    res.send(`Successfully removed task ${req.params.id}`);
+  });
 };
