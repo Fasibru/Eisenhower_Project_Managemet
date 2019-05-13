@@ -1,0 +1,23 @@
+/* this class will occupy the whole screen so the user has to interact with the editTask popup
+------------------------------------------------ */
+.editTask-outer {
+  position: fixed; /* necessary so the div around the popup will be placed at the top left */
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0, 0.3);
+}
+
+/* this class handles the styling of the newTask popup
+------------------------------------------------ */
+.editTask-inner {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 25%;
+  bottom: 25%;
+  background: white;
+}

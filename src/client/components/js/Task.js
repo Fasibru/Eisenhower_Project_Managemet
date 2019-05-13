@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function Task(props) {
   const { className, title, description } = props;
   return (
-    <div className={className}>
+    <div className={className} onDoubleClick={() => console.log('TEST')}>
       <p>{title}</p>
       <p>{description}</p>
     </div>

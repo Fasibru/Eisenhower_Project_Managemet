@@ -6,6 +6,7 @@ import Sidenav from './Sidenav';
 import Main from './Main';
 import Footer from './Footer';
 import NewTask from './NewTask';
+import EditTask from './EditTask';
 
 import '../css/App.css';
 import { tasks } from '../../data.json'; // that's the data warehouse. 'tasks' will be passed to Sidenav where the filtering happens. Sidenav will then set the filtered tasks as the state for App. The filtered tasks will be passed as array to Main where the identification of the category happens for rendering.
@@ -14,18 +15,12 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    // this.newTask = {
-    //   title: '',
-    //   description: '',
-    //   category: 'A', // default category
-    // };
-
     this.state = {
       /* filteredTasks will change depending on the filters set in Sidenav once implemented */
       filteredTasks: [],
       newTaskPopup: false,
-      // newTask: this.newTask,
       newTask: {},
+      editTaskPopup: false,
     };
 
     /* Only necessary to bind 'this' for this method since all others are arrow functions.
@@ -49,6 +44,10 @@ class App extends Component {
     // callback is comparable to newTaskPopup: !this.state.newTaskPopup
     this.setState(prevState => ({ newTaskPopup: !prevState.newTaskPopup }));
   }
+
+  toggleEditTaskPopup = () => {
+    this.setState(prevState => ({ editTaskPopup: !prevState.state.editTaskPopup }));
+  };
 
   // add new task to data warehouse on submit
   handleNewTaskFormSubmit = (event) => {
@@ -96,7 +95,12 @@ class App extends Component {
   }
 
   render() {
-    const { filteredTasks, newTaskPopup, newTask } = this.state;
+    const {
+      filteredTasks,
+      newTaskPopup,
+      newTask,
+      editTaskPopup,
+    } = this.state;
     const { title, description } = newTask;
     return (
       <div className="grid-container">
@@ -105,7 +109,10 @@ class App extends Component {
           tasks={tasks}
           toggleNewTaskPopup={this.toggleNewTaskPopup}
         />
-        <Main filteredTasks={filteredTasks} />
+        <Main
+          filteredTasks={filteredTasks}
+          toggleEditTaskPopup={this.toggleEditTaskPopup}
+        />
         <Footer />
         {newTaskPopup
           && (
@@ -116,6 +123,13 @@ class App extends Component {
             title={title}
             description={description}
           />
+          )
+        }
+        {editTaskPopup
+          && (
+            <EditTask
+              toggleEditTaskPopup={this.editTaskPopup}
+            />
           )
         }
       </div>

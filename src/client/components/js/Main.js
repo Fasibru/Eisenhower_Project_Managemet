@@ -6,6 +6,9 @@ import Task from './Task';
 
 
 class Main extends Component {
+  // constructor(props) {
+  //   super(props);
+  // }
   static categorizeFilteredTasks(filteredTasks) {
     const categorizedFilteredTasks = {
       TasksCatA: [],
@@ -13,6 +16,8 @@ class Main extends Component {
       TasksCatC: [],
       TasksCatD: [],
     };
+
+    // const { toggleEditTaskPopup } = this.props;
 
     filteredTasks.forEach((task) => {
       switch (task.category) {
