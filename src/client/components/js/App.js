@@ -46,7 +46,7 @@ class App extends Component {
   }
 
   toggleEditTaskPopup = () => {
-    this.setState(prevState => ({ editTaskPopup: !prevState.state.editTaskPopup }));
+    this.setState(prevState => ({ editTaskPopup: !prevState.editTaskPopup }));
   };
 
   // add new task to data warehouse on submit
