@@ -21,6 +21,7 @@ class App extends Component {
       newTaskPopup: false,
       newTask: {},
       editTaskPopup: false,
+      editTask: {},
     };
 
     /* Only necessary to bind 'this' for this method since all others are arrow functions.
@@ -48,6 +49,20 @@ class App extends Component {
   toggleEditTaskPopup = () => {
     this.setState(prevState => ({ editTaskPopup: !prevState.editTaskPopup }));
   };
+
+  populateEditTask = (data) => {
+    const { editTaskPopup } = this.state;
+    this.setState({
+      editTaskPopup: !editTaskPopup,
+      editTask: {
+        _id: data._id,
+        rank: data.rank,
+        category: data.category,
+        title: data.title,
+        description: data.description,
+      },
+    });
+  }
 
   // add new task to data warehouse on submit
   handleNewTaskFormSubmit = (event) => {
@@ -100,8 +115,10 @@ class App extends Component {
       newTaskPopup,
       newTask,
       editTaskPopup,
+      editTask,
     } = this.state;
     const { title, description } = newTask;
+
     return (
       <div className="grid-container">
         <Header />
@@ -112,6 +129,7 @@ class App extends Component {
         <Main
           filteredTasks={filteredTasks}
           toggleEditTaskPopup={this.toggleEditTaskPopup}
+          populateEditTask={this.populateEditTask}
         />
         <Footer />
         {newTaskPopup
@@ -128,7 +146,8 @@ class App extends Component {
         {editTaskPopup
           && (
             <EditTask
-              toggleEditTaskPopup={this.editTaskPopup}
+              toggleEditTaskPopup={this.ToggleEditTaskPopup}
+              editTask={editTask}
             />
           )
         }

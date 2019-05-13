@@ -5,7 +5,7 @@ import '../css/Main.css';
 import '../css/Task.css';
 import Task from './Task';
 
-const categorizeFilteredTasks = (filteredTasks, toggleEditTaskPopup) => {
+const categorizeFilteredTasks = (filteredTasks, populateEditTask) => {
   const categorizedFilteredTasks = {
     TasksCatA: [],
     TasksCatB: [],
@@ -20,11 +20,10 @@ const categorizeFilteredTasks = (filteredTasks, toggleEditTaskPopup) => {
       case 'A':
         categorizedFilteredTasks.TasksCatA.push(
           <Task
-            key={task._id}
             className="task task-category-A"
-            title={task.title}
-            description={task.description}
-            toggleEditTaskPopup={toggleEditTaskPopup}
+            key={task._id}
+            task={task}
+            populateEditTask={populateEditTask}
           />,
         );
         break;
@@ -32,11 +31,10 @@ const categorizeFilteredTasks = (filteredTasks, toggleEditTaskPopup) => {
       case 'B':
         categorizedFilteredTasks.TasksCatB.push(
           <Task
-            key={task._id}
             className="task task-category-B"
-            title={task.title}
-            description={task.description}
-            toggleEditTaskPopup={toggleEditTaskPopup}
+            key={task._id}
+            task={task}
+            populateEditTask={populateEditTask}
           />,
         );
         break;
@@ -44,11 +42,10 @@ const categorizeFilteredTasks = (filteredTasks, toggleEditTaskPopup) => {
       case 'C':
         categorizedFilteredTasks.TasksCatC.push(
           <Task
-            key={task._id}
             className="task task-category-C"
-            title={task.title}
-            description={task.description}
-            toggleEditTaskPopup={toggleEditTaskPopup}
+            key={task._id}
+            task={task}
+            populateEditTask={populateEditTask}
           />,
         );
         break;
@@ -56,11 +53,10 @@ const categorizeFilteredTasks = (filteredTasks, toggleEditTaskPopup) => {
       case 'D':
         categorizedFilteredTasks.TasksCatD.push(
           <Task
-            key={task._id}
             className="task task-category-D"
-            title={task.title}
-            description={task.description}
-            toggleEditTaskPopup={toggleEditTaskPopup}
+            key={task._id}
+            task={task}
+            populateEditTask={populateEditTask}
           />,
         );
         break;
@@ -73,8 +69,11 @@ const categorizeFilteredTasks = (filteredTasks, toggleEditTaskPopup) => {
 };
 
 function Main(props) {
-  const { filteredTasks, toggleEditTaskPopup } = props;
-  const categorizedFilteredTasks = categorizeFilteredTasks(filteredTasks, toggleEditTaskPopup);
+  const { filteredTasks, populateEditTask } = props;
+  const categorizedFilteredTasks = categorizeFilteredTasks(
+    filteredTasks,
+    populateEditTask,
+  );
   return (
     <main className="main">
       <div className="column-category">{categorizedFilteredTasks.TasksCatA}</div>
@@ -87,7 +86,7 @@ function Main(props) {
 
 Main.propTypes = {
   filteredTasks: PropTypes.arrayOf(PropTypes.object).isRequired,
-  toggleEditTaskPopup: PropTypes.func.isRequired,
+  populateEditTask: PropTypes.func.isRequired,
 };
 
 export default Main;
