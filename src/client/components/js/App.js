@@ -100,6 +100,15 @@ class App extends Component {
     this.toggleNewTaskPopup();
   }
 
+  handleEditTaskFormSubmit = (event) => {
+    event.preventDefault();
+
+    const { editTask } = this.state;
+
+    axios.put(`/api/editTask/${editTask._id}`, editTask)
+      .catch(console.error);
+  }
+
   // update editTask object based on form input in EditTask component:
   handleEditTaskFormChange = (event) => {
     const { editTask } = this.state;
@@ -160,6 +169,7 @@ class App extends Component {
               toggleEditTaskPopup={this.toggleEditTaskPopup}
               editTask={editTask}
               defineEditTask={this.handleEditTaskFormChange}
+              submitEditTask={this.handleEditTaskFormSubmit}
             />
           )
         }

@@ -7,19 +7,14 @@ import PropTypes from 'prop-types';
 ToDos:
   - button for delete
   - button for save edit
-  - all buttons should close popup
+  - all buttons should close popup and reset editTask in state
 */
-
-const handleSubmit = (event) => {
-  console.log('test');
-  event.preventDefault();
-};
 
 function EditTask(props) {
   const {
     toggleEditTaskPopup,
     editTask,
-    // defineEditTask,
+    submitEditTask,
   } = props;
 
   const handleChange = (event) => {
@@ -56,7 +51,7 @@ function EditTask(props) {
   return (
     <div className="editTask-outer">
       <div className="editTask-inner">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={submitEditTask}>
           <label htmlFor="title">
             Title<br />
             <input type="text" defaultValue={editTask.title} name="title" onChange={handleChange} />
@@ -94,6 +89,7 @@ EditTask.propTypes = {
     _id: PropTypes.string.isRequired,
   }).isRequired,
   defineEditTask: PropTypes.func.isRequired,
+  submitEditTask: PropTypes.func.isRequired,
 };
 
 export default EditTask;
