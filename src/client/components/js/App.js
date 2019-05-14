@@ -72,7 +72,7 @@ class App extends Component {
     const filteredTasksLength = filteredTasks.length;
 
     // POST new task and update state afterwards
-    axios.post('/api/task', newTask)
+    axios.post('/api/newTask', newTask)
       .then((res) => {
         // retrieve _id and rank from posted newTask
         const newTaskID = res.data._id;

@@ -4,7 +4,7 @@ import TasksSchema from '../models/model';
 // create 'Tasks' collection by leveraging the TasksSchema
 const Tasks = mongoose.model('Tasks', TasksSchema);
 
-// for POST endpoint
+// for POST endpoint to create new task
 export const addNewTask = (req, res) => {
   const newTask = new Tasks(req.body);
   newTask.save((err, task) => {
@@ -12,6 +12,16 @@ export const addNewTask = (req, res) => {
       res.send(err);
     }
     res.json(task);
+  });
+};
+
+// for PUT endpoint to edit task
+export const editTask = (req, res) => {
+  Tasks.findByIdAndUpdate(req.params.id, req.body, (err) => {
+    if (err) {
+      res.send(err);
+    }
+    res.send(`Successfully updated task ${req.params.id}`);
   });
 };
 
@@ -25,7 +35,7 @@ export const getTasks = (req, res) => {
   });
 };
 
-// for DELETE endpoint
+// for DELETE endpoint to delete a single task
 export const deleteTask = (req, res) => {
   // res.send(req.params);
   Tasks.findByIdAndDelete({ _id: req.params.id }, (err) => {
