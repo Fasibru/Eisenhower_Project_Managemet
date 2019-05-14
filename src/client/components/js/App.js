@@ -67,7 +67,6 @@ class App extends Component {
   // add new task to data warehouse on submit
   handleNewTaskFormSubmit = (event) => {
     event.preventDefault();
-    this.toggleNewTaskPopup();
 
     const { newTask, filteredTasks } = this.state;
     const filteredTasksLength = filteredTasks.length;
@@ -79,8 +78,8 @@ class App extends Component {
         const newTaskID = res.data._id;
         const newTaskRank = res.data.rank;
 
-        // instead of using a GET for all tasks I just add the new task to the filteredTasks array
-        // _id and rank updated manually
+        // Instead of using a GET for all tasks just add the new task to the filteredTasks array.
+        // _id and rank updated manually.
         filteredTasks.push(newTask);
         filteredTasks[filteredTasksLength]._id = newTaskID;
         filteredTasks[filteredTasksLength].rank = newTaskRank;
@@ -96,7 +95,20 @@ class App extends Component {
         });
       })
       .catch(console.error);
+
+    // close the popup after submit
+    this.toggleNewTaskPopup();
   }
+
+  // update editTask object based on form input in EditTask component:
+  handleEditTaskFormChange = (event) => {
+    const { editTask } = this.state;
+    editTask[event.target.name] = event.target.value;
+
+    this.setState({
+      editTask,
+    });
+  };
 
   // update newTask object based on form input in NewTask component:
   handleNewTaskFormChange(event) {
@@ -128,7 +140,6 @@ class App extends Component {
         />
         <Main
           filteredTasks={filteredTasks}
-          toggleEditTaskPopup={this.toggleEditTaskPopup}
           populateEditTask={this.populateEditTask}
         />
         <Footer />
@@ -146,8 +157,9 @@ class App extends Component {
         {editTaskPopup
           && (
             <EditTask
-              toggleEditTaskPopup={this.ToggleEditTaskPopup}
+              toggleEditTaskPopup={this.toggleEditTaskPopup}
               editTask={editTask}
+              defineEditTask={this.handleEditTaskFormChange}
             />
           )
         }

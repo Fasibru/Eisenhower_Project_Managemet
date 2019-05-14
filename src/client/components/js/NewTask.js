@@ -36,16 +36,16 @@ class NewTask extends Component {
         <div className="newTask-inner">
           <form onSubmit={(event) => { event.preventDefault(); }}>
             {/* to avoid that 'Enter' submits the changes to the state */}
-            <label>
+            <label htmlFor="title">
               Title<br />
               <input type="text" name="title" value={title} onChange={this.handleChange} />
             </label>
             <br />
-            <label>
+            <label htmlFor="description">
               Description<br />
               <textarea type="text" name="description" value={description} onChange={this.handleChange} />
             </label><br />
-            <label>
+            <label htmlFor="category">
               Category<br />
               <input type="radio" name="category" value="A" onChange={this.handleChange} defaultChecked />A
               <input type="radio" name="category" value="B" onChange={this.handleChange} />B
@@ -55,7 +55,6 @@ class NewTask extends Component {
           </form>
           <button type="submit" onClick={(event) => { submitNewTask(event); }}>Add Task</button>
           <button type="button" onClick={toggleNewTaskPopup}>Close</button>
-          <button type="button" onClick={() => console.log('Todo: Delete Task')}>Delete</button>
         </div>
       </div>
     );

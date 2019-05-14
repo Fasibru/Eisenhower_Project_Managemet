@@ -3,22 +3,102 @@ import React from 'react';
 import '../css/EditTask.css';
 import PropTypes from 'prop-types';
 
+/*
+ToDos:
+  - implement and populate form
+  - button for delete
+  - button for save edit
+  - button for close
+  - all buttons should close popup
+*/
+
+const handleSubmit = (event) => {
+  console.log('test');
+  event.preventDefault();
+};
+
+// function DefaultRadioCheckedA(props) {
+//   const { handleChange } = props;
+//   return (
+//     <label htmlFor="category">
+//       <input type="radio" name="category" value="A" onChange={handleChange} defaultChecked />A
+//       <input type="radio" name="category" value="B" onChange={handleChange} />B
+//       <input type="radio" name="category" value="C" onChange={handleChange} />C
+//       <input type="radio" name="category" value="D" onChange={handleChange} />D
+//     </label>
+//   );
+// }
+
 function EditTask(props) {
-  const { editTask } = props;
+  const {
+    toggleEditTaskPopup,
+    editTask,
+    // defineEditTask,
+  } = props;
+
+  const handleChange = (event) => {
+    /*
+    If this function only calls the function from props then it's redundant.
+    But I want to keep it for now for later validation purposes */
+    const { defineEditTask } = props;
+    defineEditTask(event);
+  };
+
+  // check the category of editTask for later setting of defaultChecked
+  let categoryA = false;
+  let categoryB = false;
+  let categoryC = false;
+  let categoryD = false;
+
+  switch (editTask.category) {
+    case 'A':
+      categoryA = true;
+      break;
+    case 'B':
+      categoryB = true;
+      break;
+    case 'C':
+      categoryC = true;
+      break;
+    case 'D':
+      categoryD = true;
+      break;
+    default:
+      console.error('No proper category provided');
+  }
+
   return (
     <div className="editTask-outer">
       <div className="editTask-inner">
-        <p>{editTask._id}</p>
-        <p>{editTask.rank}</p>
-        <p>{editTask.category}</p>
-        <p>{editTask.title}</p>
-        <p>{editTask.description}</p>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="title">
+            Title<br />
+            <input type="text" defaultValue={editTask.title} name="title" onChange={handleChange} />
+          </label>
+          <br />
+          <label htmlFor="description">
+            Description<br />
+            <textarea type="text" name="description" defaultValue={editTask.description} onChange={handleChange} />
+          </label>
+          <br />
+          <label htmlFor="category">
+            Category<br />
+            <input type="radio" name="category" value="A" onChange={handleChange} defaultChecked={categoryA} />A
+            <input type="radio" name="category" value="B" onChange={handleChange} defaultChecked={categoryB} />B
+            <input type="radio" name="category" value="C" onChange={handleChange} defaultChecked={categoryC} />C
+            <input type="radio" name="category" value="D" onChange={handleChange} defaultChecked={categoryD} />D
+          </label>
+          <br />
+          <input type="submit" value="submit" />
+          <button type="button" onClick={toggleEditTaskPopup}>Close</button>
+        </form>
       </div>
     </div>
   );
 }
 
 EditTask.propTypes = {
+  toggleEditTaskPopup: PropTypes.func.isRequired,
   editTask: PropTypes.shape({
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
@@ -26,6 +106,7 @@ EditTask.propTypes = {
     rank: PropTypes.number.isRequired,
     _id: PropTypes.string.isRequired,
   }).isRequired,
+  defineEditTask: PropTypes.func.isRequired,
 };
 
 export default EditTask;

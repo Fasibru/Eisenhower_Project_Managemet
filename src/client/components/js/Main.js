@@ -13,8 +13,6 @@ const categorizeFilteredTasks = (filteredTasks, populateEditTask) => {
     TasksCatD: [],
   };
 
-  // const { toggleEditTaskPopup } = this.props;
-
   filteredTasks.forEach((task) => {
     switch (task.category) {
       case 'A':
