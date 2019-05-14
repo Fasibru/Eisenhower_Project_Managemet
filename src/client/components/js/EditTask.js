@@ -5,10 +5,8 @@ import PropTypes from 'prop-types';
 
 /*
 ToDos:
-  - implement and populate form
   - button for delete
   - button for save edit
-  - button for close
   - all buttons should close popup
 */
 
@@ -16,18 +14,6 @@ const handleSubmit = (event) => {
   console.log('test');
   event.preventDefault();
 };
-
-// function DefaultRadioCheckedA(props) {
-//   const { handleChange } = props;
-//   return (
-//     <label htmlFor="category">
-//       <input type="radio" name="category" value="A" onChange={handleChange} defaultChecked />A
-//       <input type="radio" name="category" value="B" onChange={handleChange} />B
-//       <input type="radio" name="category" value="C" onChange={handleChange} />C
-//       <input type="radio" name="category" value="D" onChange={handleChange} />D
-//     </label>
-//   );
-// }
 
 function EditTask(props) {
   const {
@@ -91,6 +77,7 @@ function EditTask(props) {
           <br />
           <input type="submit" value="submit" />
           <button type="button" onClick={toggleEditTaskPopup}>Close</button>
+          <button type="button" onClick={() => console.log('To be implemented')}>Delete</button>
         </form>
       </div>
     </div>

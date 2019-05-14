@@ -31,6 +31,7 @@ module.exports = {
     // proxy /api requests to http://localhost:8080/api during dev phase --> backend server running on port 8080 obviously required.
     proxy: {
       '/api': 'http://localhost:8080',
+      changeOrigin: true,
     },
   },
   plugins: [
