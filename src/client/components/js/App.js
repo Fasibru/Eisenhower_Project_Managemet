@@ -103,10 +103,17 @@ class App extends Component {
   handleEditTaskFormSubmit = (event) => {
     event.preventDefault();
 
-    const { editTask } = this.state;
+    const { editTask, filteredTasks } = this.state;
 
+    // save changes to the DB
     axios.put(`/api/editTask/${editTask._id}`, editTask)
       .catch(console.error);
+
+    // save changes in filteredTasks array as well to avoid additional GET of all tasks
+    // find index of task to update:
+    const editTaskIndex = filteredTasks.findIndex(task => task._id === editTask._id);
+    // update filteredTasks array
+    filteredTasks[editTaskIndex] = editTask;
 
     // reset editTask
     this.setState({
