@@ -17,7 +17,7 @@ export const addNewTask = (req, res) => {
 
 // for PUT endpoint to edit task
 export const editTask = (req, res) => {
-  Tasks.findByIdAndUpdate(req.params.id, req.body, (err) => {
+  Tasks.findOneAndUpdate({ _id: req.params.id }, req.body, (err) => {
     if (err) {
       res.send(err);
     }
@@ -37,8 +37,7 @@ export const getTasks = (req, res) => {
 
 // for DELETE endpoint to delete a single task
 export const deleteTask = (req, res) => {
-  // res.send(req.params);
-  Tasks.findByIdAndDelete({ _id: req.params.id }, (err) => {
+  Tasks.findOneAndDelete({ _id: req.params.id }, (err) => {
     if (err) {
       res.send(err);
     }
