@@ -70,7 +70,7 @@ function EditTask(props) {
             <input type="radio" name="category" value="D" onChange={handleChange} defaultChecked={categoryD} />D
           </label>
           <br />
-          <input type="submit" value="submit" />
+          <input type="submit" value="Save" />
           <button type="button" onClick={toggleEditTaskPopup}>Close</button>
           <button type="button" onClick={() => console.log('To be implemented')}>Delete</button>
         </form>

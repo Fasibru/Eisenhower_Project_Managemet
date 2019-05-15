@@ -107,6 +107,14 @@ class App extends Component {
 
     axios.put(`/api/editTask/${editTask._id}`, editTask)
       .catch(console.error);
+
+    // reset editTask
+    this.setState({
+      editTask: {},
+    });
+
+    // close the popup after submit
+    this.toggleEditTaskPopup();
   }
 
   // update editTask object based on form input in EditTask component:
