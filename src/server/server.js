@@ -30,4 +30,6 @@ mongoose.connect(mongoDatabaseURL, { useNewUrlParser: true })
 
     app.listen(PORT, () => console.log(`Express server is running on port:${PORT}`)),
   )
-  .catch(() => console.error());
+  .catch((err) => {
+    console.log(err);
+  });

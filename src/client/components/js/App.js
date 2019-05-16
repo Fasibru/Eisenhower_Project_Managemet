@@ -38,7 +38,9 @@ class App extends Component {
           filteredTasks: res.data,
         });
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   toggleNewTaskPopup = () => {
@@ -108,7 +110,9 @@ class App extends Component {
           newTask: {},
         });
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.log(err);
+      });
 
     // close the popup after submit
     this.toggleNewTaskPopup();
@@ -121,7 +125,9 @@ class App extends Component {
 
     // save changes to the DB
     axios.put(`/api/editTask/${editTask._id}`, editTask)
-      .catch(console.error);
+      .catch((err) => {
+        console.log(err);
+      });
 
     // save changes in filteredTasks array as well to avoid additional GET of all tasks
     // find index of task to update:
@@ -143,9 +149,28 @@ class App extends Component {
     const { editTask } = this.state;
     editTask[event.target.name] = event.target.value;
 
+    // reflect form changes in editTask
     this.setState({
       editTask,
     });
+  };
+
+  //
+  handleDeleteTask = () => {
+    const { editTask } = this.state;
+
+    axios.delete(`/api/deleteTask/${editTask._id}`)
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // reset editTask
+    this.setState({
+      editTask: {},
+    });
+
+    // close the popup after submit
+    this.toggleEditTaskPopup();
   };
 
   // update newTask object based on form input in NewTask component:
@@ -153,7 +178,7 @@ class App extends Component {
     const { newTask } = this.state;
     newTask[event.target.name] = event.target.value;
 
-    // maybe this leads to unnecessary many re-renderings:
+    // reflect form changes in newTask
     this.setState({
       newTask,
     });
@@ -199,6 +224,7 @@ class App extends Component {
               editTask={editTask}
               defineEditTask={this.handleEditTaskFormChange}
               submitEditTask={this.handleEditTaskFormSubmit}
+              handleDeleteTask={this.handleDeleteTask}
             />
           )
         }

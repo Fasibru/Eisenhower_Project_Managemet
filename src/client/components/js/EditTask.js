@@ -14,6 +14,7 @@ function EditTask(props) {
     toggleEditTaskPopup,
     editTask,
     submitEditTask,
+    handleDeleteTask,
   } = props;
 
   const handleChange = (event) => {
@@ -71,7 +72,7 @@ function EditTask(props) {
           <br />
           <input type="submit" value="Save" />
           <button type="button" onClick={toggleEditTaskPopup}>Close</button>
-          <button type="button" onClick={() => console.log('To be implemented')}>Delete</button>
+          <button type="button" onClick={handleDeleteTask}>Delete</button>
         </form>
       </div>
     </div>
@@ -89,6 +90,7 @@ EditTask.propTypes = {
   }).isRequired,
   defineEditTask: PropTypes.func.isRequired,
   submitEditTask: PropTypes.func.isRequired,
+  handleDeleteTask: PropTypes.func.isRequired,
 };
 
 export default EditTask;
