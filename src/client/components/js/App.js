@@ -157,12 +157,16 @@ class App extends Component {
 
   //
   handleDeleteTask = () => {
-    const { editTask } = this.state;
+    const { editTask, filteredTasks } = this.state;
 
     axios.delete(`/api/deleteTask/${editTask._id}`)
       .catch((err) => {
         console.log(err);
       });
+
+    // remove deleted task from filteredTasks array
+    const deleteTaskIndex = filteredTasks.findIndex(task => task._id === editTask._id);
+    filteredTasks.splice(deleteTaskIndex, 1);
 
     // reset editTask
     this.setState({
