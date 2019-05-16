@@ -34,7 +34,7 @@ class NewTask extends Component {
     return (
       <div className="newTask-outer">
         <div className="newTask-inner">
-          <form onSubmit={(event) => { event.preventDefault(); }}>
+          <form onSubmit={submitNewTask}>
             {/* to avoid that 'Enter' submits the changes to the state */}
             <label htmlFor="title">
               Title<br />
@@ -52,10 +52,12 @@ class NewTask extends Component {
               <input type="radio" name="category" value="C" onChange={this.handleChange} />C
               <input type="radio" name="category" value="D" onChange={this.handleChange} />D
             </label>
+            <br />
             <input type="checkbox" name="completed" defaultChecked={false} onChange={this.handleChange} />Completed
+            <br />
+            <input type="submit" value="Add Task" />
+            <button type="button" onClick={toggleNewTaskPopup}>Close</button>
           </form>
-          <button type="submit" onClick={(event) => { submitNewTask(event); }}>Add Task</button>
-          <button type="button" onClick={toggleNewTaskPopup}>Close</button>
         </div>
       </div>
     );
