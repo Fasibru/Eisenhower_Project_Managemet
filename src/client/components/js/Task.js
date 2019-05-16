@@ -16,6 +16,7 @@ function Task(props) {
         category: task.category,
         title: task.title,
         description: task.description,
+        completed: task.completed,
       })}
     >
       <p>{task.title}</p>

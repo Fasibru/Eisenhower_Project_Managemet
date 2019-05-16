@@ -69,6 +69,8 @@ function EditTask(props) {
             <input type="radio" name="category" value="D" onChange={handleChange} defaultChecked={categoryD} />D
           </label>
           <br />
+          <input type="checkbox" name="completed" checked={editTask.completed} onChange={handleChange} />Completed
+          <br />
           <input type="submit" value="Save" />
           <button type="button" onClick={toggleEditTaskPopup}>Close</button>
           <button type="button" onClick={handleDeleteTask}>Delete</button>

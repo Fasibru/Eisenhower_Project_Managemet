@@ -67,7 +67,7 @@ class App extends Component {
   populateEditTask = (data) => {
     // open popup
     this.toggleEditTaskPopup();
-
+    console.log(`data: ${data.description} ${data.completed}`);
     // populate editTask based on data of double clicked task
     this.setState({
       editTask: {
@@ -76,6 +76,7 @@ class App extends Component {
         category: data.category,
         title: data.title,
         description: data.description,
+        completed: data.completed,
       },
     });
   }
@@ -147,7 +148,11 @@ class App extends Component {
   // update editTask object based on form input in EditTask component:
   handleEditTaskFormChange = (event) => {
     const { editTask } = this.state;
-    editTask[event.target.name] = event.target.value;
+    if (event.target.name === 'completed') {
+      editTask[event.target.name] = event.target.checked;
+    } else {
+      editTask[event.target.name] = event.target.value;
+    }
 
     // reflect form changes in editTask
     this.setState({
@@ -180,7 +185,11 @@ class App extends Component {
   // update newTask object based on form input in NewTask component:
   handleNewTaskFormChange(event) {
     const { newTask } = this.state;
-    newTask[event.target.name] = event.target.value;
+    if (event.target.name === 'completed') {
+      newTask[event.target.name] = event.target.checked;
+    } else {
+      newTask[event.target.name] = event.target.value;
+    }
 
     // reflect form changes in newTask
     this.setState({

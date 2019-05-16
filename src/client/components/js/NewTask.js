@@ -47,11 +47,12 @@ class NewTask extends Component {
             </label><br />
             <label htmlFor="category">
               Category<br />
-              <input type="radio" name="category" value="A" onChange={this.handleChange} defaultChecked />A
+              <input type="radio" name="category" value="A" onChange={this.handleChange} />A
               <input type="radio" name="category" value="B" onChange={this.handleChange} />B
               <input type="radio" name="category" value="C" onChange={this.handleChange} />C
               <input type="radio" name="category" value="D" onChange={this.handleChange} />D
             </label>
+            <input type="checkbox" name="completed" defaultChecked={false} onChange={this.handleChange} />Completed
           </form>
           <button type="submit" onClick={(event) => { submitNewTask(event); }}>Add Task</button>
           <button type="button" onClick={toggleNewTaskPopup}>Close</button>
