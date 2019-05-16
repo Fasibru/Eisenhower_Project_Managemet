@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 
 /*
 ToDos:
-  - button for delete
-  - all buttons should close popup and reset editTask in state
+  - checkbox for completed
 */
 
 function EditTask(props) {

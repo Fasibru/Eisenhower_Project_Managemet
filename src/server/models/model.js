@@ -17,6 +17,10 @@ const TasksSchema = new Schema({
     type: String,
     required: 'Provide a description',
   },
+  completed: {
+    type: Boolean,
+    default: false,
+  },
   date: {
     type: Date,
     default: Date.now,
