@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 /*
 ToDos:
   - button for delete
-  - button for save edit
   - all buttons should close popup and reset editTask in state
 */
 

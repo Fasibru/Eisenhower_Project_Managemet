@@ -47,13 +47,27 @@ class App extends Component {
   }
 
   toggleEditTaskPopup = () => {
-    this.setState(prevState => ({ editTaskPopup: !prevState.editTaskPopup }));
+    const { editTaskPopup } = this.state;
+    // check if popup is already open and if yes then close it and reset editTask
+    if (editTaskPopup) {
+      this.setState({
+        editTaskPopup: !editTaskPopup,
+        editTask: {},
+      });
+    } else {
+      this.setState({
+        editTaskPopup: !editTaskPopup,
+      });
+    }
+    // this.setState(prevState => ({ editTaskPopup: !prevState.editTaskPopup }));
   };
 
   populateEditTask = (data) => {
-    const { editTaskPopup } = this.state;
+    // open popup
+    this.toggleEditTaskPopup();
+
+    // populate editTask based on data of double clicked task
     this.setState({
-      editTaskPopup: !editTaskPopup,
       editTask: {
         _id: data._id,
         rank: data.rank,
