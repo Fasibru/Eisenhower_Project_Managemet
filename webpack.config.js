@@ -4,7 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: './src/client/index.js',
+  entry: ['@babel/polyfill', './src/client/index.js'],
   output: {
     path: path.join(__dirname, '/dist'),
     filename: 'index_bundle.js',
@@ -12,7 +12,8 @@ module.exports = {
   module: {
     rules: [
       {
-        // pass all js files except for those in the node_modules folder through babel-loader to transform JSX to Javascript
+        // pass all js files except for those in the node_modules folder through babel-loader
+        // this transforms JSX to Javascript
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
