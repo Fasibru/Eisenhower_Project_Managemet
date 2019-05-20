@@ -1,6 +1,7 @@
 import { Schema } from 'mongoose';
+import { stringify } from 'querystring';
 
-const TasksSchema = new Schema({
+export const TasksSchema = new Schema({
   rank: {
     type: Number,
     default: -999,
@@ -27,4 +28,9 @@ const TasksSchema = new Schema({
   },
 });
 
-export default TasksSchema;
+export const FilterSchema = new Schema({
+  showCompleted: {
+    type: String,
+    default: 'yes',
+  },
+});

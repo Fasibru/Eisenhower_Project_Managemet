@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import TasksSchema from '../models/model';
+import { TasksSchema } from '../models/model';
 
 // create 'Tasks' collection by leveraging the TasksSchema
 const Tasks = mongoose.model('Tasks', TasksSchema);
