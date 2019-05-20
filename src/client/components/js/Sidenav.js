@@ -20,7 +20,11 @@ class Sidenav extends Component {
   }
 
   render() {
-    const { toggleNewTaskPopup } = this.props;
+    const {
+      toggleNewTaskPopup,
+      handleFilterCompleted,
+      filters,
+    } = this.props;
     return (
       <aside className="sidenav">
         <ul className="sidenav__list">
@@ -29,7 +33,14 @@ class Sidenav extends Component {
             <button type="button" onClick={toggleNewTaskPopup}>New Task</button>
           </li>
           <li className="sidenav__list-elem">
-            <button type="button" onClick={this.logTasks}>Log Tasks</button>
+            {/* <button type="button" onClick={this.logTasks}>Log Tasks</button> */}
+            <p>Show completed tasks:</p>
+            <form>
+              <select name="completed" value={filters.showCompleted} onChange={handleFilterCompleted}>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </form>
           </li>
           <li className="sidenav__list-elem">Specify Filters (filter section below)</li>
         </ul>
@@ -41,6 +52,10 @@ class Sidenav extends Component {
 Sidenav.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
   toggleNewTaskPopup: PropTypes.func.isRequired,
+  handleFilterCompleted: PropTypes.func.isRequired,
+  filters: PropTypes.shape({
+    showCompleted: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Sidenav;

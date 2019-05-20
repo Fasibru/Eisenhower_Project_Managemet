@@ -22,12 +22,10 @@ class App extends Component {
       newTask: {},
       editTaskPopup: false,
       editTask: {},
+      filters: {
+        showCompleted: 'yes',
+      },
     };
-
-    /* Only necessary to bind 'this' for this method since all others are arrow functions.
-    I just left that the way it currently is for learning purposes. */
-
-    this.handleNewTaskFormChange = this.handleNewTaskFormChange.bind(this);
   }
 
   componentDidMount() {
@@ -119,6 +117,21 @@ class App extends Component {
     this.toggleNewTaskPopup();
   }
 
+  // update newTask object based on form input in NewTask component:
+  handleNewTaskFormChange = (event) => {
+    const { newTask } = this.state;
+    if (event.target.name === 'completed') {
+      newTask[event.target.name] = event.target.checked;
+    } else {
+      newTask[event.target.name] = event.target.value;
+    }
+
+    // reflect form changes in newTask
+    this.setState({
+      newTask,
+    });
+  }
+
   handleEditTaskFormSubmit = (event) => {
     event.preventDefault();
 
@@ -182,23 +195,18 @@ class App extends Component {
     this.toggleEditTaskPopup();
   };
 
-  // update newTask object based on form input in NewTask component:
-  handleNewTaskFormChange(event) {
-    const { newTask } = this.state;
-    if (event.target.name === 'completed') {
-      newTask[event.target.name] = event.target.checked;
-    } else {
-      newTask[event.target.name] = event.target.value;
-    }
-
-    // reflect form changes in newTask
+  // handle filter to show/hide completed tasks
+  handleFilterCompleted = (event) => {
+    const { filters } = this.state;
+    filters.showCompleted = event.target.value;
     this.setState({
-      newTask,
+      filters,
     });
   }
 
   render() {
     const {
+      filters,
       filteredTasks,
       newTaskPopup,
       newTask,
@@ -213,6 +221,8 @@ class App extends Component {
         <Sidenav
           tasks={tasks}
           toggleNewTaskPopup={this.toggleNewTaskPopup}
+          filters={filters}
+          handleFilterCompleted={this.handleFilterCompleted}
         />
         <Main
           filteredTasks={filteredTasks}
