@@ -2,7 +2,7 @@
 This component serves as the section for setting filters to slice and dice the data/tasks
 */
 
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import '../css/Sidenav.css';
 
