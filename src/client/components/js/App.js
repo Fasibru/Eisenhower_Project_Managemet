@@ -9,14 +9,12 @@ import NewTask from './NewTask';
 import EditTask from './EditTask';
 
 import '../css/App.css';
-import { tasks } from '../../data.json'; // that's the data warehouse. 'tasks' will be passed to Sidenav where the filtering happens. Sidenav will then set the filtered tasks as the state for App. The filtered tasks will be passed as array to Main where the identification of the category happens for rendering.
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      /* filteredTasks will change depending on the filters set in Sidenav once implemented */
       filteredTasks: [],
       newTaskPopup: false,
       newTask: {},
@@ -27,9 +25,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // read filter settings from DB
-    // if no filters available then initialize them in DB
-    // const { filters } = this.state;
+    // read initial data form DB based on filters
     axios.get('/api/getFilters')
       .then((res) => {
         this.setState({
@@ -38,24 +34,12 @@ class App extends Component {
         return res.data[0];
       })
       .then((filters) => {
-        axios.get(`/api/tasks?showCompleted=${filters.showCompleted}`)
+        axios.get(`/api/tasks?showTasks=${filters.showTasks}`)
           .then((res) => {
             this.setState({
               filteredTasks: res.data,
             });
           });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    // read initial data from DB
-    // console.log(this.state.filters.showCompleted);
-    axios.get('/api/tasks')
-      .then((res) => {
-        this.setState({
-          filteredTasks: res.data,
-        });
       })
       .catch((err) => {
         console.log(err);
@@ -182,6 +166,7 @@ class App extends Component {
   // update editTask object based on form input in EditTask component:
   handleEditTaskFormChange = (event) => {
     const { editTask } = this.state;
+
     if (event.target.name === 'completed') {
       editTask[event.target.name] = event.target.checked;
     } else {
@@ -194,7 +179,7 @@ class App extends Component {
     });
   };
 
-  //
+  // delete a task from within the EditTask popup
   handleDeleteTask = () => {
     const { editTask, filteredTasks } = this.state;
 
@@ -217,12 +202,32 @@ class App extends Component {
   };
 
   // handle filter to show/hide completed tasks
-  handleFilterCompleted = (event) => {
+  handleFilterShowTasks = (event) => {
     const { filters } = this.state;
-    filters.showCompleted = event.target.value;
-    this.setState({
-      filters,
-    });
+
+    filters.showTasks = event.target.value;
+
+    axios.put('/api/updateFilters', filters)
+      .then((res) => {
+        this.setState({
+          filters: res.data,
+        });
+      })
+      // The following updates the tasks that are shown in the UI.
+      // To avoid this additional get I will have to refactor the app.
+      // Initial tasks would be saved to state 'tasks'.
+      // filteredTasks would be based on filtering 'tasks'.
+      .then(() => {
+        axios.get(`/api/tasks?showTasks=${filters.showTasks}`)
+          .then((res) => {
+            this.setState({
+              filteredTasks: res.data,
+            });
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   render() {
@@ -240,10 +245,9 @@ class App extends Component {
       <div className="grid-container">
         <Header />
         <Sidenav
-          tasks={tasks}
           toggleNewTaskPopup={this.toggleNewTaskPopup}
           filters={filters}
-          handleFilterCompleted={this.handleFilterCompleted}
+          handleFilterShowTasks={this.handleFilterShowTasks}
         />
         <Main
           filteredTasks={filteredTasks}

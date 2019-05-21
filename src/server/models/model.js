@@ -32,8 +32,8 @@ export const FiltersSchema = new Schema({
     type: Number,
     default: -999,
   },
-  showCompleted: {
+  showTasks: {
     type: String,
-    default: 'yes',
+    default: 'both',
   },
 });

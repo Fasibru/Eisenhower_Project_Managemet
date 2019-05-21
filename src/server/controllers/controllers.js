@@ -28,20 +28,41 @@ export const editTask = (req, res) => {
 
 // for GET filtered tasks endpoint
 export const getFilteredTasks = (req, res) => {
-  if (req.query.showCompleted === 'both') {
-    Tasks.find({}, (err, tasks) => {
-      if (err) {
-        res.send(err);
-      }
-      res.json(tasks);
-    });
-  } else if (req.query.showCompleted === true || req.query.showCompleted === false) {
-    Tasks.find({ completed: req.query.showCompleted }, (err, tasks) => {
-      if (err) {
-        res.send(err);
-      }
-      res.json(tasks);
-    });
+  // if (req.query.showTasks === 'both') {
+  //   Tasks.find({}, (err, tasks) => {
+  //     if (err) {
+  //       res.send(err);
+  //     }
+  //     res.json(tasks);
+  //   });
+  // }
+  switch (req.query.showTasks) {
+    case 'both':
+      Tasks.find({}, (err, tasks) => {
+        if (err) {
+          res.send(err);
+        }
+        res.json(tasks);
+      });
+      break;
+    case 'open':
+      Tasks.find({ completed: false }, (err, tasks) => {
+        if (err) {
+          res.send(err);
+        }
+        res.json(tasks);
+      });
+      break;
+    case 'completed':
+      Tasks.find({ completed: true }, (err, tasks) => {
+        if (err) {
+          res.send(err);
+        }
+        res.json(tasks);
+      });
+      break;
+    default:
+      res.json(new Error('No proper filter for tasks to show defined.'));
   }
 };
 
@@ -56,7 +77,7 @@ export const deleteTask = (req, res) => {
 };
 
 
-// for POST endpoint to initialize filters if there aren't any
+// for POST endpoint to initialize filters
 export const setFilters = (req, res) => {
   const filters = new Filters(req.body);
   filters.save((err, filter) => {
@@ -64,6 +85,16 @@ export const setFilters = (req, res) => {
       res.send(err);
     }
     res.json(filter);
+  });
+};
+
+// for PUT endpoint to update filters
+export const updateFilters = (req, res) => {
+  Filters.findOneAndUpdate({ userID: -999 }, req.body, (err) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(req.body);
   });
 };
 

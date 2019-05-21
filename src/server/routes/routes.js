@@ -6,6 +6,7 @@ import {
   editTask,
   setFilters,
   getFilters,
+  updateFilters,
 } from '../controllers/controllers';
 
 const router = Router();
@@ -19,6 +20,8 @@ router.put('/editTask/:id', editTask);
 router.delete('/deleteTask/:id', deleteTask);
 
 router.post('/setFilters', setFilters);
+
+router.put('/updateFilters', updateFilters);
 
 router.get('/getFilters', getFilters);
 
