@@ -26,16 +26,6 @@ export const editTask = (req, res) => {
   });
 };
 
-// for GET all tasks endpoint
-export const getTasks = (req, res) => {
-  Tasks.find({}, (err, tasks) => {
-    if (err) {
-      res.send(err);
-    }
-    res.json(tasks);
-  });
-};
-
 // for GET filtered tasks endpoint
 export const getFilteredTasks = (req, res) => {
   if (req.query.showCompleted === 'both') {

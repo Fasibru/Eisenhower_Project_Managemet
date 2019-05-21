@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import {
   addNewTask,
-  getTasks,
   getFilteredTasks,
   deleteTask,
   editTask,
@@ -10,8 +9,6 @@ import {
 } from '../controllers/controllers';
 
 const router = Router();
-
-// router.get('/tasks', getTasks);
 
 router.get('/tasks', getFilteredTasks);
 
