@@ -28,14 +28,6 @@ export const editTask = (req, res) => {
 
 // for GET filtered tasks endpoint
 export const getFilteredTasks = (req, res) => {
-  // if (req.query.showTasks === 'both') {
-  //   Tasks.find({}, (err, tasks) => {
-  //     if (err) {
-  //       res.send(err);
-  //     }
-  //     res.json(tasks);
-  //   });
-  // }
   switch (req.query.showTasks) {
     case 'both':
       Tasks.find({}, (err, tasks) => {
