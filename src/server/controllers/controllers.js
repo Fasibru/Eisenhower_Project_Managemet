@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
-import { TasksSchema } from '../models/model';
+import { TasksSchema, FiltersSchema } from '../models/model';
 
 // create 'Tasks' collection by leveraging the TasksSchema
 const Tasks = mongoose.model('Tasks', TasksSchema);
+const Filters = mongoose.model('Filters', FiltersSchema);
 
 // for POST endpoint to create new task
 export const addNewTask = (req, res) => {
@@ -17,7 +18,7 @@ export const addNewTask = (req, res) => {
 
 // for PUT endpoint to edit task
 export const editTask = (req, res) => {
-  Tasks.findOneAndUpdate({ _id: req.params.id }, req.body, (err) => {
+  Tasks.findOneAndUpdate({ _id: req.params.id }, req.body, { upsert: true }, (err) => {
     if (err) {
       res.send(err);
     }
@@ -35,6 +36,25 @@ export const getTasks = (req, res) => {
   });
 };
 
+// for GET filtered tasks endpoint
+export const getFilteredTasks = (req, res) => {
+  if (req.query.showCompleted === 'both') {
+    Tasks.find({}, (err, tasks) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json(tasks);
+    });
+  } else if (req.query.showCompleted === true || req.query.showCompleted === false) {
+    Tasks.find({ completed: req.query.showCompleted }, (err, tasks) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json(tasks);
+    });
+  }
+};
+
 // for DELETE endpoint to delete a single task
 export const deleteTask = (req, res) => {
   Tasks.findOneAndDelete({ _id: req.params.id }, (err) => {
@@ -42,5 +62,27 @@ export const deleteTask = (req, res) => {
       res.send(err);
     }
     res.send(`Successfully removed task ${req.params.id}`);
+  });
+};
+
+
+// for POST endpoint to initialize filters if there aren't any
+export const setFilters = (req, res) => {
+  const filters = new Filters(req.body);
+  filters.save((err, filter) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(filter);
+  });
+};
+
+// for GET endpoint to get filter settings
+export const getFilters = (req, res) => {
+  Filters.find({}, (err, filters) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(filters);
   });
 };

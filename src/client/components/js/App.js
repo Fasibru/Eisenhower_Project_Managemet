@@ -22,14 +22,35 @@ class App extends Component {
       newTask: {},
       editTaskPopup: false,
       editTask: {},
-      filters: {
-        showCompleted: 'yes',
-      },
+      filters: {},
     };
   }
 
   componentDidMount() {
+    // read filter settings from DB
+    // if no filters available then initialize them in DB
+    // const { filters } = this.state;
+    axios.get('/api/getFilters')
+      .then((res) => {
+        this.setState({
+          filters: res.data[0],
+        });
+        return res.data[0];
+      })
+      .then((filters) => {
+        axios.get(`/api/tasks?showCompleted=${filters.showCompleted}`)
+          .then((res) => {
+            this.setState({
+              filteredTasks: res.data,
+            });
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     // read initial data from DB
+    // console.log(this.state.filters.showCompleted);
     axios.get('/api/tasks')
       .then((res) => {
         this.setState({

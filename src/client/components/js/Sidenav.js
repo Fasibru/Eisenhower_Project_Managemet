@@ -34,11 +34,12 @@ class Sidenav extends Component {
           </li>
           <li className="sidenav__list-elem">
             {/* <button type="button" onClick={this.logTasks}>Log Tasks</button> */}
-            <p>Show completed tasks:</p>
+            <p>Show tasks:</p>
             <form>
               <select name="completed" value={filters.showCompleted} onChange={handleFilterCompleted}>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
+                <option value="both">Both</option>
+                <option value="false">Open</option>
+                <option value="true">Completed</option>
               </select>
             </form>
           </li>
@@ -49,13 +50,19 @@ class Sidenav extends Component {
   }
 }
 
+Sidenav.defaultProps = {
+  filters: {
+    showCompleted: 'yes',
+  },
+};
+
 Sidenav.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
   toggleNewTaskPopup: PropTypes.func.isRequired,
   handleFilterCompleted: PropTypes.func.isRequired,
   filters: PropTypes.shape({
-    showCompleted: PropTypes.string.isRequired,
-  }).isRequired,
+    showCompleted: PropTypes.string,
+  }),
 };
 
 export default Sidenav;
