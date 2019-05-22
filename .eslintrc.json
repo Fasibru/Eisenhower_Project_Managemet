@@ -10,5 +10,8 @@
     "react/jsx-one-expression-per-line": "off",
     "no-console": "off",
     "no-underscore-dangle": ["error", {"allow": ["_id"]}]
+  },
+  "env": {
+    "jest": true
   }
 }
