@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Header Renders correctly 1`] = `
+<header
+  className="header"
+>
+  <p>
+    Show Statistics
+  </p>
+  <p>
+    Show Statistics
+  </p>
+</header>
+`;

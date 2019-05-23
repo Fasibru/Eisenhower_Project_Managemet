@@ -1,9 +1,12 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import renderer from 'react-test-renderer';
 import App from '../src/client/components/js/App';
 
-describe('First React component test with Enzyme', () => {
-  it('Renders without crashing', () => {
-    shallow(<App />);
+describe('Testing App', () => {
+  it('Renders correctly', () => {
+    const app = renderer
+      .create(<App />);
+
+    expect(app).toMatchSnapshot();
   });
 });

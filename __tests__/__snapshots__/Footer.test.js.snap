@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Footer Renders correctly 1`] = `
+<footer
+  className="footer"
+>
+  <p
+    style={
+      Object {
+        "color": "#f5fbef",
+      }
+    }
+  >
+    Some metadata
+  </p>
+</footer>
+`;

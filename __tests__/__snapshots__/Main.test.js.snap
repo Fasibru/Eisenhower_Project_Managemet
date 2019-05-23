@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Main Renders correctly 1`] = `
+<main
+  className="main"
+>
+  <div
+    className="column-category"
+  >
+    <div
+      className="task task-category-A"
+      onDoubleClick={[Function]}
+    >
+      <p>
+        Test Task
+      </p>
+      <p>
+        Testing Task
+      </p>
+    </div>
+  </div>
+  <div
+    className="column-category"
+  />
+  <div
+    className="column-category"
+  />
+  <div
+    className="column-category"
+  />
+</main>
+`;
