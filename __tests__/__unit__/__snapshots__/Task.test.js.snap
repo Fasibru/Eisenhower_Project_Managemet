@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`testing Task renders correctly 1`] = `
+exports[`Testing <Task /> Renders correctly 1`] = `
 <div
   className="test"
   onDoubleClick={[Function]}
 >
   <p>
-    Test Task
+    Task Title
   </p>
   <p>
-    Testing Task
+    Task Description
   </p>
 </div>
 `;
