@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Testing NewTask Renders correctly 1`] = `
+exports[`Testing <NewTask /> Renders correctly 1`] = `
 <div
   className="newTask-outer"
 >
@@ -8,7 +8,7 @@ exports[`Testing NewTask Renders correctly 1`] = `
     className="newTask-inner"
   >
     <form
-      onSubmit={[Function]}
+      onSubmit={[MockFunction]}
     >
       <label
         htmlFor="title"
@@ -19,7 +19,7 @@ exports[`Testing NewTask Renders correctly 1`] = `
           name="title"
           onChange={[Function]}
           type="text"
-          value="title"
+          value="props_title"
         />
       </label>
       <br />
@@ -32,7 +32,7 @@ exports[`Testing NewTask Renders correctly 1`] = `
           name="description"
           onChange={[Function]}
           type="text"
-          value="description"
+          value="props_description"
         />
       </label>
       <br />
@@ -84,7 +84,7 @@ exports[`Testing NewTask Renders correctly 1`] = `
         value="Add Task"
       />
       <button
-        onClick={[Function]}
+        onClick={[MockFunction]}
         type="button"
       >
         Close

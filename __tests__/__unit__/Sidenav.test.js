@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Sidenav from '../src/client/components/js/Sidenav';
+import Sidenav from '../../src/client/components/js/Sidenav';
 
 describe('Testing Sidenav', () => {
   it('Renders correctly', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import EditTask from '../src/client/components/js/EditTask';
+import EditTask from '../../src/client/components/js/EditTask';
 
 describe('Testing EditTask', () => {
   it('Renders correctly', () => {

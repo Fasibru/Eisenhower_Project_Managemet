@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Task from '../src/client/components/js/Task';
+import Task from '../../src/client/components/js/Task';
 
 describe('testing Task', () => {
   it('renders correctly', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Main from '../src/client/components/js/Main';
+import Main from '../../src/client/components/js/Main';
 
 describe('Testing Main', () => {
   it('Renders correctly', () => {
