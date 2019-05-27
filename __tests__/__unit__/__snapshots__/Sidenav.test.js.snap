@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Testing Sidenav Renders correctly 1`] = `
+exports[`Testing <Sidenav /> Renders correctly 1`] = `
 <aside
   className="sidenav"
 >
@@ -16,7 +16,7 @@ exports[`Testing Sidenav Renders correctly 1`] = `
       className="sidenav__list-elem"
     >
       <button
-        onClick={[Function]}
+        onClick={[MockFunction]}
         type="button"
       >
         New Task
@@ -31,7 +31,7 @@ exports[`Testing Sidenav Renders correctly 1`] = `
       <form>
         <select
           name="showTasks"
-          onChange={[Function]}
+          onChange={[MockFunction]}
           value="both"
         >
           <option
