@@ -1,0 +1,184 @@
+{
+  "data": {
+    "tasks": [
+      {
+        "rank": 1,
+        "completed": false,
+        "_id": "5cd83df54f87753c84a30fbe",
+        "category": "A",
+        "title": "React Popup",
+        "description": "Implement a better solution for the popup",
+        "date": "2019-05-12T15:38:29.122Z",
+        "__v": 0
+      },
+      {
+        "rank": 2,
+        "completed": true,
+        "_id": "5cd83e0e4f87753c84a30fbf",
+        "category": "A",
+        "title": "Data flow",
+        "description": "Read data with remote API from MongoDB --> Express routes and Axios",
+        "date": "2019-05-12T15:38:54.955Z",
+        "__v": 0
+      },
+      {
+        "rank": 1,
+        "completed": false,
+        "_id": "5cd83e5e4f87753c84a30fc0",
+        "category": "A",
+        "title": "State Management",
+        "description": "Implement Redux",
+        "date": "2019-05-12T15:40:14.325Z",
+        "__v": 0
+      },
+      {
+        "rank": 3,
+        "completed": true,
+        "_id": "5cd83e8c4f87753c84a30fc1",
+        "category": "A",
+        "title": " Edit",
+        "description": "Make tasks editable",
+        "date": "2019-05-12T15:41:00.076Z",
+        "__v": 0
+      },
+      {
+        "rank": 4,
+        "completed": true,
+        "_id": "5cd83e9e4f87753c84a30fc2",
+        "category": "A",
+        "title": "Delete",
+        "description": "Make tasks deleteable",
+        "date": "2019-05-12T15:41:18.821Z",
+        "__v": 0
+      },
+      {
+        "rank": 1,
+        "completed": false,
+        "_id": "5cd83ee64f87753c84a30fc3",
+        "category": "C",
+        "title": "Hooks",
+        "description": "Test hooks",
+        "date": "2019-05-12T15:42:30.433Z",
+        "__v": 0
+      },
+      {
+        "rank": 1,
+        "completed": false,
+        "_id": "5cd83f0a4f87753c84a30fc4",
+        "category": "D",
+        "title": "Login",
+        "description": "Create user accounts",
+        "date": "2019-05-12T15:43:06.090Z",
+        "__v": 0
+      },
+      {
+        "rank": 5,
+        "completed": false,
+        "_id": "5cd83f3a4f87753c84a30fc5",
+        "category": "A",
+        "title": "Testing",
+        "description": "Implement Tests",
+        "date": "2019-05-12T15:43:54.158Z",
+        "__v": 0
+      },
+      {
+        "rank": 2,
+        "completed": false,
+        "_id": "5cd83f554f87753c84a30fc6",
+        "category": "B",
+        "title": "UX",
+        "description": "UI overhaul",
+        "date": "2019-05-12T15:44:21.914Z",
+        "__v": 0
+      },
+      {
+        "rank": 6,
+        "completed": true,
+        "_id": "5cd841ddab8bed418c318be9",
+        "category": "A",
+        "title": "Add",
+        "description": "Add new task to mongoDB",
+        "date": "2019-05-12T15:55:09.910Z",
+        "__v": 0
+      },
+      {
+        "rank": 2,
+        "completed": false,
+        "_id": "5cd84223ab8bed418c318bea",
+        "category": "D",
+        "title": "CORS",
+        "description": "Add CORS to MERN_boilerplate",
+        "date": "2019-05-12T15:56:19.996Z",
+        "__v": 0
+      },
+      {
+        "rank": -999,
+        "completed": false,
+        "_id": "5cd92dd2e7417f4010ccf0dd",
+        "title": "Repository",
+        "description": "Work on Readme.md for repo",
+        "category": "B",
+        "date": "2019-05-13T08:41:54.460Z",
+        "__v": 0
+      },
+      {
+        "rank": -999,
+        "completed": true,
+        "_id": "5cdbde1ae13ba25a50feb673",
+        "title": "\"Completed\" feature",
+        "description": "Implement a checkbox for \"completed\" and track in backend as well",
+        "category": "C",
+        "date": "2019-05-15T09:38:35.000Z",
+        "__v": 0
+      },
+      {
+        "rank": -999,
+        "completed": true,
+        "_id": "5ce25f2b5748b61b88f36017",
+        "title": "Filter settings",
+        "description": "Filter settings should be saved to and read from DB",
+        "category": "B",
+        "date": "2019-05-20T08:02:51.416Z",
+        "__v": 0
+      },
+      {
+        "rank": -999,
+        "completed": false,
+        "_id": "5ce2fc0c311c413b348f7d11",
+        "title": "Polyfill",
+        "description": "Add babl/polyfill to MERN_boilerplate",
+        "category": "D",
+        "date": "2019-05-20T19:12:12.817Z",
+        "__v": 0
+      },
+      {
+        "rank": -999,
+        "completed": false,
+        "_id": "5ce44b23b14c891998abce57",
+        "title": "Update Tasks",
+        "description": "After editing a task the filter should be applied i.e. \"Show tasks\" currently does not work with completing tasks.",
+        "category": "A",
+        "date": "2019-05-21T19:01:55.958Z",
+        "__v": 0
+      },
+      {
+        "rank": -999,
+        "completed": false,
+        "_id": "5ce44c2e25d3a235a4ca78c7",
+        "title": "Rank",
+        "description": "Allow user to move tasks up or down.",
+        "category": "B",
+        "date": "2019-05-21T19:06:22.012Z",
+        "__v": 0
+      }
+    ],
+    "filters": [
+      {
+        "userID": -999,
+        "showTasks": "both",
+        "_id": "5ce40b97d6dbe149c4eb8264",
+        "__v": 0
+      }
+    ]
+  }
+}

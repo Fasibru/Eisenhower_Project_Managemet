@@ -2,31 +2,32 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import axios from 'axios';
 import App from '../../src/client/components/js/App';
-import { data as tasks } from '../../__mocks__/tasks.json';
-import data from '../../__mocks__/filters.json';
+import data from '../../__mocks__/data.json';
 
 jest.mock('axios');
 
 describe('Testing <App />', () => {
   // let wrapper;
+  // const createWrapper = () => {
+  //   const wrapperApp = shallow(<App />);
+  //   return wrapperApp;
+  // };
 
-  // beforeEach(() => {
-  //   wrapper = shallow(<App />);
+  // beforeEach(async () => {
+  //   wrapper = await createWrapper();
   // });
 
-  // it('Renders correctly', () => {
+  // it('Renders correctly', async () => {
+  //   const wrapper = shallow(<App />);
   //   expect(wrapper).toMatchSnapshot();
   // });
 
   it('Fetches "filters" and "tasks" on "componentDidMount"', async () => {
-    const responseFilters = data;
-    const responseTasks = tasks;
-    axios.get.mockResolvedValue(responseFilters);
-    // axios.get.mockResolvedValue(responseTasks);
+    const response = data;
+    axios.get.mockResolvedValue(response);
 
     const wrapper = shallow(<App />);
     const instance = wrapper.instance();
     await instance.componentDidMount();
-    console.log(instance.state);
   });
 });

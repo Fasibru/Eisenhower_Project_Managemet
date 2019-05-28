@@ -29,9 +29,8 @@ class App extends Component {
     axios.get('/api/getFilters')
       .then((res) => {
         this.setState({
-          filters: res.data[0],
+          filters: res.data.filters[0],
         });
-        return res.data[0];
       })
       .catch((err) => {
         console.log(err);

@@ -142,6 +142,8 @@ export const getFilters = (req, res) => {
     if (err) {
       res.send(err);
     }
-    res.json(filters);
+    res.json({
+      filters,
+    });
   });
 };
