@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Testing EditTask Renders correctly 1`] = `
+exports[`Testing <EditTask /> Renders correctly 1`] = `
 <div
   className="editTask-outer"
 >
@@ -8,7 +8,7 @@ exports[`Testing EditTask Renders correctly 1`] = `
     className="editTask-inner"
   >
     <form
-      onSubmit={[Function]}
+      onSubmit={[MockFunction]}
     >
       <label
         htmlFor="title"
@@ -16,7 +16,7 @@ exports[`Testing EditTask Renders correctly 1`] = `
         Title
         <br />
         <input
-          defaultValue="Test Task"
+          defaultValue="Task Title"
           name="title"
           onChange={[Function]}
           type="text"
@@ -29,7 +29,7 @@ exports[`Testing EditTask Renders correctly 1`] = `
         Description
         <br />
         <textarea
-          defaultValue="Testing Task"
+          defaultValue="Task Description"
           name="description"
           onChange={[Function]}
           type="text"
@@ -88,13 +88,13 @@ exports[`Testing EditTask Renders correctly 1`] = `
         value="Save"
       />
       <button
-        onClick={[Function]}
+        onClick={[MockFunction]}
         type="button"
       >
         Close
       </button>
       <button
-        onClick={[Function]}
+        onClick={[MockFunction]}
         type="button"
       >
         Delete
