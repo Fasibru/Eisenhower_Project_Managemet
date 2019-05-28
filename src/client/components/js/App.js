@@ -24,7 +24,7 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     // read initial data form DB based on filters
     axios.get('/api/getFilters')
       .then((res) => {
