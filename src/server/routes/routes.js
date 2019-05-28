@@ -13,6 +13,8 @@ const router = Router();
 
 router.get('/tasks', getFilteredTasks);
 
+router.get('/getFilteredTasks', getFilteredTasks);
+
 router.post('/newTask', addNewTask);
 
 router.put('/editTask/:id', editTask);
@@ -24,5 +26,6 @@ router.post('/setFilters', setFilters);
 router.put('/updateFilters', updateFilters);
 
 router.get('/getFilters', getFilters);
+
 
 export default router;

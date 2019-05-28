@@ -33,13 +33,15 @@ class App extends Component {
         });
         return res.data[0];
       })
-      .then((filters) => {
-        axios.get(`/api/tasks?showTasks=${filters.showTasks}`)
-          .then((res) => {
-            this.setState({
-              filteredTasks: res.data,
-            });
-          });
+      .catch((err) => {
+        console.log(err);
+      });
+
+    axios.get('/api/getFilteredTasks')
+      .then((res) => {
+        this.setState({
+          filteredTasks: res.data,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -210,20 +212,9 @@ class App extends Component {
     axios.put('/api/updateFilters', filters)
       .then((res) => {
         this.setState({
-          filters: res.data,
+          filters: res.data.filters[0],
+          filteredTasks: res.data.tasks,
         });
-      })
-      // The following updates the tasks that are shown in the UI.
-      // To avoid this additional get I will have to refactor the app.
-      // Initial tasks would be saved to state 'tasks'.
-      // filteredTasks would be based on filtering 'tasks'.
-      .then(() => {
-        axios.get(`/api/tasks?showTasks=${filters.showTasks}`)
-          .then((res) => {
-            this.setState({
-              filteredTasks: res.data,
-            });
-          });
       })
       .catch((err) => {
         console.log(err);
