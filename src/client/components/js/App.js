@@ -71,7 +71,6 @@ class App extends Component {
   populateEditTask = (data) => {
     // open popup
     this.toggleEditTaskPopup();
-    console.log(`data: ${data.description} ${data.completed}`);
     // populate editTask based on data of double clicked task
     this.setState({
       editTask: {
