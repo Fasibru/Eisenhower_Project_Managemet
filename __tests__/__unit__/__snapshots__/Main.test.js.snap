@@ -1,32 +1,99 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Testing Main Renders correctly 1`] = `
+exports[`Testing <Main /> Renders correctly 1`] = `
 <main
   className="main"
 >
   <div
     className="column-category"
   >
-    <div
+    <Task
       className="task task-category-A"
-      onDoubleClick={[Function]}
-    >
-      <p>
-        Test Task
-      </p>
-      <p>
-        Testing Task
-      </p>
-    </div>
+      key="2"
+      populateEditTask={[MockFunction]}
+      task={
+        Object {
+          "_id": "2",
+          "category": "A",
+          "completed": false,
+          "description": "Task Description A",
+          "rank": -999,
+          "title": "Task Title A",
+        }
+      }
+    />
+    <Task
+      className="task task-category-A"
+      key="21"
+      populateEditTask={[MockFunction]}
+      task={
+        Object {
+          "_id": "21",
+          "category": "A",
+          "completed": false,
+          "description": "Task Description 2A",
+          "rank": -999,
+          "title": "Task Title 2A",
+        }
+      }
+    />
   </div>
   <div
     className="column-category"
-  />
+  >
+    <Task
+      className="task task-category-B"
+      key="3"
+      populateEditTask={[MockFunction]}
+      task={
+        Object {
+          "_id": "3",
+          "category": "B",
+          "completed": true,
+          "description": "Task Description B",
+          "rank": -999,
+          "title": "Task Title B",
+        }
+      }
+    />
+  </div>
   <div
     className="column-category"
-  />
+  >
+    <Task
+      className="task task-category-C"
+      key="4"
+      populateEditTask={[MockFunction]}
+      task={
+        Object {
+          "_id": "4",
+          "category": "C",
+          "completed": true,
+          "description": "Task Description C",
+          "rank": -999,
+          "title": "Task Title C",
+        }
+      }
+    />
+  </div>
   <div
     className="column-category"
-  />
+  >
+    <Task
+      className="task task-category-D"
+      key="5"
+      populateEditTask={[MockFunction]}
+      task={
+        Object {
+          "_id": "5",
+          "category": "D",
+          "completed": true,
+          "description": "Task Description D",
+          "rank": -999,
+          "title": "Task Title D",
+        }
+      }
+    />
+  </div>
 </main>
 `;
