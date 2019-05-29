@@ -1,19 +1,19 @@
 import { Router } from 'express';
 import {
   addNewTask,
-  getFilteredTasks,
   deleteTask,
   editTask,
   setFilters,
   getFilters,
   updateFilters,
+  getInitialData,
 } from '../controllers/controllers';
 
 const router = Router();
 
-router.get('/tasks', getFilteredTasks);
+// router.get('/tasks', getInitialData);
 
-router.get('/getFilteredTasks', getFilteredTasks);
+router.get('/getInitialData', getInitialData);
 
 router.post('/newTask', addNewTask);
 

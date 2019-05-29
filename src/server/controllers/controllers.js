@@ -26,32 +26,46 @@ export const editTask = (req, res) => {
   });
 };
 
-// for GET endpoint based on filter settings
-export const getFilteredTasks = async (req, res) => {
-  const filters = await Filters.find({});
+// for GET endpoint based on filter settings to retrieve tasks and filters
+export const getInitialData = async (req, res) => {
+  let filters;
+  try {
+    filters = await Filters.find({});
+  } catch (err) {
+    console.log(err);
+  }
   switch (filters[0].showTasks) {
     case 'both':
-      Tasks.find({}, (err, tasks) => {
+      await Tasks.find({}, (err, tasks) => {
         if (err) {
           res.send(err);
         }
-        res.json(tasks);
+        res.json({
+          tasks,
+          filters,
+        });
       });
       break;
     case 'open':
-      Tasks.find({ completed: false }, (err, tasks) => {
+      await Tasks.find({ completed: false }, (err, tasks) => {
         if (err) {
           res.send(err);
         }
-        res.json(tasks);
+        res.json({
+          tasks,
+          filters,
+        });
       });
       break;
     case 'completed':
-      Tasks.find({ completed: true }, (err, tasks) => {
+      await Tasks.find({ completed: true }, (err, tasks) => {
         if (err) {
           res.send(err);
         }
-        res.json(tasks);
+        res.json({
+          tasks,
+          filters,
+        });
       });
       break;
     default:
@@ -99,7 +113,7 @@ export const updateFilters = async (req, res) => {
   }
   switch (filters[0].showTasks) {
     case 'both':
-      Tasks.find({}, (err, tasks) => {
+      await Tasks.find({}, (err, tasks) => {
         if (err) {
           res.send(err);
         }
@@ -110,7 +124,7 @@ export const updateFilters = async (req, res) => {
       });
       break;
     case 'open':
-      Tasks.find({ completed: false }, (err, tasks) => {
+      await Tasks.find({ completed: false }, (err, tasks) => {
         if (err) {
           res.send(err);
         }
@@ -121,7 +135,7 @@ export const updateFilters = async (req, res) => {
       });
       break;
     case 'completed':
-      Tasks.find({ completed: true }, (err, tasks) => {
+      await Tasks.find({ completed: true }, (err, tasks) => {
         if (err) {
           res.send(err);
         }

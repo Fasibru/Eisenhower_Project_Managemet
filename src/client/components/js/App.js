@@ -26,20 +26,11 @@ class App extends Component {
 
   componentDidMount = () => {
     // read initial data form DB based on filters
-    axios.get('/api/getFilters')
+    axios.get('/api/getInitialData')
       .then((res) => {
         this.setState({
           filters: res.data.filters[0],
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    axios.get('/api/getFilteredTasks')
-      .then((res) => {
-        this.setState({
-          filteredTasks: res.data,
+          filteredTasks: res.data.tasks,
         });
       })
       .catch((err) => {
@@ -97,12 +88,14 @@ class App extends Component {
         // retrieve _id and rank from posted newTask
         const newTaskID = res.data._id;
         const newTaskRank = res.data.rank;
+        const newTaskCompleted = res.data.completed;
 
         // Instead of using a GET for all tasks just add the new task to the filteredTasks array.
-        // _id and rank updated manually.
+        // _id, rank and completed are updated manually.
         filteredTasks.push(newTask);
         filteredTasks[filteredTasksLength]._id = newTaskID;
         filteredTasks[filteredTasksLength].rank = newTaskRank;
+        filteredTasks[filteredTasksLength].completed = newTaskCompleted;
 
         // update state including the new task for re-render
         this.setState({
