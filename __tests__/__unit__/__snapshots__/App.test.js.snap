@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing function calls and render in <App /> Renders correctly 1`] = `
+<div
+  className="grid-container"
+>
+  <Header />
+  <Sidenav
+    filters={
+      Object {
+        "__v": 0,
+        "_id": "5ce40b97d6dbe149c4eb8264",
+        "showTasks": "both",
+        "userID": -999,
+      }
+    }
+    handleFilterShowTasks={[Function]}
+    toggleNewTaskPopup={[Function]}
+  />
+  <Main
+    filteredTasks={
+      Array [
+        Object {
+          "__v": 0,
+          "_id": "5cd83df54f87753c84a30fbe",
+          "category": "A",
+          "completed": false,
+          "date": "2019-05-12T15:38:29.122Z",
+          "description": "Implement a better solution for the popup",
+          "rank": 1,
+          "title": "React Popup",
+        },
+        Object {
+          "__v": 0,
+          "_id": "5cd83e0e4f87753c84a30fbf",
+          "category": "A",
+          "completed": true,
+          "date": "2019-05-12T15:38:54.955Z",
+          "description": "Read data with remote API from MongoDB --> Express routes and Axios",
+          "rank": 2,
+          "title": "Data flow",
+        },
+        Object {
+          "__v": 0,
+          "_id": "5cd83e5e4f87753c84a30fc0",
+          "category": "A",
+          "completed": false,
+          "date": "2019-05-12T15:40:14.325Z",
+          "description": "Implement Redux",
+          "rank": 1,
+          "title": "State Management",
+        },
+        Object {
+          "__v": 0,
+          "_id": "5cd83e8c4f87753c84a30fc1",
+          "category": "A",
+          "completed": true,
+          "date": "2019-05-12T15:41:00.076Z",
+          "description": "Make tasks editable",
+          "rank": 3,
+          "title": " Edit",
+        },
+        Object {
+          "__v": 0,
+          "_id": "5cd83e9e4f87753c84a30fc2",
+          "category": "A",
+          "completed": true,
+          "date": "2019-05-12T15:41:18.821Z",
+          "description": "Make tasks deleteable",
+          "rank": 4,
+          "title": "Delete",
+        },
+        Object {
+          "__v": 0,
+          "_id": "5cd83ee64f87753c84a30fc3",
+          "category": "C",
+          "completed": false,
+          "date": "2019-05-12T15:42:30.433Z",
+          "description": "Test hooks",
+          "rank": 1,
+          "title": "Hooks",
+        },
+        Object {
+          "__v": 0,
+          "_id": "5cd83f0a4f87753c84a30fc4",
+          "category": "D",
+          "completed": false,
+          "date": "2019-05-12T15:43:06.090Z",
+          "description": "Create user accounts",
+          "rank": 1,
+          "title": "Login",
+        },
+        Object {
+          "__v": 0,
+          "_id": "5cd83f3a4f87753c84a30fc5",
+          "category": "A",
+          "completed": false,
+          "date": "2019-05-12T15:43:54.158Z",
+          "description": "Implement Tests",
+          "rank": 5,
+          "title": "Testing",
+        },
+        Object {
+          "__v": 0,
+          "_id": "5cd83f554f87753c84a30fc6",
+          "category": "B",
+          "completed": false,
+          "date": "2019-05-12T15:44:21.914Z",
+          "description": "UI overhaul",
+          "rank": 2,
+          "title": "UX",
+        },
+        Object {
+          "__v": 0,
+          "_id": "5cd841ddab8bed418c318be9",
+          "category": "A",
+          "completed": true,
+          "date": "2019-05-12T15:55:09.910Z",
+          "description": "Add new task to mongoDB",
+          "rank": 6,
+          "title": "Add",
+        },
+        Object {
+          "__v": 0,
+          "_id": "5cd84223ab8bed418c318bea",
+          "category": "D",
+          "completed": false,
+          "date": "2019-05-12T15:56:19.996Z",
+          "description": "Add CORS to MERN_boilerplate",
+          "rank": 2,
+          "title": "CORS",
+        },
+        Object {
+          "__v": 0,
+          "_id": "5cd92dd2e7417f4010ccf0dd",
+          "category": "B",
+          "completed": false,
+          "date": "2019-05-13T08:41:54.460Z",
+          "description": "Work on Readme.md for repo",
+          "rank": -999,
+          "title": "Repository",
+        },
+        Object {
+          "__v": 0,
+          "_id": "5cdbde1ae13ba25a50feb673",
+          "category": "C",
+          "completed": true,
+          "date": "2019-05-15T09:38:35.000Z",
+          "description": "Implement a checkbox for \\"completed\\" and track in backend as well",
+          "rank": -999,
+          "title": "\\"Completed\\" feature",
+        },
+        Object {
+          "__v": 0,
+          "_id": "5ce25f2b5748b61b88f36017",
+          "category": "B",
+          "completed": true,
+          "date": "2019-05-20T08:02:51.416Z",
+          "description": "Filter settings should be saved to and read from DB",
+          "rank": -999,
+          "title": "Filter settings",
+        },
+        Object {
+          "__v": 0,
+          "_id": "5ce2fc0c311c413b348f7d11",
+          "category": "D",
+          "completed": false,
+          "date": "2019-05-20T19:12:12.817Z",
+          "description": "Add babl/polyfill to MERN_boilerplate",
+          "rank": -999,
+          "title": "Polyfill",
+        },
+        Object {
+          "__v": 0,
+          "_id": "5ce44b23b14c891998abce57",
+          "category": "A",
+          "completed": false,
+          "date": "2019-05-21T19:01:55.958Z",
+          "description": "After editing a task the filter should be applied i.e. \\"Show tasks\\" currently does not work with completing tasks.",
+          "rank": -999,
+          "title": "Update Tasks",
+        },
+        Object {
+          "__v": 0,
+          "_id": "5ce44c2e25d3a235a4ca78c7",
+          "category": "B",
+          "completed": false,
+          "date": "2019-05-21T19:06:22.012Z",
+          "description": "Allow user to move tasks up or down.",
+          "rank": -999,
+          "title": "Rank",
+        },
+      ]
+    }
+    populateEditTask={[Function]}
+  />
+  <Footer />
+</div>
+`;

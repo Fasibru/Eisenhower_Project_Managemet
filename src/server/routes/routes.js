@@ -27,5 +27,9 @@ router.put('/updateFilters', updateFilters);
 
 router.get('/getFilters', getFilters);
 
+router.get('/error', (req, res) => {
+  res.send('Error');
+});
+
 
 export default router;
