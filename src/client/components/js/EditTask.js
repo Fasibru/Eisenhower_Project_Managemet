@@ -1,12 +1,6 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-import '../css/EditTask.css';
 import PropTypes from 'prop-types';
-
-/*
-ToDos:
-  - checkbox for completed
-*/
+import '../css/EditTask.css';
 
 function EditTask(props) {
   const {
@@ -85,7 +79,7 @@ EditTask.propTypes = {
   editTask: PropTypes.shape({
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
+    category: PropTypes.oneOf(['A', 'B', 'C', 'D']).isRequired,
     rank: PropTypes.number.isRequired,
     _id: PropTypes.string.isRequired,
   }).isRequired,

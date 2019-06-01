@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing <EditTask /> Renders correctly 1`] = `
+<div
+  className="editTask-outer"
+>
+  <div
+    className="editTask-inner"
+  >
+    <form
+      onSubmit={[MockFunction]}
+    >
+      <label
+        htmlFor="title"
+      >
+        Title
+        <br />
+        <input
+          defaultValue="Task Title"
+          name="title"
+          onChange={[Function]}
+          type="text"
+        />
+      </label>
+      <br />
+      <label
+        htmlFor="description"
+      >
+        Description
+        <br />
+        <textarea
+          defaultValue="Task Description"
+          name="description"
+          onChange={[Function]}
+          type="text"
+        />
+      </label>
+      <br />
+      <label
+        htmlFor="category"
+      >
+        Category
+        <br />
+        <input
+          defaultChecked={true}
+          name="category"
+          onChange={[Function]}
+          type="radio"
+          value="A"
+        />
+        A
+        <input
+          defaultChecked={false}
+          name="category"
+          onChange={[Function]}
+          type="radio"
+          value="B"
+        />
+        B
+        <input
+          defaultChecked={false}
+          name="category"
+          onChange={[Function]}
+          type="radio"
+          value="C"
+        />
+        C
+        <input
+          defaultChecked={false}
+          name="category"
+          onChange={[Function]}
+          type="radio"
+          value="D"
+        />
+        D
+      </label>
+      <br />
+      <input
+        checked={false}
+        name="completed"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      Completed
+      <br />
+      <input
+        type="submit"
+        value="Save"
+      />
+      <button
+        onClick={[MockFunction]}
+        type="button"
+      >
+        Close
+      </button>
+      <button
+        onClick={[MockFunction]}
+        type="button"
+      >
+        Delete
+      </button>
+    </form>
+  </div>
+</div>
+`;

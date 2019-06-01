@@ -24,22 +24,14 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     // read initial data form DB based on filters
-    axios.get('/api/getFilters')
+    axios.get('/api/getInitialData')
       .then((res) => {
         this.setState({
-          filters: res.data[0],
+          filters: res.data.filters[0],
+          filteredTasks: res.data.tasks,
         });
-        return res.data[0];
-      })
-      .then((filters) => {
-        axios.get(`/api/tasks?showTasks=${filters.showTasks}`)
-          .then((res) => {
-            this.setState({
-              filteredTasks: res.data,
-            });
-          });
       })
       .catch((err) => {
         console.log(err);
@@ -70,7 +62,6 @@ class App extends Component {
   populateEditTask = (data) => {
     // open popup
     this.toggleEditTaskPopup();
-    console.log(`data: ${data.description} ${data.completed}`);
     // populate editTask based on data of double clicked task
     this.setState({
       editTask: {
@@ -97,12 +88,14 @@ class App extends Component {
         // retrieve _id and rank from posted newTask
         const newTaskID = res.data._id;
         const newTaskRank = res.data.rank;
+        const newTaskCompleted = res.data.completed;
 
         // Instead of using a GET for all tasks just add the new task to the filteredTasks array.
-        // _id and rank updated manually.
+        // _id, rank and completed are updated manually.
         filteredTasks.push(newTask);
         filteredTasks[filteredTasksLength]._id = newTaskID;
         filteredTasks[filteredTasksLength].rank = newTaskRank;
+        filteredTasks[filteredTasksLength].completed = newTaskCompleted;
 
         // update state including the new task for re-render
         this.setState({
@@ -210,20 +203,9 @@ class App extends Component {
     axios.put('/api/updateFilters', filters)
       .then((res) => {
         this.setState({
-          filters: res.data,
+          filters: res.data.filters[0],
+          filteredTasks: res.data.tasks,
         });
-      })
-      // The following updates the tasks that are shown in the UI.
-      // To avoid this additional get I will have to refactor the app.
-      // Initial tasks would be saved to state 'tasks'.
-      // filteredTasks would be based on filtering 'tasks'.
-      .then(() => {
-        axios.get(`/api/tasks?showTasks=${filters.showTasks}`)
-          .then((res) => {
-            this.setState({
-              filteredTasks: res.data,
-            });
-          });
       })
       .catch((err) => {
         console.log(err);

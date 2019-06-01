@@ -26,35 +26,50 @@ export const editTask = (req, res) => {
   });
 };
 
-// for GET filtered tasks endpoint
-export const getFilteredTasks = (req, res) => {
-  switch (req.query.showTasks) {
+// for GET endpoint based on filter settings to retrieve tasks and filters
+export const getInitialData = async (req, res) => {
+  let filters;
+  try {
+    filters = await Filters.find({});
+  } catch (err) {
+    console.log(err);
+  }
+  switch (filters[0].showTasks) {
     case 'both':
-      Tasks.find({}, (err, tasks) => {
+      await Tasks.find({}, (err, tasks) => {
         if (err) {
           res.send(err);
         }
-        res.json(tasks);
+        res.json({
+          tasks,
+          filters,
+        });
       });
       break;
     case 'open':
-      Tasks.find({ completed: false }, (err, tasks) => {
+      await Tasks.find({ completed: false }, (err, tasks) => {
         if (err) {
           res.send(err);
         }
-        res.json(tasks);
+        res.json({
+          tasks,
+          filters,
+        });
       });
       break;
     case 'completed':
-      Tasks.find({ completed: true }, (err, tasks) => {
+      await Tasks.find({ completed: true }, (err, tasks) => {
         if (err) {
           res.send(err);
         }
-        res.json(tasks);
+        res.json({
+          tasks,
+          filters,
+        });
       });
       break;
     default:
-      res.json(new Error('No proper filter for tasks to show defined.'));
+      res.send('No proper filter for tasks to show defined.');
   }
 };
 
@@ -81,13 +96,58 @@ export const setFilters = (req, res) => {
 };
 
 // for PUT endpoint to update filters
-export const updateFilters = (req, res) => {
-  Filters.findOneAndUpdate({ userID: -999 }, req.body, (err) => {
+export const updateFilters = async (req, res) => {
+  // update filter settings
+  await Filters.findOneAndUpdate({ userID: -999 }, req.body, (err) => {
     if (err) {
       res.send(err);
     }
-    res.json(req.body);
-  });
+  }).exec();
+
+  // read data based on updated filter settings
+  let filters;
+  try {
+    filters = await Filters.find({});
+  } catch (err) {
+    console.log(err);
+  }
+  switch (filters[0].showTasks) {
+    case 'both':
+      await Tasks.find({}, (err, tasks) => {
+        if (err) {
+          res.send(err);
+        }
+        res.json({
+          tasks,
+          filters,
+        });
+      });
+      break;
+    case 'open':
+      await Tasks.find({ completed: false }, (err, tasks) => {
+        if (err) {
+          res.send(err);
+        }
+        res.json({
+          tasks,
+          filters,
+        });
+      });
+      break;
+    case 'completed':
+      await Tasks.find({ completed: true }, (err, tasks) => {
+        if (err) {
+          res.send(err);
+        }
+        res.json({
+          tasks,
+          filters,
+        });
+      });
+      break;
+    default:
+      res.send('No proper filter for tasks to show defined.');
+  }
 };
 
 // for GET endpoint to get filter settings
@@ -96,6 +156,8 @@ export const getFilters = (req, res) => {
     if (err) {
       res.send(err);
     }
-    res.json(filters);
+    res.json({
+      filters,
+    });
   });
 };

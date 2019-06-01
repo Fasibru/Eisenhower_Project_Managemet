@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing <NewTask /> Renders correctly 1`] = `
+<div
+  className="newTask-outer"
+>
+  <div
+    className="newTask-inner"
+  >
+    <form
+      onSubmit={[MockFunction]}
+    >
+      <label
+        htmlFor="title"
+      >
+        Title
+        <br />
+        <input
+          name="title"
+          onChange={[Function]}
+          type="text"
+          value="props_title"
+        />
+      </label>
+      <br />
+      <label
+        htmlFor="description"
+      >
+        Description
+        <br />
+        <textarea
+          name="description"
+          onChange={[Function]}
+          type="text"
+          value="props_description"
+        />
+      </label>
+      <br />
+      <label
+        htmlFor="category"
+      >
+        Category
+        <br />
+        <input
+          name="category"
+          onChange={[Function]}
+          type="radio"
+          value="A"
+        />
+        A
+        <input
+          name="category"
+          onChange={[Function]}
+          type="radio"
+          value="B"
+        />
+        B
+        <input
+          name="category"
+          onChange={[Function]}
+          type="radio"
+          value="C"
+        />
+        C
+        <input
+          name="category"
+          onChange={[Function]}
+          type="radio"
+          value="D"
+        />
+        D
+      </label>
+      <br />
+      <input
+        defaultChecked={false}
+        name="completed"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      Completed
+      <br />
+      <input
+        type="submit"
+        value="Add Task"
+      />
+      <button
+        onClick={[MockFunction]}
+        type="button"
+      >
+        Close
+      </button>
+    </form>
+  </div>
+</div>
+`;

@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing <Sidenav /> Renders correctly 1`] = `
+<aside
+  className="sidenav"
+>
+  <ul
+    className="sidenav__list"
+  >
+    <li
+      className="sidenav__list-elem"
+    >
+      Search field
+    </li>
+    <li
+      className="sidenav__list-elem"
+    >
+      <button
+        onClick={[MockFunction]}
+        type="button"
+      >
+        New Task
+      </button>
+    </li>
+    <li
+      className="sidenav__list-elem"
+    >
+      <p>
+        Show tasks:
+      </p>
+      <form>
+        <select
+          name="showTasks"
+          onChange={[MockFunction]}
+          value="both"
+        >
+          <option
+            value="both"
+          >
+            Both
+          </option>
+          <option
+            value="open"
+          >
+            Open
+          </option>
+          <option
+            value="completed"
+          >
+            Completed
+          </option>
+        </select>
+      </form>
+    </li>
+    <li
+      className="sidenav__list-elem"
+    >
+      Specify Filters (filter section below)
+    </li>
+  </ul>
+</aside>
+`;
