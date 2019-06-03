@@ -1,14 +1,26 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getTasks, toggleNewTaskPopup } from '../../actions/index';
 
 import Header from './Header';
 import Sidenav from './Sidenav';
 import Main from './Main';
+// import FilteredMain from '../../containers/FilteredMain';
 import Footer from './Footer';
 import NewTask from './NewTask';
 import EditTask from './EditTask';
 
 import '../css/App.css';
+
+function mapStateToProps(state) {
+  return {
+    // filteredTasksRedux: state.filteredTasksRedux,
+    // filtersRedux: state.filtersRedux,
+    newTaskPopup: state.newTaskPopup,
+  };
+}
 
 class App extends Component {
   constructor(props) {
@@ -16,7 +28,6 @@ class App extends Component {
 
     this.state = {
       filteredTasks: [],
-      newTaskPopup: false,
       newTask: {},
       editTaskPopup: false,
       editTask: {},
@@ -36,12 +47,20 @@ class App extends Component {
       .catch((err) => {
         console.log(err);
       });
+    // const {
+    //   // eslint-disable-next-line no-shadow
+    //   // getTasks,
+    // } = this.props;
+    // getTasks();
   }
 
-  toggleNewTaskPopup = () => {
-    // callback is comparable to newTaskPopup: !this.state.newTaskPopup
-    this.setState(prevState => ({ newTaskPopup: !prevState.newTaskPopup }));
-  }
+  // toggleNewTaskPopup = () => {
+  //   const {
+  //     // eslint-disable-next-line no-shadow
+  //     toggleNewTaskPopup,
+  //   } = this.props;
+  //   toggleNewTaskPopup();
+  // }
 
   toggleEditTaskPopup = () => {
     const { editTaskPopup } = this.state;
@@ -80,6 +99,8 @@ class App extends Component {
     event.preventDefault();
 
     const { newTask, filteredTasks } = this.state;
+    // eslint-disable-next-line no-shadow
+    const { toggleNewTaskPopup } = this.props;
     const filteredTasksLength = filteredTasks.length;
 
     // POST new task and update state afterwards
@@ -112,7 +133,7 @@ class App extends Component {
       });
 
     // close the popup after submit
-    this.toggleNewTaskPopup();
+    toggleNewTaskPopup();
   }
 
   // update newTask object based on form input in NewTask component:
@@ -216,21 +237,29 @@ class App extends Component {
     const {
       filters,
       filteredTasks,
-      newTaskPopup,
+      // newTaskPopup,
       newTask,
       editTaskPopup,
       editTask,
     } = this.state;
+    const {
+      // filteredTasksRedux,
+      // filtersRedux,
+      // eslint-disable-next-line no-shadow
+      toggleNewTaskPopup,
+      newTaskPopup,
+    } = this.props;
     const { title, description } = newTask;
 
     return (
       <div className="grid-container">
         <Header />
         <Sidenav
-          toggleNewTaskPopup={this.toggleNewTaskPopup}
+          toggleNewTaskPopup={toggleNewTaskPopup}
           filters={filters}
           handleFilterShowTasks={this.handleFilterShowTasks}
         />
+        {/* <FilteredMain /> */}
         <Main
           filteredTasks={filteredTasks}
           populateEditTask={this.populateEditTask}
@@ -239,7 +268,7 @@ class App extends Component {
         {newTaskPopup
           && (
           <NewTask
-            toggleNewTaskPopup={this.toggleNewTaskPopup}
+            toggleNewTaskPopup={toggleNewTaskPopup}
             defineNewTask={this.handleNewTaskFormChange}
             submitNewTask={this.handleNewTaskFormSubmit}
             title={title}
@@ -263,4 +292,10 @@ class App extends Component {
   }
 }
 
-export default App;
+App.propTypes = {
+  // getTasks: PropTypes.func.isRequired,
+  toggleNewTaskPopup: PropTypes.func.isRequired,
+  newTaskPopup: PropTypes.bool.isRequired,
+};
+
+export default connect(mapStateToProps, { toggleNewTaskPopup })(App);
