@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   getTasks,
+  getFilters,
   toggleNewTaskPopup,
   toggleEditTaskPopupRedux,
   openEditTaskPopup,
@@ -60,8 +61,9 @@ class App extends Component {
         console.log(err);
       });
     // eslint-disable-next-line no-shadow
-    const { getTasks } = this.props;
+    const { getTasks, getFilters } = this.props;
     getTasks();
+    getFilters();
   }
 
   // toggleNewTaskPopup = () => {
@@ -343,6 +345,7 @@ class App extends Component {
 
 App.propTypes = {
   getTasks: PropTypes.func.isRequired,
+  getFilters: PropTypes.func.isRequired,
   toggleNewTaskPopup: PropTypes.func.isRequired,
   newTaskPopup: PropTypes.bool.isRequired,
   resetEditTaskState: PropTypes.func.isRequired,
@@ -363,6 +366,7 @@ App.propTypes = {
 
 export default connect(mapStateToProps, {
   getTasks,
+  getFilters,
   toggleNewTaskPopup,
   toggleEditTaskPopupRedux,
   resetEditTaskState,

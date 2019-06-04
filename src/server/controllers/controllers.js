@@ -26,6 +26,16 @@ export const editTask = (req, res) => {
   });
 };
 
+// for GET endpoint for all tasks
+export const getTasks = (req, res) => {
+  Tasks.find({}, (err, tasks) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(tasks);
+  });
+};
+
 // for GET endpoint based on filter settings to retrieve tasks and filters
 export const getInitialData = async (req, res) => {
   let filters;
@@ -156,8 +166,6 @@ export const getFilters = (req, res) => {
     if (err) {
       res.send(err);
     }
-    res.json({
-      filters,
-    });
+    res.json(filters);
   });
 };

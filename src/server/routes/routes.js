@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import {
+  getTasks,
   addNewTask,
   deleteTask,
   editTask,
@@ -11,7 +12,7 @@ import {
 
 const router = Router();
 
-// router.get('/tasks', getInitialData);
+router.get('/tasks', getTasks);
 
 router.get('/getInitialData', getInitialData);
 
@@ -25,7 +26,7 @@ router.post('/setFilters', setFilters);
 
 router.put('/updateFilters', updateFilters);
 
-router.get('/getFilters', getFilters);
+router.get('/filters', getFilters);
 
 router.get('/error', (req, res) => {
   res.send('Error');

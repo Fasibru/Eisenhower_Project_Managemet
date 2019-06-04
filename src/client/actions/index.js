@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
   ADD_TASK,
   GET_TASKS,
+  GET_FILTERS,
   TOGGLE_NEW_TASK_POPUP,
   TOGGLE_EDIT_TASK_POPUP,
   OPEN_EDIT_TASK_POPUP,
@@ -18,6 +19,19 @@ export const getTasks = () => (dispatch) => {
       dispatch({
         type: GET_TASKS,
         tasks: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const getFilters = () => (dispatch) => {
+  axios.get('/api/filters')
+    .then((res) => {
+      dispatch({
+        type: GET_FILTERS,
+        filters: res.data,
       });
     })
     .catch((err) => {

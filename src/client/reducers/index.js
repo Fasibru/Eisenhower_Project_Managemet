@@ -1,6 +1,7 @@
 import {
   // ADD_TASK,
   GET_TASKS,
+  GET_FILTERS,
   POPULATE_EDIT_TASK_FORM,
   TOGGLE_NEW_TASK_POPUP,
   TOGGLE_EDIT_TASK_POPUP,
@@ -17,8 +18,8 @@ const initialState = {
   // newTask: {},
   editTaskPopupRedux: false,
   editTaskRedux: {},
-  // filtersRedux: {},
-  tasks: [],
+  filtersRedux: {},
+  // tasks: [],
 };
 
 const tasksReducer = (state = initialState, action) => {
@@ -26,6 +27,10 @@ const tasksReducer = (state = initialState, action) => {
     case GET_TASKS:
       return Object.assign({}, state, {
         filteredTasksRedux: action.tasks,
+      });
+    case GET_FILTERS:
+      return Object.assign({}, state, {
+        filtersRedux: action.filters,
       });
     case TOGGLE_NEW_TASK_POPUP:
       return Object.assign({}, state, {
