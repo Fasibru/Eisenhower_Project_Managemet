@@ -1,5 +1,6 @@
 import {
   // ADD_TASK,
+  DELETE_TASK,
   GET_TASKS,
   GET_FILTERS,
   POPULATE_EDIT_TASK_FORM,
@@ -71,6 +72,13 @@ const tasksReducer = (state = initialState, action) => {
           }
           return task;
         }),
+      });
+    case DELETE_TASK:
+      return Object.assign({}, state, {
+        filteredTasksRedux: [
+          ...state.filteredTasksRedux.slice(0, action.index),
+          ...state.filteredTasksRedux.slice(action.index + 1),
+        ],
       });
     // case ADD_TASK:
     //   return Object.assign({}, state, {

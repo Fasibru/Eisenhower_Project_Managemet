@@ -11,6 +11,7 @@ import {
   STORE_EDIT_TASK_FORM_CHANGE,
   POPULATE_EDIT_TASK_FORM,
   SAVE_EDITED_TASK,
+  DELETE_TASK,
 } from '../constants/action-types';
 
 export const getTasks = () => (dispatch) => {
@@ -48,6 +49,11 @@ export const saveEditedTask = (task, index) => ({
 export const addTask = payload => ({
   type: ADD_TASK,
   payload,
+});
+
+export const deleteTask = index => ({
+  type: DELETE_TASK,
+  index,
 });
 
 export const toggleNewTaskPopup = () => ({

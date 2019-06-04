@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   getTasks,
+  deleteTask,
   getFilters,
   toggleNewTaskPopup,
   toggleEditTaskPopupRedux,
@@ -49,6 +50,14 @@ class App extends Component {
   }
 
   componentDidMount = () => {
+    // ############### Redux ###############
+    // read initial data form DB based on filters
+    // eslint-disable-next-line no-shadow
+    const { getTasks, getFilters } = this.props;
+    getTasks();
+    getFilters();
+
+    // ############### Original ###############
     // read initial data form DB based on filters
     axios.get('/api/getInitialData')
       .then((res) => {
@@ -60,10 +69,6 @@ class App extends Component {
       .catch((err) => {
         console.log(err);
       });
-    // eslint-disable-next-line no-shadow
-    const { getTasks, getFilters } = this.props;
-    getTasks();
-    getFilters();
   }
 
   // toggleNewTaskPopup = () => {
@@ -77,6 +82,7 @@ class App extends Component {
   toggleEditTaskPopup = () => {
     const { editTaskPopup } = this.state;
     // check if popup is already open and if yes then close it and reset editTask
+    // only relevant for 'close' button on EditTask Form
     if (editTaskPopup) {
       this.setState({
         editTaskPopup: !editTaskPopup,
@@ -90,14 +96,19 @@ class App extends Component {
   };
 
   populateEditTask = (data) => {
+    // ############### Redux ###############
     const {
       // eslint-disable-next-line no-shadow
       populateEditTaskForm,
       // eslint-disable-next-line no-shadow
       openEditTaskPopup,
     } = this.props;
-    populateEditTaskForm(data);
+    // open dialog
     openEditTaskPopup();
+    // populate editTask based on data of double clicked task
+    populateEditTaskForm(data);
+
+    // ############### Original ###############
     // open popup
     this.toggleEditTaskPopup();
     // populate editTask based on data of double clicked task
@@ -173,8 +184,7 @@ class App extends Component {
   handleEditTaskFormSubmit = (event) => {
     event.preventDefault();
 
-    const { editTask, filteredTasks } = this.state;
-
+    // ############### Redux ###############
     const {
       editTaskRedux,
       filteredTasksRedux,
@@ -186,20 +196,34 @@ class App extends Component {
       closeEditTaskPopup,
     } = this.props;
 
+    // find index of task to update:
+    const editTaskIndexRedux = filteredTasksRedux.findIndex(task => task._id === editTaskRedux._id);
+    // save changes in filteredTasks array as well to avoid additional GET of all tasks
+    saveEditedTask(editTaskRedux, editTaskIndexRedux);
+
+    // reset editTask
+    resetEditTaskState();
+
+    // close the dialog after submit
+    closeEditTaskPopup();
+
+    // Need to work on the respective API for the route
+    // // save changes to the DB
+    // axios.put(`/api/task/${editTaskRedux._id}`, editTaskRedux)
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+
+
+    // ############### ORIGINAL ###############
+    const { editTask, filteredTasks } = this.state;
+
     // save changes to the DB
     axios.put(`/api/editTask/${editTask._id}`, editTask)
       .catch((err) => {
         console.log(err);
       });
 
-    // ############### Redux ###############
-
-    // find index of task to update:
-    const editTaskIndexRedux = filteredTasksRedux.findIndex(task => task._id === editTaskRedux._id);
-    saveEditedTask(editTaskRedux, editTaskIndexRedux);
-    resetEditTaskState();
-    closeEditTaskPopup();
-    // ############### ORIGINAL ###############
     // save changes in filteredTasks array as well to avoid additional GET of all tasks
     // find index of task to update:
     const editTaskIndex = filteredTasks.findIndex(task => task._id === editTask._id);
@@ -217,18 +241,20 @@ class App extends Component {
 
   // update editTask object based on form input in EditTask component:
   handleEditTaskFormChange = (event) => {
-    const { editTask } = this.state;
+    const { editTask } = this.state; // Original
 
     // eslint-disable-next-line no-shadow
     const { storeEditTaskFormChange } = this.props; // Redux
+    // reflect form changes in editTask state
     if (event.target.name === 'completed') {
-      editTask[event.target.name] = event.target.checked;
+      editTask[event.target.name] = event.target.checked; // Original
       storeEditTaskFormChange(event.target.name, event.target.checked); // Redux
     } else {
-      editTask[event.target.name] = event.target.value;
+      editTask[event.target.name] = event.target.value; // Original
       storeEditTaskFormChange(event.target.name, event.target.value); // Redux
     }
 
+    // Original
     // reflect form changes in editTask
     this.setState({
       editTask,
@@ -237,14 +263,40 @@ class App extends Component {
 
   // delete a task from within the EditTask popup
   handleDeleteTask = () => {
-    const { editTask, filteredTasks } = this.state;
+    // ############### Redux ###############
     // eslint-disable-next-line no-shadow
-    // const {
-    //   // eslint-disable-next-line no-shadow
-    //   closeEditTaskPopup,
-    //   // eslint-disable-next-line no-shadow
-    //   resetEditTaskState,
-    // } = this.props;
+    const {
+      // eslint-disable-next-line no-shadow
+      closeEditTaskPopup,
+      // eslint-disable-next-line no-shadow
+      resetEditTaskState,
+      // eslint-disable-next-line no-shadow
+      filteredTasksRedux,
+      // eslint-disable-next-line no-shadow
+      editTaskRedux,
+      // eslint-disable-next-line no-shadow
+      deleteTask,
+    } = this.props;
+
+    // Need to work on the respective API for the route
+    // axios.delete(`/api/deleteTask/${editTask._id}`)
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+
+    // remove deleted task from filteredTasks array
+    const deleteTaskIndexRedux = filteredTasksRedux
+      .findIndex(task => task._id === editTaskRedux._id);
+    deleteTask(deleteTaskIndexRedux);
+
+    // reset editTask state
+    resetEditTaskState();
+
+    // close the popup after submit
+    closeEditTaskPopup();
+
+    // ############### ORIGINAL ###############
+    const { editTask, filteredTasks } = this.state;
 
     axios.delete(`/api/deleteTask/${editTask._id}`)
       .catch((err) => {
@@ -259,10 +311,8 @@ class App extends Component {
     this.setState({
       editTask: {},
     });
-    // resetEditTaskState();
 
     // close the popup after submit
-    // closeEditTaskPopup();
     this.toggleEditTaskPopup();
   };
 
@@ -345,6 +395,7 @@ class App extends Component {
 
 App.propTypes = {
   getTasks: PropTypes.func.isRequired,
+  deleteTask: PropTypes.func.isRequired,
   getFilters: PropTypes.func.isRequired,
   toggleNewTaskPopup: PropTypes.func.isRequired,
   newTaskPopup: PropTypes.bool.isRequired,
@@ -354,11 +405,11 @@ App.propTypes = {
   storeEditTaskFormChange: PropTypes.func.isRequired,
   populateEditTaskForm: PropTypes.func.isRequired,
   editTaskRedux: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    category: PropTypes.oneOf(['A', 'B', 'C', 'D']).isRequired,
-    rank: PropTypes.number.isRequired,
-    _id: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    category: PropTypes.oneOf(['A', 'B', 'C', 'D']),
+    rank: PropTypes.number,
+    _id: PropTypes.string,
   }).isRequired,
   filteredTasksRedux: PropTypes.arrayOf(PropTypes.object).isRequired,
   saveEditedTask: PropTypes.func.isRequired,
@@ -375,4 +426,5 @@ export default connect(mapStateToProps, {
   storeEditTaskFormChange,
   populateEditTaskForm,
   saveEditedTask,
+  deleteTask,
 })(App);
