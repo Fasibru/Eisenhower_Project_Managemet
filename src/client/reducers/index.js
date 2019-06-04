@@ -1,16 +1,22 @@
 import {
-  ADD_TASK,
+  // ADD_TASK,
   GET_TASKS,
   POPULATE_EDIT_TASK_FORM,
   TOGGLE_NEW_TASK_POPUP,
+  TOGGLE_EDIT_TASK_POPUP,
+  OPEN_EDIT_TASK_POPUP,
+  CLOSE_EDIT_TASK_POPUP,
+  RESET_EDIT_TASK_STATE,
+  STORE_EDIT_TASK_FORM_CHANGE,
+  SAVE_EDITED_TASK,
 } from '../constants/action-types';
 
 const initialState = {
-  // filteredTasksRedux: [],
+  filteredTasksRedux: [],
   newTaskPopup: false,
   // newTask: {},
-  // editTaskPopup: false,
-  editTask: {},
+  editTaskPopupRedux: false,
+  editTaskRedux: {},
   // filtersRedux: {},
   tasks: [],
 };
@@ -19,15 +25,47 @@ const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_TASKS:
       return Object.assign({}, state, {
-        tasks: action.tasks,
-      });
-    case POPULATE_EDIT_TASK_FORM:
-      return Object.assign({}, state, {
-        editTask: action.editTask,
+        filteredTasksRedux: action.tasks,
       });
     case TOGGLE_NEW_TASK_POPUP:
       return Object.assign({}, state, {
         newTaskPopup: !state.newTaskPopup,
+      });
+    case TOGGLE_EDIT_TASK_POPUP:
+      return Object.assign({}, state, {
+        editTaskPopupRedux: !state.editTaskPopupRedux,
+      });
+    case OPEN_EDIT_TASK_POPUP:
+      return Object.assign({}, state, {
+        editTaskPopupRedux: true,
+      });
+    case CLOSE_EDIT_TASK_POPUP:
+      return Object.assign({}, state, {
+        editTaskPopupRedux: false,
+      });
+    case RESET_EDIT_TASK_STATE:
+      return Object.assign({}, state, {
+        editTaskRedux: {},
+      });
+    case POPULATE_EDIT_TASK_FORM:
+      return Object.assign({}, state, {
+        editTaskRedux: action.editTask,
+      });
+    case STORE_EDIT_TASK_FORM_CHANGE:
+      return Object.assign({}, state, {
+        editTaskRedux: {
+          ...state.editTaskRedux,
+          [action.name]: action.value,
+        },
+      });
+    case SAVE_EDITED_TASK:
+      return Object.assign({}, state, {
+        filteredTasksRedux: state.filteredTasksRedux.map((task, index) => {
+          if (index === action.index) {
+            return action.task;
+          }
+          return task;
+        }),
       });
     // case ADD_TASK:
     //   return Object.assign({}, state, {

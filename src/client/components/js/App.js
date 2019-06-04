@@ -2,7 +2,17 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getTasks, toggleNewTaskPopup } from '../../actions/index';
+import {
+  getTasks,
+  toggleNewTaskPopup,
+  toggleEditTaskPopupRedux,
+  openEditTaskPopup,
+  closeEditTaskPopup,
+  resetEditTaskState,
+  storeEditTaskFormChange,
+  populateEditTaskForm,
+  saveEditedTask,
+} from '../../actions/index';
 
 import Header from './Header';
 import Sidenav from './Sidenav';
@@ -16,9 +26,11 @@ import '../css/App.css';
 
 function mapStateToProps(state) {
   return {
-    // filteredTasksRedux: state.filteredTasksRedux,
+    filteredTasksRedux: state.filteredTasksRedux,
     // filtersRedux: state.filtersRedux,
     newTaskPopup: state.newTaskPopup,
+    editTaskPopupRedux: state.editTaskPopupRedux,
+    editTaskRedux: state.editTaskRedux,
   };
 }
 
@@ -47,11 +59,9 @@ class App extends Component {
       .catch((err) => {
         console.log(err);
       });
-    // const {
-    //   // eslint-disable-next-line no-shadow
-    //   // getTasks,
-    // } = this.props;
-    // getTasks();
+    // eslint-disable-next-line no-shadow
+    const { getTasks } = this.props;
+    getTasks();
   }
 
   // toggleNewTaskPopup = () => {
@@ -75,10 +85,17 @@ class App extends Component {
         editTaskPopup: !editTaskPopup,
       });
     }
-    // this.setState(prevState => ({ editTaskPopup: !prevState.editTaskPopup }));
   };
 
   populateEditTask = (data) => {
+    const {
+      // eslint-disable-next-line no-shadow
+      populateEditTaskForm,
+      // eslint-disable-next-line no-shadow
+      openEditTaskPopup,
+    } = this.props;
+    populateEditTaskForm(data);
+    openEditTaskPopup();
     // open popup
     this.toggleEditTaskPopup();
     // populate editTask based on data of double clicked task
@@ -156,12 +173,31 @@ class App extends Component {
 
     const { editTask, filteredTasks } = this.state;
 
+    const {
+      editTaskRedux,
+      filteredTasksRedux,
+      // eslint-disable-next-line no-shadow
+      saveEditedTask,
+      // eslint-disable-next-line no-shadow
+      resetEditTaskState,
+      // eslint-disable-next-line no-shadow
+      closeEditTaskPopup,
+    } = this.props;
+
     // save changes to the DB
     axios.put(`/api/editTask/${editTask._id}`, editTask)
       .catch((err) => {
         console.log(err);
       });
 
+    // ############### Redux ###############
+
+    // find index of task to update:
+    const editTaskIndexRedux = filteredTasksRedux.findIndex(task => task._id === editTaskRedux._id);
+    saveEditedTask(editTaskRedux, editTaskIndexRedux);
+    resetEditTaskState();
+    closeEditTaskPopup();
+    // ############### ORIGINAL ###############
     // save changes in filteredTasks array as well to avoid additional GET of all tasks
     // find index of task to update:
     const editTaskIndex = filteredTasks.findIndex(task => task._id === editTask._id);
@@ -181,10 +217,14 @@ class App extends Component {
   handleEditTaskFormChange = (event) => {
     const { editTask } = this.state;
 
+    // eslint-disable-next-line no-shadow
+    const { storeEditTaskFormChange } = this.props; // Redux
     if (event.target.name === 'completed') {
       editTask[event.target.name] = event.target.checked;
+      storeEditTaskFormChange(event.target.name, event.target.checked); // Redux
     } else {
       editTask[event.target.name] = event.target.value;
+      storeEditTaskFormChange(event.target.name, event.target.value); // Redux
     }
 
     // reflect form changes in editTask
@@ -196,6 +236,13 @@ class App extends Component {
   // delete a task from within the EditTask popup
   handleDeleteTask = () => {
     const { editTask, filteredTasks } = this.state;
+    // eslint-disable-next-line no-shadow
+    // const {
+    //   // eslint-disable-next-line no-shadow
+    //   closeEditTaskPopup,
+    //   // eslint-disable-next-line no-shadow
+    //   resetEditTaskState,
+    // } = this.props;
 
     axios.delete(`/api/deleteTask/${editTask._id}`)
       .catch((err) => {
@@ -210,8 +257,10 @@ class App extends Component {
     this.setState({
       editTask: {},
     });
+    // resetEditTaskState();
 
     // close the popup after submit
+    // closeEditTaskPopup();
     this.toggleEditTaskPopup();
   };
 
@@ -293,9 +342,33 @@ class App extends Component {
 }
 
 App.propTypes = {
-  // getTasks: PropTypes.func.isRequired,
+  getTasks: PropTypes.func.isRequired,
   toggleNewTaskPopup: PropTypes.func.isRequired,
   newTaskPopup: PropTypes.bool.isRequired,
+  resetEditTaskState: PropTypes.func.isRequired,
+  openEditTaskPopup: PropTypes.func.isRequired,
+  closeEditTaskPopup: PropTypes.func.isRequired,
+  storeEditTaskFormChange: PropTypes.func.isRequired,
+  populateEditTaskForm: PropTypes.func.isRequired,
+  editTaskRedux: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    category: PropTypes.oneOf(['A', 'B', 'C', 'D']).isRequired,
+    rank: PropTypes.number.isRequired,
+    _id: PropTypes.string.isRequired,
+  }).isRequired,
+  filteredTasksRedux: PropTypes.arrayOf(PropTypes.object).isRequired,
+  saveEditedTask: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, { toggleNewTaskPopup })(App);
+export default connect(mapStateToProps, {
+  getTasks,
+  toggleNewTaskPopup,
+  toggleEditTaskPopupRedux,
+  resetEditTaskState,
+  openEditTaskPopup,
+  closeEditTaskPopup,
+  storeEditTaskFormChange,
+  populateEditTaskForm,
+  saveEditedTask,
+})(App);
