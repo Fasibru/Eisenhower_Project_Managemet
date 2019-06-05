@@ -1,9 +1,12 @@
 import axios from 'axios';
 import {
-  ADD_TASK,
+  ADD_NEW_TASK,
   GET_TASKS,
   GET_FILTERS,
   TOGGLE_NEW_TASK_POPUP,
+  OPEN_NEW_TASK_POPUP,
+  CLOSE_NEW_TASK_POPUP,
+  RESET_NEW_TASK_STATE,
   TOGGLE_EDIT_TASK_POPUP,
   OPEN_EDIT_TASK_POPUP,
   CLOSE_EDIT_TASK_POPUP,
@@ -12,7 +15,21 @@ import {
   POPULATE_EDIT_TASK_FORM,
   SAVE_EDITED_TASK,
   DELETE_TASK,
+  STORE_NEW_TASK_FORM_CHANGE,
 } from '../constants/action-types';
+
+export const addNewTask = task => (dispatch) => {
+  axios.post('/api/task', task)
+    .then((res) => {
+      dispatch({
+        type: ADD_NEW_TASK,
+        task: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 export const getTasks = () => (dispatch) => {
   axios.get('/api/tasks')
@@ -46,11 +63,6 @@ export const saveEditedTask = (task, index) => ({
   index,
 });
 
-export const addTask = payload => ({
-  type: ADD_TASK,
-  payload,
-});
-
 export const deleteTask = index => ({
   type: DELETE_TASK,
   index,
@@ -58,6 +70,18 @@ export const deleteTask = index => ({
 
 export const toggleNewTaskPopup = () => ({
   type: TOGGLE_NEW_TASK_POPUP,
+});
+
+export const openNewTaskPopup = () => ({
+  type: OPEN_NEW_TASK_POPUP,
+});
+
+export const closeNewTaskPopup = () => ({
+  type: CLOSE_NEW_TASK_POPUP,
+});
+
+export const resetNewTaskState = () => ({
+  type: RESET_NEW_TASK_STATE,
 });
 
 export const toggleEditTaskPopupRedux = () => ({
@@ -83,6 +107,12 @@ export const populateEditTaskForm = payload => ({
 
 export const storeEditTaskFormChange = (name, value) => ({
   type: STORE_EDIT_TASK_FORM_CHANGE,
+  name,
+  value,
+});
+
+export const storeNewTaskFormChange = (name, value) => ({
+  type: STORE_NEW_TASK_FORM_CHANGE,
   name,
   value,
 });

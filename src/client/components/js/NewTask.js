@@ -29,7 +29,7 @@ class NewTask extends Component {
       title,
       description,
       submitNewTask,
-      toggleNewTaskPopup,
+      closeNewTaskPopup,
     } = this.props;
     return (
       <div className="newTask-outer">
@@ -56,7 +56,7 @@ class NewTask extends Component {
             <input type="checkbox" name="completed" defaultChecked={false} onChange={this.handleChange} />Completed
             <br />
             <input type="submit" value="Add Task" />
-            <button type="button" onClick={toggleNewTaskPopup}>Close</button>
+            <button type="button" onClick={closeNewTaskPopup}>Close</button>
           </form>
         </div>
       </div>
@@ -69,7 +69,7 @@ NewTask.propTypes = {
   description: PropTypes.string,
   defineNewTask: PropTypes.func.isRequired,
   submitNewTask: PropTypes.func.isRequired,
-  toggleNewTaskPopup: PropTypes.func.isRequired,
+  closeNewTaskPopup: PropTypes.func.isRequired,
 };
 
 NewTask.defaultProps = {

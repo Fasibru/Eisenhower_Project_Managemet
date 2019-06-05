@@ -4,16 +4,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   getTasks,
+  addNewTask,
   deleteTask,
   getFilters,
   toggleNewTaskPopup,
-  toggleEditTaskPopupRedux,
+  openNewTaskPopup,
+  closeNewTaskPopup,
+  resetNewTaskState,
   openEditTaskPopup,
   closeEditTaskPopup,
   resetEditTaskState,
   storeEditTaskFormChange,
   populateEditTaskForm,
   saveEditedTask,
+  storeNewTaskFormChange,
 } from '../../actions/index';
 
 import Header from './Header';
@@ -33,6 +37,7 @@ function mapStateToProps(state) {
     newTaskPopup: state.newTaskPopup,
     editTaskPopupRedux: state.editTaskPopupRedux,
     editTaskRedux: state.editTaskRedux,
+    newTaskRedux: state.newTaskRedux,
   };
 }
 
@@ -128,9 +133,21 @@ class App extends Component {
   handleNewTaskFormSubmit = (event) => {
     event.preventDefault();
 
+    // ############### Redux ###############
+    const {
+      // eslint-disable-next-line no-shadow
+      closeNewTaskPopup,
+      // eslint-disable-next-line no-shadow
+      resetNewTaskState,
+      // eslint-disable-next-line no-shadow
+      newTaskRedux,
+      // eslint-disable-next-line no-shadow
+      addNewTask,
+    } = this.props;
+    addNewTask(newTaskRedux);
+
+    // ############### ORIGINAL ###############
     const { newTask, filteredTasks } = this.state;
-    // eslint-disable-next-line no-shadow
-    const { toggleNewTaskPopup } = this.props;
     const filteredTasksLength = filteredTasks.length;
 
     // POST new task and update state afterwards
@@ -161,13 +178,28 @@ class App extends Component {
       .catch((err) => {
         console.log(err);
       });
+    // ############### original ###############
 
-    // close the popup after submit
-    toggleNewTaskPopup();
+    // reset editTask
+    resetNewTaskState();
+
+    // close the popup
+    closeNewTaskPopup();
   }
 
   // update newTask object based on form input in NewTask component:
   handleNewTaskFormChange = (event) => {
+    // ############### Redux ###############
+    // eslint-disable-next-line no-shadow
+    const { storeNewTaskFormChange } = this.props;
+    if (event.target.name === 'completed') {
+      storeNewTaskFormChange(event.target.name, event.target.checked);
+    } else {
+      storeNewTaskFormChange(event.target.name, event.target.value);
+    }
+
+
+    // ############### ORIGINAL ###############
     const { newTask } = this.state;
     if (event.target.name === 'completed') {
       newTask[event.target.name] = event.target.checked;
@@ -264,7 +296,6 @@ class App extends Component {
   // delete a task from within the EditTask popup
   handleDeleteTask = () => {
     // ############### Redux ###############
-    // eslint-disable-next-line no-shadow
     const {
       // eslint-disable-next-line no-shadow
       closeEditTaskPopup,
@@ -347,7 +378,9 @@ class App extends Component {
       // filteredTasksRedux,
       // filtersRedux,
       // eslint-disable-next-line no-shadow
-      toggleNewTaskPopup,
+      openNewTaskPopup,
+      // eslint-disable-next-line no-shadow
+      closeNewTaskPopup,
       newTaskPopup,
     } = this.props;
     const { title, description } = newTask;
@@ -356,7 +389,7 @@ class App extends Component {
       <div className="grid-container">
         <Header />
         <Sidenav
-          toggleNewTaskPopup={toggleNewTaskPopup}
+          openNewTaskPopup={openNewTaskPopup}
           filters={filters}
           handleFilterShowTasks={this.handleFilterShowTasks}
         />
@@ -369,7 +402,7 @@ class App extends Component {
         {newTaskPopup
           && (
           <NewTask
-            toggleNewTaskPopup={toggleNewTaskPopup}
+            closeNewTaskPopup={closeNewTaskPopup}
             defineNewTask={this.handleNewTaskFormChange}
             submitNewTask={this.handleNewTaskFormSubmit}
             title={title}
@@ -394,10 +427,14 @@ class App extends Component {
 }
 
 App.propTypes = {
+  addNewTask: PropTypes.func.isRequired,
   getTasks: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
   getFilters: PropTypes.func.isRequired,
-  toggleNewTaskPopup: PropTypes.func.isRequired,
+  // toggleNewTaskPopup: PropTypes.func.isRequired,
+  openNewTaskPopup: PropTypes.func.isRequired,
+  closeNewTaskPopup: PropTypes.func.isRequired,
+  resetNewTaskState: PropTypes.func.isRequired,
   newTaskPopup: PropTypes.bool.isRequired,
   resetEditTaskState: PropTypes.func.isRequired,
   openEditTaskPopup: PropTypes.func.isRequired,
@@ -411,15 +448,26 @@ App.propTypes = {
     rank: PropTypes.number,
     _id: PropTypes.string,
   }).isRequired,
+  newTaskRedux: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    category: PropTypes.oneOf(['A', 'B', 'C', 'D']),
+    rank: PropTypes.number,
+    _id: PropTypes.string,
+  }).isRequired,
   filteredTasksRedux: PropTypes.arrayOf(PropTypes.object).isRequired,
   saveEditedTask: PropTypes.func.isRequired,
+  storeNewTaskFormChange: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, {
+  addNewTask,
   getTasks,
   getFilters,
   toggleNewTaskPopup,
-  toggleEditTaskPopupRedux,
+  openNewTaskPopup,
+  closeNewTaskPopup,
+  resetNewTaskState,
   resetEditTaskState,
   openEditTaskPopup,
   closeEditTaskPopup,
@@ -427,4 +475,5 @@ export default connect(mapStateToProps, {
   populateEditTaskForm,
   saveEditedTask,
   deleteTask,
+  storeNewTaskFormChange,
 })(App);

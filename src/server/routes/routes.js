@@ -14,9 +14,11 @@ const router = Router();
 
 router.get('/tasks', getTasks);
 
-router.get('/getInitialData', getInitialData);
+router.get('/getInitialData', getInitialData); // deprecated
 
-router.post('/newTask', addNewTask);
+router.post('/newTask', addNewTask); // deprecated
+
+router.post('/task', addNewTask);
 
 router.put('/editTask/:id', editTask);
 

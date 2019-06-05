@@ -1,22 +1,26 @@
 import {
-  // ADD_TASK,
+  ADD_NEW_TASK,
   DELETE_TASK,
   GET_TASKS,
   GET_FILTERS,
   POPULATE_EDIT_TASK_FORM,
   TOGGLE_NEW_TASK_POPUP,
+  OPEN_NEW_TASK_POPUP,
+  CLOSE_NEW_TASK_POPUP,
+  RESET_NEW_TASK_STATE,
   TOGGLE_EDIT_TASK_POPUP,
   OPEN_EDIT_TASK_POPUP,
   CLOSE_EDIT_TASK_POPUP,
   RESET_EDIT_TASK_STATE,
   STORE_EDIT_TASK_FORM_CHANGE,
   SAVE_EDITED_TASK,
+  STORE_NEW_TASK_FORM_CHANGE,
 } from '../constants/action-types';
 
 const initialState = {
   filteredTasksRedux: [],
   newTaskPopup: false,
-  // newTask: {},
+  newTaskRedux: {},
   editTaskPopupRedux: false,
   editTaskRedux: {},
   filtersRedux: {},
@@ -25,6 +29,10 @@ const initialState = {
 
 const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_NEW_TASK:
+      return Object.assign({}, state, {
+        filteredTasksRedux: state.filteredTasksRedux.concat(action.task),
+      });
     case GET_TASKS:
       return Object.assign({}, state, {
         filteredTasksRedux: action.tasks,
@@ -36,6 +44,18 @@ const tasksReducer = (state = initialState, action) => {
     case TOGGLE_NEW_TASK_POPUP:
       return Object.assign({}, state, {
         newTaskPopup: !state.newTaskPopup,
+      });
+    case OPEN_NEW_TASK_POPUP:
+      return Object.assign({}, state, {
+        newTaskPopup: true,
+      });
+    case CLOSE_NEW_TASK_POPUP:
+      return Object.assign({}, state, {
+        newTaskPopup: false,
+      });
+    case RESET_NEW_TASK_STATE:
+      return Object.assign({}, state, {
+        newTaskRedux: {},
       });
     case TOGGLE_EDIT_TASK_POPUP:
       return Object.assign({}, state, {
@@ -80,10 +100,13 @@ const tasksReducer = (state = initialState, action) => {
           ...state.filteredTasksRedux.slice(action.index + 1),
         ],
       });
-    // case ADD_TASK:
-    //   return Object.assign({}, state, {
-    //     filteredTasks: state.filteredTasks.concat(action.payload),
-    //   });
+    case STORE_NEW_TASK_FORM_CHANGE:
+      return Object.assign({}, state, {
+        newTaskRedux: {
+          ...state.newTaskRedux,
+          [action.name]: action.value,
+        },
+      });
     default:
       return state;
   }

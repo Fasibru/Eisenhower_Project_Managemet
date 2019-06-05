@@ -8,7 +8,7 @@ import '../css/Sidenav.css';
 
 function Sidenav(props) {
   const {
-    toggleNewTaskPopup,
+    openNewTaskPopup,
     handleFilterShowTasks,
     filters,
   } = props;
@@ -17,7 +17,7 @@ function Sidenav(props) {
       <ul className="sidenav__list">
         <li className="sidenav__list-elem">Search field</li>
         <li className="sidenav__list-elem">
-          <button type="button" onClick={toggleNewTaskPopup}>New Task</button>
+          <button type="button" onClick={openNewTaskPopup}>New Task</button>
         </li>
         <li className="sidenav__list-elem">
           <p>Show tasks:</p>
@@ -36,7 +36,7 @@ function Sidenav(props) {
 }
 
 Sidenav.propTypes = {
-  toggleNewTaskPopup: PropTypes.func.isRequired,
+  openNewTaskPopup: PropTypes.func.isRequired,
   handleFilterShowTasks: PropTypes.func.isRequired,
   filters: PropTypes.shape({
     showTasks: PropTypes.string,
