@@ -15,6 +15,7 @@ import {
   STORE_EDIT_TASK_FORM_CHANGE,
   SAVE_EDITED_TASK,
   STORE_NEW_TASK_FORM_CHANGE,
+  UPDATE_FILTERS,
 } from '../constants/action-types';
 
 const initialState = {
@@ -31,7 +32,10 @@ const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_NEW_TASK:
       return Object.assign({}, state, {
-        filteredTasksRedux: state.filteredTasksRedux.concat(action.task),
+        filteredTasksRedux: [
+          ...state.filteredTasksRedux,
+          action.task,
+        ],
       });
     case GET_TASKS:
       return Object.assign({}, state, {
@@ -106,6 +110,19 @@ const tasksReducer = (state = initialState, action) => {
           ...state.newTaskRedux,
           [action.name]: action.value,
         },
+      });
+    case UPDATE_FILTERS:
+      return Object.assign({}, state, {
+        filtersRedux: {
+          ...state.filtersRedux,
+          [action.name]: action.value,
+        },
+        // filteredTasksRedux: state.filteredTasksRedux.map((task) => {
+        //   if ( === action.index) {
+        //     return action.task;
+        //   }
+        //   return task;
+        // }),
       });
     default:
       return state;

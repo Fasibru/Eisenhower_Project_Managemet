@@ -18,6 +18,7 @@ import {
   populateEditTaskForm,
   saveEditedTask,
   storeNewTaskFormChange,
+  updateFilters,
 } from '../../actions/index';
 
 import Header from './Header';
@@ -33,7 +34,7 @@ import '../css/App.css';
 function mapStateToProps(state) {
   return {
     filteredTasksRedux: state.filteredTasksRedux,
-    // filtersRedux: state.filtersRedux,
+    filtersRedux: state.filtersRedux,
     newTaskPopup: state.newTaskPopup,
     editTaskPopupRedux: state.editTaskPopupRedux,
     editTaskRedux: state.editTaskRedux,
@@ -309,8 +310,7 @@ class App extends Component {
       deleteTask,
     } = this.props;
 
-    // Need to work on the respective API for the route
-    // axios.delete(`/api/deleteTask/${editTask._id}`)
+    // axios.delete(`/api/task/${editTaskRedux._id}`)
     //   .catch((err) => {
     //     console.log(err);
     //   });
@@ -349,20 +349,33 @@ class App extends Component {
 
   // handle filter to show/hide completed tasks
   handleFilterShowTasks = (event) => {
+    // ############### Redux ###############
+    // eslint-disable-next-line no-shadow
+    const { updateFilters, filtersRedux } = this.props;
+    updateFilters(event.target.name, event.target.value);
+
+    axios.put('/api/filters', Object.assign({}, filtersRedux, {
+      [event.target.name]: event.target.value,
+    }));
+
+    // now I need to dispatch an action to update the tasks based on the filter criteria
+    // or I do that in a wrapper/container
+
+    // ############### ORIGINAL ###############
     const { filters } = this.state;
 
     filters.showTasks = event.target.value;
 
-    axios.put('/api/updateFilters', filters)
-      .then((res) => {
-        this.setState({
-          filters: res.data.filters[0],
-          filteredTasks: res.data.tasks,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // axios.put('/api/updateFilters', filters)
+    //   .then((res) => {
+    //     this.setState({
+    //       filters: res.data.filters[0],
+    //       filteredTasks: res.data.tasks,
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }
 
   render() {
@@ -458,6 +471,7 @@ App.propTypes = {
   filteredTasksRedux: PropTypes.arrayOf(PropTypes.object).isRequired,
   saveEditedTask: PropTypes.func.isRequired,
   storeNewTaskFormChange: PropTypes.func.isRequired,
+  updateFilters: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, {
@@ -476,4 +490,5 @@ export default connect(mapStateToProps, {
   saveEditedTask,
   deleteTask,
   storeNewTaskFormChange,
+  updateFilters,
 })(App);

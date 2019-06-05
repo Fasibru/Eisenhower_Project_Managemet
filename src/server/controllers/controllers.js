@@ -106,7 +106,7 @@ export const setFilters = (req, res) => {
 };
 
 // for PUT endpoint to update filters
-export const updateFilters = async (req, res) => {
+export const updateFiltersOLD = async (req, res) => {
   // update filter settings
   await Filters.findOneAndUpdate({ userID: -999 }, req.body, (err) => {
     if (err) {
@@ -167,5 +167,16 @@ export const getFilters = (req, res) => {
       res.send(err);
     }
     res.json(filters);
+  });
+};
+
+// for PUT endpoint to update filter settings
+export const updateFilters = (req, res) => {
+  // update filter settings
+  Filters.findOneAndUpdate({ userID: -999 }, req.body, (err) => {
+    if (err) {
+      res.send(err);
+    }
+    res.end();
   });
 };

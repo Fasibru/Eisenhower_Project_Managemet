@@ -6,6 +6,7 @@ import {
   editTask,
   setFilters,
   getFilters,
+  updateFiltersOLD,
   updateFilters,
   getInitialData,
 } from '../controllers/controllers';
@@ -22,13 +23,17 @@ router.post('/task', addNewTask);
 
 router.put('/editTask/:id', editTask);
 
-router.delete('/deleteTask/:id', deleteTask);
+router.delete('/deleteTask/:id', deleteTask); // deprecated
+
+router.delete('/task/:id', deleteTask);
 
 router.post('/setFilters', setFilters);
 
-router.put('/updateFilters', updateFilters);
+router.put('/updateFilters', updateFiltersOLD); // deprecated
 
 router.get('/filters', getFilters);
+
+router.put('/filters', updateFilters);
 
 router.get('/error', (req, res) => {
   res.send('Error');

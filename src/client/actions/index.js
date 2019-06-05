@@ -16,6 +16,7 @@ import {
   SAVE_EDITED_TASK,
   DELETE_TASK,
   STORE_NEW_TASK_FORM_CHANGE,
+  UPDATE_FILTERS,
 } from '../constants/action-types';
 
 export const addNewTask = task => (dispatch) => {
@@ -49,7 +50,7 @@ export const getFilters = () => (dispatch) => {
     .then((res) => {
       dispatch({
         type: GET_FILTERS,
-        filters: res.data,
+        filters: res.data[0],
       });
     })
     .catch((err) => {
@@ -113,6 +114,12 @@ export const storeEditTaskFormChange = (name, value) => ({
 
 export const storeNewTaskFormChange = (name, value) => ({
   type: STORE_NEW_TASK_FORM_CHANGE,
+  name,
+  value,
+});
+
+export const updateFilters = (name, value) => ({
+  type: UPDATE_FILTERS,
   name,
   value,
 });
