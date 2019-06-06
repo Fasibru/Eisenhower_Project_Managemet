@@ -1,23 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import {
+  populateEditTaskForm,
+  openEditTaskPopup,
+} from '../../actions/index';
+
+// eslint-disable-next-line no-shadow
+const populateEditTask = (openEditTaskPopup, populateEditTaskForm, data) => {
+  openEditTaskPopup();
+  populateEditTaskForm(data);
+};
 
 function Task(props) {
   const {
     task,
     className,
-    populateEditTask,
+    // eslint-disable-next-line no-shadow
+    openEditTaskPopup,
+    // eslint-disable-next-line no-shadow
+    populateEditTaskForm,
   } = props;
   return (
     <div
       className={className}
-      onDoubleClick={() => populateEditTask({
-        _id: task._id,
-        rank: task.rank,
-        category: task.category,
-        title: task.title,
-        description: task.description,
-        completed: task.completed,
-      })}
+      // onDoubleClick={() => populateEditTask({
+      //   _id: task._id,
+      //   rank: task.rank,
+      //   category: task.category,
+      //   title: task.title,
+      //   description: task.description,
+      //   completed: task.completed,
+      // })}
+      onDoubleClick={() => populateEditTask(openEditTaskPopup, populateEditTaskForm, task)}
     >
       <p>{task.title}</p>
       <p>{task.description}</p>
@@ -34,7 +49,8 @@ Task.propTypes = {
     rank: PropTypes.number.isRequired,
     _id: PropTypes.string.isRequired,
   }).isRequired,
-  populateEditTask: PropTypes.func.isRequired,
+  populateEditTaskForm: PropTypes.func.isRequired,
+  openEditTaskPopup: PropTypes.func.isRequired,
 };
 
-export default Task;
+export default connect(null, { openEditTaskPopup, populateEditTaskForm })(Task);

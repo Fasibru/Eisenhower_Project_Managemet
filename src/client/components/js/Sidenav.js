@@ -1,17 +1,35 @@
-/*
-This component serves as the section for setting filters to slice and dice the data/tasks
-*/
-
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import {
+  updateFilters,
+  openNewTaskPopup,
+} from '../../actions/index';
 import '../css/Sidenav.css';
+
+const mapStateToProps = state => ({
+  filters: state.filtersRedux,
+});
 
 function Sidenav(props) {
   const {
+    // eslint-disable-next-line no-shadow
     openNewTaskPopup,
-    handleFilterShowTasks,
     filters,
+    // eslint-disable-next-line no-shadow
+    updateFilters,
   } = props;
+
+  const handleFilterShowTasks = (event) => {
+    // eslint-disable-next-line no-shadow
+    updateFilters(event.target.name, event.target.value);
+
+    axios.put('/api/filters', Object.assign({}, filters, {
+      [event.target.name]: event.target.value,
+    }));
+  };
+
   return (
     <aside className="sidenav">
       <ul className="sidenav__list">
@@ -37,10 +55,13 @@ function Sidenav(props) {
 
 Sidenav.propTypes = {
   openNewTaskPopup: PropTypes.func.isRequired,
-  handleFilterShowTasks: PropTypes.func.isRequired,
+  updateFilters: PropTypes.func.isRequired,
   filters: PropTypes.shape({
     showTasks: PropTypes.string,
   }).isRequired,
 };
 
-export default Sidenav;
+export default connect(mapStateToProps, {
+  updateFilters,
+  openNewTaskPopup,
+})(Sidenav);

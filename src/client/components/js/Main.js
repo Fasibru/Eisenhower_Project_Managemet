@@ -1,11 +1,10 @@
-// import React, { Component } from 'react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import '../css/Main.css';
 import '../css/Task.css';
 import Task from './Task';
 
-const categorizeFilteredTasks = (filteredTasks, populateEditTask) => {
+const categorizeFilteredTasks = (filteredTasks) => {
   const categorizedFilteredTasks = {
     TasksCatA: [],
     TasksCatB: [],
@@ -21,7 +20,6 @@ const categorizeFilteredTasks = (filteredTasks, populateEditTask) => {
             className="task task-category-A"
             key={task._id}
             task={task}
-            populateEditTask={populateEditTask}
           />,
         );
         break;
@@ -32,7 +30,6 @@ const categorizeFilteredTasks = (filteredTasks, populateEditTask) => {
             className="task task-category-B"
             key={task._id}
             task={task}
-            populateEditTask={populateEditTask}
           />,
         );
         break;
@@ -43,7 +40,6 @@ const categorizeFilteredTasks = (filteredTasks, populateEditTask) => {
             className="task task-category-C"
             key={task._id}
             task={task}
-            populateEditTask={populateEditTask}
           />,
         );
         break;
@@ -54,7 +50,6 @@ const categorizeFilteredTasks = (filteredTasks, populateEditTask) => {
             className="task task-category-D"
             key={task._id}
             task={task}
-            populateEditTask={populateEditTask}
           />,
         );
         break;
@@ -66,11 +61,9 @@ const categorizeFilteredTasks = (filteredTasks, populateEditTask) => {
   return categorizedFilteredTasks;
 };
 
-function Main(props) {
-  const { filteredTasks, populateEditTask } = props;
+function Main({ filteredTasksRedux }) {
   const categorizedFilteredTasks = categorizeFilteredTasks(
-    filteredTasks,
-    populateEditTask,
+    filteredTasksRedux,
   );
   return (
     <main className="main">
@@ -83,8 +76,7 @@ function Main(props) {
 }
 
 Main.propTypes = {
-  filteredTasks: PropTypes.arrayOf(PropTypes.object).isRequired,
-  populateEditTask: PropTypes.func.isRequired,
+  filteredTasksRedux: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Main;

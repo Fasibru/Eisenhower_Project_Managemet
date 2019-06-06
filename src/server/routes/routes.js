@@ -21,7 +21,9 @@ router.post('/newTask', addNewTask); // deprecated
 
 router.post('/task', addNewTask);
 
-router.put('/editTask/:id', editTask);
+router.put('/editTask/:id', editTask); // deprecated
+
+router.put('/task/:id', editTask);
 
 router.delete('/deleteTask/:id', deleteTask); // deprecated
 

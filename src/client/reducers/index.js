@@ -19,27 +19,32 @@ import {
 } from '../constants/action-types';
 
 const initialState = {
+  tasks: [],
   filteredTasksRedux: [],
   newTaskPopup: false,
-  newTaskRedux: {},
+  newTaskRedux: {
+    title: '',
+    description: '',
+  },
   editTaskPopupRedux: false,
   editTaskRedux: {},
-  filtersRedux: {},
-  // tasks: [],
+  filtersRedux: {
+    showTasks: 'both',
+  },
 };
 
 const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_NEW_TASK:
       return Object.assign({}, state, {
-        filteredTasksRedux: [
-          ...state.filteredTasksRedux,
+        tasks: [
+          ...state.tasks,
           action.task,
         ],
       });
     case GET_TASKS:
       return Object.assign({}, state, {
-        filteredTasksRedux: action.tasks,
+        tasks: action.tasks,
       });
     case GET_FILTERS:
       return Object.assign({}, state, {
@@ -56,6 +61,12 @@ const tasksReducer = (state = initialState, action) => {
     case CLOSE_NEW_TASK_POPUP:
       return Object.assign({}, state, {
         newTaskPopup: false,
+        newTaskRedux: {
+          title: '',
+          description: '',
+          category: 'A',
+          completed: false,
+        },
       });
     case RESET_NEW_TASK_STATE:
       return Object.assign({}, state, {
@@ -72,6 +83,7 @@ const tasksReducer = (state = initialState, action) => {
     case CLOSE_EDIT_TASK_POPUP:
       return Object.assign({}, state, {
         editTaskPopupRedux: false,
+        editTaskRedux: {},
       });
     case RESET_EDIT_TASK_STATE:
       return Object.assign({}, state, {
@@ -90,7 +102,7 @@ const tasksReducer = (state = initialState, action) => {
       });
     case SAVE_EDITED_TASK:
       return Object.assign({}, state, {
-        filteredTasksRedux: state.filteredTasksRedux.map((task, index) => {
+        tasks: state.tasks.map((task, index) => {
           if (index === action.index) {
             return action.task;
           }
@@ -99,9 +111,9 @@ const tasksReducer = (state = initialState, action) => {
       });
     case DELETE_TASK:
       return Object.assign({}, state, {
-        filteredTasksRedux: [
-          ...state.filteredTasksRedux.slice(0, action.index),
-          ...state.filteredTasksRedux.slice(action.index + 1),
+        tasks: [
+          ...state.tasks.slice(0, action.index),
+          ...state.tasks.slice(action.index + 1),
         ],
       });
     case STORE_NEW_TASK_FORM_CHANGE:
@@ -117,12 +129,6 @@ const tasksReducer = (state = initialState, action) => {
           ...state.filtersRedux,
           [action.name]: action.value,
         },
-        // filteredTasksRedux: state.filteredTasksRedux.map((task) => {
-        //   if ( === action.index) {
-        //     return action.task;
-        //   }
-        //   return task;
-        // }),
       });
     default:
       return state;
