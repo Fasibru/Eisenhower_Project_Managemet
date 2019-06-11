@@ -3,14 +3,10 @@ import {
   ADD_NEW_TASK,
   GET_TASKS,
   GET_FILTERS,
-  TOGGLE_NEW_TASK_POPUP,
   OPEN_NEW_TASK_POPUP,
   CLOSE_NEW_TASK_POPUP,
-  RESET_NEW_TASK_STATE,
-  TOGGLE_EDIT_TASK_POPUP,
   OPEN_EDIT_TASK_POPUP,
   CLOSE_EDIT_TASK_POPUP,
-  RESET_EDIT_TASK_STATE,
   STORE_EDIT_TASK_FORM_CHANGE,
   POPULATE_EDIT_TASK_FORM,
   SAVE_EDITED_TASK,
@@ -69,10 +65,6 @@ export const deleteTask = index => ({
   index,
 });
 
-export const toggleNewTaskPopup = () => ({
-  type: TOGGLE_NEW_TASK_POPUP,
-});
-
 export const openNewTaskPopup = () => ({
   type: OPEN_NEW_TASK_POPUP,
 });
@@ -81,13 +73,6 @@ export const closeNewTaskPopup = () => ({
   type: CLOSE_NEW_TASK_POPUP,
 });
 
-export const resetNewTaskState = () => ({
-  type: RESET_NEW_TASK_STATE,
-});
-
-export const toggleEditTaskPopupRedux = () => ({
-  type: TOGGLE_EDIT_TASK_POPUP,
-});
 
 export const openEditTaskPopup = () => ({
   type: OPEN_EDIT_TASK_POPUP,
@@ -95,10 +80,6 @@ export const openEditTaskPopup = () => ({
 
 export const closeEditTaskPopup = () => ({
   type: CLOSE_EDIT_TASK_POPUP,
-});
-
-export const resetEditTaskState = () => ({
-  type: RESET_EDIT_TASK_STATE,
 });
 
 export const populateEditTaskForm = payload => ({

@@ -1,17 +1,13 @@
 import {
   ADD_NEW_TASK,
   GET_TASKS,
-  TOGGLE_NEW_TASK_POPUP,
   OPEN_NEW_TASK_POPUP,
   CLOSE_NEW_TASK_POPUP,
-  RESET_NEW_TASK_STATE,
   STORE_NEW_TASK_FORM_CHANGE,
   DELETE_TASK,
   POPULATE_EDIT_TASK_FORM,
-  TOGGLE_EDIT_TASK_POPUP,
   OPEN_EDIT_TASK_POPUP,
   CLOSE_EDIT_TASK_POPUP,
-  RESET_EDIT_TASK_STATE,
   STORE_EDIT_TASK_FORM_CHANGE,
   SAVE_EDITED_TASK,
 } from '../constants/actionTypes';
@@ -41,10 +37,6 @@ const tasksReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         tasks: action.tasks,
       });
-    case TOGGLE_NEW_TASK_POPUP:
-      return Object.assign({}, state, {
-        newTaskPopup: !state.newTaskPopup,
-      });
     case OPEN_NEW_TASK_POPUP:
       return Object.assign({}, state, {
         newTaskPopup: true,
@@ -59,20 +51,12 @@ const tasksReducer = (state = initialState, action) => {
           completed: false,
         },
       });
-    case RESET_NEW_TASK_STATE:
-      return Object.assign({}, state, {
-        newTask: {},
-      });
     case STORE_NEW_TASK_FORM_CHANGE:
       return Object.assign({}, state, {
         newTask: {
           ...state.newTask,
           [action.name]: action.value,
         },
-      });
-    case TOGGLE_EDIT_TASK_POPUP:
-      return Object.assign({}, state, {
-        editTaskPopup: !state.editTaskPopup,
       });
     case OPEN_EDIT_TASK_POPUP:
       return Object.assign({}, state, {
@@ -81,10 +65,6 @@ const tasksReducer = (state = initialState, action) => {
     case CLOSE_EDIT_TASK_POPUP:
       return Object.assign({}, state, {
         editTaskPopup: false,
-        editTaskRedux: {},
-      });
-    case RESET_EDIT_TASK_STATE:
-      return Object.assign({}, state, {
         editTaskRedux: {},
       });
     case POPULATE_EDIT_TASK_FORM:
