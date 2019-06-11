@@ -1,7 +1,7 @@
 import {
   GET_FILTERS,
   UPDATE_FILTERS,
-} from '../constants/action-types';
+} from '../constants/actionTypes';
 
 
 const initialState = {

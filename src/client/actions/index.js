@@ -17,7 +17,7 @@ import {
   DELETE_TASK,
   STORE_NEW_TASK_FORM_CHANGE,
   UPDATE_FILTERS,
-} from '../constants/action-types';
+} from '../constants/actionTypes';
 
 export const addNewTask = task => (dispatch) => {
   axios.post('/api/task', task)
