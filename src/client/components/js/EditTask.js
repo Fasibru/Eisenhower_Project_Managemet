@@ -11,9 +11,9 @@ import {
 import '../css/EditTask.css';
 
 const mapStateToProps = state => ({
-  editTask: state.editTaskRedux,
-  filteredTasks: state.filteredTasksRedux,
-  tasks: state.tasks,
+  editTask: state.tasks.editTaskRedux,
+  filteredTasks: state.tasks.filteredTasksRedux,
+  tasks: state.tasks.tasks,
 });
 
 function EditTask(props) {

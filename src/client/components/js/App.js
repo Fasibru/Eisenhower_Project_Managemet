@@ -17,8 +17,8 @@ import '../css/App.css';
 
 function mapStateToProps(state) {
   return {
-    newTaskPopup: state.newTaskPopup,
-    editTaskPopup: state.editTaskPopupRedux,
+    newTaskPopup: state.tasks.newTaskPopup,
+    editTaskPopup: state.tasks.editTaskPopup,
   };
 }
 

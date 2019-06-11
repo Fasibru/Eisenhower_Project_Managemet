@@ -9,7 +9,7 @@ import {
 import '../css/Sidenav.css';
 
 const mapStateToProps = state => ({
-  filters: state.filtersRedux,
+  filters: state.filters.filters,
 });
 
 function Sidenav(props) {

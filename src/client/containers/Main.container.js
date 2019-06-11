@@ -15,7 +15,7 @@ const filterTasks = (tasks, filters) => {
 };
 
 const mapStateToProps = state => ({
-  filteredTasksRedux: filterTasks(state.tasks, state.filtersRedux),
+  filteredTasksRedux: filterTasks(state.tasks.tasks, state.filters.filters),
 });
 
 export default connect(mapStateToProps)(Main);

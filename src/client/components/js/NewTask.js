@@ -9,7 +9,7 @@ import {
 import '../css/NewTask.css';
 
 const mapStateToProps = state => ({
-  newTask: state.newTaskRedux,
+  newTask: state.tasks.newTask,
 });
 
 function NewTask(props) {
