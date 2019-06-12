@@ -1,0 +1,12 @@
+{
+  "data": {
+    "rank": 1,
+    "completed": false,
+    "_id": "5cd83df54f87753c84a30fbe",
+    "category": "A",
+    "title": "Test title",
+    "description": "Test description",
+    "date": "2019-06-12T19:06:47.120Z",
+    "__v": 0
+  }
+}

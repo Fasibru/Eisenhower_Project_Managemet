@@ -1,0 +1,46 @@
+{
+  "data":
+    [
+      {
+        "rank": -999,
+        "completed": false,
+        "_id": "5cd83df54f87753c84a30fbe",
+        "category": "A",
+        "title": "Test title 1",
+        "description": "Test description 1",
+        "date": "2019-05-12T15:38:29.122Z",
+        "__v": 0
+      },
+      {
+        "rank": -999,
+        "completed": true,
+        "_id": "5cd83e0e4f87753c84a30fbf",
+        "category": "B",
+        "title": "Test title 2",
+        "description": "Test description 2",
+        "date": "2019-05-12T15:38:54.955Z",
+        "__v": 0
+      },
+      {
+        "rank": -999,
+        "completed": false,
+        "_id": "5cd83e5e4f87753c84a30fc0",
+        "category": "C",
+        "title": "Test title 3",
+        "description": "Test description 3",
+        "date": "2019-05-12T15:40:14.325Z",
+        "__v": 0
+      }
+      ,
+      {
+        "rank": -999,
+        "completed": false,
+        "_id": "5cd83e5e4f87753c84a30fc0",
+        "category": "D",
+        "title": "Test title 4",
+        "description": "Test description 4",
+        "date": "2019-05-12T15:40:14.325Z",
+        "__v": 0
+      }
+    ]
+}

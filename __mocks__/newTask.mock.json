@@ -1,0 +1,9 @@
+{
+  "newTask":
+    {
+      "title": "Test title",
+      "description": "Test description",
+      "category": "A",
+      "completed": "false"
+    }
+}
