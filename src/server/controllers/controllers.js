@@ -36,53 +36,6 @@ export const getTasks = (req, res) => {
   });
 };
 
-// for GET endpoint based on filter settings to retrieve tasks and filters
-export const getInitialData = async (req, res) => {
-  let filters;
-  try {
-    filters = await Filters.find({});
-  } catch (err) {
-    console.log(err);
-  }
-  switch (filters[0].showTasks) {
-    case 'both':
-      await Tasks.find({}, (err, tasks) => {
-        if (err) {
-          res.send(err);
-        }
-        res.json({
-          tasks,
-          filters,
-        });
-      });
-      break;
-    case 'open':
-      await Tasks.find({ completed: false }, (err, tasks) => {
-        if (err) {
-          res.send(err);
-        }
-        res.json({
-          tasks,
-          filters,
-        });
-      });
-      break;
-    case 'completed':
-      await Tasks.find({ completed: true }, (err, tasks) => {
-        if (err) {
-          res.send(err);
-        }
-        res.json({
-          tasks,
-          filters,
-        });
-      });
-      break;
-    default:
-      res.send('No proper filter for tasks to show defined.');
-  }
-};
-
 // for DELETE endpoint to delete a single task
 export const deleteTask = (req, res) => {
   Tasks.findOneAndDelete({ _id: req.params.id }, (err) => {
@@ -103,61 +56,6 @@ export const setFilters = (req, res) => {
     }
     res.json(filter);
   });
-};
-
-// for PUT endpoint to update filters
-export const updateFiltersOLD = async (req, res) => {
-  // update filter settings
-  await Filters.findOneAndUpdate({ userID: -999 }, req.body, (err) => {
-    if (err) {
-      res.send(err);
-    }
-  }).exec();
-
-  // read data based on updated filter settings
-  let filters;
-  try {
-    filters = await Filters.find({});
-  } catch (err) {
-    console.log(err);
-  }
-  switch (filters[0].showTasks) {
-    case 'both':
-      await Tasks.find({}, (err, tasks) => {
-        if (err) {
-          res.send(err);
-        }
-        res.json({
-          tasks,
-          filters,
-        });
-      });
-      break;
-    case 'open':
-      await Tasks.find({ completed: false }, (err, tasks) => {
-        if (err) {
-          res.send(err);
-        }
-        res.json({
-          tasks,
-          filters,
-        });
-      });
-      break;
-    case 'completed':
-      await Tasks.find({ completed: true }, (err, tasks) => {
-        if (err) {
-          res.send(err);
-        }
-        res.json({
-          tasks,
-          filters,
-        });
-      });
-      break;
-    default:
-      res.send('No proper filter for tasks to show defined.');
-  }
 };
 
 // for GET endpoint to get filter settings
