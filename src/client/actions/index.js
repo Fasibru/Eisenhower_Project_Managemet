@@ -73,7 +73,6 @@ export const closeNewTaskPopup = () => ({
   type: CLOSE_NEW_TASK_POPUP,
 });
 
-
 export const openEditTaskPopup = () => ({
   type: OPEN_EDIT_TASK_POPUP,
 });
