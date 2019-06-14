@@ -24,14 +24,6 @@ function Task(props) {
   return (
     <div
       className={className}
-      // onDoubleClick={() => populateEditTask({
-      //   _id: task._id,
-      //   rank: task.rank,
-      //   category: task.category,
-      //   title: task.title,
-      //   description: task.description,
-      //   completed: task.completed,
-      // })}
       onDoubleClick={() => populateEditTask(openEditTaskPopup, populateEditTaskForm, task)}
     >
       <p>{task.title}</p>
