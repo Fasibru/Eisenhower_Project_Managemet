@@ -21,7 +21,7 @@ const initialState = {
     description: '',
   },
   editTaskPopup: false,
-  editTaskRedux: {},
+  editTask: {},
 };
 
 const tasksReducer = (state = initialState, action) => {
@@ -65,16 +65,16 @@ const tasksReducer = (state = initialState, action) => {
     case CLOSE_EDIT_TASK_POPUP:
       return Object.assign({}, state, {
         editTaskPopup: false,
-        editTaskRedux: {},
+        editTask: {},
       });
     case POPULATE_EDIT_TASK_FORM:
       return Object.assign({}, state, {
-        editTaskRedux: action.editTask,
+        editTask: action.editTask,
       });
     case STORE_EDIT_TASK_FORM_CHANGE:
       return Object.assign({}, state, {
-        editTaskRedux: {
-          ...state.editTaskRedux,
+        editTask: {
+          ...state.editTask,
           [action.name]: action.value,
         },
       });

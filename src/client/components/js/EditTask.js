@@ -11,8 +11,7 @@ import {
 import '../css/EditTask.css';
 
 const mapStateToProps = state => ({
-  editTask: state.tasks.editTaskRedux,
-  filteredTasks: state.tasks.filteredTasksRedux,
+  editTask: state.tasks.editTask,
   tasks: state.tasks.tasks,
 });
 
@@ -53,7 +52,7 @@ function EditTask(props) {
     // find index of task to update:
     const editTaskIndex = tasks.findIndex(task => task._id === editTask._id);
 
-    // save changes in filteredTasks array as well to avoid additional GET of all tasks
+    // save changes in tasks array as well to avoid additional GET of all tasks
     saveEditedTask(editTask, editTaskIndex);
 
     // close the dialog after submit
