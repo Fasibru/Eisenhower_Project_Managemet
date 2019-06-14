@@ -1,43 +1,41 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
-// import Task from '../../src/client/components/js/Task';
+import React from 'react';
+import { shallow } from 'enzyme';
+import { Task } from '../../src/client/components/js/Task';
 
-// describe('Testing <Task />', () => {
-//   const fnDoubleClick = jest.fn();
-//   let wrapper;
+import singleTask from '../../__mocks__/singleTaskDBFormat.mock.json';
 
-//   beforeEach(() => {
-//     wrapper = shallow(<Task
-//       className="test"
-//       key={1}
-//       task={{
-//         _id: '2',
-//         rank: -999,
-//         category: 'A',
-//         title: 'Task Title',
-//         description: 'Task Description',
-//         completed: false,
-//       }}
-//       populateEditTask={fnDoubleClick}
-//     />);
-//   });
+describe('Testing <Task />', () => {
+  const fnDoubleClick = jest.fn();
+  const fnClick = jest.fn();
+  let wrapper;
 
-//   it('Renders correctly', () => {
-//     expect(wrapper).toMatchSnapshot();
-//   });
+  beforeEach(() => {
+    wrapper = shallow(<Task
+      className="test"
+      key={1}
+      task={singleTask.data}
+      openEditTaskPopup={fnClick}
+      populateEditTaskForm={fnDoubleClick}
+    />);
+  });
 
-//   it('Should populate "title" and "description" based on provided props', () => {
-//     const pTitle = wrapper.find('p').at(0);
-//     const pDescription = wrapper.find('p').at(1);
+  it('Renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
-//     expect(pTitle.text()).toEqual('Task Title');
-//     expect(pDescription.text()).toEqual('Task Description');
-//   });
+  it('Should populate "title" and "description" based on provided props', () => {
+    const pTitle = wrapper.find('p').at(0);
+    const pDescription = wrapper.find('p').at(1);
 
-//   it('Should run "populateEditTask" on double click', () => {
-//     const div = wrapper.find('div');
-//     div.simulate('doubleClick');
+    expect(pTitle.text()).toEqual('Test title');
+    expect(pDescription.text()).toEqual('Test description');
+  });
 
-//     expect(fnDoubleClick).toHaveBeenCalledTimes(1);
-//   });
-// });
+  it('Should run "populateEditTaskForm" "and openEditTaskPopup" on double click', () => {
+    const div = wrapper.find('div');
+    div.simulate('doubleClick');
+
+    expect(fnDoubleClick).toHaveBeenCalledTimes(1);
+    expect(fnClick).toHaveBeenCalledTimes(1);
+  });
+});

@@ -12,7 +12,7 @@ const populateEditTask = (openEditTaskPopup, populateEditTaskForm, data) => {
   populateEditTaskForm(data);
 };
 
-function Task(props) {
+export function Task(props) {
   const {
     task,
     className,

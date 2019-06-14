@@ -6,10 +6,10 @@ exports[`Testing <Task /> Renders correctly 1`] = `
   onDoubleClick={[Function]}
 >
   <p>
-    Task Title
+    Test title
   </p>
   <p>
-    Task Description
+    Test description
   </p>
 </div>
 `;
