@@ -49,7 +49,7 @@ describe('Testing <EditTask />', () => {
     expect(radioCategory.at(1).props().defaultChecked).toEqual(false);
     expect(radioCategory.at(2).props().defaultChecked).toEqual(false);
     expect(radioCategory.at(3).props().defaultChecked).toEqual(false);
-    expect(checkboxCompleted.props().checked).toEqual(false);
+    expect(checkboxCompleted.props().checked).toEqual(singleTask.data.completed);
   });
 
   it('Should call "closeEditTaskPopup" with "Close" button', () => {
@@ -120,106 +120,4 @@ describe('Testing <EditTask />', () => {
     expect(fnChange).toHaveBeenCalledTimes(1);
     fnChange.mockClear();
   });
-
-  // it('Handles switch statement correctly', () => {
-  //   const caseA = shallow(<EditTask
-  //     toggleEditTaskPopup={fnClick}
-  //     editTask={{
-  //       _id: '2',
-  //       rank: -999,
-  //       category: 'A',
-  //       title: 'Task Title',
-  //       description: 'Task Description',
-  //       completed: false,
-  //     }}
-  //     defineEditTask={fnChange}
-  //     submitEditTask={fnSubmit}
-  //     handleDeleteTask={fnClick}
-  //   />);
-
-  //   expect(caseA.find('input[type="radio"][value="A"]').props().defaultChecked).toEqual(true);
-  //   expect(caseA.find('input[type="radio"][value="B"]').props().defaultChecked).toEqual(false);
-  //   expect(caseA.find('input[type="radio"][value="C"]').props().defaultChecked).toEqual(false);
-  //   expect(caseA.find('input[type="radio"][value="D"]').props().defaultChecked).toEqual(false);
-
-  //   const caseB = shallow(<EditTask
-  //     toggleEditTaskPopup={fnClick}
-  //     editTask={{
-  //       _id: '2',
-  //       rank: -999,
-  //       category: 'B',
-  //       title: 'Task Title',
-  //       description: 'Task Description',
-  //       completed: false,
-  //     }}
-  //     defineEditTask={fnChange}
-  //     submitEditTask={fnSubmit}
-  //     handleDeleteTask={fnClick}
-  //   />);
-
-  //   expect(caseB.find('input[type="radio"][value="A"]').props().defaultChecked).toEqual(false);
-  //   expect(caseB.find('input[type="radio"][value="B"]').props().defaultChecked).toEqual(true);
-  //   expect(caseB.find('input[type="radio"][value="C"]').props().defaultChecked).toEqual(false);
-  //   expect(caseB.find('input[type="radio"][value="D"]').props().defaultChecked).toEqual(false);
-
-  //   const caseC = shallow(<EditTask
-  //     toggleEditTaskPopup={fnClick}
-  //     editTask={{
-  //       _id: '2',
-  //       rank: -999,
-  //       category: 'C',
-  //       title: 'Task Title',
-  //       description: 'Task Description',
-  //       completed: false,
-  //     }}
-  //     defineEditTask={fnChange}
-  //     submitEditTask={fnSubmit}
-  //     handleDeleteTask={fnClick}
-  //   />);
-
-  //   expect(caseC.find('input[type="radio"][value="A"]').props().defaultChecked).toEqual(false);
-  //   expect(caseC.find('input[type="radio"][value="B"]').props().defaultChecked).toEqual(false);
-  //   expect(caseC.find('input[type="radio"][value="C"]').props().defaultChecked).toEqual(true);
-  //   expect(caseC.find('input[type="radio"][value="D"]').props().defaultChecked).toEqual(false);
-
-  //   const caseD = shallow(<EditTask
-  //     toggleEditTaskPopup={fnClick}
-  //     editTask={{
-  //       _id: '2',
-  //       rank: -999,
-  //       category: 'D',
-  //       title: 'Task Title',
-  //       description: 'Task Description',
-  //       completed: false,
-  //     }}
-  //     defineEditTask={fnChange}
-  //     submitEditTask={fnSubmit}
-  //     handleDeleteTask={fnClick}
-  //   />);
-
-  //   expect(caseD.find('input[type="radio"][value="A"]').props().defaultChecked).toEqual(false);
-  //   expect(caseD.find('input[type="radio"][value="B"]').props().defaultChecked).toEqual(false);
-  //   expect(caseD.find('input[type="radio"][value="C"]').props().defaultChecked).toEqual(false);
-  //   expect(caseD.find('input[type="radio"][value="D"]').props().defaultChecked).toEqual(true);
-
-  //   const caseDefault = shallow(<EditTask
-  //     toggleEditTaskPopup={fnClick}
-  //     editTask={{
-  //       _id: '2',
-  //       rank: -999,
-  //       category: 'E',
-  //       title: 'Task Title',
-  //       description: 'Task Description',
-  //       completed: false,
-  //     }}
-  //     defineEditTask={fnChange}
-  //     submitEditTask={fnSubmit}
-  //     handleDeleteTask={fnClick}
-  //   />);
-
-  //   expect(caseDefault.find('input[type="radio"][value="A"]').props().defaultChecked).toEqual(false);
-  //   expect(caseDefault.find('input[type="radio"][value="B"]').props().defaultChecked).toEqual(false);
-  //   expect(caseDefault.find('input[type="radio"][value="C"]').props().defaultChecked).toEqual(false);
-  //   expect(caseDefault.find('input[type="radio"][value="D"]').props().defaultChecked).toEqual(false);
-  // });
 });
