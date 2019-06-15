@@ -1,83 +1,103 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
-// import NewTask from '../../src/client/components/js/NewTask';
+import React from 'react';
+import { shallow } from 'enzyme';
+import { NewTask } from '../../src/client/components/js/NewTask';
 
-// describe('Testing <NewTask />', () => {
-//   const fnClick = jest.fn();
-//   const fnChange = jest.fn();
-//   const fnSubmit = jest.fn();
-//   let wrapper;
+import newTask from '../../__mocks__/newTask.mock.json';
 
-//   beforeEach(() => {
-//     wrapper = shallow(<NewTask
-//       toggleNewTaskPopup={fnClick}
-//       defineNewTask={fnChange}
-//       submitNewTask={fnSubmit}
-//       title="props_title"
-//       description="props_description"
-//     />);
-//   });
+describe('Testing <NewTask />', () => {
+  const fnClick = jest.fn();
+  const fnChange = jest.fn();
+  const fnSubmit = jest.fn();
+  let wrapper;
 
-//   it('Renders correctly', () => {
-//     expect(wrapper).toMatchSnapshot();
-//   });
+  beforeEach(() => {
+    wrapper = shallow(<NewTask
+      closeNewTaskPopup={fnClick}
+      storeNewTaskFormChange={fnChange}
+      addNewTask={fnSubmit}
+      newTask={newTask.newTask}
+    />);
+  });
 
-//   it('Should call function on "title", "description", "category", "completed" change', () => {
-//     const event = {
-//       target:
-//       { value: '' },
-//     };
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
-//     const eventChecked = {
-//       target:
-//         { checked: true },
-//     };
+  it('Renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
-//     const inputTitle = wrapper.find('input').at(0);
-//     inputTitle.simulate('change', event);
+  it('Should call function on "title", "description", "category", "completed" change', () => {
+    // define events
+    const event = {
+      target:
+      { value: '' },
+    };
 
-//     const textareaDescription = wrapper.find('textarea').at(0);
-//     textareaDescription.simulate('change', event);
+    const eventChecked = {
+      target:
+        { checked: true },
+    };
 
-//     const checkboxCompleted = wrapper.find('input[type="checkbox"]');
-//     checkboxCompleted.simulate('change', eventChecked);
+    // identify nodes and simulate changes
+    const inputTitle = wrapper.find('input').at(0);
+    inputTitle.simulate('change', event);
 
-//     const radioInput = wrapper.find('input[type="radio"]');
-//     radioInput.at(0).simulate('change', eventChecked);
-//     radioInput.at(1).simulate('change', eventChecked);
-//     radioInput.at(2).simulate('change', eventChecked);
-//     radioInput.at(3).simulate('change', eventChecked);
+    const textareaDescription = wrapper.find('textarea');
+    textareaDescription.simulate('change', event);
 
-//     expect(fnChange).toHaveBeenCalledTimes(7);
-//   });
+    const checkboxCompleted = wrapper.find('input[type="checkbox"]');
+    checkboxCompleted.simulate('change', eventChecked);
 
-//   it('Should populate "title", "description", "category", "completed" based on props and defaults', () => {
-//     const inputTitle = wrapper.find('input').at(0);
-//     const textareaDescription = wrapper.find('textarea').at(0);
-//     const checkboxCompleted = wrapper.find('input[type="checkbox"]');
-//     const radioInput = wrapper.find('input[type="radio"]');
+    const radioInput = wrapper.find('input[type="radio"]');
+    radioInput.at(0).simulate('change', eventChecked);
+    radioInput.at(1).simulate('change', eventChecked);
+    radioInput.at(2).simulate('change', eventChecked);
+    radioInput.at(3).simulate('change', eventChecked);
 
-//     expect(inputTitle.props().value).toEqual('props_title');
-//     expect(textareaDescription.props().value).toEqual('props_description');
-//     expect(checkboxCompleted.props().defaultChecked).toEqual(false);
+    // Assertion
+    expect(fnChange).toHaveBeenCalledTimes(7);
+  });
 
-//     expect(radioInput.at(0).props().defaultChecked).toBeUndefined();
-//     expect(radioInput.at(1).props().defaultChecked).toBeUndefined();
-//     expect(radioInput.at(2).props().defaultChecked).toBeUndefined();
-//     expect(radioInput.at(3).props().defaultChecked).toBeUndefined();
-//   });
+  it('Should populate "title", "description", "category", "completed" based on props and defaults', () => {
+    // identify nodes
+    const inputTitle = wrapper.find('input').at(0);
+    const textareaDescription = wrapper.find('textarea').at(0);
+    const checkboxCompleted = wrapper.find('input[type="checkbox"]');
+    const radioInput = wrapper.find('input[type="radio"]');
 
-//   it('Close button should call "toggleNewTaskPopup" onClick', () => {
-//     const buttonClose = wrapper.find('button[type="button"]');
-//     buttonClose.simulate('click');
+    // Assertions
+    expect(inputTitle.props().value).toEqual(newTask.newTask.title);
+    expect(textareaDescription.props().value).toEqual(newTask.newTask.description);
+    expect(checkboxCompleted.props().defaultChecked).toEqual(false);
 
-//     expect(fnClick).toHaveBeenCalled();
-//   });
+    expect(radioInput.at(0).props().defaultChecked).toBeUndefined();
+    expect(radioInput.at(1).props().defaultChecked).toBeUndefined();
+    expect(radioInput.at(2).props().defaultChecked).toBeUndefined();
+    expect(radioInput.at(3).props().defaultChecked).toBeUndefined();
+  });
 
-//   it('Submitting the form should call "submitNewTask"', () => {
-//     const form = wrapper.find('form');
-//     form.simulate('submit');
+  it('Close button should call "closeNewTaskPopup" onClick', () => {
+    // identify node and simulate click
+    const buttonClose = wrapper.find('button[type="button"]');
+    buttonClose.simulate('click');
 
-//     expect(fnSubmit).toHaveBeenCalled();
-//   });
-// });
+    // Assertion
+    expect(fnClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('Submitting the form should call "storeNewTaskFormChange" and "closeNewTaskPopup"', () => {
+    // define event
+    const event = {
+      preventDefault: jest.fn(),
+    };
+
+    // identify node and simulate submit
+    const form = wrapper.find('form');
+    form.simulate('submit', event);
+
+    // Assertions
+    expect(fnSubmit).toHaveBeenCalledTimes(1);
+    expect(fnClick).toHaveBeenCalledTimes(1);
+  });
+});

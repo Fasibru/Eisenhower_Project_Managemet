@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
   newTask: state.tasks.newTask,
 });
 
-function NewTask(props) {
+export function NewTask(props) {
   const {
     // eslint-disable-next-line no-shadow
     closeNewTaskPopup,
