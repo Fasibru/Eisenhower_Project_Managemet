@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
   filters: state.filters.filters,
 });
 
-function Sidenav(props) {
+export function Sidenav(props) {
   const {
     // eslint-disable-next-line no-shadow
     openNewTaskPopup,

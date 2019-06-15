@@ -31,8 +31,8 @@ exports[`Testing <Sidenav /> Renders correctly 1`] = `
       <form>
         <select
           name="showTasks"
-          onChange={[MockFunction]}
-          value="both"
+          onChange={[Function]}
+          value="open"
         >
           <option
             value="both"

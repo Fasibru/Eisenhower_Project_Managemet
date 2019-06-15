@@ -1,47 +1,59 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
-// import Sidenav from '../../src/client/components/js/Sidenav';
+import React from 'react';
+import { shallow } from 'enzyme';
+import axios from 'axios';
+import { Sidenav } from '../../src/client/components/js/Sidenav';
 
-// describe('Testing <Sidenav />', () => {
-//   const fnClick = jest.fn();
-//   const fnChange = jest.fn();
-//   let wrapper;
+import filtersDBFormat from '../../__mocks__/filtersDBFormat.mock.json';
 
-//   beforeEach(() => {
-//     wrapper = shallow(<Sidenav
-//       toggleNewTaskPopup={fnClick}
-//       filters={{
-//         showTasks: 'both',
-//       }}
-//       handleFilterShowTasks={fnChange}
-//     />);
-//   });
+jest.mock('axios');
 
-//   it('Renders correctly', () => {
-//     expect(wrapper).toMatchSnapshot();
-//   });
+describe('Testing <Sidenav />', () => {
+  const fnClick = jest.fn();
+  const fnChange = jest.fn();
+  let wrapper;
 
-//   it('Should populate "select" based on provided props', () => {
-//     const select = wrapper.find('select');
+  beforeEach(() => {
+    wrapper = shallow(<Sidenav
+      openNewTaskPopup={fnClick}
+      filters={filtersDBFormat.data[0]}
+      updateFilters={fnChange}
+    />);
+  });
 
-//     expect(select.props().value).toEqual('both');
-//   });
+  it('Renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
-//   it('Should call "handleFilterShowTasks" on change', () => {
-//     const event = {
-//       target:
-//       { value: '' },
-//     };
-//     const select = wrapper.find('select');
-//     select.simulate('change', event);
+  it('Should populate "select" based on provided props', () => {
+    // identify node
+    const select = wrapper.find('select');
 
-//     expect(fnChange).toHaveBeenCalledTimes(1);
-//   });
+    // Assertions
+    expect(select.props().value).toEqual(filtersDBFormat.data[0].showTasks);
+  });
 
-//   it('Should call "toggleNewTaskPopup" on button click', () => {
-//     const button = wrapper.find('button');
-//     button.simulate('click');
+  it('Should call "updateFilters" and Axios PUT on change', () => {
+    // define event
+    const event = {
+      target:
+      { value: 'both' },
+    };
 
-//     expect(fnClick).toHaveBeenCalledTimes(1);
-//   });
-// });
+    // identify node and simulate change
+    const select = wrapper.find('select');
+    select.simulate('change', event);
+
+    // Assertions
+    expect(fnChange).toHaveBeenCalledTimes(1);
+    expect(axios.put).toHaveBeenCalledTimes(1);
+  });
+
+  it('Should call "openNewTaskPopup" on button click', () => {
+    // identify node and simulate click
+    const button = wrapper.find('button');
+    button.simulate('click');
+
+    // Assertions
+    expect(fnClick).toHaveBeenCalledTimes(1);
+  });
+});
