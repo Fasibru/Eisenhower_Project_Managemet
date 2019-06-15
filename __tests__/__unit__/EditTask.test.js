@@ -1,210 +1,225 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
-// import EditTask from '../../src/client/components/js/EditTask';
+import React from 'react';
+import { shallow } from 'enzyme';
+import axios from 'axios';
+import { EditTask } from '../../src/client/components/js/EditTask';
 
-// describe('Testing <EditTask />', () => {
-//   const fnClick = jest.fn();
-//   const fnSubmit = jest.fn();
-//   const fnChange = jest.fn();
-//   let wrapper;
+import singleTask from '../../__mocks__/singleTaskDBFormat.mock.json';
+import multipleTasks from '../../__mocks__/multipleTasksDBFormat.mock.json';
 
-//   beforeEach(() => {
-//     wrapper = shallow(<EditTask
-//       toggleEditTaskPopup={fnClick}
-//       editTask={{
-//         _id: '2',
-//         rank: -999,
-//         category: 'A',
-//         title: 'Task Title',
-//         description: 'Task Description',
-//         completed: false,
-//       }}
-//       defineEditTask={fnChange}
-//       submitEditTask={fnSubmit}
-//       handleDeleteTask={fnClick}
-//     />);
-//   });
+jest.mock('axios');
 
-//   afterEach(() => {
-//     jest.clearAllMocks();
-//   });
+describe('Testing <EditTask />', () => {
+  const fnClickClose = jest.fn();
+  const fnClickDelete = jest.fn();
+  const fnSubmit = jest.fn();
+  const fnChange = jest.fn();
+  let wrapper;
 
-//   it('Renders correctly', () => {
-//     expect(wrapper).toMatchSnapshot();
-//   });
+  beforeEach(() => {
+    wrapper = shallow(<EditTask
+      closeEditTaskPopup={fnClickClose}
+      editTask={singleTask.data}
+      storeEditTaskFormChange={fnChange}
+      tasks={multipleTasks.data}
+      saveEditedTask={fnSubmit}
+      deleteTask={fnClickDelete}
+      handleDelete={jest.fn()}
+    />);
+  });
 
-//   it('Should populate "title", "description", "category", "completed" correctly from props', () => {
-//     const inputTitle = wrapper.find('input[name="title"]');
-//     const textareaDescription = wrapper.find('textarea[name="description"]');
-//     const radioCategory = wrapper.find('input[type="radio"]');
-//     const checkboxCompleted = wrapper.find('input[type="checkbox"][name="completed"]');
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
-//     expect(inputTitle.props().defaultValue).toEqual('Task Title');
-//     expect(textareaDescription.props().defaultValue).toEqual('Task Description');
-//     expect(radioCategory.at(0).props().defaultChecked).toEqual(true);
-//     expect(radioCategory.at(1).props().defaultChecked).toEqual(false);
-//     expect(radioCategory.at(2).props().defaultChecked).toEqual(false);
-//     expect(radioCategory.at(3).props().defaultChecked).toEqual(false);
-//     expect(checkboxCompleted.props().checked).toEqual(false);
-//   });
+  it('Renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
-//   it('Should call "toggleEditTaskPopup" with "Close" button', () => {
-//     const buttonClose = wrapper.find('button').at(0);
-//     buttonClose.simulate('click');
+  it('Should populate "title", "description", "category", "completed" correctly from props', () => {
+    // identify nodes
+    const inputTitle = wrapper.find('input[name="title"]');
+    const textareaDescription = wrapper.find('textarea[name="description"]');
+    const radioCategory = wrapper.find('input[type="radio"]');
+    const checkboxCompleted = wrapper.find('input[type="checkbox"][name="completed"]');
 
-//     expect(fnClick).toHaveBeenCalledTimes(1);
-//   });
+    // Assertions
+    expect(inputTitle.props().defaultValue).toEqual(singleTask.data.title);
+    expect(textareaDescription.props().defaultValue).toEqual(singleTask.data.description);
+    expect(radioCategory.at(0).props().defaultChecked).toEqual(true);
+    expect(radioCategory.at(1).props().defaultChecked).toEqual(false);
+    expect(radioCategory.at(2).props().defaultChecked).toEqual(false);
+    expect(radioCategory.at(3).props().defaultChecked).toEqual(false);
+    expect(checkboxCompleted.props().checked).toEqual(false);
+  });
 
-//   it('Should call "handleDeleteTask" with "Delete" button', () => {
-//     const buttonDelete = wrapper.find('button').at(1);
-//     buttonDelete.simulate('click');
+  it('Should call "closeEditTaskPopup" with "Close" button', () => {
+    // identify node and simulate click
+    const buttonClose = wrapper.find('button').at(0);
+    buttonClose.simulate('click');
 
-//     expect(fnClick).toHaveBeenCalledTimes(1);
-//   });
+    // Assertion
+    expect(fnClickClose).toHaveBeenCalledTimes(1);
+  });
 
-//   it('Should call "defineEditTask" on change', () => {
-//     const event = {
-//       target:
-//         { value: '' },
-//     };
+  it('Should call "deleteTask", "closeEditTaskPopup" and axios DELETE with "Delete" button', () => {
+    // mock axios DELETE call
+    axios.delete.mockResolvedValue();
 
-//     const eventChecked = {
-//       target:
-//         { checked: true },
-//     };
+    // identify node and simulate click
+    const buttonDelete = wrapper.find('button').at(1);
+    buttonDelete.simulate('click');
 
-//     const inputTitle = wrapper.find('input[name="title"]');
-//     inputTitle.simulate('change', event);
-//     expect(fnChange).toHaveBeenCalledTimes(1);
-//     fnChange.mockClear();
+    // Assertions
+    expect(axios.delete).toHaveBeenCalledTimes(1);
+    expect(fnClickDelete).toHaveBeenCalledTimes(1);
+    expect(fnClickClose).toHaveBeenCalledTimes(1);
+  });
 
-//     const textareaDescription = wrapper.find('textarea[name="description"]');
-//     textareaDescription.simulate('change', event);
-//     expect(fnChange).toHaveBeenCalledTimes(1);
-//     fnChange.mockClear();
+  it('Should call "storeEditTaskFormChange" on change', () => {
+    // define events
+    const event = {
+      target:
+        { value: '' },
+    };
 
-//     const radioCategory = wrapper.find('input[type="radio"]');
-//     radioCategory.at(0).simulate('change', eventChecked);
-//     expect(fnChange).toHaveBeenCalledTimes(1);
-//     fnChange.mockClear();
+    const eventChecked = {
+      target:
+        { checked: true },
+    };
 
-//     radioCategory.at(1).simulate('change', eventChecked);
-//     expect(fnChange).toHaveBeenCalledTimes(1);
-//     fnChange.mockClear();
+    // identify nodes and simulate changes
+    const inputTitle = wrapper.find('input[name="title"]');
+    inputTitle.simulate('change', event);
+    expect(fnChange).toHaveBeenCalledTimes(1);
+    fnChange.mockClear();
 
-//     radioCategory.at(2).simulate('change', eventChecked);
-//     expect(fnChange).toHaveBeenCalledTimes(1);
-//     fnChange.mockClear();
+    const textareaDescription = wrapper.find('textarea[name="description"]');
+    textareaDescription.simulate('change', event);
+    expect(fnChange).toHaveBeenCalledTimes(1);
+    fnChange.mockClear();
 
-//     radioCategory.at(3).simulate('change', eventChecked);
-//     expect(fnChange).toHaveBeenCalledTimes(1);
-//     fnChange.mockClear();
+    const radioCategory = wrapper.find('input[type="radio"]');
+    radioCategory.at(0).simulate('change', eventChecked);
+    expect(fnChange).toHaveBeenCalledTimes(1);
+    fnChange.mockClear();
 
-//     const checkboxCompleted = wrapper.find('input[type="checkbox"][name="completed"]');
-//     checkboxCompleted.simulate('change', eventChecked);
-//     expect(fnChange).toHaveBeenCalledTimes(1);
-//     fnChange.mockClear();
-//   });
+    radioCategory.at(1).simulate('change', eventChecked);
+    expect(fnChange).toHaveBeenCalledTimes(1);
+    fnChange.mockClear();
 
-//   it('Handles switch statement correctly', () => {
-//     const caseA = shallow(<EditTask
-//       toggleEditTaskPopup={fnClick}
-//       editTask={{
-//         _id: '2',
-//         rank: -999,
-//         category: 'A',
-//         title: 'Task Title',
-//         description: 'Task Description',
-//         completed: false,
-//       }}
-//       defineEditTask={fnChange}
-//       submitEditTask={fnSubmit}
-//       handleDeleteTask={fnClick}
-//     />);
+    radioCategory.at(2).simulate('change', eventChecked);
+    expect(fnChange).toHaveBeenCalledTimes(1);
+    fnChange.mockClear();
 
-//     expect(caseA.find('input[type="radio"][value="A"]').props().defaultChecked).toEqual(true);
-//     expect(caseA.find('input[type="radio"][value="B"]').props().defaultChecked).toEqual(false);
-//     expect(caseA.find('input[type="radio"][value="C"]').props().defaultChecked).toEqual(false);
-//     expect(caseA.find('input[type="radio"][value="D"]').props().defaultChecked).toEqual(false);
+    radioCategory.at(3).simulate('change', eventChecked);
+    expect(fnChange).toHaveBeenCalledTimes(1);
+    fnChange.mockClear();
 
-//     const caseB = shallow(<EditTask
-//       toggleEditTaskPopup={fnClick}
-//       editTask={{
-//         _id: '2',
-//         rank: -999,
-//         category: 'B',
-//         title: 'Task Title',
-//         description: 'Task Description',
-//         completed: false,
-//       }}
-//       defineEditTask={fnChange}
-//       submitEditTask={fnSubmit}
-//       handleDeleteTask={fnClick}
-//     />);
+    const checkboxCompleted = wrapper.find('input[type="checkbox"][name="completed"]');
+    checkboxCompleted.simulate('change', eventChecked);
+    expect(fnChange).toHaveBeenCalledTimes(1);
+    fnChange.mockClear();
+  });
 
-//     expect(caseB.find('input[type="radio"][value="A"]').props().defaultChecked).toEqual(false);
-//     expect(caseB.find('input[type="radio"][value="B"]').props().defaultChecked).toEqual(true);
-//     expect(caseB.find('input[type="radio"][value="C"]').props().defaultChecked).toEqual(false);
-//     expect(caseB.find('input[type="radio"][value="D"]').props().defaultChecked).toEqual(false);
+  // it('Handles switch statement correctly', () => {
+  //   const caseA = shallow(<EditTask
+  //     toggleEditTaskPopup={fnClick}
+  //     editTask={{
+  //       _id: '2',
+  //       rank: -999,
+  //       category: 'A',
+  //       title: 'Task Title',
+  //       description: 'Task Description',
+  //       completed: false,
+  //     }}
+  //     defineEditTask={fnChange}
+  //     submitEditTask={fnSubmit}
+  //     handleDeleteTask={fnClick}
+  //   />);
 
-//     const caseC = shallow(<EditTask
-//       toggleEditTaskPopup={fnClick}
-//       editTask={{
-//         _id: '2',
-//         rank: -999,
-//         category: 'C',
-//         title: 'Task Title',
-//         description: 'Task Description',
-//         completed: false,
-//       }}
-//       defineEditTask={fnChange}
-//       submitEditTask={fnSubmit}
-//       handleDeleteTask={fnClick}
-//     />);
+  //   expect(caseA.find('input[type="radio"][value="A"]').props().defaultChecked).toEqual(true);
+  //   expect(caseA.find('input[type="radio"][value="B"]').props().defaultChecked).toEqual(false);
+  //   expect(caseA.find('input[type="radio"][value="C"]').props().defaultChecked).toEqual(false);
+  //   expect(caseA.find('input[type="radio"][value="D"]').props().defaultChecked).toEqual(false);
 
-//     expect(caseC.find('input[type="radio"][value="A"]').props().defaultChecked).toEqual(false);
-//     expect(caseC.find('input[type="radio"][value="B"]').props().defaultChecked).toEqual(false);
-//     expect(caseC.find('input[type="radio"][value="C"]').props().defaultChecked).toEqual(true);
-//     expect(caseC.find('input[type="radio"][value="D"]').props().defaultChecked).toEqual(false);
+  //   const caseB = shallow(<EditTask
+  //     toggleEditTaskPopup={fnClick}
+  //     editTask={{
+  //       _id: '2',
+  //       rank: -999,
+  //       category: 'B',
+  //       title: 'Task Title',
+  //       description: 'Task Description',
+  //       completed: false,
+  //     }}
+  //     defineEditTask={fnChange}
+  //     submitEditTask={fnSubmit}
+  //     handleDeleteTask={fnClick}
+  //   />);
 
-//     const caseD = shallow(<EditTask
-//       toggleEditTaskPopup={fnClick}
-//       editTask={{
-//         _id: '2',
-//         rank: -999,
-//         category: 'D',
-//         title: 'Task Title',
-//         description: 'Task Description',
-//         completed: false,
-//       }}
-//       defineEditTask={fnChange}
-//       submitEditTask={fnSubmit}
-//       handleDeleteTask={fnClick}
-//     />);
+  //   expect(caseB.find('input[type="radio"][value="A"]').props().defaultChecked).toEqual(false);
+  //   expect(caseB.find('input[type="radio"][value="B"]').props().defaultChecked).toEqual(true);
+  //   expect(caseB.find('input[type="radio"][value="C"]').props().defaultChecked).toEqual(false);
+  //   expect(caseB.find('input[type="radio"][value="D"]').props().defaultChecked).toEqual(false);
 
-//     expect(caseD.find('input[type="radio"][value="A"]').props().defaultChecked).toEqual(false);
-//     expect(caseD.find('input[type="radio"][value="B"]').props().defaultChecked).toEqual(false);
-//     expect(caseD.find('input[type="radio"][value="C"]').props().defaultChecked).toEqual(false);
-//     expect(caseD.find('input[type="radio"][value="D"]').props().defaultChecked).toEqual(true);
+  //   const caseC = shallow(<EditTask
+  //     toggleEditTaskPopup={fnClick}
+  //     editTask={{
+  //       _id: '2',
+  //       rank: -999,
+  //       category: 'C',
+  //       title: 'Task Title',
+  //       description: 'Task Description',
+  //       completed: false,
+  //     }}
+  //     defineEditTask={fnChange}
+  //     submitEditTask={fnSubmit}
+  //     handleDeleteTask={fnClick}
+  //   />);
 
-//     const caseDefault = shallow(<EditTask
-//       toggleEditTaskPopup={fnClick}
-//       editTask={{
-//         _id: '2',
-//         rank: -999,
-//         category: 'E',
-//         title: 'Task Title',
-//         description: 'Task Description',
-//         completed: false,
-//       }}
-//       defineEditTask={fnChange}
-//       submitEditTask={fnSubmit}
-//       handleDeleteTask={fnClick}
-//     />);
+  //   expect(caseC.find('input[type="radio"][value="A"]').props().defaultChecked).toEqual(false);
+  //   expect(caseC.find('input[type="radio"][value="B"]').props().defaultChecked).toEqual(false);
+  //   expect(caseC.find('input[type="radio"][value="C"]').props().defaultChecked).toEqual(true);
+  //   expect(caseC.find('input[type="radio"][value="D"]').props().defaultChecked).toEqual(false);
 
-//     expect(caseDefault.find('input[type="radio"][value="A"]').props().defaultChecked).toEqual(false);
-//     expect(caseDefault.find('input[type="radio"][value="B"]').props().defaultChecked).toEqual(false);
-//     expect(caseDefault.find('input[type="radio"][value="C"]').props().defaultChecked).toEqual(false);
-//     expect(caseDefault.find('input[type="radio"][value="D"]').props().defaultChecked).toEqual(false);
-//   });
-// });
+  //   const caseD = shallow(<EditTask
+  //     toggleEditTaskPopup={fnClick}
+  //     editTask={{
+  //       _id: '2',
+  //       rank: -999,
+  //       category: 'D',
+  //       title: 'Task Title',
+  //       description: 'Task Description',
+  //       completed: false,
+  //     }}
+  //     defineEditTask={fnChange}
+  //     submitEditTask={fnSubmit}
+  //     handleDeleteTask={fnClick}
+  //   />);
+
+  //   expect(caseD.find('input[type="radio"][value="A"]').props().defaultChecked).toEqual(false);
+  //   expect(caseD.find('input[type="radio"][value="B"]').props().defaultChecked).toEqual(false);
+  //   expect(caseD.find('input[type="radio"][value="C"]').props().defaultChecked).toEqual(false);
+  //   expect(caseD.find('input[type="radio"][value="D"]').props().defaultChecked).toEqual(true);
+
+  //   const caseDefault = shallow(<EditTask
+  //     toggleEditTaskPopup={fnClick}
+  //     editTask={{
+  //       _id: '2',
+  //       rank: -999,
+  //       category: 'E',
+  //       title: 'Task Title',
+  //       description: 'Task Description',
+  //       completed: false,
+  //     }}
+  //     defineEditTask={fnChange}
+  //     submitEditTask={fnSubmit}
+  //     handleDeleteTask={fnClick}
+  //   />);
+
+  //   expect(caseDefault.find('input[type="radio"][value="A"]').props().defaultChecked).toEqual(false);
+  //   expect(caseDefault.find('input[type="radio"][value="B"]').props().defaultChecked).toEqual(false);
+  //   expect(caseDefault.find('input[type="radio"][value="C"]').props().defaultChecked).toEqual(false);
+  //   expect(caseDefault.find('input[type="radio"][value="D"]').props().defaultChecked).toEqual(false);
+  // });
+});

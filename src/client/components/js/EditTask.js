@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -15,23 +15,11 @@ const mapStateToProps = state => ({
   tasks: state.tasks.tasks,
 });
 
-function EditTask(props) {
-  const {
+export class EditTask extends Component {
+  handleChange = (event) => {
     // eslint-disable-next-line no-shadow
-    closeEditTaskPopup,
-    // eslint-disable-next-line no-shadow
-    storeEditTaskFormChange,
-    // eslint-disable-next-line no-shadow
-    editTask,
-    // eslint-disable-next-line no-shadow
-    tasks,
-    // eslint-disable-next-line no-shadow
-    saveEditedTask,
-    // eslint-disable-next-line no-shadow
-    deleteTask,
-  } = props;
+    const { storeEditTaskFormChange } = this.props;
 
-  const handleChange = (event) => {
     // reflect form changes in editTask state
     if (event.target.name === 'completed') {
       storeEditTaskFormChange(event.target.name, event.target.checked);
@@ -40,7 +28,15 @@ function EditTask(props) {
     }
   };
 
-  const handleSubmit = (event) => {
+  handleSubmit = (event) => {
+    const {
+      editTask,
+      tasks,
+      // eslint-disable-next-line no-shadow
+      saveEditedTask,
+      // eslint-disable-next-line no-shadow
+      closeEditTaskPopup,
+    } = this.props;
     event.preventDefault();
 
     // save changes to the DB
@@ -59,7 +55,16 @@ function EditTask(props) {
     closeEditTaskPopup();
   };
 
-  const handleDelete = () => {
+  handleDelete = () => {
+    const {
+      editTask,
+      tasks,
+      // eslint-disable-next-line no-shadow
+      deleteTask,
+      // eslint-disable-next-line no-shadow
+      closeEditTaskPopup,
+    } = this.props;
+
     axios.delete(`/api/task/${editTask._id}`)
       .catch((err) => {
         console.log(err);
@@ -74,60 +79,46 @@ function EditTask(props) {
     closeEditTaskPopup();
   };
 
-  // check the category of editTask for later setting of defaultChecked
-  let categoryA = false;
-  let categoryB = false;
-  let categoryC = false;
-  let categoryD = false;
+  render() {
+    const {
+      // eslint-disable-next-line no-shadow
+      closeEditTaskPopup,
+      // eslint-disable-next-line no-shadow
+      editTask,
+    } = this.props;
 
-  switch (editTask.category) {
-    case 'A':
-      categoryA = true;
-      break;
-    case 'B':
-      categoryB = true;
-      break;
-    case 'C':
-      categoryC = true;
-      break;
-    case 'D':
-      categoryD = true;
-      break;
-    default:
-      console.error('No proper category provided');
-  }
-
-  return (
-    <div className="editTask-outer">
-      <div className="editTask-inner">
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="title">
-            Title<br />
-            <input type="text" defaultValue={editTask.title} name="title" onChange={handleChange} />
-          </label>
-          <br />
-          <label htmlFor="description">
-            Description<br />
-            <textarea type="text" name="description" defaultValue={editTask.description} onChange={handleChange} />
-          </label>
-          <br />
-          <label htmlFor="category">
-            Category<br />
-            <input type="radio" name="category" value="A" onChange={handleChange} defaultChecked={categoryA} />A
-            <input type="radio" name="category" value="B" onChange={handleChange} defaultChecked={categoryB} />B
-            <input type="radio" name="category" value="C" onChange={handleChange} defaultChecked={categoryC} />C
-            <input type="radio" name="category" value="D" onChange={handleChange} defaultChecked={categoryD} />D
-          </label>
-          <br />
-          <input type="checkbox" name="completed" checked={editTask.completed} onChange={handleChange} />Completed
-          <br />
-          <input type="submit" value="Save" />
-          <button type="button" onClick={closeEditTaskPopup}>Close</button>
-          <button type="button" onClick={handleDelete}>Delete</button>
-        </form>
+    return (
+      <div className="editTask-outer">
+        <div className="editTask-inner">
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="title">
+              Title<br />
+              <input type="text" defaultValue={editTask.title} name="title" onChange={this.handleChange} />
+            </label>
+            <br />
+            <label htmlFor="description">
+              Description<br />
+              <textarea type="text" name="description" defaultValue={editTask.description} onChange={this.handleChange} />
+            </label>
+            <br />
+            <label htmlFor="category">
+              Category<br />
+              <input type="radio" name="category" value="A" onChange={this.handleChange} defaultChecked={editTask.category === 'A'} />A
+              <input type="radio" name="category" value="B" onChange={this.handleChange} defaultChecked={editTask.category === 'B'} />B
+              <input type="radio" name="category" value="C" onChange={this.handleChange} defaultChecked={editTask.category === 'C'} />C
+              <input type="radio" name="category" value="D" onChange={this.handleChange} defaultChecked={editTask.category === 'D'} />D
+            </label>
+            <br />
+            <input type="checkbox" name="completed" checked={editTask.completed} onChange={this.handleChange} />Completed
+            <br />
+            <input type="submit" value="Save" />
+            <button type="button" onClick={closeEditTaskPopup}>Close</button>
+            <button type="button" onClick={this.handleDelete}>Delete</button>
+          </form>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 EditTask.propTypes = {

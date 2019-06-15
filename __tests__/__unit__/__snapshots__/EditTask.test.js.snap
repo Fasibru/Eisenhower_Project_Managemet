@@ -8,7 +8,7 @@ exports[`Testing <EditTask /> Renders correctly 1`] = `
     className="editTask-inner"
   >
     <form
-      onSubmit={[MockFunction]}
+      onSubmit={[Function]}
     >
       <label
         htmlFor="title"
@@ -16,7 +16,7 @@ exports[`Testing <EditTask /> Renders correctly 1`] = `
         Title
         <br />
         <input
-          defaultValue="Task Title"
+          defaultValue="Test title"
           name="title"
           onChange={[Function]}
           type="text"
@@ -29,7 +29,7 @@ exports[`Testing <EditTask /> Renders correctly 1`] = `
         Description
         <br />
         <textarea
-          defaultValue="Task Description"
+          defaultValue="Test description"
           name="description"
           onChange={[Function]}
           type="text"
@@ -94,7 +94,7 @@ exports[`Testing <EditTask /> Renders correctly 1`] = `
         Close
       </button>
       <button
-        onClick={[MockFunction]}
+        onClick={[Function]}
         type="button"
       >
         Delete
