@@ -61,9 +61,9 @@ const categorizeFilteredTasks = (filteredTasks) => {
   return categorizedFilteredTasks;
 };
 
-function Main({ filteredTasksRedux }) {
+function Main({ filteredTasks }) {
   const categorizedFilteredTasks = categorizeFilteredTasks(
-    filteredTasksRedux,
+    filteredTasks,
   );
   return (
     <main className="main">
@@ -76,7 +76,7 @@ function Main({ filteredTasksRedux }) {
 }
 
 Main.propTypes = {
-  filteredTasksRedux: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filteredTasks: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Main;

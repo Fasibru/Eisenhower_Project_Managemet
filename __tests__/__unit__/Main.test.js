@@ -1,76 +1,40 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
-// import Main from '../../src/client/components/js/Main';
+import React from 'react';
+import { shallow } from 'enzyme';
+import Main from '../../src/client/components/js/Main';
 
-// describe('Testing <Main />', () => {
-//   const fnMock = jest.fn();
-//   let wrapper;
+import multipleTasks from '../../__mocks__/multipleTasksDBFormat.mock.json';
 
-//   beforeEach(() => {
-//     wrapper = shallow(<Main
-//       filteredTasks={[{
-//         _id: '2',
-//         rank: -999,
-//         category: 'A',
-//         title: 'Task Title A',
-//         description: 'Task Description A',
-//         completed: false,
-//       },
-//       {
-//         _id: '21',
-//         rank: -999,
-//         category: 'A',
-//         title: 'Task Title 2A',
-//         description: 'Task Description 2A',
-//         completed: false,
-//       },
-//       {
-//         _id: '3',
-//         rank: -999,
-//         category: 'B',
-//         title: 'Task Title B',
-//         description: 'Task Description B',
-//         completed: true,
-//       },
-//       {
-//         _id: '4',
-//         rank: -999,
-//         category: 'C',
-//         title: 'Task Title C',
-//         description: 'Task Description C',
-//         completed: true,
-//       },
-//       {
-//         _id: '5',
-//         rank: -999,
-//         category: 'D',
-//         title: 'Task Title D',
-//         description: 'Task Description D',
-//         completed: true,
-//       },
-//       {
-//         _id: '6',
-//         rank: -999,
-//         category: 'E',
-//         title: 'Task Title Default Cat',
-//         description: 'Task Description Default Cat',
-//         completed: true,
-//       }]}
-//       populateEditTask={fnMock}
-//     />);
-//   });
+describe('Testing <Main />', () => {
+  let wrapper;
 
-//   afterEach(() => {
-//     jest.clearAllMocks();
-//   });
+  beforeEach(() => {
+    wrapper = shallow(<Main
+      filteredTasks={multipleTasks.data}
+    />);
+  });
 
-//   it('Renders correctly', () => {
-//     expect(wrapper).toMatchSnapshot();
-//   });
+  it('Renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
-//   it('Should categorize tasks properly', () => {
-//     const divCatA = wrapper.find('div').at(0);
-//     // console.log(divCatA.props().children.length);
-//     expect(divCatA.props().children.length).toEqual(2);
-//   });
-// });
+  it('Should categorize tasks properly', () => {
+    // identify DOM elements
+    const divCatA = wrapper.find('div').at(0);
+    const divCatB = wrapper.find('div').at(1);
+    const divCatC = wrapper.find('div').at(2);
+    const divCatD = wrapper.find('div').at(3);
+
+    // ASSERTIONS
+    // Number of rendered nodes
+    expect(divCatA.props().children.length).toEqual(1);
+    expect(divCatB.props().children.length).toEqual(1);
+    expect(divCatC.props().children.length).toEqual(1);
+    expect(divCatD.props().children.length).toEqual(1);
+
+    // Content of rendered nodes
+    expect(divCatA.props().children[0].props.task).toEqual(multipleTasks.data[0]);
+    expect(divCatB.props().children[0].props.task).toEqual(multipleTasks.data[1]);
+    expect(divCatC.props().children[0].props.task).toEqual(multipleTasks.data[2]);
+    expect(divCatD.props().children[0].props.task).toEqual(multipleTasks.data[3]);
+  });
+});
