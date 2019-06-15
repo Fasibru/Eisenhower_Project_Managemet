@@ -316,6 +316,10 @@ describe('Task reducers', () => {
 });
 
 describe('Filter reducers', () => {
+  it('Should return the initial state', () => {
+    expect(filtersReducer(undefined, {})).toEqual(initialStateFilters);
+  });
+
   it('Should handle GET_FILTERS', () => {
     expect(
       filtersReducer(
