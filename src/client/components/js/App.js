@@ -22,7 +22,7 @@ function mapStateToProps(state) {
   };
 }
 
-class App extends Component {
+export class App extends Component {
   componentDidMount = () => {
     // read initial data form DB based on filters
     // eslint-disable-next-line no-shadow
