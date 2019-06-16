@@ -2,11 +2,13 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 
 module.exports = {
   entry: ['@babel/polyfill', './src/client/index.js'],
   output: {
+    // publicPath: path.join(__dirname, '/dist'),
     path: path.join(__dirname, '/dist'),
     filename: 'index_bundle.js',
   },
@@ -25,6 +27,7 @@ module.exports = {
         // pass all css files through style-loader (injects <style> tag in DOM) and css-loader (translates CSS into CommonJS)
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
+        // use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         // pass all scss files through style-loader, css-loader and sass-loader (compiles Sass to CSS, using Node Sass by default)
@@ -33,6 +36,7 @@ module.exports = {
           extensions: ['.scss'],
         },
         use: ['style-loader', 'css-loader', 'sass-loader'],
+        // use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
     ],
   },
@@ -57,5 +61,11 @@ module.exports = {
     }),
 
     new Dotenv(),
+
+    // create a CSS file per JS file which contains CSS
+    // new MiniCssExtractPlugin({
+    //   filename: '[name].css',
+    //   chunkFilename: '[id].css',
+    // }),
   ],
 };
