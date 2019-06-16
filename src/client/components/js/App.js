@@ -13,7 +13,7 @@ import Footer from './Footer';
 import NewTask from './NewTask';
 import EditTask from './EditTask';
 
-import '../css/App.css';
+import '../scss/App.scss';
 
 function mapStateToProps(state) {
   return {

@@ -6,7 +6,7 @@ import {
   updateFilters,
   openNewTaskPopup,
 } from '../../actions/index';
-import '../css/Sidenav.css';
+import '../scss/Sidenav.scss';
 
 const mapStateToProps = state => ({
   filters: state.filters.filters,

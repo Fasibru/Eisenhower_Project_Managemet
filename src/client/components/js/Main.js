@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../css/Main.css';
-import '../css/Task.css';
+import '../scss/Main.scss';
+import '../scss/Task.scss';
 import Task from './Task';
 
 const categorizeFilteredTasks = (filteredTasks) => {

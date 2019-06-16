@@ -8,7 +8,7 @@ import {
   saveEditedTask,
   deleteTask,
 } from '../../actions/index';
-import '../css/EditTask.css';
+import '../scss/EditTask.scss';
 
 const mapStateToProps = state => ({
   editTask: state.tasks.editTask,

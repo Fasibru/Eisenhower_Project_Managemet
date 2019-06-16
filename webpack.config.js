@@ -21,9 +21,17 @@ module.exports = {
         },
       },
       {
-        // pass all css files through style-loader (injects <style> tag in DOM) and css-loader
+        // pass all css files through style-loader (injects <style> tag in DOM) and css-loader (translates CSS into CommonJS)
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
+      },
+      {
+        // pass all scss files through style-loader, css-loader and sass-loader (compiles Sass to CSS, using Node Sass by default)
+        test: /\.scss$/,
+        resolve: {
+          extensions: ['.scss'],
+        },
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },

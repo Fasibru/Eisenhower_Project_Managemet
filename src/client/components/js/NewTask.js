@@ -6,7 +6,7 @@ import {
   storeNewTaskFormChange,
   addNewTask,
 } from '../../actions/index';
-import '../css/NewTask.css';
+import '../scss/NewTask.scss';
 
 const mapStateToProps = state => ({
   newTask: state.tasks.newTask,
