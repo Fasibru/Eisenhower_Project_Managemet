@@ -4,7 +4,7 @@
   "description": "Project organization based on Eisenhower matrix",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && node src/server/server.js",
+    "start": "npm run build && node -r esm src/server/server.js",
     "build": "webpack --mode production",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "nodemon --exec babel-node src/server/server.js",
@@ -26,6 +26,8 @@
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "dotenv": "^7.0.0",
+    "dotenv-webpack": "^1.7.0",
+    "esm": "^3.2.25",
     "express": "^4.16.4",
     "mongoose": "^5.4.22",
     "prop-types": "^15.7.2",
