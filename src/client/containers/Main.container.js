@@ -3,7 +3,7 @@ import Main from '../components/js/Main';
 
 const filterTasks = (tasks, filters) => {
   switch (filters.showTasks) {
-    case 'both':
+    case 'all':
       return tasks;
     case 'completed':
       return tasks.filter(task => task.completed === true);

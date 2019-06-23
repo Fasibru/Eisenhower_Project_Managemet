@@ -34,6 +34,6 @@ export const FiltersSchema = new Schema({
   },
   showTasks: {
     type: String,
-    default: 'both',
+    default: 'all',
   },
 });

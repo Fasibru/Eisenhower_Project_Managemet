@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   filters: {
-    showTasks: 'both',
+    showTasks: 'all',
   },
 };
 

@@ -1,17 +1,64 @@
+$element-color: #f5fbef;
+$hover-color: lightblue;
+$focus-color: #C0D6DF;
+
 .sidenav {
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   grid-area: sidenav;
-  background-color: #648ca6;
+  background-color: #648ca6;    
 }
 
 .sidenav__list {
+  display: flex;
+  flex-direction: column;
   margin-top: 50px;
   padding-left: 20px;
+  padding-right: 20px;
   list-style-type: none;
 }
 
 .sidenav__list-elem {
-  color: #f5fbef;
-  padding: 20px 20px 20px 0px;
+  color: $element-color;
+  padding: 20px 0px 20px 0px;
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+// .sidenav__list-elem-showTasks {
+//   flex: 1;
+//   // flex-wrap: wrap;
+// }
+
+.sidenav__showTasks {
+  flex: 1;
+  display: flex;
+}
+
+.sidenav__btn {
+  flex: 1;
+  background: $element-color;
+  border: none;
+  padding: 10px;
+  transition-duration: 0.1s;
+  -webkit-appearance: none;
+}
+
+.sidenav__btn:hover {
+  background: $hover-color;
+}
+
+.sidenav__btn:focus {
+  outline-style: none;
+  background: $focus-color;
+}
+
+.sidenav__btn--border-left-right {
+  border-left: 0.5px solid $hover-color;
+  border-right: 0.5px solid $hover-color;
+}
+
+.sidenav__btn--active {
+  background: $hover-color;
 }
