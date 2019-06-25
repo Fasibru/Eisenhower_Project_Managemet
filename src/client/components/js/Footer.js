@@ -6,8 +6,8 @@ import '../scss/Footer.scss';
 function Footer() {
   return (
     <footer className="footer">
-      <p style={{ color: '#f5fbef' }}>
-        <a href="https://github.com/Fasibru" style={{ color: '#f5fbef', textDecoration: 'none' }}>
+      <p>
+        <a href="https://github.com/Fasibru">
           <FontAwesomeIcon icon={faGithub} size="2x" /> Get the repository.
         </a>
       </p>
