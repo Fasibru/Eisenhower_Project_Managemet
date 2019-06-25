@@ -6,11 +6,9 @@ import '../scss/Footer.scss';
 function Footer() {
   return (
     <footer className="footer">
-      <p>
-        <a href="https://github.com/Fasibru">
-          <FontAwesomeIcon icon={faGithub} size="2x" /> Get the repository.
-        </a>
-      </p>
+      <a href="https://github.com/Fasibru">
+        <FontAwesomeIcon icon={faGithub} size="2x" /> Get the repository.
+      </a>
     </footer>
   );
 }

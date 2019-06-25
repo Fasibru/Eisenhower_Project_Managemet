@@ -7,14 +7,10 @@
   display: flex;
   align-items: center;
 
-  p {
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
     color: $element-color;
-
-    a {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      color: $element-color;
-    }
   }
 }
