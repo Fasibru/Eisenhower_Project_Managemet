@@ -1,5 +1,20 @@
+@import './variables';
+
 .footer {
   grid-area: footer;
-  background-color: #394263;
-  color: #f5fbef;
+  background-color: $component-color-HeaderFooter;
+  color: $element-color;
+  display: flex;
+  align-items: center;
+
+  p {
+    color: $element-color;
+
+    a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: $element-color;
+    }
+  }
 }
