@@ -1,12 +1,10 @@
-$element-color: #f5fbef;
-$hover-color: lightblue;
-$focus-color: #C0D6DF;
+@import './variables';
 
 .sidenav {
   // display: flex;
   // flex-direction: column;
   grid-area: sidenav;
-  background-color: #648ca6;    
+  background-color: $component-color-sidenav;
 }
 
 .sidenav__list {
@@ -24,12 +22,31 @@ $focus-color: #C0D6DF;
   flex: 1;
   display: flex;
   flex-wrap: wrap;
+
+  p {
+    margin: 0;
+  }
 }
 
-// .sidenav__list-elem-showTasks {
-//   flex: 1;
-//   // flex-wrap: wrap;
-// }
+.sidenav__search {
+  flex: 1;
+}
+
+.sidenav__date {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  p {
+    margin: 0;
+  }
+
+  input {
+    font-family: $font-stack;
+    background: $element-color;
+  }
+}
+
 
 .sidenav__showTasks {
   flex: 1;

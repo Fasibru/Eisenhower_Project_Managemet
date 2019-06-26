@@ -7,6 +7,8 @@ import {
 const initialState = {
   filters: {
     showTasks: 'all',
+    dateRangeStart: new Date().toISOString(),
+    dateRangeEnd: new Date().toISOString(),
   },
 };
 

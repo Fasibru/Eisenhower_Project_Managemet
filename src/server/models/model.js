@@ -36,4 +36,12 @@ export const FiltersSchema = new Schema({
     type: String,
     default: 'all',
   },
+  dateRangeStart: {
+    type: Date,
+    default: Date.now,
+  },
+  dateRangeEnd: {
+    type: Date,
+    default: Date.now,
+  },
 });

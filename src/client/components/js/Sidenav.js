@@ -8,6 +8,8 @@ import {
 } from '../../actions/index';
 import '../scss/Sidenav.scss';
 
+import CalculatedDateFilter from '../../containers/DateFilter.container';
+
 const mapStateToProps = state => ({
   filters: state.filters.filters,
 });
@@ -21,13 +23,14 @@ export function Sidenav(props) {
     updateFilters,
   } = props;
 
-  const handleFilterShowTasks = (event) => {
+  const handleFilter = (event) => {
     // eslint-disable-next-line no-shadow
     updateFilters(event.target.name, event.target.value);
 
-    axios.put('/api/filters', Object.assign({}, filters, {
+    axios.put('/api/filters', {
+      ...filters,
       [event.target.name]: event.target.value,
-    }));
+    });
   };
 
   const classNameButtonActive = 'sidenav__btn sidenav__btn--active';
@@ -39,7 +42,7 @@ export function Sidenav(props) {
     <aside className="sidenav">
       <ul className="sidenav__list">
         <li className="sidenav__list-elem">
-          <input type="search" placeholder="...to be implemented..." />
+          <input className="sidenav__search" type="search" placeholder="...to be implemented..." />
         </li>
         <li className="sidenav__list-elem">
           <button className="sidenav__btn" type="button" onClick={openNewTaskPopup}>New Task</button>
@@ -52,7 +55,7 @@ export function Sidenav(props) {
               type="button"
               name="showTasks"
               value="all"
-              onClick={handleFilterShowTasks}
+              onClick={handleFilter}
               onMouseDown={e => e.preventDefault()} /* to remove focus after button is clicked */
             >All
             </button>
@@ -61,7 +64,7 @@ export function Sidenav(props) {
               type="button"
               name="showTasks"
               value="open"
-              onClick={handleFilterShowTasks}
+              onClick={handleFilter}
               onMouseDown={e => e.preventDefault()} /* to remove focus after button is clicked */
             >Open
             </button>
@@ -70,11 +73,16 @@ export function Sidenav(props) {
               type="button"
               name="showTasks"
               value="completed"
-              onClick={handleFilterShowTasks}
+              onClick={handleFilter}
               onMouseDown={e => e.preventDefault()} /* to remove focus after button is clicked */
             >Completed
             </button>
           </div>
+        </li>
+        <li className="sidenav__list-elem">
+          {/* <DateFilter className="sidenav__date" />
+         */}
+          <CalculatedDateFilter />
         </li>
         <li className="sidenav__list-elem">Specify further filters e.g. by Date</li>
       </ul>
@@ -87,6 +95,8 @@ Sidenav.propTypes = {
   updateFilters: PropTypes.func.isRequired,
   filters: PropTypes.shape({
     showTasks: PropTypes.string,
+    dateRangeStart: PropTypes.string,
+    dateRangeEnd: PropTypes.string,
   }).isRequired,
 };
 
