@@ -1,5 +1,8 @@
 import { connect } from 'react-redux';
 import DateFilter from '../components/js/DateFilter';
+import {
+  updateFilters,
+} from '../actions/index';
 
 // eslint-disable-next-line max-len
 const getMinDate = (tasks) => {
@@ -20,4 +23,4 @@ const mapStateToProps = state => ({
   filters: state.filters.filters,
 });
 
-export default connect(mapStateToProps)(DateFilter);
+export default connect(mapStateToProps, { updateFilters })(DateFilter);

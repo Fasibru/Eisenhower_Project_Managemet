@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {
-  updateFilters,
-} from '../../actions/index';
+// import {
+//   updateFilters,
+// } from '../../actions/index';
 
 function DateFilter(props) {
   // const { className } = props;
@@ -12,6 +12,7 @@ function DateFilter(props) {
     dateRangeEnd,
     minDate,
     filters,
+    updateFilters,
   } = props;
 
   const handleFilter = (event) => {
@@ -26,7 +27,7 @@ function DateFilter(props) {
 
   return (
     <div className="sidenav__date">
-      <p>Since:</p>
+      <p>Created between</p>
       <input
         type="Date"
         name="dateRangeStart"
@@ -34,7 +35,7 @@ function DateFilter(props) {
         min={minDate}
         onChange={handleFilter}
       />
-      <p>Until:</p>
+      <p>and</p>
       <input
         type="Date"
         name="dateRangeEnd"
@@ -56,6 +57,7 @@ DateFilter.propTypes = {
     dateRangeStart: PropTypes.string,
     dateRangeEnd: PropTypes.string,
   }).isRequired,
+  updateFilters: PropTypes.func.isRequired,
 };
 
 export default DateFilter;

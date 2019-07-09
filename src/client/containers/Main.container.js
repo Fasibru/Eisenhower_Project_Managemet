@@ -1,7 +1,13 @@
 import { connect } from 'react-redux';
 import Main from '../components/js/Main';
 
-const filterTasks = (tasks, filters) => {
+const formatDate = date => date.substr(0, 10);
+
+const filterTasksByDate = (tasks, filters) => tasks.filter(
+  task => formatDate(task.date) >= formatDate(filters.dateRangeStart) && formatDate(task.date) <= formatDate(filters.dateRangeEnd),
+);
+
+const filterTasksByStatus = (tasks, filters) => {
   switch (filters.showTasks) {
     case 'all':
       return tasks;
@@ -15,7 +21,9 @@ const filterTasks = (tasks, filters) => {
 };
 
 const mapStateToProps = state => ({
-  filteredTasks: filterTasks(state.tasks.tasks, state.filters.filters),
+  filteredTasks: filterTasksByStatus(
+    filterTasksByDate(state.tasks.tasks, state.filters.filters), state.filters.filters,
+  ),
 });
 
 export default connect(mapStateToProps)(Main);
