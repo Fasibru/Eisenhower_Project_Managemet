@@ -5,8 +5,10 @@
   // flex-direction: column;
   grid-area: sidenav;
   background-color: $component-color-sidenav;
-  
+  // position: sticky;
+  // top: 0;
   ul {
+    margin-top: 0;
     position: sticky;
     top: 0;
   }
@@ -15,7 +17,7 @@
 .sidenav__list {
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  // margin-top: 50px;
   padding-left: 20px;
   padding-right: 20px;
   list-style-type: none;

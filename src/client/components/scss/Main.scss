@@ -2,9 +2,14 @@
   grid-area: main;
   display: flex;
   background-color: #f5fbef;
+  overflow-y: scroll;
 }
 
-.column-category {
+.main__column-category {
   flex: 1;
   border-right: 1px solid black;
+}
+
+.column-category:last-child {
+  border: none;
 }
