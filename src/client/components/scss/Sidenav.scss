@@ -39,14 +39,14 @@
   flex: 1;
 }
 
+.sidenav__status {
+  flex: 1;
+}
+
 .sidenav__date {
   display: flex;
   flex-direction: column;
   flex: 1;
-
-  p {
-    margin: 0;
-  }
 
   input {
     font-family: $font-stack;
