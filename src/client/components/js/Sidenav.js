@@ -8,7 +8,7 @@ import {
 } from '../../actions/index';
 import '../scss/Sidenav.scss';
 
-import CalculatedDateFilter from '../../containers/DateFilter.container';
+import DateFilter from '../../containers/DateFilter.container';
 
 const mapStateToProps = state => ({
   filters: state.filters.filters,
@@ -42,13 +42,14 @@ export function Sidenav(props) {
     <aside className="sidenav">
       <ul className="sidenav__list">
         <li className="sidenav__list-elem">
+          <button className="sidenav__btn" type="button" onClick={openNewTaskPopup}>Add New Task</button>
+        </li>
+        <li className="sidenav__list-elem">
+          <p>Search tasks:</p>
           <input className="sidenav__search" type="search" placeholder="...to be implemented..." />
         </li>
         <li className="sidenav__list-elem">
-          <button className="sidenav__btn" type="button" onClick={openNewTaskPopup}>New Task</button>
-        </li>
-        <li className="sidenav__list-elem">
-          <p>Show Tasks:</p>
+          <p>Show tasks:</p>
           <div className="sidenav__showTasks">
             <button
               className={filters.showTasks === 'all' ? classNameButtonActive : classNameButtonInactive}
@@ -80,11 +81,9 @@ export function Sidenav(props) {
           </div>
         </li>
         <li className="sidenav__list-elem">
-          {/* <DateFilter className="sidenav__date" />
-         */}
-          <CalculatedDateFilter />
+          <DateFilter />
         </li>
-        <li className="sidenav__list-elem">Specify further filters e.g. by Date</li>
+        <li className="sidenav__list-elem">Specify further filters e.g. by team member (very much in the future)</li>
       </ul>
     </aside>
   );
