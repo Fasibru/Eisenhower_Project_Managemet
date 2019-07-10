@@ -1,5 +1,7 @@
+@import './variables';
+
 .task:hover {
-  background: lightblue;
+  background: $hover-color;
 }
 
 .task-category-A {

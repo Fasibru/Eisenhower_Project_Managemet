@@ -27,7 +27,7 @@ export function Task(props) {
       onDoubleClick={() => populateEditTask(openEditTaskPopup, populateEditTaskForm, task)}
     >
       <p>{task.title}</p>
-      <p>{task.description}</p>
+      <p style={{ whiteSpace: 'pre-wrap' }}>{task.description}</p>
     </div>
   );
 }
