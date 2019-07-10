@@ -14,20 +14,20 @@ export function Sidenav({ openNewTaskPopup }) {
   return (
     <aside className="sidenav">
       <ul className="sidenav__list">
-        <li className="sidenav__list-elem">
+        <li className="sidenav__list-elem sidenav__list-elem--flex">
           <button className="sidenav__btn" type="button" onClick={openNewTaskPopup}>Add New Task</button>
         </li>
-        <li className="sidenav__list-elem">
+        <li className="sidenav__list-elem sidenav__list-elem--flex">
           <p>Search tasks:</p>
-          <input className="sidenav__search" type="search" placeholder="...to be implemented..." />
+          <input className="sidenav__list-elem--flex" type="search" placeholder="...to be implemented..." />
         </li>
-        <li className="sidenav__list-elem">
+        <li className="sidenav__list-elem sidenav__list-elem--flex">
           <StatusFilter />
         </li>
-        <li className="sidenav__list-elem">
+        <li className="sidenav__list-elem sidenav__list-elem--flex">
           <DateFilter />
         </li>
-        <li className="sidenav__list-elem">Specify further filters e.g. by team member (very much in the future)</li>
+        <li className="sidenav__list-elem sidenav__list-elem--flex">Specify further filters e.g. by team member (very much in the future)</li>
       </ul>
     </aside>
   );

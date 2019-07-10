@@ -23,10 +23,13 @@
   list-style-type: none;
 }
 
+.sidenav__list-elem--flex {
+  flex: 1;
+}
+
 .sidenav__list-elem {
   color: $element-color;
   padding: 20px 0px 20px 0px;
-  flex: 1;
   display: flex;
   flex-wrap: wrap;
 
@@ -35,18 +38,9 @@
   }
 }
 
-.sidenav__search {
-  flex: 1;
-}
-
-.sidenav__status {
-  flex: 1;
-}
-
 .sidenav__date {
   display: flex;
   flex-direction: column;
-  flex: 1;
 
   input {
     font-family: $font-stack;
@@ -54,9 +48,7 @@
   }
 }
 
-
 .sidenav__showTasks {
-  flex: 1;
   display: flex;
 }
 
