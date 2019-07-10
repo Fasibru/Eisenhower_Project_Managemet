@@ -5,6 +5,11 @@
   // flex-direction: column;
   grid-area: sidenav;
   background-color: $component-color-sidenav;
+  
+  ul {
+    position: sticky;
+    top: 0;
+  }
 }
 
 .sidenav__list {
