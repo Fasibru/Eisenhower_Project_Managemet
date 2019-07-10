@@ -40,7 +40,7 @@ function DateFilter(props) {
         type="Date"
         name="dateRangeEnd"
         value={dateRangeEnd}
-        max={dateRangeEnd}
+        max={new Date().toISOString().substring(0, 10)}
         onChange={handleFilter}
       />
     </div>
