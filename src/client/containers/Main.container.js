@@ -4,7 +4,8 @@ import Main from '../components/js/Main';
 const formatDate = date => date.substr(0, 10);
 
 const filterTasksByDate = (tasks, filters) => tasks.filter(
-  task => formatDate(task.date) >= formatDate(filters.dateRangeStart) && formatDate(task.date) <= formatDate(filters.dateRangeEnd),
+  task => formatDate(task.date) >= formatDate(filters.dateRangeStart)
+    && formatDate(task.date) <= formatDate(filters.dateRangeEnd),
 );
 
 const filterTasksByStatus = (tasks, filters) => {
