@@ -1,12 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-// import {
-//   updateFilters,
-// } from '../../actions/index';
 
 function DateFilter(props) {
-  // const { className } = props;
   const {
     dateRangeStart,
     dateRangeEnd,
@@ -48,7 +44,6 @@ function DateFilter(props) {
 }
 
 DateFilter.propTypes = {
-  // className: PropTypes.string.isRequired,
   dateRangeStart: PropTypes.string.isRequired,
   dateRangeEnd: PropTypes.string.isRequired,
   minDate: PropTypes.string.isRequired,
