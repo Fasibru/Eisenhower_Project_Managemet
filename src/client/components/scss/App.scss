@@ -28,9 +28,11 @@
 
 /* Global settings 
 ----------------------------------------------*/
-body {
+html, body {
   font-family: 'Pontano Sans', sans-serif;
   margin: 0;
+  height: 100%;
+  width: 100%;
 }
 /* Grid settings
 ----------------------------------------------*/
@@ -42,5 +44,5 @@ body {
     "sidenav header"
     "sidenav main"
     "sidenav footer";
-  height: 100vh;
+  // height: 200%;
 }

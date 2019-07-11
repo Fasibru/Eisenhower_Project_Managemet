@@ -32,7 +32,7 @@ function StatusFilter({
   const classNameButtonBorderInactive = 'sidenav__btn sidenav__btn--border-left-right';
 
   return (
-    <div className="sidenav__list-elem--flex">
+    <div className="sidenav__status">
       <p>Show tasks:</p>
       <div className="sidenav__showTasks">
         <button

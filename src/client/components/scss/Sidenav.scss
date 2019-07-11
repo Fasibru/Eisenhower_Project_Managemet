@@ -5,8 +5,7 @@
   // flex-direction: column;
   grid-area: sidenav;
   background-color: $component-color-sidenav;
-  // position: sticky;
-  // top: 0;
+  // overflow-y: auto; 
   ul {
     margin-top: 0;
     position: sticky;
@@ -17,7 +16,6 @@
 .sidenav__list {
   display: flex;
   flex-direction: column;
-  // margin-top: 50px;
   padding-left: 20px;
   padding-right: 20px;
   list-style-type: none;
@@ -28,35 +26,47 @@
 }
 
 .sidenav__list-elem {
+  flex: 1;
   color: $element-color;
   padding: 20px 0px 20px 0px;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
 
   p {
     margin: 0;
   }
 }
 
-.sidenav__date {
-  display: flex;
-  flex-direction: column;
+.sidenav__input {
+  font-family: $font-stack;
+}
 
-  input {
-    font-family: $font-stack;
-    background: $element-color;
-  }
+.sidenav__status {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 
 .sidenav__showTasks {
   display: flex;
+  flex: 1;
 }
+
+.sidenav__date {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
 
 .sidenav__btn {
   flex: 1;
+  font-family: $font-stack;
   background: $element-color;
   border: none;
-  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   transition-duration: 0.1s;
   -webkit-appearance: none;
 }

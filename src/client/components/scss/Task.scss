@@ -1,26 +1,37 @@
 @import './variables';
 
+.task {
+  margin: 4px 8px 4px 8px;
+  padding: 8px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+.task:first-child {
+  margin-top: 8px;
+}
+
+.task:last-child {
+  margin-bottom: 8px;
+}
+
 .task:hover {
   background: $hover-color;
 }
 
-.task-category-A {
+.task--red {
   border: 1px solid red;
-  margin: 8px;
-  padding: 8px;
 }
-.task-category-B {
+
+.task--orange {
   border: 1px solid orange;
-  margin: 8px;
-  padding: 8px;
 }
-.task-category-C {
+
+.task--green {
   border: 1px solid green;
-  margin: 8px;
-  padding: 8px;
 }
-.task-category-D {
+
+.task--lightgray {
   border: 1px solid lightgray;
-  margin: 8px;
-  padding: 8px;
 }

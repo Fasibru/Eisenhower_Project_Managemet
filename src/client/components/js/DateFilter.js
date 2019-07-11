@@ -22,9 +22,10 @@ function DateFilter(props) {
   };
 
   return (
-    <div className="sidenav__date sidenav__list-elem--flex">
+    <div className="sidenav__date">
       <p>Created between</p>
       <input
+        className="sidenav__input"
         type="Date"
         name="dateRangeStart"
         value={dateRangeStart}
@@ -33,6 +34,7 @@ function DateFilter(props) {
       />
       <p>and</p>
       <input
+        className="sidenav__input"
         type="Date"
         name="dateRangeEnd"
         value={dateRangeEnd}
