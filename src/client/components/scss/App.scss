@@ -1,35 +1,9 @@
-/* color schema matrix
-#eec170 Middle Yellow Red
-#f2a65a Sandy Brown
-#f58549 Mandarin
-#772f1a Liver
-*/
-
-/* color schema surface (greenish)
-#CAD2C5 Pastel Gray
-#84A98C Dark Sea Green
-#52796f Hooker's Green
-#354f52 Dark Slate Gray
-#2f3e46 Japanese Indigo
-*/
-
-/* color schema
-#648ca6 Rackley
-#394263 Deep Koamaru
-#8fd4d9 Middle Blue Green
-(#011638 Maastricht Blue)
-(#364156 Charcoal)
-#EAE0CC Pearl
-#C9ADA1 Silver Pink
-#FBFCFF White
-#F5FBFF Honeydew
-#D0CCD0 Light Gray
-*/
+@import './variables';
 
 /* Global settings 
 ----------------------------------------------*/
 html, body {
-  font-family: 'Pontano Sans', sans-serif;
+  font-family: $font-stack;
   margin: 0;
   height: 100%;
   width: 100%;
@@ -44,5 +18,4 @@ html, body {
     "sidenav header"
     "sidenav main"
     "sidenav footer";
-  // height: 200%;
 }

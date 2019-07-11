@@ -1,7 +1,9 @@
+@import './variables';
+
 .header {
   grid-area: header;
-  background-color: #394263;
-  color: #f5fbef;
+  background-color: $component-color-HeaderFooter;
+  color: $element-color;
   position: sticky;
   top: 0;
 }
