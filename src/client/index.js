@@ -1,14 +1,13 @@
 import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
 
 import store from './store/index';
-import App from './components/js/App';
+import Root from './components/js/Root';
+// import App from './components/js/App';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <Root store={store} />,
   document.getElementById('root'),
 );
