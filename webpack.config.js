@@ -41,6 +41,8 @@ module.exports = {
     ],
   },
   devServer: {
+    // publicPath: '/',
+    historyApiFallback: true,
     port: 3000,
     // proxy /api requests to http://localhost:8080/api during dev phase --> backend server running on port 8080 obviously required.
     proxy: {
