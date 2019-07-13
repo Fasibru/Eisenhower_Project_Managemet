@@ -4,7 +4,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
-import apiRouter from './routes/routes';
+import apiRouter from './routes/apiRoutes';
+import accountRoutes from './routes/accountRoutes';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -25,6 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/api', apiRouter);
+app.use('/', accountRoutes);
 
 // to serve files from production build:
 app.use(express.static('dist'));

@@ -7,7 +7,7 @@ import {
   setFilters,
   getFilters,
   updateFilters,
-} from '../controllers/controllers';
+} from '../controllers/apiControllers';
 
 const router = Router();
 
