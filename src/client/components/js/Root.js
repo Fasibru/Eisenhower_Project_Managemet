@@ -10,6 +10,7 @@ import {
 
 import App from './App';
 import Login from './Login';
+import Register from './Register';
 
 const Root = ({ store }) => (
   <Provider store={store}>
@@ -17,6 +18,7 @@ const Root = ({ store }) => (
       <Switch>
         <Route exact path="/" component={App} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
         <Redirect to="/" />
       </Switch>
     </Router>

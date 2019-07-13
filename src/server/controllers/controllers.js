@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { TasksSchema, FiltersSchema } from '../models/model';
 
-// create 'Tasks' collection by leveraging the TasksSchema
+// create collections by leveraging the Schemas
 const Tasks = mongoose.model('Tasks', TasksSchema);
 const Filters = mongoose.model('Filters', FiltersSchema);
 

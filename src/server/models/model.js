@@ -7,15 +7,15 @@ export const TasksSchema = new Schema({
   },
   category: {
     type: String,
-    required: 'Provide valid category',
+    required: true,
   },
   title: {
     type: String,
-    required: 'Provide a title',
+    required: true,
   },
   description: {
     type: String,
-    required: 'Provide a description',
+    required: true,
   },
   completed: {
     type: Boolean,
@@ -43,5 +43,29 @@ export const FiltersSchema = new Schema({
   dateRangeEnd: {
     type: Date,
     default: Date.now,
+  },
+});
+
+export const UserSchema = new Schema({
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  userName: {
+    type: String,
+    required: true,
+  },
+  emailAddress: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
   },
 });
