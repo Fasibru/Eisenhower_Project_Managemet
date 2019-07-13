@@ -18,6 +18,9 @@ export const registerUser = (req, res) => {
       }
 
       bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
+        if (err) {
+          return res.status(500).json({ message: `Something went wrong. Please try again. Error: ${err}` });
+        }
         const newUser = new User({
           firstName: req.body.firstName,
           lastName: req.body.lastName,

@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/api', apiRouter);
-app.use('/', accountRoutes);
+app.use('/account', accountRoutes);
 
 // to serve files from production build:
 app.use(express.static('dist'));
