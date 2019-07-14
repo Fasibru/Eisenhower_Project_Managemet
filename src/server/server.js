@@ -3,6 +3,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import passport from 'passport';
+import './config/passport-config';
 
 import apiRouter from './routes/apiRoutes';
 import accountRoutes from './routes/accountRoutes';
@@ -24,6 +26,8 @@ app.use(cors());
 // bodyParser setup
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(passport.initialize());
 
 app.use('/api', apiRouter);
 app.use('/account', accountRoutes);
