@@ -59,14 +59,15 @@ export const loginUser = (req, res, next) => {
       id: user._id,
     };
 
-    jwt.sign(payload, secret, (err, token) => {
+    jwt.sign(payload, secret, { algorithm: 'HS256', expiresIn: '1d' }, (err, token) => {
       if (err) {
         res.status(500).json({ message: `Something went wrong. Please try again. Error: ${err}` });
       } else {
-        res.status(200).json({
-          success: true,
-          token: `Bearer ${token}`,
-        });
+        // res.setHeader('Set-Cookie', `jwt=${token}; Path:/; httpOnly: true; secure; Domain=NULL`);
+        res.clearCookie('jwt');
+        res.cookie('jwt', token, { httpOnly: true, secure: true });
+        res.status(200).redirect('/');
+        // res.sendStatus(200);
       }
     });
   })(req, res, next);

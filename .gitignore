@@ -9,3 +9,9 @@
 
 # test
 /coverage
+
+# security
+.key
+.pem
+.coverage
+.cnf

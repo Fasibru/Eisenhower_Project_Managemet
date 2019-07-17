@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
+const fs = require('fs');
 
 module.exports = {
   entry: ['@babel/polyfill', './src/client/index.js'],
@@ -41,14 +42,25 @@ module.exports = {
     ],
   },
   devServer: {
+    https: {
+      key: fs.readFileSync(path.join(__dirname, '/security/cert.key')),
+      cert: fs.readFileSync(path.join(__dirname, '/security/cert.pem')),
+      ca: fs.readFileSync(path.join(__dirname, '/security/cert.pem')),
+    },
     // publicPath: '/',
     historyApiFallback: true,
     port: 3000,
-    // proxy /api requests to http://localhost:8080/api during dev phase --> backend server running on port 8080 obviously required.
+    // proxy /api requests to https://localhost:8080/api during dev phase --> backend server running on port 8080 obviously required.
     proxy: {
-      '/api': 'http://localhost:8080',
-      '/account': 'http://localhost:8080',
-      changeOrigin: true,
+      '/api': {
+        target: 'https://localhost:8080',
+        secure: false,
+      },
+      '/account': {
+        target: 'https://localhost:8080',
+        secure: false,
+      },
+      // changeOrigin: true,
     },
   },
   plugins: [
