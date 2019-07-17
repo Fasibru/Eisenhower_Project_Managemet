@@ -11,7 +11,7 @@
 /coverage
 
 # security
-.key
-.pem
-.coverage
-.cnf
+/security/*.key
+/security/*.pem
+/security/*.cer
+/security/*.cnf
