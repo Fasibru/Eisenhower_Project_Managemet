@@ -8,11 +8,13 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import passport from 'passport';
-import './config/passport-config';
+import '../config/passport-config';
 import jwt from 'jsonwebtoken';
 
 import apiRouter from './routes/apiRoutes';
 import accountRoutes from './routes/accountRoutes';
+
+const portConfig = JSON.parse(fs.readFileSync('src/config/port-config.json'))[0];
 
 const verifyJWT = (req, res, next) => {
   // eslint-disable-next-line dot-notation
@@ -35,13 +37,8 @@ const verifyJWT = (req, res, next) => {
   }
 };
 
-const httpsOptions = {
-  key: fs.readFileSync('security/cert.key'),
-  cert: fs.readFileSync('security/cert.pem'),
-};
-
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || portConfig.BACKEND_SERVER_PORT;
 const mongoDatabaseURL = process.env.DB_URL;
 
 // initiate mongoose connection
@@ -69,17 +66,7 @@ app.use('/account', accountRoutes);
 // to serve files from production build:
 app.use(express.static(path.resolve(__dirname, '../../dist')));
 
-//  #######################################################
-app.get('/cookie/get', (req, res) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header('Access-Control-Allow-Headers', 'X-PINGOTHER, Content-Type');
-  res.header('Vary', 'Origin');
-  res.cookie('jwt1', 'Hopefully', { httpOnly: true }).send();
-});
-
-//  #######################################################
-
+// serve index.html so react-router-dom works without 404 error
 app.get('/*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../../dist', 'index.html'), (err) => {
     if (err) {
@@ -87,12 +74,16 @@ app.get('/*', (req, res) => {
     }
   });
 });
-// app.listen(PORT, () => console.log(`Express server is running on port:${PORT}`));
+
 if (process.env.NODE_ENV === 'production') {
   app.listen(PORT, () => console.log(`${process.env.NODE_ENV} HTTP Express server is running on port:${PORT}`));
 } else if (process.env.NODE_ENV === 'development') {
+  const httpsOptions = {
+    key: fs.readFileSync('security/cert.key'),
+    cert: fs.readFileSync('security/cert.pem'),
+  };
   https.createServer(httpsOptions, app)
-    .listen(PORT, () => console.log(`${process.env.NODE_ENV} HTTPS Express server is running on port:${PORT}`));
+    .listen(PORT, () => console.log(`${process.env.NODE_ENV} HTTPS Express server is running on port:${PORT} --> http://localhost:${PORT}`));
 } else {
   console.log('process.env.NODE_ENV neither set to production nor development');
 }

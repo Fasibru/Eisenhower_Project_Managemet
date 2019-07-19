@@ -63,12 +63,20 @@ export const loginUser = (req, res, next) => {
       if (err) {
         res.status(500).json({ message: `Something went wrong. Please try again. Error: ${err}` });
       }
+      let cookieOptions;
       if (process.env.NODE_ENV === 'production') {
-        res.cookie('jwt', token, { httpOnly: true, secure: false}).sendStatus(200);
+        cookieOptions = {
+          httpOnly: true,
+          secure: false,
+        };
       } else if (process.env.NODE_ENV === 'development') {
+        cookieOptions = {
+          httpOnly: true,
+          secure: true,
+        };
         res.set('Access-Control-Allow-Origin', `http://localhost:${process.env.DEV_SERVER_PORT}`);
-        res.cookie('jwt', token, { httpOnly: true, secure: true }).sendStatus(200);
       }
+      res.cookie('JWT', token, cookieOptions).sendStatus(200);
     });
   })(req, res, next);
 };

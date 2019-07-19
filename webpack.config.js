@@ -5,7 +5,9 @@ const Dotenv = require('dotenv-webpack');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const fs = require('fs');
-require('dotenv').config()
+require('dotenv').config();
+
+const portConfig = JSON.parse(fs.readFileSync('src/config/port-config.json'))[0];
 
 module.exports = {
   entry: ['@babel/polyfill', './src/client/index.js'],
@@ -51,25 +53,17 @@ module.exports = {
     },
     publicPath: '/',
     historyApiFallback: true,
-    port: process.env.DEV_SERVER_PORT,
-    // proxy /api requests to https://localhost:8080/api during dev phase --> backend server running on port 8080 obviously required.
+    port: portConfig.DEV_FRONTEND_SERVER_PORT,
+    // proxy /api requests to https://localhost:<BACKEND_SERVER_PORT>/api during dev phase --> backend server running on port 8080 obviously required.
     proxy: {
       '/api': {
-        target: 'https://localhost:8080',
+        target: `https://localhost:${portConfig.BACKEND_SERVER_PORT}`,
         secure: false,
       },
       '/account': {
-        target: 'https://localhost:8080',
+        target: `https://localhost:${portConfig.BACKEND_SERVER_PORT}`,
         secure: false,
       },
-    // proxy: {
-    //   '/api': {
-    //     target: 'http://localhost:8080',
-    //   },
-    //   '/account': {
-    //     target: 'http://localhost:8080',
-    //   },
-    //   // changeOrigin: true,
     },
   },
   plugins: [
