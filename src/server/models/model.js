@@ -1,4 +1,5 @@
 import { Schema } from 'mongoose';
+import uuid from 'uuid-random';
 
 export const TasksSchema = new Schema({
   rank: {
@@ -66,5 +67,9 @@ export const UserSchema = new Schema({
   password: {
     type: String,
     required: true,
+  },
+  tokenSalt: {
+    type: String,
+    default: uuid(),
   },
 });

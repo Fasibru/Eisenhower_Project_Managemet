@@ -4,11 +4,11 @@
   "description": "Project organization based on Eisenhower matrix",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && node -r esm src/server/server.js",
+    "start": "npm run build && set NODE_ENV=production&& node -r esm src/server/server.js",
     "build": "webpack --mode production",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "nodemon --exec babel-node src/server/server.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "set NODE_ENV=development&&concurrently \"npm run server\" \"npm run client\"",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --verbose --coverage"

@@ -5,13 +5,15 @@ const Dotenv = require('dotenv-webpack');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const fs = require('fs');
+require('dotenv').config()
 
 module.exports = {
   entry: ['@babel/polyfill', './src/client/index.js'],
   output: {
-    // publicPath: path.join(__dirname, '/dist'),
-    path: path.join(__dirname, '/dist'),
-    filename: 'index_bundle.js',
+    // path: path.join(__dirname, '/dist'),
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -47,9 +49,9 @@ module.exports = {
       cert: fs.readFileSync(path.join(__dirname, '/security/cert.pem')),
       ca: fs.readFileSync(path.join(__dirname, '/security/cert.pem')),
     },
-    // publicPath: '/',
+    publicPath: '/',
     historyApiFallback: true,
-    port: 3000,
+    port: process.env.DEV_SERVER_PORT,
     // proxy /api requests to https://localhost:8080/api during dev phase --> backend server running on port 8080 obviously required.
     proxy: {
       '/api': {
@@ -60,7 +62,14 @@ module.exports = {
         target: 'https://localhost:8080',
         secure: false,
       },
-      // changeOrigin: true,
+    // proxy: {
+    //   '/api': {
+    //     target: 'http://localhost:8080',
+    //   },
+    //   '/account': {
+    //     target: 'http://localhost:8080',
+    //   },
+    //   // changeOrigin: true,
     },
   },
   plugins: [
@@ -72,7 +81,7 @@ module.exports = {
 
     // to auto insert <script> tag into index.html which serves the index_bundle.js
     new HtmlWebpackPlugin({
-      template: './public/index.html',
+      template: 'public/index.html',
     }),
 
     new Dotenv(),

@@ -62,12 +62,12 @@ export const loginUser = (req, res, next) => {
     jwt.sign(payload, secret, { algorithm: 'HS256', expiresIn: '1d' }, (err, token) => {
       if (err) {
         res.status(500).json({ message: `Something went wrong. Please try again. Error: ${err}` });
-      } else {
-        // res.setHeader('Set-Cookie', `jwt=${token}; Path:/; httpOnly: true; secure; Domain=NULL`);
-        res.clearCookie('jwt');
-        res.cookie('jwt', token, { httpOnly: true, secure: true });
-        res.status(200).redirect('/');
-        // res.sendStatus(200);
+      }
+      if (process.env.NODE_ENV === 'production') {
+        res.cookie('jwt', token, { httpOnly: true, secure: false}).sendStatus(200);
+      } else if (process.env.NODE_ENV === 'development') {
+        res.set('Access-Control-Allow-Origin', `http://localhost:${process.env.DEV_SERVER_PORT}`);
+        res.cookie('jwt', token, { httpOnly: true, secure: true }).sendStatus(200);
       }
     });
   })(req, res, next);
