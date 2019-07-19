@@ -83,7 +83,7 @@ if (process.env.NODE_ENV === 'production') {
     cert: fs.readFileSync('security/cert.pem'),
   };
   https.createServer(httpsOptions, app)
-    .listen(PORT, () => console.log(`${process.env.NODE_ENV} HTTPS Express server is running on port:${PORT} --> http://localhost:${PORT}`));
+    .listen(PORT, () => console.log(`${process.env.NODE_ENV} HTTPS Express backend server is running on port:${PORT}.\nFrontend dev server running on port:${portConfig.DEV_FRONTEND_SERVER_PORT} --> https://localhost:${portConfig.DEV_FRONTEND_SERVER_PORT}`));
 } else {
   console.log('process.env.NODE_ENV neither set to production nor development');
 }

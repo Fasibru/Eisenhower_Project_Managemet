@@ -3,7 +3,11 @@ import mongoose from 'mongoose';
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import fs from 'fs';
 import { UserSchema } from '../models/model';
+import { getConsoleOutput } from '@jest/console';
+
+const portConfig = JSON.parse(fs.readFileSync('src/config/port-config.json'))[0];
 
 const secret = process.env.SECRET;
 const saltRounds = 12;
@@ -74,9 +78,9 @@ export const loginUser = (req, res, next) => {
           httpOnly: true,
           secure: true,
         };
-        res.set('Access-Control-Allow-Origin', `http://localhost:${process.env.DEV_SERVER_PORT}`);
+        res.set('Access-Control-Allow-Origin', `http://localhost:${portConfig.DEV_FRONTEND_SERVER_PORT}`);
       }
-      res.cookie('JWT', token, cookieOptions).sendStatus(200);
+      res.cookie('JSONWebToken', token, cookieOptions).sendStatus(200);
     });
   })(req, res, next);
 };
