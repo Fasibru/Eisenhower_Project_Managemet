@@ -22,7 +22,7 @@ const verifyJWT = (req, res, next) => {
   if (!jwtToken) {
     res.sendStatus(403);
   } else if (jwtToken) {
-    jwt.verify(jwtToken, process.env.SECRET, (err) => {
+    jwt.verify(jwtToken, process.env.SECRET, { algorithms: 'HS256' }, (err) => {
       if (err) {
         res.status(403).json({ message: err });
       } else {
