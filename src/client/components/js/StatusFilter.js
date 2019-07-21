@@ -17,13 +17,13 @@ function StatusFilter({
   updateFilters,
 }) {
   const handleFilter = (event) => {
-    // eslint-disable-next-line no-shadow
-    updateFilters(event.target.name, event.target.value);
-
     axios.put('/api/filters', {
       ...filters,
       [event.target.name]: event.target.value,
-    });
+    })
+      // eslint-disable-next-line no-shadow
+      .then(() => updateFilters(event.target.name, event.target.value))
+      .catch(err => console.log(err));
   };
 
   const classNameButtonActive = 'sidenav__btn sidenav__btn--active';

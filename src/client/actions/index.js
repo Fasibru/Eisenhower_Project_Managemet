@@ -25,6 +25,9 @@ export const addNewTask = task => (dispatch) => {
     })
     .catch((err) => {
       console.log(err);
+      dispatch({
+        type: CLOSE_NEW_TASK_POPUP,
+      });
     });
 };
 

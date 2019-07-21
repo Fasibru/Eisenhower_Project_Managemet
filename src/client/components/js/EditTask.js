@@ -39,20 +39,22 @@ export class EditTask extends Component {
     } = this.props;
     event.preventDefault();
 
-    // save changes to the DB
+    // save changes to the DB and if successful to UI as well
     axios.put(`/api/task/${editTask._id}`, editTask)
+      .then(() => {
+        // find index of task to update:
+        const editTaskIndex = tasks.findIndex(task => task._id === editTask._id);
+
+        // save changes in tasks array as well to avoid additional GET of all tasks
+        saveEditedTask(editTask, editTaskIndex);
+
+        // close the dialog after submit
+        closeEditTaskPopup();
+      })
       .catch((err) => {
         console.log(err);
+        closeEditTaskPopup();
       });
-
-    // find index of task to update:
-    const editTaskIndex = tasks.findIndex(task => task._id === editTask._id);
-
-    // save changes in tasks array as well to avoid additional GET of all tasks
-    saveEditedTask(editTask, editTaskIndex);
-
-    // close the dialog after submit
-    closeEditTaskPopup();
   };
 
   handleDelete = () => {
@@ -66,17 +68,19 @@ export class EditTask extends Component {
     } = this.props;
 
     axios.delete(`/api/task/${editTask._id}`)
+      .then(() => {
+        // remove deleted task from tasks array
+        const deleteTaskIndex = tasks
+          .findIndex(task => task._id === editTask._id);
+        deleteTask(deleteTaskIndex);
+
+        // close the popup after submit
+        closeEditTaskPopup();
+      })
       .catch((err) => {
         console.log(err);
+        closeEditTaskPopup();
       });
-
-    // remove deleted task from tasks array
-    const deleteTaskIndex = tasks
-      .findIndex(task => task._id === editTask._id);
-    deleteTask(deleteTaskIndex);
-
-    // close the popup after submit
-    closeEditTaskPopup();
   };
 
   render() {
