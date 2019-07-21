@@ -17,18 +17,15 @@ import accountRoutes from './routes/accountRoutes';
 const portConfig = JSON.parse(fs.readFileSync('src/config/port-config.json'))[0];
 
 const verifyJWT = (req, res, next) => {
-  // eslint-disable-next-line dot-notation
-  if (req.headers['authorization'] === undefined) {
+  const jwtToken = req.cookies.JSONWebToken;
+
+  if (!jwtToken) {
     res.sendStatus(403);
-    // eslint-disable-next-line dot-notation
-  } else if (req.headers['authorization'].split(' ')[0] === 'Bearer') {
-    // eslint-disable-next-line dot-notation
-    const bearerToken = req.headers['authorization'].split(' ')[1];
-    jwt.verify(bearerToken, 'jd7!_F1#22aFH+6234aFJ?e8912lfd4af7_xb', (err, authData) => {
+  } else if (jwtToken) {
+    jwt.verify(jwtToken, process.env.SECRET, (err) => {
       if (err) {
         res.status(403).json({ message: err });
       } else {
-        req.authData = authData;
         next();
       }
     });
@@ -59,8 +56,7 @@ app.use(bodyParser.json());
 
 app.use(passport.initialize());
 
-// app.use('/api', verifyJWT, apiRouter);
-app.use('/api', apiRouter);
+app.use('/api', verifyJWT, apiRouter);
 app.use('/account', accountRoutes);
 
 // to serve files from production build:

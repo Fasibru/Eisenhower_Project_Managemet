@@ -15,14 +15,8 @@ import {
   UPDATE_FILTERS,
 } from '../constants/actionTypes';
 
-const config = {
-  headers: {
-    authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkMmI4OWY1OTczMDMxM2FmMGQwNDIyOCIsImlhdCI6MTU2MzEzNjEzMSwiZXhwIjoxNTYzMjIyNTMxfQ.iHWHP-QWPdBi19sbOrH2JJo9-QPqZm3IyIG6jNUNC58',
-  },
-};
-
 export const addNewTask = task => (dispatch) => {
-  axios.post('/api/task', task, config)
+  axios.post('/api/task', task)
     .then((res) => {
       dispatch({
         type: ADD_NEW_TASK,
@@ -35,7 +29,7 @@ export const addNewTask = task => (dispatch) => {
 };
 
 export const getTasks = () => (dispatch) => {
-  axios.get('/api/tasks', config)
+  axios.get('/api/tasks')
     .then((res) => {
       dispatch({
         type: GET_TASKS,
@@ -48,7 +42,7 @@ export const getTasks = () => (dispatch) => {
 };
 
 export const getFilters = () => (dispatch) => {
-  axios.get('/api/filters', config)
+  axios.get('/api/filters')
     .then((res) => {
       dispatch({
         type: GET_FILTERS,
