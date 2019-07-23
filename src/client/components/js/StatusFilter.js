@@ -17,12 +17,14 @@ function StatusFilter({
   updateFilters,
 }) {
   const handleFilter = (event) => {
+    const eventName = event.target.name;
+    const eventValue = event.target.value;
     axios.put('/api/filters', {
       ...filters,
-      [event.target.name]: event.target.value,
+      [eventName]: eventValue,
     })
       // eslint-disable-next-line no-shadow
-      .then(() => updateFilters(event.target.name, event.target.value))
+      .then(() => updateFilters(eventName, eventValue))
       .catch(err => console.log(err));
   };
 
