@@ -8,7 +8,7 @@ const onSubmit = (event) => {
   const password = document.getElementById('password').value;
   axios.post('/account/login', { emailAddress, password }, { withCredentials: true })
     .then(() => {
-      window.location = ('/');
+      window.location = ('/app');
     })
     .catch(err => console.log(err));
 };
