@@ -93,5 +93,6 @@ export const logoutUser = (req, res) => {
     sameSite: true,
   };
   res.clearCookie('JSONWebToken', cookieOptions);
+  res.clearCookie('sid', cookieOptions); // need to end session to clear the sid cookie automatically?
   res.sendStatus(200);
 };

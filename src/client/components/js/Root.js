@@ -11,12 +11,14 @@ import {
 import App from './App';
 import Login from './Login';
 import Register from './Register';
+import Home from './Home';
 
 const Root = ({ store }) => (
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route exact path="/" component={App} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/app" component={App} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Redirect to="/" />

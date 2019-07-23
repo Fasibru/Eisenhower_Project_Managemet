@@ -4,7 +4,7 @@ import {
   addNewTask,
   deleteTask,
   editTask,
-  setFilters,
+  // setFilters,
   getFilters,
   updateFilters,
 } from '../controllers/apiControllers';
@@ -19,7 +19,7 @@ router.put('/task/:id', editTask);
 
 router.delete('/task/:id', deleteTask);
 
-router.post('/setFilters', setFilters);
+// router.post('/setFilters', setFilters);
 
 router.get('/filters', getFilters);
 

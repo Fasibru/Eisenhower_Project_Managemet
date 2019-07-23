@@ -48,15 +48,15 @@ export const deleteTask = (req, res) => {
 
 
 // for POST endpoint to initialize filters
-export const setFilters = (req, res) => {
-  const filters = new Filters(req.body);
-  filters.save((err, filter) => {
-    if (err) {
-      res.send(err);
-    }
-    res.json(filter);
-  });
-};
+// export const setFilters = (req, res) => {
+//   const filters = new Filters(req.body);
+//   filters.save((err, filter) => {
+//     if (err) {
+//       res.send(err);
+//     }
+//     res.json(filter);
+//   });
+// };
 
 // for GET endpoint to get filter settings
 export const getFilters = (req, res) => {

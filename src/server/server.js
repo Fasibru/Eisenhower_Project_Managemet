@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import session from 'express-session';
 import https from 'https';
 import fs from 'fs';
 import path from 'path';
@@ -9,32 +10,18 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import passport from 'passport';
 import '../config/passport-config';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 
 import apiRouter from './routes/apiRoutes';
 import accountRoutes from './routes/accountRoutes';
+import verifyJWT from './customMiddleware/customMiddleware';
 
-const portConfig = JSON.parse(fs.readFileSync('src/config/port-config.json'))[0];
-
-const verifyJWT = (req, res, next) => {
-  const jwtToken = req.cookies.JSONWebToken;
-
-  if (!jwtToken) {
-    res.sendStatus(403);
-  } else if (jwtToken) {
-    jwt.verify(jwtToken, process.env.SECRET, { algorithms: 'HS256' }, (err) => {
-      if (err) {
-        res.status(403).json({ message: err });
-      } else {
-        next();
-      }
-    });
-  } else {
-    res.sendStatus(403);
-  }
+const cookieOptions = {
+  httpOnly: true,
+  // secure: process.env.NODE_ENV === 'development',
+  sameSite: true,
 };
-
-const app = express();
+const portConfig = JSON.parse(fs.readFileSync('src/config/port-config.json'))[0];
 const PORT = process.env.PORT || portConfig.BACKEND_SERVER_PORT;
 const mongoDatabaseURL = process.env.DB_URL;
 
@@ -45,10 +32,26 @@ mongoose.connect(mongoDatabaseURL, { useNewUrlParser: true })
     console.log(err);
   });
 
+const app = express();
+
+// Session
+app.use(session({
+  name: 'sid',
+  resave: false,
+  saveUninitialized: false,
+  secret: process.env.SECRET,
+  cookie: cookieOptions,
+}));
+
+// app.use((req, res, next) => {
+//   console.log(req.session);
+//   next();
+// });
+
 // CORS
 app.use(cors());
 
-app.use(cookieParser());
+app.use(cookieParser(process.env.SECRET));
 
 // bodyParser setup
 app.use(bodyParser.urlencoded({ extended: true }));
