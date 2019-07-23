@@ -59,6 +59,8 @@ export const loginUser = (req, res, next) => {
       });
     }
 
+    req.session.userId = user._id;
+
     const payload = {
       id: user._id,
     };
@@ -78,4 +80,18 @@ export const loginUser = (req, res, next) => {
       res.cookie('JSONWebToken', token, cookieOptions).sendStatus(200);
     });
   })(req, res, next);
+};
+
+export const getUserId = (req, res) => {
+  res.status(200).json(req.session.userId);
+};
+
+export const logoutUser = (req, res) => {
+  const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'development',
+    sameSite: true,
+  };
+  res.clearCookie('JSONWebToken', cookieOptions);
+  res.sendStatus(200);
 };
