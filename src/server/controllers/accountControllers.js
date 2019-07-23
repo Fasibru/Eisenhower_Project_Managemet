@@ -67,19 +67,12 @@ export const loginUser = (req, res, next) => {
       if (err) {
         res.status(500).json({ message: `Something went wrong. Please try again. Error: ${err}` });
       }
-      let cookieOptions;
-      if (process.env.NODE_ENV === 'production') {
-        cookieOptions = {
-          httpOnly: true,
-          secure: false,
-          sameSite: true,
-        };
-      } else if (process.env.NODE_ENV === 'development') {
-        cookieOptions = {
-          httpOnly: true,
-          secure: true,
-          sameSite: true,
-        };
+      const cookieOptions = {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'development',
+        sameSite: true,
+      };
+      if (process.env.NODE_ENV === 'development') {
         res.set('Access-Control-Allow-Origin', `http://localhost:${portConfig.DEV_FRONTEND_SERVER_PORT}`);
       }
       res.cookie('JSONWebToken', token, cookieOptions).sendStatus(200);
