@@ -72,11 +72,13 @@ export const loginUser = (req, res, next) => {
         cookieOptions = {
           httpOnly: true,
           secure: false,
+          sameSite: true,
         };
       } else if (process.env.NODE_ENV === 'development') {
         cookieOptions = {
           httpOnly: true,
           secure: true,
+          sameSite: true,
         };
         res.set('Access-Control-Allow-Origin', `http://localhost:${portConfig.DEV_FRONTEND_SERVER_PORT}`);
       }
