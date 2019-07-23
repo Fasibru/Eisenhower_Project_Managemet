@@ -48,10 +48,12 @@ Currently the app uses a connection to a local MongoDB server so you need to hav
 command in the terminal.
 
 ### HTTPS
-During development stage (see the Scripts section on how to start that) the app is running the backend on an https Express server and the frontend on an https webpack DevServer.  
+During development stage (see the Scripts section on how to start that) the app is running the backend on an HTTPS Express server and the frontend on an HTTPS webpack DevServer.  
 I have used a self-signed SSL certificate but that is **not** part of the repo so you have to create that on your own and put the cert.key and cert.pem files in the /security folder.
 
-The production build does not need the SSL certificate since it's a basic Express http server running both the frontend and the backend.
+The production build does not need the SSL certificate since it's a basic Express HTTP server running both the frontend and the backend. If the deployment of the app will require HTTPS then it's quite straight forward to change that.
+
+A - in my opinion very clear - step-by-step instruction on how to create the SSL certificate and how to add it to Chrome can be found here: <https://stackoverflow.com/questions/21397809/create-a-trusted-self-signed-ssl-cert-for-localhost-for-use-with-express-node>
 
 ### .env
 The URL for the MongoDB as well as the secret (e.g. for JWT) are stored in an .env file which is **not** part of this repo so you have to create this file in the root directory and it should have the following keys in it (the values are just examples):
