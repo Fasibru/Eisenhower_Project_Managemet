@@ -44,12 +44,12 @@ export function NewTask(props) {
         <form onSubmit={handleSubmit}>
           <label htmlFor="title">
             Title<br />
-            <input type="text" name="title" value={newTask.title} onChange={handleChange} />
+            <input type="text" name="title" value={newTask.title} onChange={handleChange} required />
           </label>
           <br />
           <label htmlFor="description">
             Description<br />
-            <textarea type="text" name="description" value={newTask.description} onChange={handleChange} />
+            <textarea type="text" name="description" value={newTask.description} onChange={handleChange} required />
           </label><br />
           <label htmlFor="category">
             Category<br />

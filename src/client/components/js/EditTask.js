@@ -97,12 +97,12 @@ export class EditTask extends Component {
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="title">
               Title<br />
-              <input type="text" defaultValue={editTask.title} name="title" onChange={this.handleChange} />
+              <input type="text" defaultValue={editTask.title} name="title" onChange={this.handleChange} required />
             </label>
             <br />
             <label htmlFor="description">
               Description<br />
-              <textarea type="text" name="description" defaultValue={editTask.description} onChange={this.handleChange} />
+              <textarea type="text" name="description" defaultValue={editTask.description} onChange={this.handleChange} required />
             </label>
             <br />
             <label htmlFor="category">
