@@ -83,7 +83,14 @@ export const loginUser = (req, res, next) => {
 };
 
 export const getUserId = (req, res) => {
-  res.status(200).json(req.session.userId);
+  User.findOne({ _id: req.session.userId })
+    .then(() => res.status(200).json(req.session.userId))
+    .catch((err) => {
+      res.status(404).json({
+        error: err,
+        message: 'User not found',
+      });
+    });
 };
 
 export const logoutUser = (req, res) => {

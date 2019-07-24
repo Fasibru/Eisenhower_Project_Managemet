@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+
+// BETTER USE REDUX WITH APPROPRIATE ACTIONS AND USERLOGGEDIN STATE etc.
+// ACTIONS should have 3 stages
+// Problem: Component probably does not rerender on browser refresh or navigation via react-router-dom
 function Home() {
   const [userId, setUserId] = useState(undefined);
 
@@ -9,7 +13,6 @@ function Home() {
     axios.get('/account/login')
       .then((res) => {
         setUserId(res.data);
-        console.log(res);
       })
       .catch(err => console.log(err));
   });
@@ -24,7 +27,6 @@ function Home() {
 
   return (
     <div>
-      <p>{userId}</p>
       {!userId
         && (
           <div>
