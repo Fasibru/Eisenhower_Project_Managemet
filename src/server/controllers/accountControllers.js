@@ -99,7 +99,9 @@ export const logoutUser = (req, res) => {
     secure: process.env.NODE_ENV === 'development',
     sameSite: true,
   };
-  res.clearCookie('JSONWebToken', cookieOptions);
-  res.clearCookie('sid', cookieOptions); // need to end session to clear the sid cookie automatically?
-  res.sendStatus(200);
+  req.session.destroy(() => {
+    res.clearCookie('JSONWebToken', cookieOptions);
+    res.clearCookie('sid', cookieOptions);
+    res.sendStatus(200);
+  });
 };
