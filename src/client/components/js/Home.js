@@ -1,50 +1,56 @@
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { connect } from 'react-redux';
+// import axios from 'axios';
+import PropTypes from 'prop-types';
 
+import { getUserId } from '../../actions/actionsUser';
 
-// BETTER USE REDUX WITH APPROPRIATE ACTIONS AND USERLOGGEDIN STATE etc.
-// ACTIONS should have 3 stages
-// Problem: Component probably does not rerender on browser refresh or navigation via react-router-dom
-function Home() {
-  const [userId, setUserId] = useState(undefined);
+const mapStateToProps = state => ({
+  userId: state.user.userId,
+  isFetchingUserId: state.user.isFetchingUserId,
+  userIdError: state.user.userIdError,
+});
 
-  useEffect(() => {
-    axios.get('/account/login')
-      .then((res) => {
-        setUserId(res.data);
-      })
-      .catch(err => console.log(err));
-  });
+class Home extends Component {
+  componentDidMount = () => {
+    // eslint-disable-next-line no-shadow
+    const { getUserId } = this.props;
+    getUserId();
+  }
 
-  const logout = () => {
-    axios.post('/account/logout')
-      .then(() => {
-        setUserId(undefined);
-      })
-      .catch(err => console.log(err));
-  };
+  render() {
+    const { userId } = this.props;
 
-  return (
-    <div>
-      {!userId
-        && (
-          <div>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
-          </div>
-        )
-      }
-      {userId
-        && (
-          <div>
-            <Link to="/app">App</Link>
-            <button type="button" onClick={logout}>Logout</button>
-          </div>
-        )
-      }
-    </div>
-  );
+    return (
+      <div>
+        {!userId
+          && (
+            <div>
+              <Link to="/login">Login</Link>
+              <Link to="/register">Register</Link>
+            </div>
+          )
+        }
+        {userId
+          && (
+            <div>
+              <Link to="/app">App</Link>
+              {/* <button type="button" onClick={logout}>Logout</button> */}
+            </div>
+          )
+        }
+      </div>
+    );
+  }
 }
 
-export default Home;
+Home.propTypes = {
+  getUserId: PropTypes.func.isRequired,
+  userId: PropTypes.string.isRequired,
+};
+
+export default connect(mapStateToProps, {
+  getUserId,
+})(Home);

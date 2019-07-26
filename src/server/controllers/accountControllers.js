@@ -84,7 +84,12 @@ export const loginUser = (req, res, next) => {
 
 export const getUserId = (req, res) => {
   User.findOne({ _id: req.session.userId })
-    .then(() => res.status(200).json(req.session.userId))
+    .then((user) => {
+      if (user) {
+        return res.status(200).json(req.session.userId);
+      }
+      return res.sendStatus(404);
+    })
     .catch((err) => {
       res.status(404).json({
         error: err,

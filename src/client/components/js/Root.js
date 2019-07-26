@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Route,
   Switch,
   Redirect,
@@ -15,7 +15,7 @@ import Home from './Home';
 
 const Root = ({ store }) => (
   <Provider store={store}>
-    <Router>
+    <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/app" component={App} />
@@ -23,7 +23,7 @@ const Root = ({ store }) => (
         <Route exact path="/register" component={Register} />
         <Redirect to="/" />
       </Switch>
-    </Router>
+    </BrowserRouter>
   </Provider>
 );
 
