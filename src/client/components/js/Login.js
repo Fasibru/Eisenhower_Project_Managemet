@@ -1,14 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
+// Refactor with Redux
 const onSubmit = (event) => {
   event.preventDefault();
   const emailAddress = document.getElementById('emailAddress').value;
   const password = document.getElementById('password').value;
   axios.post('/account/login', { emailAddress, password }, { withCredentials: true })
     .then(() => {
-      window.location = ('/app');
+      history.pushState(null, null, '/app');
+      history.go();
     })
     .catch(err => console.log(err));
 };
