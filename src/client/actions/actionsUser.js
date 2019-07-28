@@ -3,6 +3,7 @@ import {
   GET_USER_ID_REQUEST,
   GET_USER_ID_SUCCESS,
   GET_USER_ID_FAILURE,
+  REMOVE_USER_ID,
 } from '../constants/actionTypesUser';
 
 export const getUserIdRequest = () => ({
@@ -29,3 +30,7 @@ export const getUserId = () => (dispatch) => {
       dispatch(getUserIdFailure(err));
     });
 };
+
+export const removeUserId = () => ({
+  type: REMOVE_USER_ID,
+});

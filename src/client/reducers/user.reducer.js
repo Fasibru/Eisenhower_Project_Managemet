@@ -2,6 +2,7 @@ import {
   GET_USER_ID_REQUEST,
   GET_USER_ID_SUCCESS,
   GET_USER_ID_FAILURE,
+  REMOVE_USER_ID,
 } from '../constants/actionTypesUser';
 
 const initialState = {
@@ -17,7 +18,6 @@ const userReducer = (state = initialState, action) => {
         isFetchingUserId: true,
       });
     case GET_USER_ID_SUCCESS:
-      console.log(action);
       return Object.assign({}, state, {
         isFetchingUserId: false,
         userId: action.userId,
@@ -26,6 +26,10 @@ const userReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         isFetchingUserId: false,
         userIdError: action.error.message,
+      });
+    case REMOVE_USER_ID:
+      return Object.assign({}, state, {
+        userId: '',
       });
     default:
       return state;

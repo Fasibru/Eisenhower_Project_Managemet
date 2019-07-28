@@ -59,11 +59,11 @@ app.use(bodyParser.json());
 
 app.use(passport.initialize());
 
-app.use('/api', verifyJWT, apiRouter);
-app.use('/account', accountRoutes);
-
 // to serve files from production build:
 app.use(express.static(path.resolve(__dirname, '../../dist')));
+
+app.use('/api', verifyJWT, apiRouter);
+app.use('/account', accountRoutes);
 
 // serve index.html so react-router-dom works without 404 error
 app.get('/*', (req, res) => {

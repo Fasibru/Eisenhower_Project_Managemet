@@ -2,10 +2,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import axios from 'axios';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 
-import { getUserId } from '../../actions/actionsUser';
+import {
+  getUserId,
+  removeUserId,
+} from '../../actions/actionsUser';
 
 const mapStateToProps = state => ({
   userId: state.user.userId,
@@ -18,6 +21,14 @@ class Home extends Component {
     // eslint-disable-next-line no-shadow
     const { getUserId } = this.props;
     getUserId();
+  }
+
+  logout = () => {
+    // eslint-disable-next-line no-shadow
+    const { removeUserId } = this.props;
+    removeUserId();
+    axios.post('/account/logout')
+      .catch(err => console.log(err));
   }
 
   render() {
@@ -37,7 +48,7 @@ class Home extends Component {
           && (
             <div>
               <Link to="/app">App</Link>
-              {/* <button type="button" onClick={logout}>Logout</button> */}
+              <button type="button" onClick={this.logout}>Logout</button>
             </div>
           )
         }
@@ -48,9 +59,11 @@ class Home extends Component {
 
 Home.propTypes = {
   getUserId: PropTypes.func.isRequired,
+  removeUserId: PropTypes.func.isRequired,
   userId: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, {
   getUserId,
+  removeUserId,
 })(Home);
