@@ -5,6 +5,7 @@
 html, body {
   font-family: $font-stack;
   margin: 0;
+  padding: 0;
   height: 100%;
   width: 100%;
 }
@@ -18,4 +19,5 @@ html, body {
     "sidenav header"
     "sidenav main"
     "sidenav footer";
+  height: 100vh;
 }

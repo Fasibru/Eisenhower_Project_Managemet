@@ -22,7 +22,7 @@ export const getUserIdFailure = error => ({
 
 export const getUserId = () => (dispatch) => {
   dispatch(getUserIdRequest());
-  axios.get('/account/login')
+  return axios.get('/account/login')
     .then((res) => {
       dispatch(getUserIdSuccess(res.data));
     })

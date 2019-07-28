@@ -36,6 +36,16 @@ export const getTasks = (req, res) => {
   });
 };
 
+// for GET endpoint for user specific tasks
+export const getUserTasks = (req, res) => {
+  Tasks.find({ members: req.params.userId }, (err, tasks) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(tasks);
+  });
+};
+
 // for DELETE endpoint to delete a single task
 export const deleteTask = (req, res) => {
   Tasks.findOneAndDelete({ _id: req.params.id }, (err) => {
@@ -45,18 +55,6 @@ export const deleteTask = (req, res) => {
     res.send(`Successfully removed task ${req.params.id}`);
   });
 };
-
-
-// for POST endpoint to initialize filters
-// export const setFilters = (req, res) => {
-//   const filters = new Filters(req.body);
-//   filters.save((err, filter) => {
-//     if (err) {
-//       res.send(err);
-//     }
-//     res.json(filter);
-//   });
-// };
 
 // for GET endpoint to get filter settings
 export const getFilters = (req, res) => {

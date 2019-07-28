@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
   ADD_NEW_TASK,
   GET_TASKS,
+  GET_USER_TASKS,
   GET_FILTERS,
   OPEN_NEW_TASK_POPUP,
   CLOSE_NEW_TASK_POPUP,
@@ -33,6 +34,19 @@ export const addNewTask = task => (dispatch) => {
 
 export const getTasks = () => (dispatch) => {
   axios.get('/api/tasks')
+    .then((res) => {
+      dispatch({
+        type: GET_TASKS,
+        tasks: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const getUserTasks = userId => (dispatch) => {
+  axios.get(`/api/tasks/${userId}`)
     .then((res) => {
       dispatch({
         type: GET_TASKS,

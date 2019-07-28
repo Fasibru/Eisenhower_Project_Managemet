@@ -2,6 +2,8 @@ export const ADD_NEW_TASK = 'ADD_NEW_TASK';
 
 export const GET_TASKS = 'GET_TASKS';
 
+export const GET_USER_TASKS = 'GET_USER_TASKS';
+
 export const GET_FILTERS = 'GET_FILTERS';
 
 export const POPULATE_EDIT_TASK_FORM = 'POPULATE_EDIT_TASK_FORM';

@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import {
   getTasks,
+  getUserTasks,
   addNewTask,
   deleteTask,
   editTask,
-  // setFilters,
   getFilters,
   updateFilters,
 } from '../controllers/apiControllers';
@@ -13,13 +13,13 @@ const router = Router();
 
 router.get('/tasks', getTasks);
 
+router.get('/tasks/:userId', getUserTasks);
+
 router.post('/task', addNewTask);
 
 router.put('/task/:id', editTask);
 
 router.delete('/task/:id', deleteTask);
-
-// router.post('/setFilters', setFilters);
 
 router.get('/filters', getFilters);
 
