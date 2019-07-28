@@ -13,7 +13,12 @@ const onSubmit = (event) => {
     lastName,
     emailAddress,
     password,
-  });
+  })
+    .then(() => {
+      history.pushState(null, null, '/app');
+      history.go();
+    })
+    .catch(err => console.log(err));
 };
 
 const Register = () => (
