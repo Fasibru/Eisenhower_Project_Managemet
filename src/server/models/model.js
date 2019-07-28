@@ -26,6 +26,10 @@ export const TasksSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  members: {
+    type: [{ type: String }],
+    default: null,
+  },
 });
 
 export const FiltersSchema = new Schema({
