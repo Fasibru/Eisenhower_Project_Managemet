@@ -5,6 +5,7 @@ import {
   getTasks,
   getFilters,
 } from '../../actions/index';
+import { getUserId } from '../../actions/actionsUser';
 
 import Header from './Header';
 import Sidenav from './Sidenav';
@@ -26,9 +27,10 @@ export class App extends Component {
   componentDidMount = () => {
     // read initial data form DB based on filters
     // eslint-disable-next-line no-shadow
-    const { getTasks, getFilters } = this.props;
+    const { getTasks, getFilters, getUserId } = this.props;
     getTasks();
     getFilters();
+    getUserId();
   }
 
   render() {
@@ -64,6 +66,7 @@ export class App extends Component {
 App.propTypes = {
   getTasks: PropTypes.func.isRequired,
   getFilters: PropTypes.func.isRequired,
+  getUserId: PropTypes.func.isRequired,
   newTaskPopup: PropTypes.bool.isRequired,
   editTaskPopup: PropTypes.bool.isRequired,
 };
@@ -71,4 +74,5 @@ App.propTypes = {
 export default connect(mapStateToProps, {
   getTasks,
   getFilters,
+  getUserId,
 })(App);
