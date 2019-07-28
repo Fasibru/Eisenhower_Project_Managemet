@@ -10,6 +10,7 @@ import '../scss/NewTask.scss';
 
 const mapStateToProps = state => ({
   newTask: state.tasks.newTask,
+  userId: state.user.userId,
 });
 
 export function NewTask(props) {
@@ -21,6 +22,7 @@ export function NewTask(props) {
     // eslint-disable-next-line no-shadow
     addNewTask,
     newTask,
+    userId,
   } = props;
 
   const handleChange = (event) => {
@@ -34,7 +36,8 @@ export function NewTask(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addNewTask(newTask);
+    // addNewTask(newTask);
+    addNewTask({ ...newTask, members: [userId] });
     closeNewTaskPopup();
   };
 
@@ -80,6 +83,7 @@ NewTask.propTypes = {
     rank: PropTypes.number,
     _id: PropTypes.string,
   }).isRequired,
+  userId: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, {
