@@ -1,4 +1,8 @@
+Caveat: This repo is a fully working web app but since it is also a tool for me to learn and try out different technologies you should not be surprised to see inconsistencies like mainly using ES6 but sometimes also ES5, or using react class components but trying react hooks as well and so on.
+
+
 # JATLA Project Management
+
 Looking at the title you might think 'Probably that's just another todo list app.' and to be honest as of now there are not a lot of arguments I can bring to the table to proof you wrong.  
 Nevertheless maybe you will change your mind sometime in the future once I have all my ideas implemented because as the title suggests this repo is about project management, not only todo task handling.  As of July 2019 you can add/edit/remove tasks, assign a priority, change the status to completed and filter on that as well as on the date the tasks where created. A search function will be the next filter to be implemented.  
 I see this evolving to a real project management tool once the following capabilities are implemented:
