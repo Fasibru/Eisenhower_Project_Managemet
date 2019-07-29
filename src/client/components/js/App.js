@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   getUserFilters,
@@ -16,13 +17,11 @@ import EditTask from './EditTask';
 
 import '../scss/App.scss';
 
-function mapStateToProps(state) {
-  return {
-    newTaskPopup: state.tasks.newTaskPopup,
-    editTaskPopup: state.tasks.editTaskPopup,
-    userId: state.user.userId,
-  };
-}
+const mapStateToProps = state => ({
+  newTaskPopup: state.tasks.newTaskPopup,
+  editTaskPopup: state.tasks.editTaskPopup,
+  userId: state.user.userId,
+});
 
 export class App extends Component {
   componentDidMount = () => {
@@ -43,10 +42,16 @@ export class App extends Component {
       // closeNewTaskPopup,
       newTaskPopup,
       editTaskPopup,
+      userId,
     } = this.props;
 
     return (
       <div className="grid-container">
+        {!userId
+          && (
+            <Redirect to="/login" />
+          )
+        }
         <Header />
         <Sidenav />
         <FilteredMain />
