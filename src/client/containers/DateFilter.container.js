@@ -21,6 +21,7 @@ const mapStateToProps = state => ({
   dateRangeEnd: formatDate(state.filters.filters.dateRangeEnd),
   minDate: getMinDate(state.tasks.tasks).substr(0, 10),
   filters: state.filters.filters,
+  userId: state.user.userId,
 });
 
 export default connect(mapStateToProps, { updateFilters })(DateFilter);

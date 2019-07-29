@@ -9,13 +9,15 @@ function DateFilter(props) {
     minDate,
     filters,
     updateFilters,
+    userId,
   } = props;
 
   const handleFilter = (event) => {
     const eventName = event.target.name;
     const eventValue = event.target.value;
-    axios.put('/api/filters', {
+    axios.put(`/api/filters/${userId}`, {
       ...filters,
+      userID: userId,
       [eventName]: eventValue,
     })
       // eslint-disable-next-line no-shadow
@@ -57,6 +59,7 @@ DateFilter.propTypes = {
     dateRangeEnd: PropTypes.string,
   }).isRequired,
   updateFilters: PropTypes.func.isRequired,
+  userId: PropTypes.string.isRequired,
 };
 
 export default DateFilter;

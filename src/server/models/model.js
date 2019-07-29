@@ -8,7 +8,7 @@ export const TasksSchema = new Schema({
   },
   category: {
     type: String,
-    required: true,
+    default: 'A',
   },
   title: {
     type: String,
@@ -34,8 +34,8 @@ export const TasksSchema = new Schema({
 
 export const FiltersSchema = new Schema({
   userID: {
-    type: Number,
-    default: -999,
+    type: String,
+    default: '-999',
   },
   showTasks: {
     type: String,

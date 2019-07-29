@@ -40,9 +40,9 @@ export const getTasks = (req, res) => {
 export const getUserTasks = (req, res) => {
   Tasks.find({ members: req.params.userId }, (err, tasks) => {
     if (err) {
-      res.send(err);
+      res.status(404).send(err);
     }
-    res.json(tasks);
+    res.status(200).json(tasks);
   });
 };
 
@@ -66,13 +66,33 @@ export const getFilters = (req, res) => {
   });
 };
 
+export const getUserFilters = (req, res) => {
+  Filters.find({ userID: req.params.userId }, (err, filters) => {
+    if (err) {
+      res.status(404).send(err);
+    }
+    res.status(200).json(filters);
+  });
+};
+
 // for PUT endpoint to update filter settings
 export const updateFilters = (req, res) => {
   // update filter settings
-  Filters.findOneAndUpdate({ userID: -999 }, req.body, (err) => {
+  Filters.findOneAndUpdate({ userID: req.params.userId }, req.body, (err) => {
     if (err) {
       res.send(err);
     }
     res.end();
+  });
+};
+
+// for POST endpoint to initialize user filter settings
+export const initializeUserFilters = (req, res) => {
+  const filters = new Filters(req.body);
+  filters.save((err, filter) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.status(200).json(filter);
   });
 };

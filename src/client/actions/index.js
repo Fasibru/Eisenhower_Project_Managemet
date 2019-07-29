@@ -14,6 +14,8 @@ import {
   DELETE_TASK,
   STORE_NEW_TASK_FORM_CHANGE,
   UPDATE_FILTERS,
+  RESET_FILTERS_STORE,
+  RESET_TASKS_STORE,
 } from '../constants/actionTypes';
 
 export const addNewTask = task => (dispatch) => {
@@ -60,6 +62,19 @@ export const getUserTasks = userId => (dispatch) => {
 
 export const getFilters = () => (dispatch) => {
   axios.get('/api/filters')
+    .then((res) => {
+      dispatch({
+        type: GET_FILTERS,
+        filters: res.data[0],
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const getUserFilters = userId => (dispatch) => {
+  axios.get(`/api/filters/${userId}`)
     .then((res) => {
       dispatch({
         type: GET_FILTERS,
@@ -119,4 +134,12 @@ export const updateFilters = (name, value) => ({
   type: UPDATE_FILTERS,
   name,
   value,
+});
+
+export const resetFiltersStore = () => ({
+  type: RESET_FILTERS_STORE,
+});
+
+export const resetTasksStore = () => ({
+  type: RESET_TASKS_STORE,
 });

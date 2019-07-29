@@ -51,7 +51,7 @@ export const registerUser = (req, res) => {
               if (process.env.NODE_ENV === 'development') {
                 res.set('Access-Control-Allow-Origin', `http://localhost:${portConfig.DEV_FRONTEND_SERVER_PORT}`);
               }
-              res.cookie('JSONWebToken', token, cookieOptions).sendStatus(200);
+              res.cookie('JSONWebToken', token, cookieOptions).status(200).json(user);
             });
           })
           .catch((err) => {

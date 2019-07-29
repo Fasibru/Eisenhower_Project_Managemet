@@ -9,18 +9,21 @@ import {
 
 const mapStateToProps = state => ({
   filters: state.filters.filters,
+  userId: state.user.userId,
 });
 
 function StatusFilter({
   filters,
   // eslint-disable-next-line no-shadow
   updateFilters,
+  userId,
 }) {
   const handleFilter = (event) => {
     const eventName = event.target.name;
     const eventValue = event.target.value;
-    axios.put('/api/filters', {
+    axios.put(`/api/filters/${userId}`, {
       ...filters,
+      userID: userId,
       [eventName]: eventValue,
     })
       // eslint-disable-next-line no-shadow
@@ -76,6 +79,7 @@ StatusFilter.propTypes = {
     dateRangeStart: PropTypes.string,
     dateRangeEnd: PropTypes.string,
   }).isRequired,
+  userId: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, {

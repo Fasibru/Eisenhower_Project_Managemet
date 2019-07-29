@@ -10,6 +10,7 @@ import {
   CLOSE_EDIT_TASK_POPUP,
   STORE_EDIT_TASK_FORM_CHANGE,
   SAVE_EDITED_TASK,
+  RESET_TASKS_STORE,
 } from '../constants/actionTypes';
 
 
@@ -94,6 +95,8 @@ const tasksReducer = (state = initialState, action) => {
           ...state.tasks.slice(action.index + 1),
         ],
       });
+    case RESET_TASKS_STORE:
+      return Object.assign({}, initialState);
     default:
       return state;
   }
