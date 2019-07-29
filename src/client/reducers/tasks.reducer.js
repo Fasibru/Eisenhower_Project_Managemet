@@ -11,8 +11,7 @@ import {
   STORE_EDIT_TASK_FORM_CHANGE,
   SAVE_EDITED_TASK,
   RESET_TASKS_STORE,
-} from '../constants/actionTypes';
-
+} from '../constants/actionTypesTasks';
 
 const initialState = {
   tasks: [],

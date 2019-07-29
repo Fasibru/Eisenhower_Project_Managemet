@@ -5,7 +5,7 @@ import {
   closeNewTaskPopup,
   storeNewTaskFormChange,
   addNewTask,
-} from '../../actions/index';
+} from '../../actions/actionsTasks';
 import '../scss/NewTask.scss';
 
 const mapStateToProps = state => ({

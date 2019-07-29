@@ -9,6 +9,8 @@ import {
   getUserId,
   removeUserId,
 } from '../../actions/actionsUser';
+import { resetTasksStore } from '../../actions/actionsTasks';
+import { resetFiltersStore } from '../../actions/actionsFilters';
 
 const mapStateToProps = state => ({
   userId: state.user.userId,
@@ -25,9 +27,13 @@ class Home extends Component {
 
   logout = () => {
     // eslint-disable-next-line no-shadow
-    const { removeUserId } = this.props;
+    const { removeUserId, resetFiltersStore, resetTasksStore } = this.props;
     removeUserId();
     axios.post('/account/logout')
+      .then(() => {
+        resetFiltersStore();
+        resetTasksStore();
+      })
       .catch(err => console.log(err));
   }
 
@@ -60,10 +66,14 @@ class Home extends Component {
 Home.propTypes = {
   getUserId: PropTypes.func.isRequired,
   removeUserId: PropTypes.func.isRequired,
+  resetFiltersStore: PropTypes.func.isRequired,
+  resetTasksStore: PropTypes.func.isRequired,
   userId: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, {
   getUserId,
   removeUserId,
+  resetFiltersStore,
+  resetTasksStore,
 })(Home);

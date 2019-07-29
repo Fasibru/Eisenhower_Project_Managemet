@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import {
-  updateFilters,
-  openNewTaskPopup,
-} from '../../actions/index';
+
+import { updateFilters } from '../../actions/actionsFilters';
 
 const mapStateToProps = state => ({
   filters: state.filters.filters,
@@ -84,5 +82,4 @@ StatusFilter.propTypes = {
 
 export default connect(mapStateToProps, {
   updateFilters,
-  openNewTaskPopup,
 })(StatusFilter);

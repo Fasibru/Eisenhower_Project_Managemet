@@ -2,7 +2,6 @@ import axios from 'axios';
 import {
   ADD_NEW_TASK,
   GET_TASKS,
-  GET_FILTERS,
   OPEN_NEW_TASK_POPUP,
   CLOSE_NEW_TASK_POPUP,
   OPEN_EDIT_TASK_POPUP,
@@ -12,10 +11,9 @@ import {
   SAVE_EDITED_TASK,
   DELETE_TASK,
   STORE_NEW_TASK_FORM_CHANGE,
-  UPDATE_FILTERS,
-  RESET_FILTERS_STORE,
   RESET_TASKS_STORE,
-} from '../constants/actionTypes';
+} from '../constants/actionTypesTasks';
+
 
 export const addNewTask = task => (dispatch) => {
   axios.post('/api/task', task)
@@ -52,32 +50,6 @@ export const getUserTasks = userId => (dispatch) => {
       dispatch({
         type: GET_TASKS,
         tasks: res.data,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-export const getFilters = () => (dispatch) => {
-  axios.get('/api/filters')
-    .then((res) => {
-      dispatch({
-        type: GET_FILTERS,
-        filters: res.data[0],
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-export const getUserFilters = userId => (dispatch) => {
-  axios.get(`/api/filters/${userId}`)
-    .then((res) => {
-      dispatch({
-        type: GET_FILTERS,
-        filters: res.data[0],
       });
     })
     .catch((err) => {
@@ -127,16 +99,6 @@ export const storeNewTaskFormChange = (name, value) => ({
   type: STORE_NEW_TASK_FORM_CHANGE,
   name,
   value,
-});
-
-export const updateFilters = (name, value) => ({
-  type: UPDATE_FILTERS,
-  name,
-  value,
-});
-
-export const resetFiltersStore = () => ({
-  type: RESET_FILTERS_STORE,
 });
 
 export const resetTasksStore = () => ({

@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  openNewTaskPopup,
-} from '../../actions/index';
+
+import { openNewTaskPopup } from '../../actions/actionsTasks';
 import '../scss/Sidenav.scss';
 
 import StatusFilter from './StatusFilter';

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {
   populateEditTaskForm,
   openEditTaskPopup,
-} from '../../actions/index';
+} from '../../actions/actionsTasks';
 
 // eslint-disable-next-line no-shadow
 const populateEditTask = (openEditTaskPopup, populateEditTaskForm, data) => {

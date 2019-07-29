@@ -1,0 +1,5 @@
+export const GET_FILTERS = 'GET_FILTERS';
+
+export const UPDATE_FILTERS = 'UPDATE_FILTERS';
+
+export const RESET_FILTERS_STORE = 'RESET_FILTERS_STORE';

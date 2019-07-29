@@ -2,7 +2,7 @@ import {
   GET_FILTERS,
   UPDATE_FILTERS,
   RESET_FILTERS_STORE,
-} from '../constants/actionTypes';
+} from '../constants/actionTypesFilters';
 
 
 const initialState = {

@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {
-  getUserFilters,
-  getUserTasks,
-} from '../../actions/index';
+import { getUserTasks } from '../../actions/actionsTasks';
+import { getUserFilters } from '../../actions/actionsFilters';
+
 import { getUserId } from '../../actions/actionsUser';
 
 import Header from './Header';

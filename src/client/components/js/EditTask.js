@@ -7,7 +7,7 @@ import {
   storeEditTaskFormChange,
   saveEditedTask,
   deleteTask,
-} from '../../actions/index';
+} from '../../actions/actionsTasks';
 import '../scss/EditTask.scss';
 
 const mapStateToProps = state => ({
