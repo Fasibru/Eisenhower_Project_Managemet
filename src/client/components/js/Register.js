@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
+import { getUserId } from '../../actions/actionsUser';
+
 const mapStateToProps = state => ({
   filters: state.filters.filters,
+  userId: state.user.userId,
 });
 
 
-const Register = ({ filters }) => {
+// eslint-disable-next-line no-shadow
+const Register = ({ filters, getUserId, userId }) => {
+  useEffect(() => {
+    getUserId();
+  });
+
   const onSubmit = (event) => {
     event.preventDefault();
     const firstName = document.getElementById('firstName').value;
@@ -38,14 +46,25 @@ const Register = ({ filters }) => {
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
-        <input type="firstName" name="firstName" id="firstName" placeholder="First Name" required />
-        <input type="lastName" name="lastName" id="lastName" placeholder="Last Name" required />
-        <input type="email" name="emailAddress" id="emailAddress" placeholder="email" required />
-        <input type="password" name="password" id="password" placeholder="Password" required />
-        <button type="submit">Register</button>
-      </form>
-      <Link to="/login">Login</Link>
+      {userId
+        && (
+          <Redirect to="/app" />
+        )
+      }
+      {!userId
+        && (
+          <div>
+            <form onSubmit={onSubmit}>
+              <input type="firstName" name="firstName" id="firstName" placeholder="First Name" required />
+              <input type="lastName" name="lastName" id="lastName" placeholder="Last Name" required />
+              <input type="email" name="emailAddress" id="emailAddress" placeholder="email" required />
+              <input type="password" name="password" id="password" placeholder="Password" required />
+              <button type="submit">Register</button>
+            </form>
+            <Link to="/login">Login</Link>
+          </div>
+        )
+      }
     </div>
   );
 };
@@ -55,8 +74,11 @@ Register.propTypes = {
     showTasks: PropTypes.string,
     dateRangeStart: PropTypes.string,
     dateRangeEnd: PropTypes.string,
-    // userID: PropTypes.string,
   }).isRequired,
+  userId: PropTypes.string.isRequired,
+  getUserId: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Register);
+export default connect(mapStateToProps, {
+  getUserId,
+})(Register);
