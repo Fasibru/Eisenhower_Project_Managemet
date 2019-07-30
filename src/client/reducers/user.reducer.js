@@ -22,11 +22,8 @@ const userReducer = (state = initialState, action) => {
       });
     case GET_USER_SUCCESS:
       return Object.assign({}, state, {
-        // isFetchingUser: false,
-        // userId: action.user.userId,
-        userId: action.user.userId,
+        userId: action.user._id,
         isFetchingUser: false,
-        userError: action.user.userError,
         emailAddress: action.user.emailAddress,
         firstName: action.user.firstName,
         lastName: action.user.lastName,

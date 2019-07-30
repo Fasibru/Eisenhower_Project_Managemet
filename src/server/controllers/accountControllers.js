@@ -4,8 +4,7 @@ import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import fs from 'fs';
-import { UserSchema } from '../models/model';
-import { getConsoleOutput } from '@jest/console';
+import { UserSchema, TasksSchema } from '../models/model';
 
 const portConfig = JSON.parse(fs.readFileSync('src/config/port-config.json'))[0];
 
@@ -13,6 +12,7 @@ const secret = process.env.SECRET;
 const saltRounds = 12;
 
 const User = mongoose.model('Users', UserSchema);
+const Task = mongoose.model('Tasks', TasksSchema);
 
 export const registerUser = (req, res) => {
   User.findOne({ emailAddress: req.body.emailAddress })
@@ -101,16 +101,14 @@ export const loginUser = (req, res, next) => {
 };
 
 export const getUser = (req, res) => {
-  User.findOne({ _id: req.session.userId })
+  User.findOne({ _id: req.session.userId }, {
+    firstName: 1,
+    lastName: 1,
+    emailAddress: 1,
+  })
     .then((user) => {
       if (user) {
-        const userData = {
-          firstName: user.firstName,
-          lastName: user.lastName,
-          emailAddress: user.emailAddress,
-          userId: user._id.toString(),
-        };
-        return res.status(200).json(userData);
+        return res.status(200).json(user);
       }
       return res.sendStatus(404);
     })
@@ -134,3 +132,11 @@ export const logoutUser = (req, res) => {
     res.sendStatus(200);
   });
 };
+
+// export const deleteUser = (req, res) => {
+//   // 1. delete User
+
+//   // 2. delete userId from members in Tasks
+
+//   // 3. delete tasks in Tasks where members is empty
+// };
