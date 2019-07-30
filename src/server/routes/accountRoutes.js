@@ -3,7 +3,7 @@ import { Router } from 'express';
 import {
   registerUser,
   loginUser,
-  getUserId,
+  getUser,
   logoutUser,
 } from '../controllers/accountControllers';
 
@@ -13,7 +13,7 @@ router.post('/register', registerUser);
 
 router.post('/login', loginUser);
 
-router.get('/login', getUserId);
+router.get('/user', getUser);
 
 router.post('/logout', logoutUser);
 

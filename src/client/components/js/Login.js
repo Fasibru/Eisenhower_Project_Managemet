@@ -4,16 +4,16 @@ import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-import { getUserId } from '../../actions/actionsUser';
+import { getUser } from '../../actions/actionsUser';
 
 const mapStateToProps = state => ({
   userId: state.user.userId,
 });
 
 // eslint-disable-next-line no-shadow
-const Login = ({ userId, getUserId }) => {
+const Login = ({ userId, getUser }) => {
   useEffect(() => {
-    getUserId();
+    getUser();
   });
 
   // Refactor with Redux
@@ -54,9 +54,9 @@ const Login = ({ userId, getUserId }) => {
 
 Login.propTypes = {
   userId: PropTypes.string.isRequired,
-  getUserId: PropTypes.func.isRequired,
+  getUser: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, {
-  getUserId,
+  getUser,
 })(Login);

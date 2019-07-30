@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { getUserTasks } from '../../actions/actionsTasks';
 import { getUserFilters } from '../../actions/actionsFilters';
 
-import { getUserId } from '../../actions/actionsUser';
+import { getUser } from '../../actions/actionsUser';
 
 import Header from './Header';
 import Sidenav from './Sidenav';
@@ -26,8 +26,8 @@ export class App extends Component {
   componentDidMount = () => {
     // read initial data form DB based on filters
     // eslint-disable-next-line no-shadow
-    const { getUserTasks, getUserFilters, getUserId } = this.props;
-    getUserId()
+    const { getUserTasks, getUserFilters, getUser } = this.props;
+    getUser()
       .then(() => {
         const { userId } = this.props;
         getUserTasks(userId);
@@ -73,7 +73,7 @@ export class App extends Component {
 App.propTypes = {
   getUserTasks: PropTypes.func.isRequired,
   getUserFilters: PropTypes.func.isRequired,
-  getUserId: PropTypes.func.isRequired,
+  getUser: PropTypes.func.isRequired,
   newTaskPopup: PropTypes.bool.isRequired,
   editTaskPopup: PropTypes.bool.isRequired,
   userId: PropTypes.string.isRequired,
@@ -81,6 +81,6 @@ App.propTypes = {
 
 export default connect(mapStateToProps, {
   getUserFilters,
-  getUserId,
+  getUser,
   getUserTasks,
 })(App);

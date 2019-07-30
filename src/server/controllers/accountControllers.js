@@ -100,11 +100,17 @@ export const loginUser = (req, res, next) => {
   })(req, res, next);
 };
 
-export const getUserId = (req, res) => {
+export const getUser = (req, res) => {
   User.findOne({ _id: req.session.userId })
     .then((user) => {
       if (user) {
-        return res.status(200).json(req.session.userId);
+        const userData = {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          emailAddress: user.emailAddress,
+          userId: user._id.toString(),
+        };
+        return res.status(200).json(userData);
       }
       return res.sendStatus(404);
     })

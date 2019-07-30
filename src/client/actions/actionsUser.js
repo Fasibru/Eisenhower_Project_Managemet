@@ -1,36 +1,36 @@
 import axios from 'axios';
 import {
-  GET_USER_ID_REQUEST,
-  GET_USER_ID_SUCCESS,
-  GET_USER_ID_FAILURE,
-  REMOVE_USER_ID,
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_FAILURE,
+  REMOVE_USER,
 } from '../constants/actionTypesUser';
 
-export const getUserIdRequest = () => ({
-  type: GET_USER_ID_REQUEST,
+export const getUserRequest = () => ({
+  type: GET_USER_REQUEST,
 });
 
-export const getUserIdSuccess = userId => ({
-  type: GET_USER_ID_SUCCESS,
-  userId,
+export const getUserSuccess = user => ({
+  type: GET_USER_SUCCESS,
+  user,
 });
 
-export const getUserIdFailure = error => ({
-  type: GET_USER_ID_FAILURE,
+export const getUserFailure = error => ({
+  type: GET_USER_FAILURE,
   error,
 });
 
-export const getUserId = () => (dispatch) => {
-  dispatch(getUserIdRequest());
-  return axios.get('/account/login')
+export const getUser = () => (dispatch) => {
+  dispatch(getUserRequest());
+  return axios.get('/account/user')
     .then((res) => {
-      dispatch(getUserIdSuccess(res.data));
+      dispatch(getUserSuccess(res.data));
     })
     .catch((err) => {
-      dispatch(getUserIdFailure(err));
+      dispatch(getUserFailure(err));
     });
 };
 
-export const removeUserId = () => ({
-  type: REMOVE_USER_ID,
+export const removeUser = () => ({
+  type: REMOVE_USER,
 });

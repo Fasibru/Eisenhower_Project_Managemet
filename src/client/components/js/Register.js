@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import { getUserId } from '../../actions/actionsUser';
+import { getUser } from '../../actions/actionsUser';
 
 const mapStateToProps = state => ({
   filters: state.filters.filters,
@@ -13,9 +13,9 @@ const mapStateToProps = state => ({
 
 
 // eslint-disable-next-line no-shadow
-const Register = ({ filters, getUserId, userId }) => {
+const Register = ({ filters, getUser, userId }) => {
   useEffect(() => {
-    getUserId();
+    getUser();
   });
 
   const onSubmit = (event) => {
@@ -76,9 +76,9 @@ Register.propTypes = {
     dateRangeEnd: PropTypes.string,
   }).isRequired,
   userId: PropTypes.string.isRequired,
-  getUserId: PropTypes.func.isRequired,
+  getUser: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, {
-  getUserId,
+  getUser,
 })(Register);

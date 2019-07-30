@@ -6,29 +6,27 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 
 import {
-  getUserId,
-  removeUserId,
+  getUser,
+  removeUser,
 } from '../../actions/actionsUser';
 import { resetTasksStore } from '../../actions/actionsTasks';
 import { resetFiltersStore } from '../../actions/actionsFilters';
 
 const mapStateToProps = state => ({
   userId: state.user.userId,
-  isFetchingUserId: state.user.isFetchingUserId,
-  userIdError: state.user.userIdError,
 });
 
 class Home extends Component {
   componentDidMount = () => {
     // eslint-disable-next-line no-shadow
-    const { getUserId } = this.props;
-    getUserId();
+    const { getUser } = this.props;
+    getUser();
   }
 
   logout = () => {
     // eslint-disable-next-line no-shadow
-    const { removeUserId, resetFiltersStore, resetTasksStore } = this.props;
-    removeUserId();
+    const { removeUser, resetFiltersStore, resetTasksStore } = this.props;
+    removeUser();
     axios.post('/account/logout')
       .then(() => {
         resetFiltersStore();
@@ -64,16 +62,16 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  getUserId: PropTypes.func.isRequired,
-  removeUserId: PropTypes.func.isRequired,
+  getUser: PropTypes.func.isRequired,
+  removeUser: PropTypes.func.isRequired,
   resetFiltersStore: PropTypes.func.isRequired,
   resetTasksStore: PropTypes.func.isRequired,
   userId: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, {
-  getUserId,
-  removeUserId,
+  getUser,
+  removeUser,
   resetFiltersStore,
   resetTasksStore,
 })(Home);
