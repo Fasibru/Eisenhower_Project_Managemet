@@ -4,7 +4,7 @@ import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import fs from 'fs';
-import { UserSchema, TasksSchema } from '../models/model';
+import { UserSchema, TasksSchema, FiltersSchema } from '../models/model';
 
 const portConfig = JSON.parse(fs.readFileSync('src/config/port-config.json'))[0];
 
@@ -12,7 +12,8 @@ const secret = process.env.SECRET;
 const saltRounds = 12;
 
 const User = mongoose.model('Users', UserSchema);
-const Task = mongoose.model('Tasks', TasksSchema);
+const Tasks = mongoose.model('Tasks', TasksSchema);
+const Filters = mongoose.model('Filters', FiltersSchema);
 
 export const registerUser = (req, res) => {
   User.findOne({ emailAddress: req.body.emailAddress })
@@ -51,7 +52,21 @@ export const registerUser = (req, res) => {
               if (process.env.NODE_ENV === 'development') {
                 res.set('Access-Control-Allow-Origin', `http://localhost:${portConfig.DEV_FRONTEND_SERVER_PORT}`);
               }
-              res.cookie('JSONWebToken', token, cookieOptions).status(200).json(user);
+              res.cookie('JSONWebToken', token, cookieOptions);
+            });
+
+            // initialize filters with defaults for user
+            const filters = new Filters({
+              userID: user._id,
+            });
+            filters.save((err, filter) => {
+              if (err) {
+                res.status(500).send(err);
+              }
+              res.status(200).json({
+                filter,
+                user,
+              });
             });
           })
           .catch((err) => {
@@ -133,10 +148,21 @@ export const logoutUser = (req, res) => {
   });
 };
 
-// export const deleteUser = (req, res) => {
-//   // 1. delete User
+export const deleteUser = (req, res) => {
+  // 1. delete User
+  User.deleteOne({ _id: req.session.userId })
+    .then(() => {
+      // 2. delete userId from members in Tasks
+      Tasks.update({}, { $pull: { members: [req.session.userId] } }, { multi: true });
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      res.status(404).json({
+        error: err,
+        message: 'User not found',
+      });
+    });
+  
 
-//   // 2. delete userId from members in Tasks
-
-//   // 3. delete tasks in Tasks where members is empty
-// };
+  // 3. delete tasks in Tasks where members is empty
+};

@@ -30,13 +30,6 @@ const Register = ({ filters, getUser, userId }) => {
       emailAddress,
       password,
     })
-      .then((res) => {
-        axios.post(`/api/filters/${res.data._id}`, {
-          ...filters,
-          userID: res.data._id,
-        })
-          .catch(err => console.log(err));
-      })
       .then(() => {
         history.pushState(null, null, '/app');
         history.go();
