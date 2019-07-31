@@ -18,6 +18,6 @@ router.get('/user', getUser);
 
 router.post('/logout', logoutUser);
 
-router.delete('/user/:userId', deleteUser);
+router.delete('/user', deleteUser);
 
 export default router;

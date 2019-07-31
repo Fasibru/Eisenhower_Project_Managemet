@@ -8,7 +8,6 @@ import {
   // getFilters,
   getUserFilters,
   updateFilters,
-  initializeUserFilters,
 } from '../controllers/apiControllers';
 
 const router = Router();
@@ -30,8 +29,6 @@ router.get('/filters/:userId', getUserFilters);
 // router.put('/filters', updateFilters);
 
 router.put('/filters/:userId', updateFilters);
-
-router.post('/filters/:userId', initializeUserFilters);
 
 // router.get('/error', (req, res) => {
 //   res.send('Error');

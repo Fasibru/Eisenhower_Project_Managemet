@@ -85,14 +85,3 @@ export const updateFilters = (req, res) => {
     res.end();
   });
 };
-
-// for POST endpoint to initialize user filter settings
-export const initializeUserFilters = (req, res) => {
-  const filters = new Filters(req.body);
-  filters.save((err, filter) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-    res.status(200).json(filter);
-  });
-};

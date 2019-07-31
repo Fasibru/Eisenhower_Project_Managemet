@@ -153,16 +153,65 @@ export const deleteUser = (req, res) => {
   User.deleteOne({ _id: req.session.userId })
     .then(() => {
       // 2. delete userId from members in Tasks
-      Tasks.update({}, { $pull: { members: [req.session.userId] } }, { multi: true });
-      res.sendStatus(200);
+      Tasks.updateMany(
+        { members: { $in: [req.session.userId] } },
+        { $pull: { members: req.session.userId } },
+      )
+        .then(() => {
+          // 3. delete tasks where members is empty
+          Tasks.deleteMany({ members: [] })
+            .then(() => {
+              res.status(200);
+            })
+            .catch((err) => {
+              console.log(err);
+              return res.status(500).json({
+                error: err,
+                message: 'Something went wrong while deleting the tasks. Please try again.',
+              });
+            });
+          res.status(200);
+        })
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).json({
+            message: 'Something went wrong while updating the tasks. Please try again.',
+            error: err,
+          });
+        });
+    })
+    // 4. delete user filters
+    .then(() => {
+      Filters.deleteOne({ userID: req.session.userId })
+        .then(() => {
+          res.status(200);
+        })
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).json({
+            message: 'Something went wrong while deleting the filters. Please try again.',
+            error: err,
+          });
+        });
+    })
+    // 5. delete cookies and destroy session
+    .then(() => {
+      const cookieOptions = {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'development',
+        sameSite: true,
+      };
+      req.session.destroy(() => {
+        res.clearCookie('JSONWebToken', cookieOptions);
+        res.clearCookie('sid', cookieOptions);
+        res.sendStatus(200);
+      });
     })
     .catch((err) => {
-      res.status(404).json({
+      console.log(err);
+      return res.status(500).json({
         error: err,
-        message: 'User not found',
+        message: 'Something went wrong while deleting the user. Please try again.',
       });
     });
-  
-
-  // 3. delete tasks in Tasks where members is empty
 };

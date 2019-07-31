@@ -26,7 +26,10 @@ const PORT = process.env.PORT || portConfig.BACKEND_SERVER_PORT;
 const mongoDatabaseURL = process.env.DB_URL;
 
 // initiate mongoose connection
-mongoose.connect(mongoDatabaseURL, { useNewUrlParser: true })
+mongoose.connect(mongoDatabaseURL, {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+})
   .then(() => console.log(`Connected to mongodb: ${mongoDatabaseURL}`))
   .catch((err) => {
     console.log(err);
