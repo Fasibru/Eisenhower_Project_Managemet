@@ -5,6 +5,7 @@ import https from 'https';
 import fs from 'fs';
 import path from 'path';
 import mongoose from 'mongoose';
+import connectMongo from 'connect-mongo';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -24,6 +25,7 @@ const cookieOptions = {
 const portConfig = JSON.parse(fs.readFileSync('src/config/port-config.json'))[0];
 const PORT = process.env.PORT || portConfig.BACKEND_SERVER_PORT;
 const mongoDatabaseURL = process.env.DB_URL;
+const MongoStore = connectMongo(session);
 
 // initiate mongoose connection
 mongoose.connect(mongoDatabaseURL, {
@@ -39,6 +41,7 @@ const app = express();
 
 // Session
 app.use(session({
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
   name: 'sid',
   resave: false,
   saveUninitialized: false,
