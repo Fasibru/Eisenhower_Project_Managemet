@@ -4,14 +4,24 @@ import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-import { getUser } from '../../actions/actionsUser';
+import {
+  getUser,
+  getLoginRegisterError,
+} from '../../actions/actionsUser';
 
 const mapStateToProps = state => ({
   userId: state.user.userId,
+  loginRegisterError: state.user.loginRegisterError,
 });
 
-// eslint-disable-next-line no-shadow
-const Login = ({ userId, getUser }) => {
+const Login = ({
+  userId,
+  /* eslint-disable no-shadow */
+  getUser,
+  getLoginRegisterError,
+  loginRegisterError,
+  /* eslint-enable no-shadow */
+}) => {
   useEffect(() => {
     getUser();
   });
@@ -26,7 +36,11 @@ const Login = ({ userId, getUser }) => {
         history.pushState(null, null, '/app');
         history.go();
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
+      .catch((err) => {
+        getLoginRegisterError(err.response.data.message);
+        console.log(err);
+      });
   };
 
   return (
@@ -39,6 +53,11 @@ const Login = ({ userId, getUser }) => {
       {!userId
         && (
           <div>
+            {loginRegisterError
+              && (
+                <p>{loginRegisterError}</p>
+              )
+            }
             <form onSubmit={onSubmit}>
               <input type="email" name="emailAddress" id="emailAddress" placeholder="email" required />
               <input type="password" name="password" id="password" placeholder="Password" required />
@@ -55,8 +74,11 @@ const Login = ({ userId, getUser }) => {
 Login.propTypes = {
   userId: PropTypes.string.isRequired,
   getUser: PropTypes.func.isRequired,
+  getLoginRegisterError: PropTypes.func.isRequired,
+  loginRegisterError: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, {
   getUser,
+  getLoginRegisterError,
 })(Login);

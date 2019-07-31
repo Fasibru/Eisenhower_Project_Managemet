@@ -4,6 +4,7 @@ import {
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
   REMOVE_USER,
+  GET_LOGIN_REGISTER_ERROR,
 } from '../constants/actionTypesUser';
 
 export const getUserRequest = () => ({
@@ -33,4 +34,9 @@ export const getUser = () => (dispatch) => {
 
 export const removeUser = () => ({
   type: REMOVE_USER,
+});
+
+export const getLoginRegisterError = message => ({
+  type: GET_LOGIN_REGISTER_ERROR,
+  message,
 });

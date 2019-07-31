@@ -3,6 +3,7 @@ import {
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
   REMOVE_USER,
+  GET_LOGIN_REGISTER_ERROR,
 } from '../constants/actionTypesUser';
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   emailAddress: '',
   firstName: '',
   lastName: '',
+  loginRegisterError: '',
 };
 
 const userReducer = (state = initialState, action) => {
@@ -35,6 +37,11 @@ const userReducer = (state = initialState, action) => {
       });
     case REMOVE_USER:
       return Object.assign({}, initialState);
+    case GET_LOGIN_REGISTER_ERROR:
+      console.log('logReg error:', action.message);
+      return Object.assign({}, state, {
+        loginRegisterError: action.message,
+      });
     default:
       return state;
   }

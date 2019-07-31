@@ -4,16 +4,26 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import { getUser } from '../../actions/actionsUser';
+import {
+  getUser,
+  getLoginRegisterError,
+} from '../../actions/actionsUser';
 
 const mapStateToProps = state => ({
-  filters: state.filters.filters,
   userId: state.user.userId,
+  loginRegisterError: state.user.loginRegisterError,
 });
 
 
 // eslint-disable-next-line no-shadow
-const Register = ({ filters, getUser, userId }) => {
+const Register = ({
+  userId,
+  /* eslint-disable no-shadow */
+  getUser,
+  getLoginRegisterError,
+  loginRegisterError
+  /* eslint-enable no-shadow */
+}) => {
   useEffect(() => {
     getUser();
   });
@@ -34,7 +44,10 @@ const Register = ({ filters, getUser, userId }) => {
         history.pushState(null, null, '/app');
         history.go();
       })
-      .catch(err => console.log(err));
+      .catch((err) => {
+        getLoginRegisterError(err.response.data.message);
+        console.log(err);
+      });
   };
 
   return (
@@ -47,6 +60,11 @@ const Register = ({ filters, getUser, userId }) => {
       {!userId
         && (
           <div>
+            {loginRegisterError
+              && (
+                <p>{loginRegisterError}</p>
+              )
+            }
             <form onSubmit={onSubmit}>
               <input type="firstName" name="firstName" id="firstName" placeholder="First Name" required />
               <input type="lastName" name="lastName" id="lastName" placeholder="Last Name" required />
@@ -63,15 +81,13 @@ const Register = ({ filters, getUser, userId }) => {
 };
 
 Register.propTypes = {
-  filters: PropTypes.shape({
-    showTasks: PropTypes.string,
-    dateRangeStart: PropTypes.string,
-    dateRangeEnd: PropTypes.string,
-  }).isRequired,
   userId: PropTypes.string.isRequired,
   getUser: PropTypes.func.isRequired,
+  getLoginRegisterError: PropTypes.func.isRequired,
+  loginRegisterError: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, {
   getUser,
+  getLoginRegisterError,
 })(Register);
