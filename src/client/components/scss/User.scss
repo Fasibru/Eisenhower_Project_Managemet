@@ -1,0 +1,82 @@
+@import './variables';
+
+.user__container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.user-dialog__container {
+  background-color: $component-color-User;
+  border: 1px solid $element-color;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-dialog__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  font-family: $font-stack;
+  font-size: 1rem;
+  color: $element-color;
+  padding: 10px;
+  border: 1px solid $element-color;
+}
+
+.user-dialog__btn:hover {
+  cursor: pointer;
+}
+
+.user-dialog__btn:focus {
+  outline-style: none;
+  color: #000000;
+  background: $focus-color;
+}
+
+.user-dialog__btn--open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  font-family: $font-stack;
+  font-size: 1rem;
+  color: $element-color;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid $element-color;
+}
+
+.user-dialog__btn--open:hover {
+  cursor: pointer;
+}
+
+.user-dialog__btn--open:focus {
+  outline-style: none;
+  background: $focus-color;
+}
+
+.user-dialog__item {
+  margin: 5px 0px;
+  padding: 0 10px;
+}
+
+.user-dialog__menu-btn {
+  border: none;
+  background-color: transparent;
+  font-family: $font-stack;
+  font-size: 1rem;
+  color: $element-color;
+  text-align: left;
+}
+
+.user-dialog__menu-btn:focus {
+  outline-style: none;
+  background: $focus-color;
+}
+
+.user-dialog__menu-btn:hover {
+  background-color: $hover-color;
+}

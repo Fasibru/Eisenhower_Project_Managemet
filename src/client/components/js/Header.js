@@ -1,13 +1,13 @@
 import React from 'react';
 import '../scss/Header.scss';
 
-function Header() {
-  return (
-    <header className="header">
-      <p>Show Statistics</p>
-      <p>Show Statistics</p>
-    </header>
-  );
-}
+import User from './User';
+
+const Header = () => (
+  <header className="header">
+    <p>Statistics will follow here</p>
+    <User />
+  </header>
+);
 
 export default Header;

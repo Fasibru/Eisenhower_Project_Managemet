@@ -6,8 +6,9 @@
   color: $element-color;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   position: sticky;
-  bottom: 0;
+  bottom: 0px;
 
   a {
     display: flex;
@@ -15,4 +16,21 @@
     text-decoration: none;
     color: $element-color;
   }
+
+  a:focus {
+  outline-style: none;
+  background: $focus-color;
+}
+}
+
+.footer__link-github {
+  margin-left: 20px;
+
+  p {
+    margin-left: 5px;
+  }
+}
+
+.footer__link-home {
+  margin-right: 20px;
 }
