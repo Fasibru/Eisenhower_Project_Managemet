@@ -11,6 +11,11 @@
   width: calc(25% - 16px);
   box-sizing: border-box;
   border-right: 1px solid black;
+
+  span {
+    text-align: center;
+    color: darkgray;
+  }
 }
 
 .column-category:last-child {

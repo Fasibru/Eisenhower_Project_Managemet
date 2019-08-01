@@ -69,10 +69,22 @@ function Main({ filteredTasks }) {
 
   return (
     <main className="main" id="main">
-      <div className="main__column-category">{categorizedFilteredTasks.TasksCatA}</div>
-      <div className="main__column-category">{categorizedFilteredTasks.TasksCatB}</div>
-      <div className="main__column-category">{categorizedFilteredTasks.TasksCatC}</div>
-      <div className="main__column-category">{categorizedFilteredTasks.TasksCatD}</div>
+      <div className="main__column-category">
+        <span>Important and Urgent</span>
+        {categorizedFilteredTasks.TasksCatA}
+      </div>
+      <div className="main__column-category">
+        <span>Important</span>
+        {categorizedFilteredTasks.TasksCatB}
+      </div>
+      <div className="main__column-category">
+        <span>Urgent</span>
+        {categorizedFilteredTasks.TasksCatC}
+      </div>
+      <div className="main__column-category">
+        <span>Not Important and not Urgent</span>
+        {categorizedFilteredTasks.TasksCatD}
+      </div>
     </main>
   );
 }
