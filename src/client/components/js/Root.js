@@ -19,7 +19,7 @@ const Root = ({ store }) => (
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/app" component={App} />
-        <Route exact path="/login" component={Login} />
+        {/* <Route exact path="/login" component={Login} /> */}
         <Route exact path="/register" component={Register} />
         <Redirect to="/" />
       </Switch>

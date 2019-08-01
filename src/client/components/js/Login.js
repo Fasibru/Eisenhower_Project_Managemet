@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
 import {
   getUser,
   getLoginRegisterError,
+  setUserInformation,
 } from '../../actions/actionsUser';
 
 const mapStateToProps = state => ({
@@ -20,6 +21,7 @@ const Login = ({
   getUser,
   getLoginRegisterError,
   loginRegisterError,
+  setUserInformation,
   /* eslint-enable no-shadow */
 }) => {
   useEffect(() => {
@@ -32,11 +34,12 @@ const Login = ({
     const emailAddress = document.getElementById('emailAddress').value;
     const password = document.getElementById('password').value;
     axios.post('/account/login', { emailAddress, password }, { withCredentials: true })
-      .then(() => {
-        history.pushState(null, null, '/app');
+      .then((res) => {
+        setUserInformation(res.data);
+        // pass userId to App so it's available before first render
+        history.pushState({ userId: res.data.userId }, null, '/app');
         history.go();
       })
-      // .catch(err => console.log(err));
       .catch((err) => {
         getLoginRegisterError(err.response.data.message);
         console.log(err);
@@ -63,7 +66,7 @@ const Login = ({
               <input type="password" name="password" id="password" placeholder="Password" required />
               <button type="submit">Login</button>
             </form>
-            <Link to="/register">Register</Link>
+            {/* <Link to="/register">Register</Link> */}
           </div>
         )
       }
@@ -75,10 +78,12 @@ Login.propTypes = {
   userId: PropTypes.string.isRequired,
   getUser: PropTypes.func.isRequired,
   getLoginRegisterError: PropTypes.func.isRequired,
+  setUserInformation: PropTypes.func.isRequired,
   loginRegisterError: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, {
   getUser,
   getLoginRegisterError,
+  setUserInformation,
 })(Login);

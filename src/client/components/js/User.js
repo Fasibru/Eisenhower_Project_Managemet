@@ -40,6 +40,8 @@ const User = ({
       .then(() => {
         resetFiltersStore();
         resetTasksStore();
+        history.pushState(null, null, '/home');
+        history.go();
       })
       .catch(err => console.log(err));
   };

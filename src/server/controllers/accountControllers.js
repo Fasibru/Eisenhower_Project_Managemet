@@ -110,7 +110,15 @@ export const loginUser = (req, res, next) => {
       if (process.env.NODE_ENV === 'development') {
         res.set('Access-Control-Allow-Origin', `http://localhost:${portConfig.DEV_FRONTEND_SERVER_PORT}`);
       }
-      res.cookie('JSONWebToken', token, cookieOptions).sendStatus(200);
+      res
+        .cookie('JSONWebToken', token, cookieOptions)
+        .status(200)
+        .json({
+          firstName: user.firstName,
+          lastName: user.lastName,
+          userId: user._id,
+          emailAddress: user.emailAddress,
+        });
     });
   })(req, res, next);
 };
@@ -125,12 +133,14 @@ export const getUser = (req, res) => {
       if (user) {
         return res.status(200).json(user);
       }
-      return res.sendStatus(404);
+      return res.status(404).json({
+        message: 'User not found.',
+      });
     })
     .catch((err) => {
-      res.status(404).json({
+      res.status(500).json({
+        message: 'Server error while querying user.',
         error: err,
-        message: 'User not found',
       });
     });
 };

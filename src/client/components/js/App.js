@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -20,55 +20,52 @@ const mapStateToProps = state => ({
   newTaskPopup: state.tasks.newTaskPopup,
   editTaskPopup: state.tasks.editTaskPopup,
   userId: state.user.userId,
+  userError: state.user.userError,
 });
 
-export class App extends Component {
-  componentDidMount = () => {
-    // read initial data form DB based on filters
-    // eslint-disable-next-line no-shadow
-    const { getUserTasks, getUserFilters, getUser } = this.props;
+export const App = ({
+  /* eslint-disable no-shadow */
+  getUserTasks,
+  getUserFilters,
+  getUser,
+  newTaskPopup,
+  editTaskPopup,
+  userId,
+  userError,
+  /* eslint-enable no-shadow */
+}) => {
+  useEffect(() => {
     getUser()
       .then(() => {
-        const { userId } = this.props;
+        if (userError) {
+          history.pushState(null, null, '/');
+          history.go();
+          return;
+        }
         getUserTasks(userId);
         getUserFilters(userId);
       });
-  }
+  });
 
-  render() {
-    const {
-      // eslint-disable-next-line no-shadow
-      // closeNewTaskPopup,
-      newTaskPopup,
-      editTaskPopup,
-      userId,
-    } = this.props;
-
-    return (
-      <div className="grid-container">
-        {!userId
-          && (
-            <Redirect to="/login" />
-          )
-        }
-        <Header />
-        <Sidenav />
-        <FilteredMain />
-        <Footer />
-        {newTaskPopup
-          && (
+  return (
+    <div className="grid-container">
+      <Header />
+      <Sidenav />
+      <FilteredMain />
+      <Footer />
+      {newTaskPopup
+        && (
           <NewTask />
-          )
-        }
-        {editTaskPopup
-          && (
-            <EditTask />
-          )
-        }
-      </div>
-    );
-  }
-}
+        )
+      }
+      {editTaskPopup
+        && (
+          <EditTask />
+        )
+      }
+    </div>
+  );
+};
 
 App.propTypes = {
   getUserTasks: PropTypes.func.isRequired,
@@ -77,6 +74,7 @@ App.propTypes = {
   newTaskPopup: PropTypes.bool.isRequired,
   editTaskPopup: PropTypes.bool.isRequired,
   userId: PropTypes.string.isRequired,
+  userError: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, {
