@@ -15,6 +15,7 @@
     align-items: center;
     text-decoration: none;
     color: $element-color;
+    padding: 0;
   }
 
   a:focus {
@@ -26,7 +27,7 @@
 .footer__link-github {
   margin-left: 20px;
 
-  p {
+  span {
     margin-left: 5px;
   }
 }

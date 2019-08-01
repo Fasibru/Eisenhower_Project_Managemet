@@ -8,7 +8,7 @@ function Footer() {
     <footer className="footer">
       <a href="https://github.com/Fasibru/JATLA_Project_Management" className="footer__link-github">
         <FontAwesomeIcon icon={faGithub} size="2x" />
-        <p>Show me the GitHub repository</p>
+        <span>Show me the GitHub repository</span>
       </a>
       <a href="/home" className="footer__link-home">Bring me back to the overview</a>
     </footer>
