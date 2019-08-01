@@ -5,6 +5,7 @@
   flex-direction: column;
   grid-area: sidenav;
   background-color: $component-color-sidenav;
+  overflow: auto;
 }
 
 .sidenav__list {
