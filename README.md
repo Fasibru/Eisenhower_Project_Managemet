@@ -7,7 +7,7 @@ Looking at the title you might think 'Probably that's just another todo list app
 Nevertheless maybe you will change your mind sometime in the future once I have all my ideas implemented because as the title suggests this repo is about project management, not only todo task handling.  As of July 2019 you can add/edit/remove tasks, assign a priority, change the status to completed and filter on that as well as on the date the tasks where created. A search function will be the next filter to be implemented.  
 I see this evolving to a real project management tool once the following capabilities are implemented:
 
-* User accounts (currently in development)
+* ~~User accounts~~ (done August 2019)
 * User roles like team/project lead or member
 * Different permissions for different user roles
 * Assign multiple users to a task and only those can see the task in the app (and probably the team lead as well)
