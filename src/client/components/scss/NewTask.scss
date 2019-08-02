@@ -1,3 +1,5 @@
+@import './variables';
+
 /* this class will occupy the whole screen so the user has to interact with the newTask popup
 ------------------------------------------------ */
 .newTask-outer {
@@ -8,37 +10,85 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0, 0.3);
+  background-color: rgba(0,0,0, 0.5);
 }
 
-/* this class handles the styling of the newTask popup
------------------------------------------------- */
 .newTask-inner {
-  position: absolute;
-  left: 25%;
-  right: 25%;
-  top: 25%;
-  bottom: 25%;
-  background: white;
+  position: relative;
+  top: 10%;
+  width: 500px;
+  // height: 500px;
+  // margin: 16px auto auto auto;
+  margin: auto;
+  background: $component-color-Task;
 }
 
-/* this class handles the styling of the newTask popup buttons
------------------------------------------------- */
-/* .newTask-inner button {
-  position: absolute;
-  bottom: 10px;
-  left: 33%;
-} */
+.newTask__header {
+  padding-top: 16px;
+  text-align: center;
+  // font-size: 1.1rem;
+  font-weight: bold;
+}
 
-/* just for testing, so can be deleted later on
------------------------------------------------- */
-.test {
-  position: absolute;
-  top: -12.5px;
-  right: -12.5px;
-  font-size: 30px;
-  background: white;
-  border-radius: 50%;
-  color: red;
-  border: 0;
+.newTask__form {
+  padding: 0px 10px 16px; 
+}
+
+.newTask__title {
+  margin-top: 0px;
+  margin-bottom: 2px;
+}
+
+.newTask__category {
+  display: block;
+  p {
+    margin-bottom: 2px;
+  }
+}
+
+.newTask__category--no-left-margin {
+  margin-left: 0px;
+}
+
+.newTask__completed {
+  margin: 16px 5px 16px 0px;
+}
+
+.newTask__description {
+  
+  p {
+    margin-bottom: 2px;
+  }
+
+  textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
+    overflow-y: auto;
+    font-family: $font-stack;
+  }
+}
+
+.newTask__btn {
+  font-family: $font-stack;
+  font-size: 1rem;
+  border: none;
+  background-color: $component-color-sidenav;
+  color: $color-bright-font;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transition-duration: 0.1s;
+}
+
+.newTask__btn--margin-right {
+  margin-right: 10px;
+}
+
+.newTask__btn:hover {
+  background: $hover-color;
+}
+
+.newTask__btn:focus {
+  outline-style: none;
+  background: $focus-color;
 }

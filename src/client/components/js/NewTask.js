@@ -44,28 +44,53 @@ export function NewTask(props) {
   return (
     <div className="newTask-outer">
       <div className="newTask-inner">
-        <form onSubmit={handleSubmit}>
+        <p className="newTask__header">Define a new Task</p>
+        <form onSubmit={handleSubmit} className="newTask__form">
           <label htmlFor="title">
-            Title<br />
-            <input type="text" name="title" value={newTask.title} onChange={handleChange} required />
+            <p className="newTask__title">Title</p>
+            <input
+              type="text"
+              name="title"
+              value={newTask.title}
+              onChange={handleChange}
+              required
+            />
           </label>
-          <br />
-          <label htmlFor="description">
-            Description<br />
-            <textarea type="text" name="description" value={newTask.description} onChange={handleChange} required />
-          </label><br />
-          <label htmlFor="category">
-            Category<br />
-            <input type="radio" name="category" value="A" onChange={handleChange} />A
+          <label htmlFor="description" className="newTask__description">
+            <p>Description</p>
+            <textarea
+              type="text"
+              name="description"
+              value={newTask.description}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label htmlFor="category" className="newTask__category">
+            <p>Category</p>
+            <input type="radio" className="newTask__category--no-left-margin" name="category" value="A" onChange={handleChange} />A
             <input type="radio" name="category" value="B" onChange={handleChange} />B
             <input type="radio" name="category" value="C" onChange={handleChange} />C
             <input type="radio" name="category" value="D" onChange={handleChange} />D
           </label>
+          {/* <br /> */}
+          <input
+            type="checkbox"
+            className="newTask__completed"
+            name="completed"
+            defaultChecked={false}
+            onChange={handleChange}
+          />
+          Completed
           <br />
-          <input type="checkbox" name="completed" defaultChecked={false} onChange={handleChange} />Completed
-          <br />
-          <input type="submit" value="Add Task" />
-          <button type="button" onClick={closeNewTaskPopup}>Close</button>
+          <input type="submit" value="Add Task" className="newTask__btn newTask__btn--margin-right" />
+          <button
+            type="button"
+            onClick={closeNewTaskPopup}
+            className="newTask__btn"
+          >
+            Close
+          </button>
         </form>
       </div>
     </div>
