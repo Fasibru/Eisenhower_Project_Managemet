@@ -11,12 +11,20 @@ const mapStateToProps = state => ({
 
 const Footer = ({ firstName }) => (
   <footer className="footer">
-    <a href="https://github.com/Fasibru/JATLA_Project_Management" className="footer__link-github">
+    <a
+      href="https://github.com/Fasibru/JATLA_Project_Management"
+      className="footer__link-github"
+    >
       <FontAwesomeIcon icon={faGithub} size="2x" />
       <span>Show me the GitHub repository</span>
     </a>
     <span>Hello {firstName}</span>
-    <a href="/home" className="footer__link-home">Bring me back to the overview</a>
+    <a
+      href="/home"
+      className="footer__link-home"
+    >
+      Bring me back to the overview
+    </a>
   </footer>
 );
 
