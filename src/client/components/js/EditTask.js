@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -10,16 +10,26 @@ import {
 } from '../../actions/actionsTasks';
 import '../scss/EditTask.scss';
 
+import TaskFormTitle from './TaskFormTitle';
+import TaskFormDescription from './TaskFormDescription';
+import TaskFormCategory from './TaskFormCategory';
+
 const mapStateToProps = state => ({
   editTask: state.tasks.editTask,
   tasks: state.tasks.tasks,
 });
 
-export class EditTask extends Component {
-  handleChange = (event) => {
-    // eslint-disable-next-line no-shadow
-    const { storeEditTaskFormChange } = this.props;
-
+export const EditTask = ({
+  /* eslint-disable no-shadow */
+  tasks,
+  editTask,
+  closeEditTaskPopup,
+  storeEditTaskFormChange,
+  saveEditedTask,
+  deleteTask,
+  /* eslint-enable no-shadow */
+}) => {
+  const handleChange = (event) => {
     // reflect form changes in editTask state
     if (event.target.name === 'completed') {
       storeEditTaskFormChange(event.target.name, event.target.checked);
@@ -28,15 +38,7 @@ export class EditTask extends Component {
     }
   };
 
-  handleSubmit = (event) => {
-    const {
-      editTask,
-      tasks,
-      // eslint-disable-next-line no-shadow
-      saveEditedTask,
-      // eslint-disable-next-line no-shadow
-      closeEditTaskPopup,
-    } = this.props;
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     // save changes to the DB and if successful to UI as well
@@ -57,16 +59,7 @@ export class EditTask extends Component {
       });
   };
 
-  handleDelete = () => {
-    const {
-      editTask,
-      tasks,
-      // eslint-disable-next-line no-shadow
-      deleteTask,
-      // eslint-disable-next-line no-shadow
-      closeEditTaskPopup,
-    } = this.props;
-
+  const handleDelete = () => {
     axios.delete(`/api/task/${editTask._id}`)
       .then(() => {
         // remove deleted task from tasks array
@@ -83,47 +76,31 @@ export class EditTask extends Component {
       });
   };
 
-  render() {
-    const {
-      // eslint-disable-next-line no-shadow
-      closeEditTaskPopup,
-      // eslint-disable-next-line no-shadow
-      editTask,
-    } = this.props;
-
-    return (
-      <div className="editTask-outer">
-        <div className="editTask-inner">
-          <form onSubmit={this.handleSubmit}>
-            <label htmlFor="title">
-              Title<br />
-              <input type="text" defaultValue={editTask.title} name="title" onChange={this.handleChange} required />
-            </label>
-            <br />
-            <label htmlFor="description">
-              Description<br />
-              <textarea type="text" name="description" defaultValue={editTask.description} onChange={this.handleChange} required />
-            </label>
-            <br />
-            <label htmlFor="category">
-              Category<br />
-              <input type="radio" name="category" value="A" onChange={this.handleChange} defaultChecked={editTask.category === 'A'} />A
-              <input type="radio" name="category" value="B" onChange={this.handleChange} defaultChecked={editTask.category === 'B'} />B
-              <input type="radio" name="category" value="C" onChange={this.handleChange} defaultChecked={editTask.category === 'C'} />C
-              <input type="radio" name="category" value="D" onChange={this.handleChange} defaultChecked={editTask.category === 'D'} />D
-            </label>
-            <br />
-            <input type="checkbox" name="completed" checked={editTask.completed} onChange={this.handleChange} />Completed
-            <br />
-            <input type="submit" value="Save" />
-            <button type="button" onClick={closeEditTaskPopup}>Close</button>
-            <button type="button" onClick={this.handleDelete}>Delete</button>
-          </form>
-        </div>
+  return (
+    <div className="Task-outer">
+      <div className="Task-inner">
+        <p className="Task__header">Edit the Task</p>
+        <form onSubmit={handleSubmit} className="Task__form">
+          <TaskFormTitle title={editTask.title} handleChange={handleChange} />
+          <TaskFormDescription description={editTask.description} handleChange={handleChange} />
+          <TaskFormCategory category={editTask.category} handleChange={handleChange} />
+          <input
+            type="checkbox"
+            className="Task__completed"
+            name="completed"
+            checked={editTask.completed}
+            onChange={handleChange}
+          />
+          Completed
+          <br />
+          <input type="submit" value="Save Changes" className="Task__btn Task__btn--margin-right" />
+          <button type="button" onClick={closeEditTaskPopup} className="Task__btn Task__btn--margin-right">Close</button>
+          <button type="button" onClick={handleDelete} className="Task__btn">Delete Task</button>
+        </form>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 EditTask.propTypes = {
   editTask: PropTypes.shape({
@@ -132,6 +109,7 @@ EditTask.propTypes = {
     category: PropTypes.oneOf(['A', 'B', 'C', 'D']).isRequired,
     rank: PropTypes.number.isRequired,
     _id: PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired,
   }).isRequired,
   closeEditTaskPopup: PropTypes.func.isRequired,
   storeEditTaskFormChange: PropTypes.func.isRequired,

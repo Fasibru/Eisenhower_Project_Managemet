@@ -1,0 +1,105 @@
+@import './variables';
+
+/* this class will occupy the whole screen so the user has to interact with the Task popup
+------------------------------------------------ */
+.Task-outer {
+  position: fixed; /* necessary so the div around the popup will be placed at the top left */
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0, 0.5);
+}
+
+.Task-inner {
+  position: relative;
+  top: 10%;
+  width: 500px;
+  // height: 500px;
+  // margin: 16px auto auto auto;
+  margin: auto;
+  background: $component-color-Task;
+}
+
+.Task__header {
+  padding-top: 16px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.Task__form {
+  padding: 0px 10px 16px;
+}
+
+.Task__title {
+  margin-top: 0px;
+  margin-bottom: 2px;
+  font-size: 1rem;
+}
+
+.Task__title-input {
+    width: 50%;
+    font-size: 1rem;
+  }
+
+.Task__category {
+  display: block;
+  p {
+    margin-bottom: 2px;
+  }
+}
+
+.Task__category--no-left-margin {
+  margin-left: 0px;
+}
+
+.Task__completed {
+  margin: 16px 5px 16px 0px;
+}
+
+.Task__completed-text {
+  display: block;
+}
+
+.Task__description {
+  
+  p {
+    margin-bottom: 2px;
+  }
+
+  textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
+    overflow-y: auto;
+    font-family: $font-stack;
+    color: #000000;
+    font-size: 1rem;
+  }
+}
+
+.Task__btn {
+  font-family: $font-stack;
+  font-size: 1rem;
+  border: none;
+  background-color: $component-color-sidenav;
+  color: $color-bright-font;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transition-duration: 0.1s;
+}
+
+.Task__btn--margin-right {
+  margin-right: 10px;
+}
+
+.Task__btn:hover {
+  background: $hover-color;
+}
+
+.Task__btn:focus {
+  outline-style: none;
+  background: $focus-color;
+}

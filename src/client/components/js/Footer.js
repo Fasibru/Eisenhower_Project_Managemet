@@ -18,7 +18,7 @@ const Footer = ({ firstName }) => (
       <FontAwesomeIcon icon={faGithub} size="2x" />
       <span>Show me the GitHub repository</span>
     </a>
-    <span>Hello {firstName}</span>
+    <span>Hello {firstName}!</span>
     <a
       href="/home"
       className="footer__link-home"

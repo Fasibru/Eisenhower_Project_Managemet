@@ -1,12 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import {
   closeNewTaskPopup,
   storeNewTaskFormChange,
   addNewTask,
 } from '../../actions/actionsTasks';
+
 import '../scss/NewTask.scss';
+import '../scss/TaskForm.scss';
+
+import TaskFormTitle from './TaskFormTitle';
+import TaskFormDescription from './TaskFormDescription';
+import TaskFormCategory from './TaskFormCategory';
 
 const mapStateToProps = state => ({
   newTask: state.tasks.newTask,
@@ -15,14 +22,13 @@ const mapStateToProps = state => ({
 
 export function NewTask(props) {
   const {
-    // eslint-disable-next-line no-shadow
+    /* eslint-disable no-shadow */
     closeNewTaskPopup,
-    // eslint-disable-next-line no-shadow
     storeNewTaskFormChange,
-    // eslint-disable-next-line no-shadow
     addNewTask,
     newTask,
     userId,
+    /* eslint-enable no-shadow */
   } = props;
 
   const handleChange = (event) => {
@@ -42,52 +48,27 @@ export function NewTask(props) {
   };
 
   return (
-    <div className="newTask-outer">
-      <div className="newTask-inner">
-        <p className="newTask__header">Define a new Task</p>
-        <form onSubmit={handleSubmit} className="newTask__form">
-          <label htmlFor="title">
-            <p className="newTask__title">Title</p>
-            <input
-              type="text"
-              name="title"
-              value={newTask.title}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label htmlFor="description" className="newTask__description">
-            <p>Description</p>
-            <textarea
-              type="text"
-              name="description"
-              value={newTask.description}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label htmlFor="category" className="newTask__category">
-            <p>Category</p>
-            <input type="radio" className="newTask__category--no-left-margin" name="category" value="A" onChange={handleChange} />A
-            <input type="radio" name="category" value="B" onChange={handleChange} />B
-            <input type="radio" name="category" value="C" onChange={handleChange} />C
-            <input type="radio" name="category" value="D" onChange={handleChange} />D
-          </label>
-          {/* <br /> */}
+    <div className="Task-outer">
+      <div className="Task-inner">
+        <p className="Task__header">Define a new Task</p>
+        <form onSubmit={handleSubmit} className="Task__form">
+          <TaskFormTitle title={newTask.title} handleChange={handleChange} />
+          <TaskFormDescription description={newTask.description} handleChange={handleChange} />
+          <TaskFormCategory category={newTask.category} handleChange={handleChange} />
           <input
             type="checkbox"
-            className="newTask__completed"
+            className="Task__completed"
             name="completed"
             defaultChecked={false}
             onChange={handleChange}
           />
           Completed
           <br />
-          <input type="submit" value="Add Task" className="newTask__btn newTask__btn--margin-right" />
+          <input type="submit" value="Add Task" className="Task__btn Task__btn--margin-right" />
           <button
             type="button"
             onClick={closeNewTaskPopup}
-            className="newTask__btn"
+            className="Task__btn"
           >
             Close
           </button>
