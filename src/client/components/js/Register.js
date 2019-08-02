@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
@@ -21,7 +21,7 @@ const Register = ({
   /* eslint-disable no-shadow */
   getUser,
   getLoginRegisterError,
-  loginRegisterError
+  loginRegisterError,
   /* eslint-enable no-shadow */
 }) => {
   useEffect(() => {
@@ -72,7 +72,6 @@ const Register = ({
               <input type="password" name="password" id="password" placeholder="Password" required />
               <button type="submit">Register</button>
             </form>
-            <Link to="/login">Login</Link>
           </div>
         )
       }

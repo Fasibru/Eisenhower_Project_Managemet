@@ -16,8 +16,6 @@
 
 .user-dialog__btn {
   display: flex;
-  align-items: center;
-  justify-content: center;
   background-color: transparent;
   font-family: $font-stack;
   font-size: 1rem;
@@ -38,8 +36,7 @@
 
 .user-dialog__btn--open {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   background-color: transparent;
   font-family: $font-stack;
   font-size: 1rem;
@@ -47,6 +44,10 @@
   padding: 10px;
   border: none;
   border-bottom: 1px solid $element-color;
+
+  span {
+    margin-right: 10px;
+  }
 }
 
 .user-dialog__btn--open:hover {

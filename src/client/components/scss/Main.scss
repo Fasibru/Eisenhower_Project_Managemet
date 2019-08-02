@@ -1,7 +1,9 @@
+@import './variables';
+
 .main {
   grid-area: main;
   display: flex;
-  background-color: #f5fbef;
+  background-color: $component-color-Main;
 }
 
 .main__column-category {

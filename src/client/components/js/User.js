@@ -11,12 +11,12 @@ import { resetTasksStore } from '../../actions/actionsTasks';
 import { resetFiltersStore } from '../../actions/actionsFilters';
 
 const mapStateToProps = state => ({
-  firstName: state.user.firstName,
+  emailAddress: state.user.emailAddress,
 });
 
 const User = ({
   /* eslint-disable no-shadow */
-  firstName,
+  emailAddress,
   removeUser,
   resetFiltersStore,
   resetTasksStore,
@@ -55,7 +55,6 @@ const User = ({
             className="user-dialog__btn"
             onClick={() => setUserDialog(!userDialog)}
           >
-            Hello {firstName}
             <MenuBar />
           </button>
         )
@@ -68,7 +67,7 @@ const User = ({
               className="user-dialog__btn--open"
               onClick={() => setUserDialog(!userDialog)}
             >
-              Hello {firstName}
+              <span>{emailAddress}</span>
               <MenuBar />
             </button>
             <button
@@ -104,7 +103,7 @@ const User = ({
 };
 
 User.propTypes = {
-  firstName: PropTypes.string.isRequired,
+  emailAddress: PropTypes.string.isRequired,
   removeUser: PropTypes.func.isRequired,
   resetFiltersStore: PropTypes.func.isRequired,
   resetTasksStore: PropTypes.func.isRequired,

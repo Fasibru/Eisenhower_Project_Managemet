@@ -1,5 +1,5 @@
-// import React, { useState, useEffect } from 'react';
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
+// import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -20,20 +20,23 @@ import { resetFiltersStore } from '../../actions/actionsFilters';
 const mapStateToProps = state => ({
   userId: state.user.userId,
 });
-/* TODO:
-  1. Refactor with React Hooks
-  2. Track a state variable to either render Login or Register depending on a clicked button
-*/
-class Home extends Component {
-  componentDidMount = () => {
-    // eslint-disable-next-line no-shadow
-    const { getUser } = this.props;
-    getUser();
-  }
 
-  logout = () => {
-    // eslint-disable-next-line no-shadow
-    const { removeUser, resetFiltersStore, resetTasksStore } = this.props;
+const Home = ({
+  /* eslint-disable no-shadow */
+  getUser,
+  removeUser,
+  resetFiltersStore,
+  resetTasksStore,
+  userId,
+  /* eslint-enable no-shadow */
+}) => {
+  useEffect(() => {
+    getUser();
+  });
+
+  const [registerFlag, setRegisterFlag] = useState(false);
+
+  const logout = () => {
     removeUser();
     axios.post('/account/logout')
       .then(() => {
@@ -41,24 +44,50 @@ class Home extends Component {
         resetTasksStore();
       })
       .catch(err => console.log(err));
-  }
+  };
 
-  render() {
-    const { userId } = this.props;
-
-    return (
-      <div className="home">
-        <header className="home__header">
+  return (
+    <div className="home">
+      <div className="home__header">
+        <header className="container-content">
           <div className="home__title">
             <h1>JATLA</h1>
             <h2>A tool to manage projects</h2>
           </div>
           {!userId
             && (
-              <div className="home_login">
-                {/* <Link to="/login">Login</Link> */}
-                <Login />
-                <Link to="/register">Register</Link>
+              <div className="home__access">
+                {
+                  registerFlag
+                    ? (
+                      <div>
+                        <Register />
+                        <span>Already have an account?</span>
+                        <button
+                          className="home__access-btn"
+                          type="button"
+                          onClick={() => setRegisterFlag(false)}
+                          onMouseDown={e => e.preventDefault()} // remove focus after click
+                        >
+                          Login
+                        </button>
+                      </div>
+                    )
+                    : (
+                      <div>
+                        <Login />
+                        <span>Want to create a new account?</span>
+                        <button
+                          className="home__access-btn"
+                          type="button"
+                          onClick={() => setRegisterFlag(true)}
+                          onMouseDown={e => e.preventDefault()} // remove focus after click
+                        >
+                          Register
+                        </button>
+                      </div>
+                    )
+                }
               </div>
             )
           }
@@ -66,15 +95,21 @@ class Home extends Component {
             && (
               <div className="home_app">
                 <Link to="/app">App</Link>
-                <button type="button" onClick={this.logout}>Logout</button>
+                <button type="button" onClick={logout}>Logout</button>
               </div>
             )
           }
         </header>
       </div>
-    );
-  }
-}
+      <div className="home__description">
+        <main className="container-content">
+          <p>A description with a slideshow of screenshots and an outlook will follow here.</p>
+          <p>Some information about the why and who will follow too.</p>
+        </main>
+      </div>
+    </div>
+  );
+};
 
 Home.propTypes = {
   getUser: PropTypes.func.isRequired,

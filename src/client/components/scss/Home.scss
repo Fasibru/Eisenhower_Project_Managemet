@@ -1,7 +1,48 @@
 @import './variables';
 
 .home {
-  width: 80%;
+  height: 100%;
+  width: 100%;
   margin: auto;
-  // margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-content {
+  width: 80%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.home__header {
+  background-color: $color-Home-header;
+  padding: 20px;
+
+  h1 {
+    margin-top: 0;
+  }
+}
+
+.home__access-btn {
+  border: none;
+  background-color: transparent;
+  font-family: $font-stack;
+  font-size: 1rem;
+  text-decoration-line: underline;
+}
+
+.home__access-btn:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.home__description {
+  color: $color-bright-font;
+  background-color: #4A6FA5;
+  flex-grow: 1;
+  padding: 20px;
+
+  p {
+    margin: 0;
+  }
 }

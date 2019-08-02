@@ -1,4 +1,5 @@
 import React from 'react';
+
 import '../scss/Header.scss';
 
 import User from './User';

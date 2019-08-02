@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import {
   getUser,
   getLoginRegisterError,
-  setUserInformation,
 } from '../../actions/actionsUser';
 
 const mapStateToProps = state => ({
@@ -21,7 +20,6 @@ const Login = ({
   getUser,
   getLoginRegisterError,
   loginRegisterError,
-  setUserInformation,
   /* eslint-enable no-shadow */
 }) => {
   useEffect(() => {
@@ -34,10 +32,8 @@ const Login = ({
     const emailAddress = document.getElementById('emailAddress').value;
     const password = document.getElementById('password').value;
     axios.post('/account/login', { emailAddress, password }, { withCredentials: true })
-      .then((res) => {
-        setUserInformation(res.data);
-        // pass userId to App so it's available before first render
-        history.pushState({ userId: res.data.userId }, null, '/app');
+      .then(() => {
+        history.pushState(null, null, '/app');
         history.go();
       })
       .catch((err) => {
@@ -66,7 +62,6 @@ const Login = ({
               <input type="password" name="password" id="password" placeholder="Password" required />
               <button type="submit">Login</button>
             </form>
-            {/* <Link to="/register">Register</Link> */}
           </div>
         )
       }
@@ -78,12 +73,10 @@ Login.propTypes = {
   userId: PropTypes.string.isRequired,
   getUser: PropTypes.func.isRequired,
   getLoginRegisterError: PropTypes.func.isRequired,
-  setUserInformation: PropTypes.func.isRequired,
   loginRegisterError: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, {
   getUser,
   getLoginRegisterError,
-  setUserInformation,
 })(Login);
