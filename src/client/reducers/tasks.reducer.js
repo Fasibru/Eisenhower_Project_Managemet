@@ -1,6 +1,8 @@
 import {
   ADD_NEW_TASK,
-  GET_TASKS,
+  GET_TASKS_FAILURE,
+  GET_TASKS_REQUEST,
+  GET_TASKS_SUCCESS,
   OPEN_NEW_TASK_POPUP,
   CLOSE_NEW_TASK_POPUP,
   STORE_NEW_TASK_FORM_CHANGE,
@@ -22,6 +24,8 @@ const initialState = {
   },
   editTaskPopup: false,
   editTask: {},
+  isFetchingTasks: false,
+  fetchingError: '',
 };
 
 const tasksReducer = (state = initialState, action) => {
@@ -33,9 +37,20 @@ const tasksReducer = (state = initialState, action) => {
           action.task,
         ],
       });
-    case GET_TASKS:
+    case GET_TASKS_REQUEST:
+      return Object.assign({}, state, {
+        isFetchingTasks: true,
+      });
+    case GET_TASKS_SUCCESS:
       return Object.assign({}, state, {
         tasks: action.tasks,
+        isFetchingTasks: false,
+        fetchingError: '',
+      });
+    case GET_TASKS_FAILURE:
+      return Object.assign({}, state, {
+        isFetchingTasks: false,
+        fetchingError: action.error.message,
       });
     case OPEN_NEW_TASK_POPUP:
       return Object.assign({}, state, {

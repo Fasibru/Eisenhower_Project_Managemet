@@ -28,8 +28,8 @@ export const getUser = () => (dispatch) => {
     .then((res) => {
       dispatch(getUserSuccess(res.data));
     })
-    .catch((err) => {
-      dispatch(getUserFailure(err));
+    .catch((error) => {
+      dispatch(getUserFailure(error));
     });
 };
 

@@ -18,8 +18,11 @@ import '../scss/App.scss';
 const mapStateToProps = state => ({
   newTaskPopup: state.tasks.newTaskPopup,
   editTaskPopup: state.tasks.editTaskPopup,
+  isFetchingTasks: state.tasks.isFetchingTasks,
   userId: state.user.userId,
   userError: state.user.userError,
+  isFetchingUser: state.user.isFetchingUser,
+  isFetchingFilters: state.filters.isFetchingFilters,
 });
 
 export const App = ({
@@ -31,20 +34,34 @@ export const App = ({
   editTaskPopup,
   userId,
   userError,
+  isFetchingTasks,
+  isFetchingUser,
+  isFetchingFilters,
   /* eslint-enable no-shadow */
 }) => {
+  // guide on fetching data with useEffect:
+  // https://www.robinwieruch.de/react-hooks-fetch-data/
   useEffect(() => {
-    getUser()
-      .then(() => {
-        if (userError) {
-          history.pushState(null, null, '/');
-          history.go();
-          return;
-        }
-        getUserTasks(userId);
-        getUserFilters(userId);
-      });
-  });
+    const fetchData = async () => {
+      await getUser();
+      getUserTasks(userId);
+      getUserFilters(userId);
+      if (userError) {
+        history.pushState(null, null, '/');
+        history.go();
+      }
+    };
+    fetchData();
+  },
+  [userId, userError]);
+
+  if (isFetchingUser || isFetchingTasks || isFetchingFilters) {
+    return (
+      <div className="grid-container">
+        <h1>Loading your data</h1>
+      </div>
+    );
+  }
 
   return (
     <div className="grid-container">
@@ -74,6 +91,9 @@ App.propTypes = {
   editTaskPopup: PropTypes.bool.isRequired,
   userId: PropTypes.string.isRequired,
   userError: PropTypes.string.isRequired,
+  isFetchingTasks: PropTypes.bool.isRequired,
+  isFetchingUser: PropTypes.bool.isRequired,
+  isFetchingFilters: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps, {

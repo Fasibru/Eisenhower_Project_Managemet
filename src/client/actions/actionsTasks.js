@@ -1,7 +1,9 @@
 import axios from 'axios';
 import {
   ADD_NEW_TASK,
-  GET_TASKS,
+  GET_TASKS_FAILURE,
+  GET_TASKS_REQUEST,
+  GET_TASKS_SUCCESS,
   OPEN_NEW_TASK_POPUP,
   CLOSE_NEW_TASK_POPUP,
   OPEN_EDIT_TASK_POPUP,
@@ -31,29 +33,44 @@ export const addNewTask = task => (dispatch) => {
     });
 };
 
+export const getTasksRequest = () => ({
+  type: GET_TASKS_REQUEST,
+});
+
+export const getTasksSuccess = tasks => ({
+  type: GET_TASKS_SUCCESS,
+  tasks,
+});
+
+export const getTasksFailure = error => ({
+  type: GET_TASKS_FAILURE,
+  error,
+});
+
 export const getTasks = () => (dispatch) => {
+  dispatch(getTasksRequest());
   axios.get('/api/tasks')
     .then((res) => {
-      dispatch({
-        type: GET_TASKS,
-        tasks: res.data,
-      });
+      dispatch(getTasksSuccess(res.data));
     })
-    .catch((err) => {
-      console.log(err);
+    .catch((error) => {
+      dispatch(getTasksFailure(error));
     });
 };
 
 export const getUserTasks = userId => (dispatch) => {
+  dispatch(getTasksRequest());
   axios.get(`/api/tasks/${userId}`)
     .then((res) => {
-      dispatch({
-        type: GET_TASKS,
-        tasks: res.data,
-      });
+      dispatch(getTasksSuccess(res.data));
+      // dispatch({
+      //   type: GET_TASKS,
+      //   tasks: res.data,
+      // });
     })
-    .catch((err) => {
-      console.log(err);
+    .catch((error) => {
+      console.log(error);
+      dispatch(getTasksFailure(error));
     });
 };
 
