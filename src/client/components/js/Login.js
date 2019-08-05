@@ -24,7 +24,8 @@ const Login = ({
 }) => {
   useEffect(() => {
     getUser();
-  });
+  },
+  []);
 
   // Refactor with Redux
   const onSubmit = (event) => {

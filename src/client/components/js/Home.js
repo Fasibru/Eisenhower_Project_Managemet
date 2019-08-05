@@ -32,7 +32,8 @@ const Home = ({
 }) => {
   useEffect(() => {
     getUser();
-  });
+  },
+  []);
 
   const [registerFlag, setRegisterFlag] = useState(false);
 
@@ -105,6 +106,8 @@ const Home = ({
         <main className="container-content">
           <p>A description with a slideshow of screenshots and an outlook will follow here.</p>
           <p>Some information about the why and who will follow too.</p>
+          <p>You can user the following demo login. Not connected to backend and some functions disabled since I want to avoid having to store any kind of personal data. Hence registering is also disabled.</p>
+          <p>The app is still a prototype and as such it works but there are still many improvements planned - frontend and backend wise.</p>
         </main>
       </div>
     </div>

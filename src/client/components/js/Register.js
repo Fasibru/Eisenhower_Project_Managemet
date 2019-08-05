@@ -26,7 +26,8 @@ const Register = ({
 }) => {
   useEffect(() => {
     getUser();
-  });
+  },
+  []);
 
   const onSubmit = (event) => {
     event.preventDefault();
