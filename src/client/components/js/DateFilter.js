@@ -69,7 +69,7 @@ function DateFilter(props) {
         disabled={dateRangeEndDefaultToday}
       />
       <p className="sidenav__date-default-today">
-        <span>Default to today (not implemented yet):</span>
+        <span>Default to today:</span>
         <input
           type="checkbox"
           name="dateRangeEndDefaultToday"
