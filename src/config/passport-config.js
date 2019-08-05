@@ -20,7 +20,7 @@ passport.use(
         .then((user) => {
           if (!user) {
             return done(null, false, {
-              message: 'User not found.',
+              message: "Sorry, we couldn't find you with the provided email and password.",
               status: 404,
             });
           }
@@ -28,8 +28,8 @@ passport.use(
             .then((match) => {
               if (match !== true) {
                 return done(null, false, {
-                  message: 'Password is incorrect.',
-                  status: 401,
+                  message: "Sorry, we couldn't find you with the provided email and password.",
+                  status: 404,
                 });
               }
               return done(null, user);

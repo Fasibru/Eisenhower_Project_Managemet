@@ -20,7 +20,28 @@
 
   h1 {
     margin-top: 0;
+    margin-bottom: 0px;
+    font-size: 4rem;
+    font-weight: bold;
+    letter-spacing: 0.3em;
+    color: $color-JATLA-font;
   }
+
+  h2 {
+    margin-top: 0px;
+  }
+}
+
+.container-content-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home__access--center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .home__access-btn {
@@ -45,4 +66,15 @@
   p {
     margin: 0;
   }
+}
+
+.access {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.access__login-register-error {
+  margin-top: 0;
+  color: red;
 }

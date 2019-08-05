@@ -6,24 +6,29 @@ import { connect } from 'react-redux';
 
 import {
   getUser,
-  getLoginRegisterError,
+  getLoginError,
+  resetLoginError,
+  resetRegisterError,
 } from '../../actions/actionsUser';
 
 const mapStateToProps = state => ({
   userId: state.user.userId,
-  loginRegisterError: state.user.loginRegisterError,
+  loginError: state.user.loginError,
 });
 
 const Login = ({
   userId,
   /* eslint-disable no-shadow */
   getUser,
-  getLoginRegisterError,
-  loginRegisterError,
+  getLoginError,
+  resetLoginError,
+  resetRegisterError,
+  loginError,
   /* eslint-enable no-shadow */
 }) => {
   useEffect(() => {
     getUser();
+    resetRegisterError();
   },
   []);
 
@@ -38,7 +43,7 @@ const Login = ({
         history.go();
       })
       .catch((err) => {
-        getLoginRegisterError(err.response.data.message);
+        getLoginError(err.response.data.message);
         console.log(err);
       });
   };
@@ -52,17 +57,31 @@ const Login = ({
       }
       {!userId
         && (
-          <div>
-            {loginRegisterError
-              && (
-                <p>{loginRegisterError}</p>
-              )
-            }
+          <div className="access">
             <form onSubmit={onSubmit}>
-              <input type="email" name="emailAddress" id="emailAddress" placeholder="email" required />
-              <input type="password" name="password" id="password" placeholder="Password" required />
+              <input
+                type="email"
+                name="emailAddress"
+                id="emailAddress"
+                placeholder="email"
+                onChange={resetLoginError}
+                required
+              />
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+                onChange={resetLoginError}
+                required
+              />
               <button type="submit">Login</button>
             </form>
+            {loginError
+              && (
+                <p className="access__login-register-error">{loginError}</p>
+              )
+            }
           </div>
         )
       }
@@ -73,11 +92,15 @@ const Login = ({
 Login.propTypes = {
   userId: PropTypes.string.isRequired,
   getUser: PropTypes.func.isRequired,
-  getLoginRegisterError: PropTypes.func.isRequired,
-  loginRegisterError: PropTypes.string.isRequired,
+  getLoginError: PropTypes.func.isRequired,
+  resetLoginError: PropTypes.func.isRequired,
+  loginError: PropTypes.string.isRequired,
+  resetRegisterError: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, {
   getUser,
-  getLoginRegisterError,
+  getLoginError,
+  resetLoginError,
+  resetRegisterError,
 })(Login);

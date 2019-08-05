@@ -6,12 +6,14 @@ import axios from 'axios';
 
 import {
   getUser,
-  getLoginRegisterError,
+  getRegisterError,
+  resetRegisterError,
+  resetLoginError,
 } from '../../actions/actionsUser';
 
 const mapStateToProps = state => ({
   userId: state.user.userId,
-  loginRegisterError: state.user.loginRegisterError,
+  registerError: state.user.registerError,
 });
 
 
@@ -20,12 +22,15 @@ const Register = ({
   userId,
   /* eslint-disable no-shadow */
   getUser,
-  getLoginRegisterError,
-  loginRegisterError,
+  getRegisterError,
+  resetRegisterError,
+  registerError,
+  resetLoginError,
   /* eslint-enable no-shadow */
 }) => {
   useEffect(() => {
     getUser();
+    resetLoginError();
   },
   []);
 
@@ -46,7 +51,7 @@ const Register = ({
         history.go();
       })
       .catch((err) => {
-        getLoginRegisterError(err.response.data.message);
+        getRegisterError(err.response.data.message);
         console.log(err);
       });
   };
@@ -60,19 +65,47 @@ const Register = ({
       }
       {!userId
         && (
-          <div>
-            {loginRegisterError
-              && (
-                <p>{loginRegisterError}</p>
-              )
-            }
+          <div className="access">
             <form onSubmit={onSubmit}>
-              <input type="firstName" name="firstName" id="firstName" placeholder="First Name" required />
-              <input type="lastName" name="lastName" id="lastName" placeholder="Last Name" required />
-              <input type="email" name="emailAddress" id="emailAddress" placeholder="email" required />
-              <input type="password" name="password" id="password" placeholder="Password" required />
+              <input
+                type="firstName"
+                name="firstName"
+                id="firstName"
+                placeholder="First Name"
+                onChange={resetRegisterError}
+                required
+              />
+              <input
+                type="lastName"
+                name="lastName"
+                id="lastName"
+                placeholder="Last Name"
+                onChange={resetRegisterError}
+                required
+              />
+              <input
+                type="email"
+                name="emailAddress"
+                id="emailAddress"
+                placeholder="email"
+                onChange={resetRegisterError}
+                required
+              />
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+                onChange={resetRegisterError}
+                required
+              />
               <button type="submit">Register</button>
             </form>
+            {registerError
+              && (
+                <p className="access__login-register-error">{registerError}</p>
+              )
+            }
           </div>
         )
       }
@@ -83,11 +116,15 @@ const Register = ({
 Register.propTypes = {
   userId: PropTypes.string.isRequired,
   getUser: PropTypes.func.isRequired,
-  getLoginRegisterError: PropTypes.func.isRequired,
-  loginRegisterError: PropTypes.string.isRequired,
+  getRegisterError: PropTypes.func.isRequired,
+  resetRegisterError: PropTypes.func.isRequired,
+  registerError: PropTypes.string.isRequired,
+  resetLoginError: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, {
   getUser,
-  getLoginRegisterError,
+  getRegisterError,
+  resetRegisterError,
+  resetLoginError,
 })(Register);
