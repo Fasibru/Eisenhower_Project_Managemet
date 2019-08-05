@@ -1,0 +1,24 @@
+@import './variables';
+
+.loading-screen__container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $component-color-Loading;
+}
+
+.loading-screen__text {
+  font-size: 4rem;
+  font-weight: bold;
+  letter-spacing: 15px;
+  color: $color-JATLA-font;
+}
+
+.loading-screen__spinner {
+  margin-top: 20px;
+  font-size: 4rem;
+  color: $color-JATLA-font;
+}

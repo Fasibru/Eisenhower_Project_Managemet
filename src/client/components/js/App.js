@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getUserTasks } from '../../actions/actionsTasks';
@@ -12,6 +12,7 @@ import FilteredMain from '../../containers/Main.container';
 import Footer from './Footer';
 import NewTask from './NewTask';
 import EditTask from './EditTask';
+import LoadingScreen from './LoadingScreen';
 
 import '../scss/App.scss';
 
@@ -39,13 +40,15 @@ export const App = ({
   isFetchingFilters,
   /* eslint-enable no-shadow */
 }) => {
+  const [isInitialRender, setInitialRender] = useState(true);
+
   // guide on fetching data with useEffect:
   // https://www.robinwieruch.de/react-hooks-fetch-data/
   useEffect(() => {
     const fetchData = async () => {
       await getUser();
-      getUserTasks(userId);
-      getUserFilters(userId);
+      // getUserTasks(userId);
+      // getUserFilters(userId);
       if (userError) {
         history.pushState(null, null, '/');
         history.go();
@@ -53,13 +56,20 @@ export const App = ({
     };
     fetchData();
   },
-  [userId, userError]);
+  [userError]);
 
-  if (isFetchingUser || isFetchingTasks || isFetchingFilters) {
+  useEffect(() => {
+    if (userId) {
+      getUserTasks(userId);
+      getUserFilters(userId);
+    }
+    setInitialRender(false);
+  },
+  [userId]);
+
+  if (isFetchingUser || isFetchingTasks || isFetchingFilters || isInitialRender) {
     return (
-      <div className="grid-container">
-        <h1>Loading your data</h1>
-      </div>
+      <LoadingScreen />
     );
   }
 

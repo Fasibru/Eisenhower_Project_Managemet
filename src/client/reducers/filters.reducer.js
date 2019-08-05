@@ -13,9 +13,9 @@ const initialState = {
     dateRangeStart: new Date().toISOString(),
     dateRangeEnd: new Date().toISOString(),
     // userID: '',
-    isFetchingFilters: false,
-    fetchingError: '',
   },
+  isFetchingFilters: false,
+  fetchingError: '',
 };
 
 const filtersReducer = (state = initialState, action) => {
