@@ -22,7 +22,7 @@ export const getFiltersFailure = error => ({
 });
 
 export const getFilters = () => (dispatch) => {
-  dispatch(getFiltersRequest);
+  dispatch(getFiltersRequest());
   axios.get('/api/filters')
     .then((res) => {
       dispatch(getFiltersSuccess(res.data[0]));
@@ -33,7 +33,7 @@ export const getFilters = () => (dispatch) => {
 };
 
 export const getUserFilters = userId => (dispatch) => {
-  dispatch(getFiltersRequest);
+  dispatch(getFiltersRequest());
   axios.get(`/api/filters/${userId}`)
     .then((res) => {
       dispatch(getFiltersSuccess(res.data[0]));
