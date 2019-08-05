@@ -12,7 +12,7 @@ const initialState = {
     showTasks: 'all',
     dateRangeStart: new Date().toISOString(),
     dateRangeEnd: new Date().toISOString(),
-    // userID: '',
+    dateRangeEndDefaultToday: false,
   },
   isFetchingFilters: false,
   fetchingError: '',

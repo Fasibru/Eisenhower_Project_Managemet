@@ -17,7 +17,13 @@ const formatDate = date => date.substr(0, 10);
 
 const mapStateToProps = state => ({
   dateRangeStart: formatDate(state.filters.filters.dateRangeStart),
-  dateRangeEnd: formatDate(state.filters.filters.dateRangeEnd),
+  // dateRangeEnd: formatDate(state.filters.filters.dateRangeEnd),
+  dateRangeEnd: formatDate(
+    state.filters.filters.dateRangeEndDefaultToday
+      ? new Date().toISOString()
+      : state.filters.filters.dateRangeEnd,
+  ),
+  dateRangeEndDefaultToday: state.filters.filters.dateRangeEndDefaultToday,
   minDate: getMinDate(state.tasks.tasks).substr(0, 10),
   filters: state.filters.filters,
   userId: state.user.userId,

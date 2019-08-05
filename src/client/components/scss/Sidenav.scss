@@ -53,6 +53,21 @@
   flex-direction: column;
 }
 
+.sidenav_input-date--no-arrow::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+}
+
+.sidenav__date-default-today {
+  display: flex;
+  align-items: center;
+  padding-top: 5px;
+
+  input {
+    margin-left: 10px;
+  }
+};
+
 
 .sidenav__btn {
   flex: 1;

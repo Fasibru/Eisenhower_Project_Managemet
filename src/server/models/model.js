@@ -49,6 +49,10 @@ export const FiltersSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  dateRangeEndDefaultToday: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export const UserSchema = new Schema({
