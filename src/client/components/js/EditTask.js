@@ -81,9 +81,18 @@ export const EditTask = ({
       <div className="Task-inner">
         <p className="Task__header">Edit the Task</p>
         <form onSubmit={handleSubmit} className="Task__form">
-          <TaskFormTitle title={editTask.title} handleChange={handleChange} />
-          <TaskFormDescription description={editTask.description} handleChange={handleChange} />
-          <TaskFormCategory category={editTask.category} handleChange={handleChange} />
+          <TaskFormTitle
+            title={editTask.title}
+            handleChange={handleChange}
+          />
+          <TaskFormDescription
+            description={editTask.description}
+            handleChange={handleChange}
+          />
+          <TaskFormCategory
+            category={editTask.category}
+            handleChange={handleChange}
+          />
           <input
             type="checkbox"
             className="Task__completed"
@@ -93,9 +102,25 @@ export const EditTask = ({
           />
           Completed
           <br />
-          <input type="submit" value="Save Changes" className="Task__btn Task__btn--margin-right" />
-          <button type="button" onClick={closeEditTaskPopup} className="Task__btn Task__btn--margin-right">Close</button>
-          <button type="button" onClick={handleDelete} className="Task__btn">Delete Task</button>
+          <input
+            type="submit"
+            value="Save Changes"
+            className="Task__btn Task__btn--margin-right"
+          />
+          <button
+            type="button"
+            onClick={handleDelete}
+            className="Task__btn Task__btn--margin-right"
+          >
+            Delete Task
+          </button>
+          <button
+            type="button"
+            onClick={closeEditTaskPopup}
+            className="Task__btn"
+          >
+            Cancel
+          </button>
         </form>
       </div>
     </div>

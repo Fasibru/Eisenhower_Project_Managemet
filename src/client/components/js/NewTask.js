@@ -52,9 +52,18 @@ export function NewTask(props) {
       <div className="Task-inner">
         <p className="Task__header">Define a new Task</p>
         <form onSubmit={handleSubmit} className="Task__form">
-          <TaskFormTitle title={newTask.title} handleChange={handleChange} />
-          <TaskFormDescription description={newTask.description} handleChange={handleChange} />
-          <TaskFormCategory category={newTask.category} handleChange={handleChange} />
+          <TaskFormTitle
+            title={newTask.title}
+            handleChange={handleChange}
+          />
+          <TaskFormDescription
+            description={newTask.description}
+            handleChange={handleChange}
+          />
+          <TaskFormCategory
+            category={newTask.category}
+            handleChange={handleChange}
+          />
           <input
             type="checkbox"
             className="Task__completed"
@@ -64,13 +73,17 @@ export function NewTask(props) {
           />
           Completed
           <br />
-          <input type="submit" value="Add Task" className="Task__btn Task__btn--margin-right" />
+          <input
+            type="submit"
+            value="Add Task"
+            className="Task__btn Task__btn--margin-right"
+          />
           <button
             type="button"
             onClick={closeNewTaskPopup}
             className="Task__btn"
           >
-            Close
+            Cancel
           </button>
         </form>
       </div>
