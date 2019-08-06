@@ -1,13 +1,13 @@
 @import './variables';
 
 .user__container {
-  position: absolute;
+  position: fixed;
   top: 20px;
   right: 20px;
+  background-color: $component-color-User;
 }
 
 .user-dialog__container {
-  background-color: $component-color-User;
   border: 1px solid $element-color;
   margin: 0;
   display: flex;
