@@ -5,12 +5,14 @@
   background-color: $component-color-HeaderFooter;
   color: $element-color;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   // position: sticky;
   // bottom: 0px;
 
   a {
+
     display: flex;
     align-items: center;
     // text-decoration: underline;
@@ -24,14 +26,26 @@
 }
 }
 
-.footer__link-github {
-  margin-left: 20px;
-
-  span {
-    margin-left: 5px;
-  }
+.footer__link-home {
+  margin-bottom: 10px;
 }
 
-.footer__link-home {
-  margin-right: 20px;
+.footer__link-github-text{
+  margin-left: 5px;
+}
+
+// Non-mobile styles
+@media only screen and (min-width: 768px) {
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .footer__link-github {
+    margin-left: 20px;
+  }
+
+  .footer__link-home {
+    margin: 0px 20px 0px 0px;
+  }
 }

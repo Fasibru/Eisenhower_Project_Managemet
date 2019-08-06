@@ -2,31 +2,67 @@
 
 .main {
   grid-area: main;
-  // display: flex;
-  column-count: 1;
   background-color: $component-color-Main;
+  display: grid;
+  grid-template-areas:
+    "column-A"
+    "column-B"
+    "column-C"
+    "column-D"
+}
+
+.main__column-A {
+  grid-area: column-A;
+}
+
+.main__column-B {
+  grid-area: column-B;
+}
+
+.main__column-C {
+  grid-area: column-C;
+}
+
+.main__column-D {
+  grid-area: column-D;
 }
 
 .main__column-category {
-  // flex: 1 1 0;
   display: flex;
   flex-direction: column;
-  width: 100%; // necessary?
-  // margin-top: 10px;
-  // width: calc(25% - 16px);
-  // box-sizing: border-box;
-  // border-right: 1px solid black;
-
-  span {
-    text-align: center;
-    color: darkgray;
-  }
 }
-
-// .main__column-category:last-child {
-//   border: none;
-// }
 
 .main__column-header {
   margin-top: 10px;
+  text-align: center;
+  color: darkgray;
+}
+
+// Medium screens breakpoint
+@media only screen and (min-width: 992px) {
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "column-A column-B"
+      "column-C column-D"
+  }
+
+  .main__column-category:nth-child(2n+1) {
+    border-right: 1px solid $color-darkest;
+  }
+}
+
+// Large screens breakpoint
+@media only screen and (min-width: 1400px) {
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+      "column-A column-B column-C column-D"
+    }
+
+  .main__column-category:nth-child(-n+3) {
+    border-right: 1px solid $color-darkest;
+  }
 }

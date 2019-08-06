@@ -116,7 +116,7 @@
   color: $element-color;
   cursor: pointer;
   display: flex;
-  background-color: transparent;
+  background-color: $color-darkest;
   font-family: $font-stack;
   font-size: 1rem;
   color: $element-color;
@@ -124,26 +124,29 @@
   border: 1px solid $element-color;
 }
 
-.sidenav__menu-icon:focus {
-  outline-style: none;
-  color: #000000;
-  background: $focus-color;
-}
-
 .sidenav__close-icon {
   position: absolute;
   visibility: visible;
-  top: -2px;
-  right: 0px;
+  top: 2px;
+  right: 4px;
   cursor: pointer;
   font-size: 20px;
   color: $element-color;
-  padding: 7px;
+  padding: 3px;
   background-color: transparent;
   border: none;
   z-index: 1;
 }
 
-// .sidenav__close-icon:hover {
-//   cursor: pointer;
-// }
+// Non-mobile styles
+@media only screen and (min-width: 768px) {
+  .sidenav {
+    grid-area: sidenav;
+    // position: relative;
+    transform: translateX(0);
+  }
+
+  .sidenav__close-icon {
+    visibility: hidden;
+  }
+}
