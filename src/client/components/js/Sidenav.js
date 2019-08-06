@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import { openNewTaskPopup } from '../../actions/actionsTasks';
 import '../scss/Sidenav.scss';
@@ -9,9 +11,19 @@ import StatusFilter from './StatusFilter';
 import DateFilter from '../../containers/DateFilter.container';
 
 // eslint-disable-next-line no-shadow
-export function Sidenav({ openNewTaskPopup }) {
+export function Sidenav({ openNewTaskPopup, isOpen, toggleFilterMenu }) {
   return (
-    <aside className="sidenav">
+    <aside
+      className={isOpen ? 'sidenav sidenav--active' : 'sidenav'}
+    >
+      <button
+        type="button"
+        className="sidenav__close-icon"
+        onClick={toggleFilterMenu}
+        onMouseDown={e => e.preventDefault()} /* to remove focus after button is clicked */
+      >
+        <FontAwesomeIcon icon={faTimes} />
+      </button>
       <ul className="sidenav__list">
         <li className="sidenav__list-elem">
           <button className="sidenav__btn" type="button" onClick={openNewTaskPopup}>Add New Task</button>
@@ -38,6 +50,8 @@ export function Sidenav({ openNewTaskPopup }) {
 
 Sidenav.propTypes = {
   openNewTaskPopup: PropTypes.func.isRequired,
+  toggleFilterMenu: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
 };
 
 export default connect(null, {

@@ -13,11 +13,11 @@ html, body {
 ----------------------------------------------*/
 .grid-container {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: 100px 1fr 50px;
   grid-template-areas:
-    "sidenav header"
-    "sidenav main"
-    "sidenav footer";
+    "header"
+    "main"
+    "footer";
   height: 100vh;
 }

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+
 import { getUserTasks } from '../../actions/actionsTasks';
 import { getUserFilters } from '../../actions/actionsFilters';
-
 import { getUser } from '../../actions/actionsUser';
 
 import Header from './Header';
@@ -13,6 +15,7 @@ import Footer from './Footer';
 import NewTask from './NewTask';
 import EditTask from './EditTask';
 import LoadingScreen from './LoadingScreen';
+import MenuBar from './MenuBar';
 
 import '../scss/App.scss';
 
@@ -41,6 +44,7 @@ export const App = ({
   /* eslint-enable no-shadow */
 }) => {
   const [isInitialRender, setInitialRender] = useState(true);
+  const [filtersMenuOpen, setFiltersMenuFlag] = useState(false);
 
   // guide on fetching data with useEffect:
   // https://www.robinwieruch.de/react-hooks-fetch-data/
@@ -73,10 +77,25 @@ export const App = ({
     );
   }
 
+  const toggleFilterMenu = () => {
+    setFiltersMenuFlag(!filtersMenuOpen);
+  };
+
   return (
     <div className="grid-container">
+      <button
+        type="button"
+        id="sidenav__menu-icon"
+        className="sidenav__menu-icon"
+        // className={filtersMenuOpen ? 'sidenav__menu-icon' : 'sidenav__menu-icon sidenav--active'}
+        onClick={toggleFilterMenu}
+        onMouseDown={e => e.preventDefault()} /* to remove focus after button is clicked */
+      >
+        {/* <FontAwesomeIcon icon={faBars} /> */}
+        <MenuBar />
+      </button>
       <Header />
-      <Sidenav />
+      <Sidenav isOpen={filtersMenuOpen} toggleFilterMenu={toggleFilterMenu} />
       <FilteredMain />
       <Footer />
       {newTaskPopup

@@ -70,19 +70,19 @@ function Main({ filteredTasks }) {
   return (
     <main className="main" id="main">
       <div className="main__column-category">
-        <span>Important and Urgent ({categorizedFilteredTasks.TasksCatA.length})</span>
+        <span className="main__column-header">Important and Urgent ({categorizedFilteredTasks.TasksCatA.length})</span>
         {categorizedFilteredTasks.TasksCatA}
       </div>
       <div className="main__column-category">
-        <span>Important ({categorizedFilteredTasks.TasksCatB.length})</span>
+        <span className="main__column-header">Important ({categorizedFilteredTasks.TasksCatB.length})</span>
         {categorizedFilteredTasks.TasksCatB}
       </div>
       <div className="main__column-category">
-        <span>Urgent ({categorizedFilteredTasks.TasksCatC.length})</span>
+        <span className="main__column-header">Urgent ({categorizedFilteredTasks.TasksCatC.length})</span>
         {categorizedFilteredTasks.TasksCatC}
       </div>
       <div className="main__column-category">
-        <span>Not Important and not Urgent ({categorizedFilteredTasks.TasksCatD.length})</span>
+        <span className="main__column-header">Not Important and not Urgent ({categorizedFilteredTasks.TasksCatD.length})</span>
         {categorizedFilteredTasks.TasksCatD}
       </div>
     </main>

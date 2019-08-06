@@ -6,7 +6,7 @@ import User from './User';
 
 const Header = () => (
   <header className="header">
-    <p>Statistics will follow here</p>
+    <p className="header__statistics">Statistics will follow here</p>
     <User />
   </header>
 );

@@ -3,15 +3,26 @@
 .sidenav {
   display: flex;
   flex-direction: column;
-  grid-area: sidenav;
+  height: 100%;
+  width: 220px;
+  position: fixed;
+  // grid-area: sidenav;
   background-color: $component-color-sidenav;
   overflow: auto;
+  transform: translateX(-220px);
+  transition: all .6s ease-in-out;
+  // box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  z-index: 2;
+}
+
+.sidenav--active {
+  transform: translateX(0);
 }
 
 .sidenav__list {
   // display: flex;
   // flex-direction: column;
-  margin: 0;
+  margin: 15px 0px 0px 0px;
   padding-left: 20px;
   padding-right: 20px;
   list-style-type: none;
@@ -97,3 +108,42 @@
 .sidenav__btn--active {
   background: $hover-color;
 }
+.sidenav__menu-icon {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+  color: $element-color;
+  cursor: pointer;
+  display: flex;
+  background-color: transparent;
+  font-family: $font-stack;
+  font-size: 1rem;
+  color: $element-color;
+  padding: 10px;
+  border: 1px solid $element-color;
+}
+
+.sidenav__menu-icon:focus {
+  outline-style: none;
+  color: #000000;
+  background: $focus-color;
+}
+
+.sidenav__close-icon {
+  position: absolute;
+  visibility: visible;
+  top: -2px;
+  right: 0px;
+  cursor: pointer;
+  font-size: 20px;
+  color: $element-color;
+  padding: 7px;
+  background-color: transparent;
+  border: none;
+  z-index: 1;
+}
+
+// .sidenav__close-icon:hover {
+//   cursor: pointer;
+// }
