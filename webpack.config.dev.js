@@ -1,10 +1,8 @@
-const path = require('path');
+// const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const fs = require('fs');
-require('dotenv').config();
 
 const portConfig = JSON.parse(fs.readFileSync('src/config/port-config.json'))[0];
 
@@ -75,8 +73,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'public/index.html',
     }),
-
-    new Dotenv(),
 
     // create a CSS file per JS file which contains CSS
     // new MiniCssExtractPlugin({

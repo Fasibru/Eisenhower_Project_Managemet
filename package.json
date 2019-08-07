@@ -39,7 +39,6 @@
     "cors": "^2.8.5",
     "css-loader": "^2.1.1",
     "dotenv": "^7.0.0",
-    "dotenv-webpack": "^1.7.0",
     "esm": "^3.2.25",
     "express": "^4.16.4",
     "express-session": "^1.16.2",

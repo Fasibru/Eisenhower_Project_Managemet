@@ -2,10 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-// const Dotenv = require('dotenv-webpack');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
-require('dotenv').config();
 
 module.exports = {
   entry: ['@babel/polyfill', './src/client/index.js'],
@@ -59,8 +57,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'public/index.html',
     }),
-
-    new Dotenv(),
 
     // create a CSS file per JS file which contains CSS
     // new MiniCssExtractPlugin({
