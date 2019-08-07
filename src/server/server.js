@@ -32,7 +32,7 @@ mongoose.connect(mongoDatabaseURL, {
   useNewUrlParser: true,
   useFindAndModify: false,
 })
-  .then(() => console.log(`Connected to mongodb: ${mongoDatabaseURL}`))
+  .then(() => console.log('Successfully connected to mongodb'))
   .catch((err) => {
     console.log(err);
   });
