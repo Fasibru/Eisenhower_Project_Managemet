@@ -37,7 +37,7 @@ const Login = ({
     event.preventDefault();
     const emailAddress = document.getElementById('emailAddress').value;
     const password = document.getElementById('password').value;
-    axios.post('/account/login', { emailAddress, password }, { withCredentials: true })
+    axios.post('/account/login', { emailAddress, password })
       .then(() => {
         history.pushState(null, null, '/app');
         history.go();
