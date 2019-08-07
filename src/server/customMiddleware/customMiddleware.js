@@ -1,7 +1,14 @@
 import jwt from 'jsonwebtoken';
 
 const verifyJWT = (req, res, next) => {
-  const jwtToken = req.cookies.JSONWebToken;
+  let authCookieName;
+
+  if (process.env.NODE_ENV === 'development') {
+    authCookieName = process.env.AUTH_NAME_DEV;
+  } else if (process.env.NODE_ENV === 'production') {
+    authCookieName = process.env.AUTH_NAME_PROD;
+  }
+  const jwtToken = req.cookies[authCookieName];
 
   if (!jwtToken) {
     res.status(403).json({ message: 'No JWT provided.' });
