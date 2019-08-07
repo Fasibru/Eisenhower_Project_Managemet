@@ -110,7 +110,6 @@ export const loginUser = (req, res, next) => {
         secure: process.env.NODE_ENV === 'production',
         sameSite: true,
       };
-      console.log('in loginUser', req.session.userId);
       const authCookieName = process.env.AUTH_COOKIE_NAME;
 
       if (process.env.NODE_ENV === 'development') {
@@ -131,7 +130,6 @@ export const loginUser = (req, res, next) => {
 };
 
 export const getUser = (req, res) => {
-  console.log('in getUser', req.session.userId);
   User.findOne({ _id: req.session.userId }, {
     firstName: 1,
     lastName: 1,
@@ -143,6 +141,7 @@ export const getUser = (req, res) => {
       }
       return res.status(404).json({
         message: 'User not found.',
+        sid: req.session.userId,
       });
     })
     .catch((err) => {

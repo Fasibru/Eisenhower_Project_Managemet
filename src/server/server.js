@@ -45,7 +45,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   secret: process.env.SECRET,
-  cookie: cookieOptions,
+  // cookie: cookieOptions,
 }));
 
 // CORS
