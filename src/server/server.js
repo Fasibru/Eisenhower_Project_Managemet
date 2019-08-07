@@ -19,7 +19,7 @@ import verifyJWT from './customMiddleware/customMiddleware';
 const cookieOptions = {
   httpOnly: true,
   secure: process.env.NODE_ENV === 'production',
-  sameSite: true,
+  // sameSite: true,
 };
 const portConfig = JSON.parse(fs.readFileSync('src/config/port-config.json'))[0];
 const PORT = process.env.PORT || portConfig.BACKEND_SERVER_PORT;
