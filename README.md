@@ -4,7 +4,7 @@ Caveat: This repo is a fully working web app but since it is also a tool for me 
 # JATLA Project Management
 
 Looking at the title you might think 'Probably that's just another todo list app.' and to be honest as of now there are not a lot of arguments I can bring to the table to proof you wrong.  
-Nevertheless maybe you will change your mind sometime in the future once I have all my ideas implemented because as the title suggests this repo is about project management, not only todo task handling.  As of July 2019 you can add/edit/remove tasks, assign a priority, change the status to completed and filter on that as well as on the date the tasks where created. A search function will be the next filter to be implemented.  
+Nevertheless maybe you will change your mind sometime in the future once I have all my ideas implemented because as the title suggests this repo is about project management, not only todo task handling.  As of August 2019 for individual users you can add/edit/remove tasks, assign a priority, change the status to completed and filter on that as well as on the date the tasks where created. A search function will be the next filter to be implemented.  
 I see this evolving to a real project management tool once the following capabilities are implemented:
 
 * ~~User accounts~~ (done August 2019)
@@ -45,11 +45,13 @@ To make the app work there are a few things you have to do first and which are o
 You need an installation of [Node](https://nodejs.org/en/). I have used the 10.16.0 LTS version for the development.
 
 ### MongoDB
-Currently the app uses a connection to a local MongoDB server so you need to have MongoDB installed. You can find instructions on how to do that here: [Install MongoDB](https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installation-tutorials). After the installation make sure to start the server with the
+Initially the app used a connection to a local MongoDB server. If you want to do that as well you need to have MongoDB installed. You can find instructions on how to do that here: [Install MongoDB](https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installation-tutorials). After the installation make sure to start the server with the
 
     mongod
 
 command in the terminal.
+
+By now I'm using the cloud based solution [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) where you have 512MB free storage. To make the app work with that as well you just have to set the respective connection string (which you get from the mongodb homepage) in the .env file (as described below).
 
 ### HTTPS
 During development stage (see the Scripts section on how to start that) the app is running the backend on an HTTPS Express server and the frontend on an HTTPS webpack DevServer.  
@@ -60,7 +62,7 @@ The production build does not need the SSL certificate since it's a basic Expres
 A - in my opinion very clear - step-by-step instruction on how to create the SSL certificate and how to add it to Chrome can be found here: <https://stackoverflow.com/questions/21397809/create-a-trusted-self-signed-ssl-cert-for-localhost-for-use-with-express-node>
 
 ### .env
-The URL for the MongoDB as well as the secret (e.g. for JWT) are stored in an .env file which is **not** part of this repo so you have to create this file in the root directory and it should have the following keys in it (the values are just examples):
+The URL for the MongoDB as well as the secret (e.g. for JWT) are stored in an .env file which is **not** part of this repo so you have to create this file in the root directory and it should have the following keys in it (the values are just examples e.g. for DB_URL it's an example with a local DB server but of course you can also use a cloud connection string):
     
     DB_URL = 'mongod://localhost:27017/your_DB_name'
     SECRET = 'your_secret_string'
