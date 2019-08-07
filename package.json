@@ -23,7 +23,11 @@
     "url": "https://github.com/Fasibru/Eisenhower_Project_Managemet.git"
   },
   "dependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.18",
     "@fortawesome/free-brands-svg-icons": "^5.8.2",
     "@fortawesome/free-regular-svg-icons": "^5.8.2",
@@ -66,11 +70,7 @@
     "webpack-cli": "^3.3.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.4",
     "@babel/node": "^7.5.0",
-    "@babel/plugin-proposal-class-properties": "^7.5.0",
-    "@babel/preset-env": "^7.5.4",
-    "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.8.0",
     "concurrently": "^4.1.1",
