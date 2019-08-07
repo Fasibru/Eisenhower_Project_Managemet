@@ -1,13 +1,8 @@
 import jwt from 'jsonwebtoken';
 
 const verifyJWT = (req, res, next) => {
-  let authCookieName;
+  const authCookieName = process.env.AUTH_COOKIE_NAME;
 
-  if (process.env.NODE_ENV === 'development') {
-    authCookieName = process.env.AUTH_NAME_DEV;
-  } else if (process.env.NODE_ENV === 'production') {
-    authCookieName = process.env.AUTH_NAME_PROD;
-  }
   const jwtToken = req.cookies[authCookieName];
 
   if (!jwtToken) {

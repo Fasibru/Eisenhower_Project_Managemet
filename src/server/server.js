@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import session from 'express-session';
-import https from 'https';
+// import https from 'https';
 import fs from 'fs';
 import path from 'path';
 import mongoose from 'mongoose';
@@ -18,7 +18,7 @@ import verifyJWT from './customMiddleware/customMiddleware';
 
 const cookieOptions = {
   httpOnly: true,
-  // secure: process.env.NODE_ENV === 'development',
+  secure: process.env.NODE_ENV === 'production',
   sameSite: true,
 };
 const portConfig = JSON.parse(fs.readFileSync('src/config/port-config.json'))[0];
@@ -48,11 +48,6 @@ app.use(session({
   cookie: cookieOptions,
 }));
 
-// app.use((req, res, next) => {
-//   console.log(req.session);
-//   next();
-// });
-
 // CORS
 app.use(cors());
 
@@ -79,15 +74,17 @@ app.get('/*', (req, res) => {
   });
 });
 
-if (process.env.NODE_ENV === 'production') {
-  app.listen(PORT, () => console.log(`${process.env.NODE_ENV} HTTP Express server is running on port:${PORT}`));
-} else if (process.env.NODE_ENV === 'development') {
-  const httpsOptions = {
-    key: fs.readFileSync('security/cert.key'),
-    cert: fs.readFileSync('security/cert.pem'),
-  };
-  https.createServer(httpsOptions, app)
-    .listen(PORT, () => console.log(`${process.env.NODE_ENV} HTTPS Express backend server is running on port:${PORT}.\nFrontend dev server running on port:${portConfig.DEV_FRONTEND_SERVER_PORT} --> https://localhost:${portConfig.DEV_FRONTEND_SERVER_PORT}`));
-} else {
-  console.log('process.env.NODE_ENV neither set to production nor development');
-}
+app.listen(PORT, () => console.log(`${process.env.NODE_ENV} HTTP Express server is running on port:${PORT}`));
+
+// if (process.env.NODE_ENV === 'production') {
+//   app.listen(PORT, () => console.log(`${process.env.NODE_ENV} HTTP Express server is running on port:${PORT}`));
+// } else if (process.env.NODE_ENV === 'development') {
+//   const httpsOptions = {
+//     key: fs.readFileSync('security/cert.key'),
+//     cert: fs.readFileSync('security/cert.pem'),
+//   };
+//   https.createServer(httpsOptions, app)
+//     .listen(PORT, () => console.log(`${process.env.NODE_ENV} HTTPS Express backend server is running on port:${PORT}.\nFrontend dev server running on port:${portConfig.DEV_FRONTEND_SERVER_PORT} --> https://localhost:${portConfig.DEV_FRONTEND_SERVER_PORT}`));
+// } else {
+//   console.log('process.env.NODE_ENV neither set to production nor development');
+// }

@@ -46,17 +46,14 @@ export const registerUser = (req, res) => {
               }
               const cookieOptions = {
                 httpOnly: true,
-                secure: process.env.NODE_ENV === 'development',
+                secure: process.env.NODE_ENV === 'production',
                 sameSite: true,
               };
 
-              let authCookieName;
+              const authCookieName = process.env.AUTH_COOKIE_NAME;
 
               if (process.env.NODE_ENV === 'development') {
                 res.set('Access-Control-Allow-Origin', `http://localhost:${portConfig.DEV_FRONTEND_SERVER_PORT}`);
-                authCookieName = process.env.AUTH_NAME_DEV;
-              } else if (process.env.NODE_ENV === 'production') {
-                authCookieName = process.env.AUTH_NAME_PROD;
               }
               res.cookie(authCookieName, token, cookieOptions);
             });
@@ -110,16 +107,14 @@ export const loginUser = (req, res, next) => {
       }
       const cookieOptions = {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'development',
+        secure: process.env.NODE_ENV === 'production',
         sameSite: true,
       };
 
-      let authCookieName;
+      const authCookieName = process.env.AUTH_COOKIE_NAME;
+
       if (process.env.NODE_ENV === 'development') {
         res.set('Access-Control-Allow-Origin', `http://localhost:${portConfig.DEV_FRONTEND_SERVER_PORT}`);
-        authCookieName = process.env.AUTH_NAME_DEV;
-      } else if (process.env.NODE_ENV === 'production') {
-        authCookieName = process.env.AUTH_NAME_PROD;
       }
 
       res
@@ -160,16 +155,11 @@ export const getUser = (req, res) => {
 export const logoutUser = (req, res) => {
   const cookieOptions = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'development',
+    secure: process.env.NODE_ENV === 'production',
     sameSite: true,
   };
 
-  let authCookieName;
-  if (process.env.NODE_ENV === 'development') {
-    authCookieName = process.env.AUTH_NAME_DEV;
-  } else if (process.env.NODE_ENV === 'production') {
-    authCookieName = process.env.AUTH_NAME_PROD;
-  }
+  const authCookieName = process.env.AUTH_COOKIE_NAME;
 
   req.session.destroy(() => {
     res.clearCookie(authCookieName, cookieOptions);
@@ -228,16 +218,11 @@ export const deleteUser = (req, res) => {
     .then(() => {
       const cookieOptions = {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'development',
+        secure: process.env.NODE_ENV === 'production',
         sameSite: true,
       };
 
-      let authCookieName;
-      if (process.env.NODE_ENV === 'development') {
-        authCookieName = process.env.AUTH_NAME_DEV;
-      } else if (process.env.NODE_ENV === 'production') {
-        authCookieName = process.env.AUTH_NAME_PROD;
-      }
+      const authCookieName = process.env.AUTH_COOKIE_NAME;
 
       req.session.destroy(() => {
         res.clearCookie(authCookieName, cookieOptions);
