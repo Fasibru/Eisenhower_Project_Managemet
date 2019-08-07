@@ -9,8 +9,6 @@ import {
 } from 'react-router-dom';
 
 import App from './App';
-import Login from './Login';
-import Register from './Register';
 import Home from './Home';
 
 const Root = ({ store }) => (
@@ -19,8 +17,6 @@ const Root = ({ store }) => (
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/app" component={App} />
-        {/* <Route exact path="/login" component={Login} /> */}
-        <Route exact path="/register" component={Register} />
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>
