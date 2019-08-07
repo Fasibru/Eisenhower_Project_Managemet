@@ -11,7 +11,6 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import passport from 'passport';
 import '../config/passport-config';
-// import jwt from 'jsonwebtoken';
 
 import apiRouter from './routes/apiRoutes';
 import accountRoutes from './routes/accountRoutes';
