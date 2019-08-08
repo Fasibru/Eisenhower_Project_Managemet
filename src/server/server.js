@@ -48,6 +48,7 @@ app.use(session({
   proxy: true,
   cookie: {
     secure: true,
+    sameSite: true,
   },
   // cookie: cookieOptions,
 }));
