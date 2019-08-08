@@ -45,6 +45,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   secret: process.env.SECRET,
+  cookie: {
+    secure: true,
+  },
   // cookie: cookieOptions,
 }));
 
