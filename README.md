@@ -39,7 +39,8 @@ Naturally there are further dev dependencies like [webpack](https://webpack.js.o
 So far the app was developed for Chrome but should run on other browsers as well although CSS prefixing isn't included yet.
 
 ## Prerequisites
-To make the app work there are a few things you have to do first and which are outlined below. Once you are settled and have started the app you can access it in the browser with <https://localhost:3000> (development) or <http://localhost:8080> (production).
+To make the app work there are a few things you have to do first and which are outlined below. Once you are settled you can access the app in the browser with <https://localhost:3000> if you have started it with the development script (see respective section).  
+The production build cannot be used locally since it's an HTTP server but the app relies on cookies with the secure flag set to true. The concept here is that I have deployed the production build on Heroku which serves the app via HTTPS so the cookies are set correctly.
 
 ### NodeJS
 You need an installation of [Node](https://nodejs.org/en/). I have used the 10.16.0 LTS version for the development.
