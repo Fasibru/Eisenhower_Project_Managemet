@@ -3,10 +3,14 @@ import Main from '../components/js/Main';
 
 const formatDate = date => date.substr(0, 10);
 
-const filterTasksByDate = (tasks, filters) => tasks.filter(
-  task => formatDate(task.date) >= formatDate(filters.dateRangeStart)
-    && formatDate(task.date) <= formatDate(filters.dateRangeEnd),
-);
+const filterTasksByDate = (tasks, filters) => {
+  const today = new Date().toISOString().substring(0, 10);
+  const dynamicDateRangeEnd = filters.dateRangeEndDefaultToday ? today : filters.dateRangeEnd;
+  return tasks.filter(
+    task => formatDate(task.date) >= formatDate(filters.dateRangeStart)
+    && formatDate(task.date) <= formatDate(dynamicDateRangeEnd),
+  );
+};
 
 const filterTasksByStatus = (tasks, filters) => {
   switch (filters.showTasks) {

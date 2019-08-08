@@ -1,4 +1,4 @@
-// const path = require('path');
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
@@ -43,25 +43,25 @@ module.exports = {
     ],
   },
   devServer: {
-    // https: {
-    //   key: fs.readFileSync(path.join(__dirname, '/security/cert.key')),
-    //   cert: fs.readFileSync(path.join(__dirname, '/security/cert.pem')),
-    //   ca: fs.readFileSync(path.join(__dirname, '/security/cert.pem')),
-    // },
+    https: {
+      key: fs.readFileSync(path.join(__dirname, '/security/cert.key')),
+      cert: fs.readFileSync(path.join(__dirname, '/security/cert.pem')),
+      ca: fs.readFileSync(path.join(__dirname, '/security/cert.pem')),
+    },
     publicPath: '/',
     historyApiFallback: true,
     port: portConfig.DEV_FRONTEND_SERVER_PORT,
     // proxy /api requests to https://localhost:<BACKEND_SERVER_PORT>/api during dev phase --> backend server running on port 8080 obviously required.
     proxy: {
       '/api': {
-        // target: `https://localhost:${portConfig.BACKEND_SERVER_PORT}`,
-        // secure: false,
-        target: `http://localhost:${portConfig.BACKEND_SERVER_PORT}`,
+        target: `https://localhost:${portConfig.BACKEND_SERVER_PORT}`,
+        secure: false,
+        // target: `http://localhost:${portConfig.BACKEND_SERVER_PORT}`,
       },
       '/account': {
-        // target: `https://localhost:${portConfig.BACKEND_SERVER_PORT}`,
-        // secure: false,
-        target: `http://localhost:${portConfig.BACKEND_SERVER_PORT}`,
+        target: `https://localhost:${portConfig.BACKEND_SERVER_PORT}`,
+        secure: false,
+        // target: `http://localhost:${portConfig.BACKEND_SERVER_PORT}`,
       },
     },
   },

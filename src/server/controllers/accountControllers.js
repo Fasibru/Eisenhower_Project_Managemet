@@ -46,7 +46,7 @@ export const registerUser = (req, res) => {
               }
               const cookieOptions = {
                 httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
+                secure: true,
                 sameSite: true,
               };
 
@@ -107,7 +107,7 @@ export const loginUser = (req, res, next) => {
       }
       const cookieOptions = {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
+        secure: true,
         sameSite: true,
       };
       const authCookieName = process.env.AUTH_COOKIE_NAME;
@@ -154,7 +154,7 @@ export const getUser = (req, res) => {
 export const logoutUser = (req, res) => {
   const cookieOptions = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: true,
     sameSite: true,
   };
 
@@ -217,7 +217,7 @@ export const deleteUser = (req, res) => {
     .then(() => {
       const cookieOptions = {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
+        secure: true,
         sameSite: true,
       };
 
