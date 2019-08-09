@@ -8,16 +8,31 @@ const portConfig = JSON.parse(fs.readFileSync('src/config/port-config.json'))[0]
 
 module.exports = {
   entry: ['@babel/polyfill', './src/client/index.js'],
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+  },
   module: {
     rules: [
+      // {
+      //   // pass all js files except for those in the node_modules folder through babel-loader
+      //   // this transforms JSX to Javascript
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   use: {
+      //     loader: 'babel-loader',
+      //   },
+      // },
       {
-        // pass all js files except for those in the node_modules folder through babel-loader
-        // this transforms JSX to Javascript
-        test: /\.js$/,
+        test: /\.ts(x?)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: 'ts-loader',
         },
+      },
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: ['babel-loader', 'source-map-loader'],
       },
       {
         // pass all css files through style-loader (injects <style> tag in DOM) and css-loader (translates CSS into CommonJS)
@@ -42,6 +57,15 @@ module.exports = {
       },
     ],
   },
+  // When importing a module whose path matches one of the following, just
+  // assume a corresponding global variable exists and use that instead.
+  // This is important because it allows us to avoid bundling all of our
+  // dependencies, which allows browsers to cache those libraries between builds.
+  // externals: {
+  //   'react': 'React',
+  //   'react-dom': 'ReactDOM',
+  // },
+  devtool: 'spource-map',
   devServer: {
     https: {
       key: fs.readFileSync(path.join(__dirname, '/security/cert.key')),
