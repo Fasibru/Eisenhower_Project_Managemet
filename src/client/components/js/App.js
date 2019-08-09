@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import { getUserTasks } from '../../actions/actionsTasks';
 import { getUserFilters } from '../../actions/actionsFilters';
@@ -51,8 +49,6 @@ export const App = ({
   useEffect(() => {
     const fetchData = async () => {
       await getUser();
-      // getUserTasks(userId);
-      // getUserFilters(userId);
       if (userError) {
         history.pushState(null, null, '/');
         history.go();
@@ -91,7 +87,6 @@ export const App = ({
         onClick={toggleFilterMenu}
         onMouseDown={e => e.preventDefault()} /* to remove focus after button is clicked */
       >
-        {/* <FontAwesomeIcon icon={faBars} /> */}
         <MenuBar />
       </button>
       <Header />
