@@ -1,5 +1,5 @@
-import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import * as React from 'react';
 
 interface TaskFormDescriptionProps {
   description: string;
@@ -20,7 +20,7 @@ const TaskFormDescription = ({ description, handleChange }: TaskFormDescriptionP
 
 TaskFormDescription.propTypes = {
   description: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  // handleChange: PropTypes.func.isRequired,
 };
 
 export default TaskFormDescription;
