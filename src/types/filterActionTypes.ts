@@ -5,7 +5,7 @@ import {
   GET_FILTERS_SUCCESS,
   RESET_FILTERS_STORE,
   UPDATE_FILTERS,
-} from '../client/constants/actionTypesFilters';
+} from '../client/constants/actionConstantsFilters';
 
 import {
   Filter,

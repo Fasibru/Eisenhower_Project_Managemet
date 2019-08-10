@@ -16,7 +16,7 @@ import {
   GET_FILTERS_SUCCESS,
   RESET_FILTERS_STORE,
   UPDATE_FILTERS,
-} from '../constants/actionTypesFilters';
+} from '../constants/actionConstantsFilters';
 
 export const getFiltersRequest = (): FiltersActionsTypes => ({
   type: GET_FILTERS_REQUEST,
