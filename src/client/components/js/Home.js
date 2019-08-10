@@ -53,7 +53,7 @@ const Home = ({
         <header className="container-content container-content-header">
           <div className="home__title">
             <h1>JATLA</h1>
-            <h2>A tool to manage projects</h2>
+            <h2>Project Management</h2>
           </div>
           {!userId
             && (
