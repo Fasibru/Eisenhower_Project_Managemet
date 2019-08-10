@@ -1,7 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
 
-const TaskFormTitle = ({ title, handleChange }) => (
+interface TaskFormTitleProps {
+  title: string;
+  handleChange(event: React.ChangeEvent<HTMLInputElement>): void;
+}
+
+const TaskFormTitle = ({ title, handleChange }: TaskFormTitleProps) => (
   <label htmlFor="title">
     <p className="Task__title">Title</p>
     <input
@@ -10,14 +15,14 @@ const TaskFormTitle = ({ title, handleChange }) => (
       name="title"
       value={title}
       onChange={handleChange}
-      required
+      required={true}
     />
   </label>
 );
 
 TaskFormTitle.propTypes = {
-  title: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default TaskFormTitle;
