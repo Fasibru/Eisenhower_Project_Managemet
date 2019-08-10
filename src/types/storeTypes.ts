@@ -18,8 +18,8 @@ export interface NewTask {
 
 export interface Filter {
   showTasks: string;
-  dateRangeStart: Date;
-  dateRangeEnd: Date;
+  dateRangeStart: string;
+  dateRangeEnd: string;
   dateRangeEndDefaultToday: boolean;
 }
 
