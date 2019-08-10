@@ -32,7 +32,7 @@ const Login = ({
   },
   []);
 
-  // Refactor with Redux
+  // TODO: Work with refs instead of directly interacting with the DOM
   const onSubmit = (event) => {
     event.preventDefault();
     const emailAddress = document.getElementById('emailAddress').value;

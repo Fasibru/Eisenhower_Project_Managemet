@@ -34,6 +34,7 @@ const Register = ({
   },
   []);
 
+  // TODO: Work with refs instead of directly interacting with the DOM
   const onSubmit = (event) => {
     event.preventDefault();
     const firstName = document.getElementById('firstName').value;
