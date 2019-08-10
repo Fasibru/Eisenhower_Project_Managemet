@@ -11,26 +11,33 @@ import {
   Filter,
 } from './storeTypes';
 
-export interface GetFiltersRequestAction {
+interface GetFiltersRequestAction {
   type: typeof GET_FILTERS_REQUEST;
 }
 
-export interface GetFiltersSuccessAction {
+interface GetFiltersSuccessAction {
   type: typeof GET_FILTERS_SUCCESS;
   filters: Filter;
 }
 
-export interface GetFiltersFailureAction {
+interface GetFiltersFailureAction {
   type: typeof GET_FILTERS_FAILURE;
   error: AxiosError;
 }
 
-export interface ResetFiltersStoreAction {
+interface ResetFiltersStoreAction {
   type: typeof RESET_FILTERS_STORE;
 }
 
-export interface UpdateFiltersAction {
+interface UpdateFiltersAction {
   type: typeof UPDATE_FILTERS;
   name: string;
   value: boolean | Date | string;
 }
+
+export type FiltersActionsTypes =
+GetFiltersFailureAction |
+GetFiltersRequestAction |
+GetFiltersSuccessAction |
+ResetFiltersStoreAction |
+UpdateFiltersAction;

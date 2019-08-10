@@ -1,9 +1,11 @@
+import { FiltersActionsTypes } from '../../types/filterActionTypes';
+import { Filters } from '../../types/storeTypes';
 import {
   GET_FILTERS_FAILURE,
   GET_FILTERS_REQUEST,
   GET_FILTERS_SUCCESS,
-  UPDATE_FILTERS,
   RESET_FILTERS_STORE,
+  UPDATE_FILTERS,
 } from '../constants/actionTypesFilters';
 
 
@@ -18,7 +20,7 @@ const initialState = {
   fetchingError: '',
 };
 
-const filtersReducer = (state = initialState, action) => {
+const filtersReducer = (state = initialState, action: FiltersActionsTypes): Filters => {
   switch (action.type) {
     case GET_FILTERS_REQUEST:
       return Object.assign({}, state, {

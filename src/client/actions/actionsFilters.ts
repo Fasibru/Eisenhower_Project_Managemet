@@ -2,12 +2,13 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import {
-  GetFiltersFailureAction,
-  GetFiltersRequestAction,
-  GetFiltersSuccessAction,
-  ResetFiltersStoreAction,
-  UpdateFiltersAction,
-} from '../../types/actionTypes';
+  // GetFiltersFailureAction,
+  // GetFiltersRequestAction,
+  // GetFiltersSuccessAction,
+  // ResetFiltersStoreAction,
+  // UpdateFiltersAction,
+  FiltersActionsTypes
+} from '../../types/filterActionTypes';
 import { Filter, Filters } from '../../types/storeTypes';
 import {
   GET_FILTERS_FAILURE,
@@ -17,16 +18,16 @@ import {
   UPDATE_FILTERS,
 } from '../constants/actionTypesFilters';
 
-export const getFiltersRequest = (): GetFiltersRequestAction => ({
+export const getFiltersRequest = (): FiltersActionsTypes => ({
   type: GET_FILTERS_REQUEST,
 });
 
-export const getFiltersSuccess = (filters: Filter): GetFiltersSuccessAction => ({
+export const getFiltersSuccess = (filters: Filter): FiltersActionsTypes => ({
   filters,
   type: GET_FILTERS_SUCCESS,
 });
 
-export const getFiltersFailure = (error: AxiosError): GetFiltersFailureAction => ({
+export const getFiltersFailure = (error: AxiosError): FiltersActionsTypes => ({
   type: GET_FILTERS_FAILURE,
   error,
 });
@@ -37,7 +38,7 @@ export const getFilters = (): ThunkAction<
   // Optional extra argument passed to the inner function (if specified when setting up the Thunk middleware):
   null,
   // The (non-thunk) actions that can be dispatched:
-  GetFiltersRequestAction | GetFiltersSuccessAction | GetFiltersFailureAction
+  FiltersActionsTypes
 > => (dispatch: Dispatch) => {
   dispatch(getFiltersRequest());
   axios.get('/api/filters')
@@ -53,7 +54,7 @@ export const getUserFilters = (userId: string): ThunkAction<
   void,
   Filters,
   null,
-  GetFiltersRequestAction | GetFiltersSuccessAction | GetFiltersFailureAction
+  FiltersActionsTypes
 > => (dispatch: Dispatch) => {
   dispatch(getFiltersRequest());
   axios.get(`/api/filters/${userId}`)
@@ -66,12 +67,12 @@ export const getUserFilters = (userId: string): ThunkAction<
 };
 
 export const updateFilters =
-(name: string, value: boolean | Date | string): UpdateFiltersAction => ({
+  (name: string, value: boolean | Date | string): FiltersActionsTypes => ({
   type: UPDATE_FILTERS,
   name,
   value,
 });
 
-export const resetFiltersStore = (): ResetFiltersStoreAction => ({
+export const resetFiltersStore = (): FiltersActionsTypes => ({
   type: RESET_FILTERS_STORE,
 });
