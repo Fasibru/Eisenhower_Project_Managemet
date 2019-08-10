@@ -21,7 +21,7 @@ const TaskFormTitle = ({ title, handleChange }: TaskFormTitleProps) => (
 );
 
 TaskFormTitle.propTypes = {
-  handleChange: PropTypes.func.isRequired,
+  // handleChange: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
 };
 

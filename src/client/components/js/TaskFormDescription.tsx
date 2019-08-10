@@ -1,15 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 
-const TaskFormDescription = ({ description, handleChange }) => (
+interface TaskFormDescriptionProps {
+  description: string;
+  handleChange(event: React.ChangeEvent<HTMLTextAreaElement>): void;
+}
+
+const TaskFormDescription = ({ description, handleChange }: TaskFormDescriptionProps) => (
   <label htmlFor="description" className="Task__description">
     <p>Description</p>
     <textarea
-      type="text"
       name="description"
       value={description}
       onChange={handleChange}
-      required
+      required={true}
     />
   </label>
 );
