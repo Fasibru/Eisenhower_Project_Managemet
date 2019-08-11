@@ -40,3 +40,22 @@
 .task__title--bold {
   font-weight: bold;
 }
+
+// Medium screens breakpoint
+@media only screen and (min-width: 992px) {
+  .task--orange, .task--lightgray {
+    margin-left: 4px;
+  }
+
+  .task--red, .task--green {
+    margin-right: 4px;
+  }
+}
+
+// Large screens breakpoint
+@media only screen and (min-width: 1400px) {
+  .task--orange, .task--green {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+}
