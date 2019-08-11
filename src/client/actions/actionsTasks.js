@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {
-  ADD_NEW_TASK,
   GET_TASKS_FAILURE,
   GET_TASKS_REQUEST,
   GET_TASKS_SUCCESS,
@@ -11,27 +10,16 @@ import {
   STORE_EDIT_TASK_FORM_CHANGE,
   POPULATE_EDIT_TASK_FORM,
   SAVE_EDITED_TASK,
+  SAVE_NEW_TASK,
   DELETE_TASK,
   STORE_NEW_TASK_FORM_CHANGE,
   RESET_TASKS_STORE,
 } from '../constants/actionTypesTasks';
 
-
-export const addNewTask = task => (dispatch) => {
-  axios.post('/api/task', task)
-    .then((res) => {
-      dispatch({
-        type: ADD_NEW_TASK,
-        task: res.data,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      dispatch({
-        type: CLOSE_NEW_TASK_POPUP,
-      });
-    });
-};
+export const saveNewTask = task => ({
+  type: SAVE_NEW_TASK,
+  task,
+});
 
 export const getTasksRequest = () => ({
   type: GET_TASKS_REQUEST,

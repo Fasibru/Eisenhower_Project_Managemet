@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -5,7 +6,7 @@ import { connect } from 'react-redux';
 import {
   closeNewTaskPopup,
   storeNewTaskFormChange,
-  addNewTask,
+  saveNewTask,
 } from '../../actions/actionsTasks';
 
 import '../scss/NewTask.scss';
@@ -25,7 +26,7 @@ export function NewTask(props) {
     /* eslint-disable no-shadow */
     closeNewTaskPopup,
     storeNewTaskFormChange,
-    addNewTask,
+    saveNewTask,
     newTask,
     userId,
     /* eslint-enable no-shadow */
@@ -42,9 +43,12 @@ export function NewTask(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // addNewTask(newTask);
-    addNewTask({ ...newTask, members: [userId] });
-    closeNewTaskPopup();
+    axios.post('/api/task', { ...newTask, members: [userId] })
+      .then((res) => {
+        saveNewTask(res.data);
+        closeNewTaskPopup();
+      })
+      .catch(error => console.log(error));
   };
 
   return (
@@ -94,7 +98,7 @@ export function NewTask(props) {
 NewTask.propTypes = {
   closeNewTaskPopup: PropTypes.func.isRequired,
   storeNewTaskFormChange: PropTypes.func.isRequired,
-  addNewTask: PropTypes.func.isRequired,
+  saveNewTask: PropTypes.func.isRequired,
   newTask: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
@@ -108,5 +112,5 @@ NewTask.propTypes = {
 export default connect(mapStateToProps, {
   closeNewTaskPopup,
   storeNewTaskFormChange,
-  addNewTask,
+  saveNewTask,
 })(NewTask);

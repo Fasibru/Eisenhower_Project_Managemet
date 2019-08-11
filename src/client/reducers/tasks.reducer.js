@@ -1,5 +1,4 @@
 import {
-  ADD_NEW_TASK,
   GET_TASKS_FAILURE,
   GET_TASKS_REQUEST,
   GET_TASKS_SUCCESS,
@@ -12,6 +11,7 @@ import {
   CLOSE_EDIT_TASK_POPUP,
   STORE_EDIT_TASK_FORM_CHANGE,
   SAVE_EDITED_TASK,
+  SAVE_NEW_TASK,
   RESET_TASKS_STORE,
 } from '../constants/actionTypesTasks';
 
@@ -30,13 +30,6 @@ const initialState = {
 
 const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_NEW_TASK:
-      return Object.assign({}, state, {
-        tasks: [
-          ...state.tasks,
-          action.task,
-        ],
-      });
     case GET_TASKS_REQUEST:
       return Object.assign({}, state, {
         isFetchingTasks: true,
@@ -101,6 +94,13 @@ const tasksReducer = (state = initialState, action) => {
           }
           return task;
         }),
+      });
+    case SAVE_NEW_TASK:
+      return Object.assign({}, state, {
+        tasks: [
+          ...state.tasks,
+          action.task,
+        ],
       });
     case DELETE_TASK:
       return Object.assign({}, state, {
