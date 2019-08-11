@@ -14,7 +14,7 @@ import {
   SAVE_NEW_TASK,
   STORE_EDIT_TASK_FORM_CHANGE,
   STORE_NEW_TASK_FORM_CHANGE,
-} from '../client/constants/actionTypesTasks';
+} from '../client/constants/actionConstantsTasks';
 import { Task } from './storeTypes';
 
 interface SaveNewTaskAction {
@@ -65,6 +65,7 @@ interface CloseEditTaskPopupAction {
 
 interface PopulateEditTaskFormAction {
   type: typeof POPULATE_EDIT_TASK_FORM;
+  editTask: Task;
 }
 
 interface StoreEditTaskFormChangeAction {
