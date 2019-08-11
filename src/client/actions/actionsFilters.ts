@@ -68,10 +68,10 @@ export const getUserFilters = (userId: string): ThunkAction<
 
 export const updateFilters =
   (name: string, value: boolean | Date | string): FiltersActionsTypes => ({
-  type: UPDATE_FILTERS,
-  name,
-  value,
-});
+    type: UPDATE_FILTERS,
+    name,
+    value,
+  });
 
 export const resetFiltersStore = (): FiltersActionsTypes => ({
   type: RESET_FILTERS_STORE,
