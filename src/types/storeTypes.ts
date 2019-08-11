@@ -10,8 +10,8 @@ export interface Task {
 }
 
 export interface NewTask {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   category?: string;
   completed?: boolean;
 }
