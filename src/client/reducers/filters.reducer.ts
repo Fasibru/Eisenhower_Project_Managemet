@@ -8,7 +8,6 @@ import {
   UPDATE_FILTERS,
 } from '../constants/actionConstantsFilters';
 
-
 const initialState = {
   filters: {
     showTasks: 'all',
