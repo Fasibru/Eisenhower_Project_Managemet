@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import {
   GET_LOGIN_ERROR,
   GET_REGISTER_ERROR,
@@ -12,6 +12,13 @@ import {
 } from '../client/constants/actionConstantsUser';
 
 import { User } from './storeTypes';
+
+export interface AxiosResponseUser {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  emailAddress: string;
+}
 
 interface GetLoginErrorAction {
   type: typeof GET_LOGIN_ERROR;
@@ -34,7 +41,7 @@ interface GetUserRequestAction {
 
 interface GetUserSuccessAction {
   type: typeof GET_USER_SUCCESS;
-  user: User;
+  user: AxiosResponseUser;
 }
 
 interface RemoveUserAction {

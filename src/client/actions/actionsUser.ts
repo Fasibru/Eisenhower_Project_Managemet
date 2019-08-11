@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import { Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { User } from '../../types/storeTypes';
-import { UserActionsTypes } from '../../types/userActionTypes';
+import { AxiosResponseUser, UserActionsTypes } from '../../types/userActionTypes';
 import {
   GET_LOGIN_ERROR,
   GET_REGISTER_ERROR,
@@ -19,7 +19,7 @@ export const getUserRequest = (): UserActionsTypes => ({
   type: GET_USER_REQUEST,
 });
 
-export const getUserSuccess = (user: User): UserActionsTypes => ({
+export const getUserSuccess = (user: AxiosResponseUser): UserActionsTypes => ({
   type: GET_USER_SUCCESS,
   user,
 });
@@ -37,10 +37,10 @@ export const getUser = (): ThunkAction<
 > => (dispatch: Dispatch) => {
   dispatch(getUserRequest());
   return axios.get('/account/user')
-    .then((res) => {
+    .then((res: AxiosResponse) => {
       dispatch(getUserSuccess(res.data));
     })
-    .catch((error) => {
+    .catch((error: AxiosError) => {
       dispatch(getUserFailure(error));
     });
 };

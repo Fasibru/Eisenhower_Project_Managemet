@@ -1,15 +1,16 @@
+import { User } from '../../types/storeTypes';
+import { UserActionsTypes } from '../../types/userActionTypes';
 import {
+  GET_LOGIN_ERROR,
+  GET_REGISTER_ERROR,
+  GET_USER_FAILURE,
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
-  GET_USER_FAILURE,
   REMOVE_USER,
-  GET_LOGIN_REGISTER_ERROR,
-  GET_LOGIN_ERROR,
   RESET_LOGIN_ERROR,
-  GET_REGISTER_ERROR,
   RESET_REGISTER_ERROR,
   SET_USER_INFORMATION,
-} from '../constants/actionTypesUser';
+} from '../constants/actionConstantsUser';
 
 const initialState = {
   userId: '',
@@ -23,7 +24,7 @@ const initialState = {
   registerError: '',
 };
 
-const userReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action: UserActionsTypes): User => {
   switch (action.type) {
     case GET_USER_REQUEST:
       return Object.assign({}, state, {
@@ -44,10 +45,6 @@ const userReducer = (state = initialState, action) => {
       });
     case REMOVE_USER:
       return Object.assign({}, initialState);
-    case GET_LOGIN_REGISTER_ERROR:
-      return Object.assign({}, state, {
-        loginRegisterError: action.message,
-      });
     case GET_LOGIN_ERROR:
       return Object.assign({}, state, {
         loginError: action.message,
