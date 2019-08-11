@@ -31,7 +31,7 @@ export interface Filters {
 
 export interface Tasks {
   tasks: Task[];
-  newTaskPopup: false;
+  newTaskPopup: boolean;
   newTask: NewTask;
   editTaskPopup: boolean;
   editTask: Task;
