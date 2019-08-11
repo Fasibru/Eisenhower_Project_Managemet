@@ -1,14 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import {
-  // GetFiltersFailureAction,
-  // GetFiltersRequestAction,
-  // GetFiltersSuccessAction,
-  // ResetFiltersStoreAction,
-  // UpdateFiltersAction,
-  FiltersActionsTypes
-} from '../../types/filterActionTypes';
+import { FiltersActionsTypes } from '../../types/filterActionTypes';
 import { Filter, Filters } from '../../types/storeTypes';
 import {
   GET_FILTERS_FAILURE,
