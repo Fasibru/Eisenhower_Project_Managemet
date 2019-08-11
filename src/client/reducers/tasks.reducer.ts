@@ -1,21 +1,23 @@
+import { Task, Tasks } from '../../types/storeTypes';
+import { TaskActionsTypes } from '../../types/taskActionTypes';
 import {
+  CLOSE_EDIT_TASK_POPUP,
+  CLOSE_NEW_TASK_POPUP,
+  DELETE_TASK,
   GET_TASKS_FAILURE,
   GET_TASKS_REQUEST,
   GET_TASKS_SUCCESS,
-  OPEN_NEW_TASK_POPUP,
-  CLOSE_NEW_TASK_POPUP,
-  STORE_NEW_TASK_FORM_CHANGE,
-  DELETE_TASK,
-  POPULATE_EDIT_TASK_FORM,
   OPEN_EDIT_TASK_POPUP,
-  CLOSE_EDIT_TASK_POPUP,
-  STORE_EDIT_TASK_FORM_CHANGE,
+  OPEN_NEW_TASK_POPUP,
+  POPULATE_EDIT_TASK_FORM,
+  RESET_TASKS_STORE,
   SAVE_EDITED_TASK,
   SAVE_NEW_TASK,
-  RESET_TASKS_STORE,
-} from '../constants/actionTypesTasks';
+  STORE_EDIT_TASK_FORM_CHANGE,
+  STORE_NEW_TASK_FORM_CHANGE,
+} from '../constants/actionConstantsTasks';
 
-const initialState = {
+const initialState: Tasks = {
   tasks: [],
   newTaskPopup: false,
   newTask: {
@@ -23,12 +25,21 @@ const initialState = {
     description: '',
   },
   editTaskPopup: false,
-  editTask: {},
+  editTask: {
+    __v: -999,
+    _id: '',
+    category: '',
+    completed: false,
+    date: '',
+    description: '',
+    rank: -999,
+    title: '',
+  },
   isFetchingTasks: false,
   fetchingError: '',
 };
 
-const tasksReducer = (state = initialState, action) => {
+const tasksReducer = (state = initialState, action: TaskActionsTypes): Tasks => {
   switch (action.type) {
     case GET_TASKS_REQUEST:
       return Object.assign({}, state, {
