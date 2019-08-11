@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { AnyAction, Dispatch } from 'redux';
-import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { Dispatch } from 'redux';
+import { ThunkAction } from 'redux-thunk';
 import {
   // GetFiltersFailureAction,
   // GetFiltersRequestAction,
