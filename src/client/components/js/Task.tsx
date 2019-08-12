@@ -15,6 +15,7 @@ interface TaskProps {
   populateEditTaskForm(task: TaskType): TaskActionsTypes;
 }
 
+// tslint:disable-next-line: variable-name
 export const Task: React.FC<TaskProps> = ({
   task,
   className,
@@ -37,7 +38,7 @@ export const Task: React.FC<TaskProps> = ({
       <p style={{ whiteSpace: 'pre-wrap' }}>{task.description}</p>
     </div>
   );
-}
+};
 
 // Task.propTypes = {
 //   className: PropTypes.string.isRequired,
