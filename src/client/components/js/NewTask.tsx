@@ -32,6 +32,7 @@ const mapStateToProps = (state: Store) => ({
   userId: state.user.userId,
 });
 
+// tslint:disable-next-line: variable-name
 export const NewTask: React.FC<NewTaskProps> = ({
   // tslint:disable: no-shadowed-variable
   newTask,
@@ -108,7 +109,7 @@ export const NewTask: React.FC<NewTaskProps> = ({
       </div>
     </div>
   );
-}
+};
 
 // NewTask.propTypes = {
 //   closeNewTaskPopup: PropTypes.func.isRequired,
@@ -126,6 +127,6 @@ export const NewTask: React.FC<NewTaskProps> = ({
 
 export default connect(mapStateToProps, {
   closeNewTaskPopup,
-  storeNewTaskFormChange,
   saveNewTask,
+  storeNewTaskFormChange,
 })(NewTask);
