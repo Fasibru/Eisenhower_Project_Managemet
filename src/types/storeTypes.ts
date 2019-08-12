@@ -39,7 +39,7 @@ export interface Tasks {
   fetchingError: string;
 }
 
-export interface User {
+export interface UserType {
   userId: string;
   isFetchingUser: boolean;
   userError: string;
@@ -54,5 +54,5 @@ export interface User {
 export interface Store {
   filters: Filters;
   tasks: Tasks;
-  user: User;
+  user: UserType;
 }

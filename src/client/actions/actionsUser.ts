@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { User } from '../../types/storeTypes';
+import { UserType } from '../../types/storeTypes';
 import { AxiosResponseUser, UserActionsTypes } from '../../types/userActionTypes';
 import {
   GET_LOGIN_ERROR,
@@ -31,7 +31,7 @@ export const getUserFailure = (error: AxiosError): UserActionsTypes => ({
 
 export const getUser = (): ThunkAction<
   void,
-  User,
+  UserType,
   null,
   UserActionsTypes
 > => (dispatch: Dispatch) => {
@@ -67,7 +67,7 @@ export const resetRegisterError = (): UserActionsTypes => ({
   type: RESET_REGISTER_ERROR,
 });
 
-export const setUserInformation = (user: User): UserActionsTypes => ({
+export const setUserInformation = (user: UserType): UserActionsTypes => ({
   type: SET_USER_INFORMATION,
   user,
 });

@@ -1,4 +1,4 @@
-import { User } from '../../types/storeTypes';
+import { UserType } from '../../types/storeTypes';
 import { UserActionsTypes } from '../../types/userActionTypes';
 import {
   GET_LOGIN_ERROR,
@@ -24,7 +24,7 @@ const initialState = {
   registerError: '',
 };
 
-const userReducer = (state = initialState, action: UserActionsTypes): User => {
+const userReducer = (state = initialState, action: UserActionsTypes): UserType => {
   switch (action.type) {
     case GET_USER_REQUEST:
       return Object.assign({}, state, {

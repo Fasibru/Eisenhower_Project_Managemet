@@ -11,7 +11,7 @@ import {
   SET_USER_INFORMATION,
 } from '../client/constants/actionConstantsUser';
 
-import { User } from './storeTypes';
+import { UserType } from './storeTypes';
 
 export interface AxiosResponseUser {
   _id: string;
@@ -58,7 +58,7 @@ interface ResetRegisterErrorAction {
 
 interface SetUserInformationAction {
   type: typeof SET_USER_INFORMATION;
-  user: User;
+  user: UserType;
 }
 
 export type UserActionsTypes =
