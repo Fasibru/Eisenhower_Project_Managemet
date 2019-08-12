@@ -10,7 +10,7 @@ import { updateFilters } from '../../actions/actionsFilters';
 interface StatusFilterProps {
   filters: Filter;
   userId: string;
-  updateFilters(eventName: string, eventValue: boolean | Date | string): FiltersActionsTypes;
+  updateFilters(eventName: string, eventValue: string): FiltersActionsTypes;
 }
 
 const mapStateToProps = (state: Store) => ({
