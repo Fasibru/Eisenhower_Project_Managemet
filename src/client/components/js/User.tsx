@@ -1,6 +1,7 @@
 /* eslint-disable no-alert */
 import axios from 'axios';
 // import PropTypes from 'prop-types';
+// tslint:disable-next-line: import-name
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
@@ -27,6 +28,7 @@ const mapStateToProps = (state: Store) => ({
   emailAddress: state.user.emailAddress,
 });
 
+// tslint:disable-next-line: variable-name
 const User: React.FC<UserProps> = ({
   // tslint:disable: no-shadowed-variable
   emailAddress,
@@ -39,7 +41,8 @@ const User: React.FC<UserProps> = ({
 
   const deleteAccount = () => {
     if (confirm(
-      'If you proceed all your data will be deleted and cannot be restored. Do you really want to delete your account?'
+      // tslint:disable-next-line: max-line-length
+      'If you proceed all your data will be deleted and cannot be restored. Do you really want to delete your account?',
     )) {
       axios.delete('/account/user')
         .then(() => {
