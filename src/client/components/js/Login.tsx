@@ -29,6 +29,7 @@ const mapStateToProps = (state: Store) => ({
   userId: state.user.userId,
 });
 
+// tslint:disable-next-line: variable-name
 const Login: React.FC<LoginProps> = ({
   userId,
   // tslint:disable: no-shadowed-variable
