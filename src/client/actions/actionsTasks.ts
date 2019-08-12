@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { Task } from '../../types/storeTypes';
+import { ITask } from '../../types/storeTypes';
 import { TaskActionsTypes } from '../../types/taskActionTypes';
 import {
   CLOSE_EDIT_TASK_POPUP,
@@ -20,7 +20,7 @@ import {
   STORE_NEW_TASK_FORM_CHANGE,
 } from '../constants/actionConstantsTasks';
 
-export const saveNewTask = (task: Task): TaskActionsTypes => ({
+export const saveNewTask = (task: ITask): TaskActionsTypes => ({
   type: SAVE_NEW_TASK,
   task,
 });
@@ -29,7 +29,7 @@ export const getTasksRequest = (): TaskActionsTypes => ({
   type: GET_TASKS_REQUEST,
 });
 
-export const getTasksSuccess = (tasks: Task[]): TaskActionsTypes => ({
+export const getTasksSuccess = (tasks: ITask[]): TaskActionsTypes => ({
   type: GET_TASKS_SUCCESS,
   tasks,
 });
@@ -41,7 +41,7 @@ export const getTasksFailure = (error: AxiosError): TaskActionsTypes => ({
 
 export const getTasks = (): ThunkAction<
   void,
-  Task[],
+  ITask[],
   null,
   TaskActionsTypes
 > => (dispatch: Dispatch) => {
@@ -57,7 +57,7 @@ export const getTasks = (): ThunkAction<
 
 export const getUserTasks = (userId: string): ThunkAction<
   void,
-  Task[],
+  ITask[],
   null,
   TaskActionsTypes
 > => (dispatch: Dispatch) => {
@@ -71,7 +71,7 @@ export const getUserTasks = (userId: string): ThunkAction<
     });
 };
 
-export const saveEditedTask = (task: Task, index: number): TaskActionsTypes => ({
+export const saveEditedTask = (task: ITask, index: number): TaskActionsTypes => ({
   type: SAVE_EDITED_TASK,
   task,
   index,
@@ -98,7 +98,7 @@ export const closeEditTaskPopup = (): TaskActionsTypes => ({
   type: CLOSE_EDIT_TASK_POPUP,
 });
 
-export const populateEditTaskForm = (payload: Task): TaskActionsTypes => ({
+export const populateEditTaskForm = (payload: ITask): TaskActionsTypes => ({
   type: POPULATE_EDIT_TASK_FORM,
   editTask: payload,
 });
