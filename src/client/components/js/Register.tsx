@@ -1,50 +1,64 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import React, { useEffect } from 'react';
+// import PropTypes from 'prop-types';
 
 import {
-  getUser,
   getRegisterError,
-  resetRegisterError,
+  getUser,
   resetLoginError,
+  resetRegisterError,
 } from '../../actions/actionsUser';
 
-const mapStateToProps = state => ({
-  userId: state.user.userId,
+import { Store } from '../../../types/storeTypes';
+import { UserActionsTypes } from '../../../types/userActionTypes';
+
+interface RegisterProps {
+  registerError: string;
+  userId: string;
+  getUser(): UserActionsTypes;
+  getRegisterError(message: string): UserActionsTypes;
+  resetRegisterError(): UserActionsTypes;
+  resetLoginError(): UserActionsTypes;
+}
+
+const mapStateToProps = (state: Store) => ({
   registerError: state.user.registerError,
+  userId: state.user.userId,
 });
 
-
 // eslint-disable-next-line no-shadow
-const Register = ({
+const Register: React.FC<RegisterProps> = ({
   userId,
-  /* eslint-disable no-shadow */
+  // tslint:disable: no-shadowed-variable
   getUser,
   getRegisterError,
   resetRegisterError,
   registerError,
   resetLoginError,
-  /* eslint-enable no-shadow */
+  // tslint:enable: no-shadowed-variable
 }) => {
   useEffect(() => {
     getUser();
     resetLoginError();
-  },
-  []);
+  }, []);
 
-  // TODO: Work with refs instead of directly interacting with the DOM
-  const onSubmit = (event) => {
+  const textInputFirstName = React.createRef<HTMLInputElement>();
+  const textInputLastName = React.createRef<HTMLInputElement>();
+  const textInputEmailAddress = React.createRef<HTMLInputElement>();
+  const textInputPassword = React.createRef<HTMLInputElement>();
+
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const firstName = document.getElementById('firstName').value;
-    const lastName = document.getElementById('lastName').value;
-    const emailAddress = document.getElementById('emailAddress').value;
-    const password = document.getElementById('password').value;
+    const firstName = textInputFirstName.current.value;
+    const lastName = textInputLastName.current.value;
+    const emailAddress = textInputEmailAddress.current.value;
+    const password = textInputPassword.current.value;
     axios.post('/account/register', {
+      emailAddress,
       firstName,
       lastName,
-      emailAddress,
       password,
     })
       .then(() => {
@@ -53,7 +67,7 @@ const Register = ({
       })
       .catch((err) => {
         getRegisterError(err.response.data.message);
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -72,33 +86,37 @@ const Register = ({
                 type="firstName"
                 name="firstName"
                 id="firstName"
+                ref={textInputFirstName}
                 placeholder="First Name"
                 onChange={resetRegisterError}
-                required
+                required={true}
               />
               <input
                 type="lastName"
                 name="lastName"
                 id="lastName"
+                ref={textInputLastName}
                 placeholder="Last Name"
                 onChange={resetRegisterError}
-                required
+                required={true}
               />
               <input
                 type="email"
                 name="emailAddress"
                 id="emailAddress"
+                ref={textInputEmailAddress}
                 placeholder="email"
                 onChange={resetRegisterError}
-                required
+                required={true}
               />
               <input
                 type="password"
                 name="password"
                 id="password"
+                ref={textInputPassword}
                 placeholder="Password"
                 onChange={resetRegisterError}
-                required
+                required={true}
               />
               <button type="submit">Register</button>
             </form>
@@ -114,18 +132,18 @@ const Register = ({
   );
 };
 
-Register.propTypes = {
-  userId: PropTypes.string.isRequired,
-  getUser: PropTypes.func.isRequired,
-  getRegisterError: PropTypes.func.isRequired,
-  resetRegisterError: PropTypes.func.isRequired,
-  registerError: PropTypes.string.isRequired,
-  resetLoginError: PropTypes.func.isRequired,
-};
+// Register.propTypes = {
+//   userId: PropTypes.string.isRequired,
+//   getUser: PropTypes.func.isRequired,
+//   getRegisterError: PropTypes.func.isRequired,
+//   resetRegisterError: PropTypes.func.isRequired,
+//   registerError: PropTypes.string.isRequired,
+//   resetLoginError: PropTypes.func.isRequired,
+// };
 
 export default connect(mapStateToProps, {
-  getUser,
   getRegisterError,
-  resetRegisterError,
+  getUser,
   resetLoginError,
+  resetRegisterError,
 })(Register);

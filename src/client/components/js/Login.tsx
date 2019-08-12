@@ -1,42 +1,55 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import React, { useEffect } from 'react';
+// import PropTypes from 'prop-types';
 
 import {
-  getUser,
   getLoginError,
+  getUser,
   resetLoginError,
   resetRegisterError,
 } from '../../actions/actionsUser';
 
-const mapStateToProps = state => ({
-  userId: state.user.userId,
+import { Store } from '../../../types/storeTypes';
+import { UserActionsTypes } from '../../../types/userActionTypes';
+
+interface LoginProps {
+  loginError: string;
+  userId: string;
+  getUser(): UserActionsTypes;
+  getLoginError(message: string): UserActionsTypes;
+  resetRegisterError(): UserActionsTypes;
+  resetLoginError(): UserActionsTypes;
+}
+
+const mapStateToProps = (state: Store) => ({
   loginError: state.user.loginError,
+  userId: state.user.userId,
 });
 
-const Login = ({
+const Login: React.FC<LoginProps> = ({
   userId,
-  /* eslint-disable no-shadow */
+  // tslint:disable: no-shadowed-variable
   getUser,
   getLoginError,
   resetLoginError,
   resetRegisterError,
   loginError,
-  /* eslint-enable no-shadow */
+  // tslint:enable: no-shadowed-variable
 }) => {
   useEffect(() => {
     getUser();
     resetRegisterError();
-  },
-  []);
+  }, []);
 
-  // TODO: Work with refs instead of directly interacting with the DOM
-  const onSubmit = (event) => {
+  const textInputEmailAddress = React.createRef<HTMLInputElement>();
+  const textInputPassword = React.createRef<HTMLInputElement>();
+
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const emailAddress = document.getElementById('emailAddress').value;
-    const password = document.getElementById('password').value;
+    const emailAddress = textInputEmailAddress.current.value;
+    const password = textInputPassword.current.value;
     axios.post('/account/login', { emailAddress, password })
       .then(() => {
         history.pushState(null, null, '/app');
@@ -44,7 +57,7 @@ const Login = ({
       })
       .catch((err) => {
         getLoginError(err.response.data.message);
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -63,17 +76,19 @@ const Login = ({
                 type="email"
                 name="emailAddress"
                 id="emailAddress"
+                ref={textInputEmailAddress}
                 placeholder="email"
                 onChange={resetLoginError}
-                required
+                required={true}
               />
               <input
                 type="password"
                 name="password"
                 id="password"
+                ref={textInputPassword}
                 placeholder="Password"
                 onChange={resetLoginError}
-                required
+                required={true}
               />
               <button type="submit">Login</button>
             </form>
@@ -89,18 +104,18 @@ const Login = ({
   );
 };
 
-Login.propTypes = {
-  userId: PropTypes.string.isRequired,
-  getUser: PropTypes.func.isRequired,
-  getLoginError: PropTypes.func.isRequired,
-  resetLoginError: PropTypes.func.isRequired,
-  loginError: PropTypes.string.isRequired,
-  resetRegisterError: PropTypes.func.isRequired,
-};
+// Login.propTypes = {
+//   userId: PropTypes.string.isRequired,
+//   getUser: PropTypes.func.isRequired,
+//   getLoginError: PropTypes.func.isRequired,
+//   resetLoginError: PropTypes.func.isRequired,
+//   loginError: PropTypes.string.isRequired,
+//   resetRegisterError: PropTypes.func.isRequired,
+// };
 
 export default connect(mapStateToProps, {
-  getUser,
   getLoginError,
+  getUser,
   resetLoginError,
   resetRegisterError,
 })(Login);
