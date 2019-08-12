@@ -1,4 +1,4 @@
-export interface ITask {
+export interface TaskType {
   rank: number;
   category: string;
   completed: boolean;
@@ -30,11 +30,11 @@ export interface Filters {
 }
 
 export interface Tasks {
-  tasks: ITask[];
+  tasks: TaskType[];
   newTaskPopup: boolean;
   newTask: NewTaskType;
   editTaskPopup: boolean;
-  editTask: ITask;
+  editTask: TaskType;
   isFetchingTasks: boolean;
   fetchingError: string;
 }

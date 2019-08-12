@@ -1,7 +1,7 @@
 // import PropTypes from 'prop-types';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { ITask } from '../../../types/storeTypes';
+import { TaskType } from '../../../types/storeTypes';
 import { TaskActionsTypes } from '../../../types/taskActionTypes';
 import {
   openEditTaskPopup,
@@ -9,10 +9,10 @@ import {
 } from '../../actions/actionsTasks';
 
 interface TaskProps {
-  task: ITask;
+  task: TaskType;
   className: string;
   openEditTaskPopup(): TaskActionsTypes;
-  populateEditTaskForm(task: ITask): TaskActionsTypes;
+  populateEditTaskForm(task: TaskType): TaskActionsTypes;
 }
 
 export const Task: React.FC<TaskProps> = ({
