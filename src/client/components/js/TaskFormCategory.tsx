@@ -6,6 +6,7 @@ interface TaskFormCategoryProps {
   handleChange(event: React.ChangeEvent<HTMLInputElement>): void;
 }
 
+// tslint:disable-next-line: variable-name
 const TaskFormCategory = ({ category = 'A', handleChange }: TaskFormCategoryProps) => (
   <label htmlFor="category" className="Task__category">
     <p>Category</p>

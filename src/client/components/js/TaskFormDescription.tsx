@@ -6,6 +6,7 @@ interface TaskFormDescriptionProps {
   handleChange(event: React.ChangeEvent<HTMLTextAreaElement>): void;
 }
 
+// tslint:disable-next-line: variable-name
 const TaskFormDescription = ({ description, handleChange }: TaskFormDescriptionProps) => (
   <label htmlFor="description" className="Task__description">
     <p>Description</p>

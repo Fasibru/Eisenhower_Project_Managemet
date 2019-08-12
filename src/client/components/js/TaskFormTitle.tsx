@@ -6,6 +6,7 @@ interface TaskFormTitleProps {
   handleChange(event: React.ChangeEvent<HTMLInputElement>): void;
 }
 
+// tslint:disable-next-line: variable-name
 const TaskFormTitle = ({ title, handleChange }: TaskFormTitleProps) => (
   <label htmlFor="title">
     <p className="Task__title">Title</p>
