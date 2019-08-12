@@ -1,5 +1,5 @@
 // import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { openNewTaskPopup } from '../../actions/actionsTasks';
 import '../scss/Sidenav.scss';
 
-import DateFilter from '../../containers/DateFilter.container';
+import DateFilterContainer from '../../containers/DateFilter.container';
 import StatusFilter from './StatusFilter';
 
 import { TaskActionsTypes } from '../../../types/taskActionTypes';
@@ -19,6 +19,7 @@ interface SidenavProps {
   openNewTaskPopup(): TaskActionsTypes;
 }
 
+// tslint:disable-next-line: variable-name
 export const Sidenav: React.FC<SidenavProps> = ({
   // tslint:disable-next-line: no-shadowed-variable
   openNewTaskPopup,
@@ -59,7 +60,7 @@ export const Sidenav: React.FC<SidenavProps> = ({
           <StatusFilter />
         </li>
         <li className="sidenav__list-elem">
-          <DateFilter />
+          <DateFilterContainer />
         </li>
         <li
           className="sidenav__list-elem"
