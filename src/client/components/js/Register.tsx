@@ -1,7 +1,8 @@
 import axios from 'axios';
+// tslint:disable-next-line: import-name
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import React, { useEffect } from 'react';
 // import PropTypes from 'prop-types';
 
 import {
@@ -28,7 +29,7 @@ const mapStateToProps = (state: Store) => ({
   userId: state.user.userId,
 });
 
-// eslint-disable-next-line no-shadow
+// tslint:disable-next-line: variable-name
 const Register: React.FC<RegisterProps> = ({
   userId,
   // tslint:disable: no-shadowed-variable
