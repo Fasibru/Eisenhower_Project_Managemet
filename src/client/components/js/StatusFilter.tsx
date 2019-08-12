@@ -18,6 +18,7 @@ const mapStateToProps = (state: Store) => ({
   userId: state.user.userId,
 });
 
+// tslint:disable-next-line: variable-name
 const StatusFilter: React.FC<StatusFilterProps> = ({
   filters,
   // tslint:disable-next-line: no-shadowed-variable
@@ -83,7 +84,7 @@ const StatusFilter: React.FC<StatusFilterProps> = ({
       </div>
     </div>
   );
-}
+};
 
 // StatusFilter.propTypes = {
 //   // filters: PropTypes.shape({
