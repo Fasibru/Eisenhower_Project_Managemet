@@ -1,4 +1,4 @@
-import { Task, Tasks } from '../../types/storeTypes';
+import { Tasks } from '../../types/storeTypes';
 import { TaskActionsTypes } from '../../types/taskActionTypes';
 import {
   CLOSE_EDIT_TASK_POPUP,

@@ -15,11 +15,11 @@ import {
   STORE_EDIT_TASK_FORM_CHANGE,
   STORE_NEW_TASK_FORM_CHANGE,
 } from '../client/constants/actionConstantsTasks';
-import { Task } from './storeTypes';
+import { ITask } from './storeTypes';
 
 interface SaveNewTaskAction {
   type: typeof SAVE_NEW_TASK;
-  task: Task;
+  task: ITask;
 }
 
 interface GetTasksRequestAction {
@@ -28,7 +28,7 @@ interface GetTasksRequestAction {
 
 interface GetTasksSuccessAction {
   type: typeof GET_TASKS_SUCCESS;
-  tasks: Task[];
+  tasks: ITask[];
 }
 
 interface GetTasksFailureAction {
@@ -38,7 +38,7 @@ interface GetTasksFailureAction {
 
 interface SaveEditedTaskAction {
   type: typeof SAVE_EDITED_TASK;
-  task: Task;
+  task: ITask;
   index: number;
 }
 
@@ -65,7 +65,7 @@ interface CloseEditTaskPopupAction {
 
 interface PopulateEditTaskFormAction {
   type: typeof POPULATE_EDIT_TASK_FORM;
-  editTask: Task;
+  editTask: ITask;
 }
 
 interface StoreEditTaskFormChangeAction {
