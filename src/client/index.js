@@ -3,11 +3,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // import { Provider } from 'react-redux';
 
-import store from './store/index';
+// import store from './store/index';
 import Root from './components/js/Root';
 // import App from './components/js/App';
 
 ReactDOM.render(
-  <Root store={store} />,
+  <Root />,
+  // eslint-disable-next-line no-undef
   document.getElementById('root'),
 );
