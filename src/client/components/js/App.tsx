@@ -1,34 +1,70 @@
+// tslint:disable-next-line: import-name
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { ThunkAction } from 'redux-thunk';
 
-import { getUserTasks } from '../../actions/actionsTasks';
 import { getUserFilters } from '../../actions/actionsFilters';
+import { getUserTasks } from '../../actions/actionsTasks';
 import { getUser } from '../../actions/actionsUser';
 
-import Header from './Header';
-import Sidenav from './Sidenav';
-import FilteredMain from '../../containers/Main.container';
-import Footer from './Footer';
-import NewTask from './NewTask';
+import { FiltersActionsTypes } from '../../../types/filterActionTypes';
+import { Filters, Store, TaskType, UserType } from '../../../types/storeTypes';
+import { TaskActionsTypes } from '../../../types/taskActionTypes';
+import { UserActionsTypes } from '../../../types/userActionTypes';
+
+import MainContainer from '../../containers/Main.container';
 import EditTask from './EditTask';
+import Footer from './Footer';
+import Header from './Header';
 import LoadingScreen from './LoadingScreen';
 import MenuBar from './MenuBar';
+import NewTask from './NewTask';
+import Sidenav from './Sidenav';
 
 import '../scss/App.scss';
 
-const mapStateToProps = state => ({
-  newTaskPopup: state.tasks.newTaskPopup,
+interface AppProps {
+  newTaskPopup: boolean;
+  editTaskPopup: boolean;
+  userId: string;
+  userError: string;
+  isFetchingTasks: boolean;
+  isFetchingUser: boolean;
+  isFetchingFilters: boolean;
+  getUserTasks(userId: string): ThunkAction<
+    void,
+    TaskType[],
+    null,
+    TaskActionsTypes
+  >;
+  getUserFilters(userId: string): ThunkAction<
+    void,
+    Filters,
+    null,
+    FiltersActionsTypes
+  >;
+  getUser(): ThunkAction<
+    void,
+    UserType,
+    null,
+    UserActionsTypes
+  >;
+}
+
+const mapStateToProps = (state: Store) => ({
   editTaskPopup: state.tasks.editTaskPopup,
-  isFetchingTasks: state.tasks.isFetchingTasks,
-  userId: state.user.userId,
-  userError: state.user.userError,
-  isFetchingUser: state.user.isFetchingUser,
   isFetchingFilters: state.filters.isFetchingFilters,
+  isFetchingTasks: state.tasks.isFetchingTasks,
+  isFetchingUser: state.user.isFetchingUser,
+  newTaskPopup: state.tasks.newTaskPopup,
+  userError: state.user.userError,
+  userId: state.user.userId,
 });
 
-export const App = ({
-  /* eslint-disable no-shadow */
+// tslint:disable-next-line: variable-name
+export const App: React.FC<AppProps> = ({
+  // tslint:disable: no-shadowed-variable
   getUserTasks,
   getUserFilters,
   getUser,
@@ -39,7 +75,7 @@ export const App = ({
   isFetchingTasks,
   isFetchingUser,
   isFetchingFilters,
-  /* eslint-enable no-shadow */
+  // tslint:enable: no-shadowed-variable
 }) => {
   const [isInitialRender, setInitialRender] = useState(true);
   const [filtersMenuOpen, setFiltersMenuFlag] = useState(false);
@@ -91,7 +127,7 @@ export const App = ({
       </button>
       <Header />
       <Sidenav isOpen={filtersMenuOpen} toggleFilterMenu={toggleFilterMenu} />
-      <FilteredMain />
+      <MainContainer />
       <Footer />
       {newTaskPopup
         && (
@@ -107,21 +143,21 @@ export const App = ({
   );
 };
 
-App.propTypes = {
-  getUserTasks: PropTypes.func.isRequired,
-  getUserFilters: PropTypes.func.isRequired,
-  getUser: PropTypes.func.isRequired,
-  newTaskPopup: PropTypes.bool.isRequired,
-  editTaskPopup: PropTypes.bool.isRequired,
-  userId: PropTypes.string.isRequired,
-  userError: PropTypes.string.isRequired,
-  isFetchingTasks: PropTypes.bool.isRequired,
-  isFetchingUser: PropTypes.bool.isRequired,
-  isFetchingFilters: PropTypes.bool.isRequired,
-};
+// App.propTypes = {
+//   getUserTasks: PropTypes.func.isRequired,
+//   getUserFilters: PropTypes.func.isRequired,
+//   getUser: PropTypes.func.isRequired,
+//   newTaskPopup: PropTypes.bool.isRequired,
+//   editTaskPopup: PropTypes.bool.isRequired,
+//   userId: PropTypes.string.isRequired,
+//   userError: PropTypes.string.isRequired,
+//   isFetchingTasks: PropTypes.bool.isRequired,
+//   isFetchingUser: PropTypes.bool.isRequired,
+//   isFetchingFilters: PropTypes.bool.isRequired,
+// };
 
 export default connect(mapStateToProps, {
-  getUserFilters,
   getUser,
+  getUserFilters,
   getUserTasks,
 })(App);
