@@ -21,8 +21,8 @@ import {
 } from '../constants/actionConstantsTasks';
 
 export const saveNewTask = (task: TaskType): TaskActionsTypes => ({
-  type: SAVE_NEW_TASK,
   task,
+  type: SAVE_NEW_TASK,
 });
 
 export const getTasksRequest = (): TaskActionsTypes => ({
@@ -30,13 +30,13 @@ export const getTasksRequest = (): TaskActionsTypes => ({
 });
 
 export const getTasksSuccess = (tasks: TaskType[]): TaskActionsTypes => ({
-  type: GET_TASKS_SUCCESS,
   tasks,
+  type: GET_TASKS_SUCCESS,
 });
 
 export const getTasksFailure = (error: AxiosError): TaskActionsTypes => ({
-  type: GET_TASKS_FAILURE,
   error,
+  type: GET_TASKS_FAILURE,
 });
 
 export const getTasks = (): ThunkAction<
@@ -72,14 +72,14 @@ export const getUserTasks = (userId: string): ThunkAction<
 };
 
 export const saveEditedTask = (task: TaskType, index: number): TaskActionsTypes => ({
-  type: SAVE_EDITED_TASK,
-  task,
   index,
+  task,
+  type: SAVE_EDITED_TASK,
 });
 
 export const deleteTask = (index: number): TaskActionsTypes => ({
-  type: DELETE_TASK,
   index,
+  type: DELETE_TASK,
 });
 
 export const openNewTaskPopup = (): TaskActionsTypes => ({
@@ -99,22 +99,24 @@ export const closeEditTaskPopup = (): TaskActionsTypes => ({
 });
 
 export const populateEditTaskForm = (payload: TaskType): TaskActionsTypes => ({
-  type: POPULATE_EDIT_TASK_FORM,
   editTask: payload,
+  type: POPULATE_EDIT_TASK_FORM,
 });
 
 export const storeEditTaskFormChange =
 (name: string, value: string | boolean): TaskActionsTypes => ({
-  type: STORE_EDIT_TASK_FORM_CHANGE,
   name,
   value,
+  // tslint:disable-next-line: object-literal-sort-keys
+  type: STORE_EDIT_TASK_FORM_CHANGE,
 });
 
 export const storeNewTaskFormChange =
 (name: string, value: string | boolean): TaskActionsTypes => ({
-  type: STORE_NEW_TASK_FORM_CHANGE,
   name,
   value,
+  // tslint:disable-next-line: object-literal-sort-keys
+  type: STORE_NEW_TASK_FORM_CHANGE,
 });
 
 export const resetTasksStore = () => ({
