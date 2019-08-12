@@ -1,31 +1,46 @@
 /* eslint-disable no-alert */
+import axios from 'axios';
+// import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import axios from 'axios';
 
 import '../scss/User.scss';
 import MenuBar from './MenuBar';
-import { removeUser } from '../../actions/actionsUser';
-import { resetTasksStore } from '../../actions/actionsTasks';
-import { resetFiltersStore } from '../../actions/actionsFilters';
 
-const mapStateToProps = state => ({
+import { resetFiltersStore } from '../../actions/actionsFilters';
+import { resetTasksStore } from '../../actions/actionsTasks';
+import { removeUser } from '../../actions/actionsUser';
+
+import { FiltersActionsTypes } from '../../../types/filterActionTypes';
+import { Store } from '../../../types/storeTypes';
+import { TaskActionsTypes } from '../../../types/taskActionTypes';
+import { UserActionsTypes } from '../../../types/userActionTypes';
+
+interface UserProps {
+  emailAddress: string;
+  removeUser(): UserActionsTypes;
+  resetFiltersStore(): FiltersActionsTypes;
+  resetTasksStore(): TaskActionsTypes;
+}
+
+const mapStateToProps = (state: Store) => ({
   emailAddress: state.user.emailAddress,
 });
 
-const User = ({
-  /* eslint-disable no-shadow */
+const User: React.FC<UserProps> = ({
+  // tslint:disable: no-shadowed-variable
   emailAddress,
   removeUser,
   resetFiltersStore,
   resetTasksStore,
-  /* eslint-enable no-shadow */
+  // tslint:enable: no-shadowed-variable
 }) => {
   const [userDialog, setUserDialog] = useState(false);
 
   const deleteAccount = () => {
-    if (confirm('If you proceed all your data will be deleted and cannot be restored. Do you really want to delete your account?')) {
+    if (confirm(
+      'If you proceed all your data will be deleted and cannot be restored. Do you really want to delete your account?'
+    )) {
       axios.delete('/account/user')
         .then(() => {
           removeUser();
@@ -94,7 +109,6 @@ const User = ({
             >
               Logout
             </button>
-            {/* <p className="user-dialog__item">Logout</p> */}
           </div>
         )
       }
@@ -102,12 +116,12 @@ const User = ({
   );
 };
 
-User.propTypes = {
-  emailAddress: PropTypes.string.isRequired,
-  removeUser: PropTypes.func.isRequired,
-  resetFiltersStore: PropTypes.func.isRequired,
-  resetTasksStore: PropTypes.func.isRequired,
-};
+// User.propTypes = {
+//   emailAddress: PropTypes.string.isRequired,
+//   removeUser: PropTypes.func.isRequired,
+//   resetFiltersStore: PropTypes.func.isRequired,
+//   resetTasksStore: PropTypes.func.isRequired,
+// };
 
 export default connect(mapStateToProps, {
   removeUser,
