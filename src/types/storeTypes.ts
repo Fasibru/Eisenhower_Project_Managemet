@@ -9,7 +9,7 @@ export interface ITask {
   __v: number;
 }
 
-export interface NewTask {
+export interface NewTaskType {
   title: string;
   description: string;
   category?: string;
@@ -32,7 +32,7 @@ export interface Filters {
 export interface Tasks {
   tasks: ITask[];
   newTaskPopup: boolean;
-  newTask: NewTask;
+  newTask: NewTaskType;
   editTaskPopup: boolean;
   editTask: ITask;
   isFetchingTasks: boolean;
