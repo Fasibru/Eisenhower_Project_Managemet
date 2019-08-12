@@ -7,7 +7,7 @@ const fs = require('fs');
 const portConfig = JSON.parse(fs.readFileSync('src/config/port-config.json'))[0];
 
 module.exports = {
-  entry: ['@babel/polyfill', './src/client/index.js'],
+  entry: ['@babel/polyfill', './src/client/index.tsx'],
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
