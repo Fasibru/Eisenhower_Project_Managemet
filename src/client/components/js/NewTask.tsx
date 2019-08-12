@@ -60,7 +60,10 @@ export const NewTask: React.FC<NewTaskProps> = ({
         saveNewTask(res.data);
         closeNewTaskPopup();
       })
-      .catch(error => console.log(error));
+      .catch((err) => {
+        console.log(err);
+        closeNewTaskPopup();
+      });
   };
 
   return (

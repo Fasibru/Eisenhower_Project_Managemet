@@ -1,44 +1,61 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
+import * as React from 'react';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import {
   closeEditTaskPopup,
-  storeEditTaskFormChange,
-  saveEditedTask,
   deleteTask,
+  saveEditedTask,
+  storeEditTaskFormChange,
 } from '../../actions/actionsTasks';
+
 import '../scss/EditTask.scss';
+import '../scss/TaskForm.scss';
 
-import TaskFormTitle from './TaskFormTitle';
-import TaskFormDescription from './TaskFormDescription';
 import TaskFormCategory from './TaskFormCategory';
+import TaskFormDescription from './TaskFormDescription';
+import TaskFormTitle from './TaskFormTitle';
 
-const mapStateToProps = state => ({
+import { Store, TaskType } from '../../../types/storeTypes';
+import { TaskActionsTypes } from '../../../types/taskActionTypes';
+
+interface EditTaskProps {
+  editTask: TaskType;
+  tasks: TaskType[];
+  closeEditTaskPopup(): TaskActionsTypes;
+  deleteTask(index: number): TaskActionsTypes;
+  saveEditedTask(task: TaskType, index: number): TaskActionsTypes;
+  storeEditTaskFormChange(name: string, value: boolean | string): TaskActionsTypes;
+}
+
+const mapStateToProps = (state: Store) => ({
   editTask: state.tasks.editTask,
   tasks: state.tasks.tasks,
 });
 
-export const EditTask = ({
-  /* eslint-disable no-shadow */
-  tasks,
+export const EditTask: React.FC<EditTaskProps> = ({
+  // tslint:disable: no-shadowed-variable
   editTask,
+  tasks,
   closeEditTaskPopup,
-  storeEditTaskFormChange,
-  saveEditedTask,
   deleteTask,
-  /* eslint-enable no-shadow */
+  saveEditedTask,
+  storeEditTaskFormChange,
+  // tslint:enable: no-shadowed-variable
 }) => {
-  const handleChange = (event) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
+    ) => {
     // reflect form changes in editTask state
     if (event.target.name === 'completed') {
-      storeEditTaskFormChange(event.target.name, event.target.checked);
+      storeEditTaskFormChange(event.target.name, (event.target as HTMLInputElement).checked);
     } else {
       storeEditTaskFormChange(event.target.name, event.target.value);
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // save changes to the DB and if successful to UI as well
@@ -127,25 +144,25 @@ export const EditTask = ({
   );
 };
 
-EditTask.propTypes = {
-  editTask: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    category: PropTypes.oneOf(['A', 'B', 'C', 'D']).isRequired,
-    rank: PropTypes.number.isRequired,
-    _id: PropTypes.string.isRequired,
-    completed: PropTypes.bool.isRequired,
-  }).isRequired,
-  closeEditTaskPopup: PropTypes.func.isRequired,
-  storeEditTaskFormChange: PropTypes.func.isRequired,
-  saveEditedTask: PropTypes.func.isRequired,
-  deleteTask: PropTypes.func.isRequired,
-  tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
+// EditTask.propTypes = {
+//   editTask: PropTypes.shape({
+//     title: PropTypes.string.isRequired,
+//     description: PropTypes.string.isRequired,
+//     category: PropTypes.oneOf(['A', 'B', 'C', 'D']).isRequired,
+//     rank: PropTypes.number.isRequired,
+//     _id: PropTypes.string.isRequired,
+//     completed: PropTypes.bool.isRequired,
+//   }).isRequired,
+//   closeEditTaskPopup: PropTypes.func.isRequired,
+//   storeEditTaskFormChange: PropTypes.func.isRequired,
+//   saveEditedTask: PropTypes.func.isRequired,
+//   deleteTask: PropTypes.func.isRequired,
+//   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
+// };
 
 export default connect(mapStateToProps, {
   closeEditTaskPopup,
-  storeEditTaskFormChange,
-  saveEditedTask,
   deleteTask,
+  saveEditedTask,
+  storeEditTaskFormChange,
 })(EditTask);
