@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import '../scss/MenuBar.scss';
 
+// tslint:disable-next-line: variable-name
 const MenuBar: React.FC<{}> = () => (
   <div className="menu-bar__container">
     <div className="menu-bar__bar1" />
