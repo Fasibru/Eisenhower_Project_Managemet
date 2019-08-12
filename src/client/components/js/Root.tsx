@@ -12,6 +12,7 @@ import Home from './Home';
 
 import { store } from '../../store/index';
 
+// tslint:disable-next-line: variable-name
 const Root: React.FC = () => (
   <Provider store={store}>
     <BrowserRouter>
