@@ -44,6 +44,11 @@ const User: React.FC<UserProps> = ({
       axios.delete('/account/user')
         .then(() => {
           removeUser();
+
+        })
+        .then(() => {
+          history.pushState(null, null, '/');
+          history.go();
         })
         .catch(err => console.log(err));
     }
