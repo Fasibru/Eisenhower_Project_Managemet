@@ -1,7 +1,8 @@
 import axios from 'axios';
+// tslint:disable-next-line: import-name
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import React, { useEffect } from 'react';
 // import PropTypes from 'prop-types';
 
 import {
