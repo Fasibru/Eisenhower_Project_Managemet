@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 
@@ -14,13 +14,20 @@ module.exports = {
   },
   module: {
     rules: [
+      // {
+      //   // pass all js files except for those in the node_modules folder through babel-loader
+      //   // this transforms JSX to Javascript
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   use: {
+      //     loader: 'babel-loader',
+      //   },
+      // },
       {
-        // pass all js files except for those in the node_modules folder through babel-loader
-        // this transforms JSX to Javascript
-        test: /\.js$/,
+        test: /\.ts(x?)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: 'ts-loader',
         },
       },
       {
@@ -65,6 +72,6 @@ module.exports = {
     // }),
   ],
   optimization: {
-    minimizer: [new UglifyJsPlugin()],
+    minimizer: [new TerserPlugin()],
   },
 };
