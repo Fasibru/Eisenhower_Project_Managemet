@@ -1,4 +1,4 @@
-Caveat: This repo is a fully working web app but since it is also a tool for me to learn and try out different technologies you should not be surprised to see inconsistencies like mainly using ES6 but sometimes also ES5, or using react class components but trying react hooks as well and so on.
+Caveat: This repo is a fully working web app but since it is also a tool for me to learn and try out different technologies you should not be surprised to see inconsistencies like mainly using ES6 but sometimes also ES5, or using react class components but trying react hooks as well and so on. The app was developed with/for Chrome and I already encountered problems with Safari but those will be tackled in the future. CSS prefixing isn't included yet either.
 
 
 # JATLA Project Management
@@ -7,7 +7,7 @@ Looking at the title you might think 'Probably that's just another todo list app
 Nevertheless maybe you will change your mind sometime in the future once I have all my ideas implemented because as the title suggests this repo is about project management, not only todo task handling.  As of August 2019 for individual users you can add/edit/remove tasks, assign a priority, change the status to completed and filter on that as well as on the date the tasks where created. A search function will be the next filter to be implemented.  
 I see this evolving to a real project management tool once the following capabilities are implemented:
 
-* ~~User accounts~~ (done August 2019)
+* ~~User accounts~~ (basic implementation done August 2019)
 * User roles like team/project lead or member
 * Different permissions for different user roles
 * Assign multiple users to a task and only those can see the task in the app (and probably the team lead as well)
@@ -22,7 +22,7 @@ Probably there will be more functionalities coming to my mind during the develop
 One more word on setting the priorities of tasks: In the app you can assign categories A-D to a task and this approach is somewhat based on the Eisenhower Matrix. This time management technique should help you focusing on the important tasks although I think that tasks in the last category D are not necessarily to be dropped. You can read a short description on [Wikipedia](https://en.wikipedia.org/wiki/Time_management#The_Eisenhower_Method).
 
 ## Technologies
-This web app is based on the MERN stack. The main dependencies used are:
+This web app is based on the MERN stack and by now written in TypeScript. The main dependencies used are:
 
 * [MongoDB](https://www.mongodb.com/)
 * [Express](https://expressjs.com/)
@@ -33,10 +33,11 @@ This web app is based on the MERN stack. The main dependencies used are:
 * [Dotenv](https://www.npmjs.com/package/dotenv)
 * [JSONWebToken](https://jwt.io/)
 * [Passport](http://www.passportjs.org/)
+* [Typescript](https://www.typescriptlang.org/)
 
-Naturally there are further dev dependencies like [webpack](https://webpack.js.org/) and [Babel](https://babeljs.io/).
+Naturally there are further dependencies like [webpack](https://webpack.js.org/) and [Babel](https://babeljs.io/).
 
-So far the app was developed for Chrome but should run on other browsers as well although CSS prefixing isn't included yet.
+So far the app was developed with/for Chrome and I already encountered problems with Safari. Those will be tackled in the future. CSS prefixing isn't included yet either.
 
 ## Prerequisites
 To make the app work there are a few things you have to do first and which are outlined below. Once you are settled you can access the app in the browser with <https://localhost:3000> if you have started it with the development script (see respective section).  
