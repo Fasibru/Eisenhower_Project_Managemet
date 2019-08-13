@@ -6,7 +6,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: ['@babel/polyfill', './src/client/index.tsx'],
+  entry: ['@babel/polyfill', './dist/client/index.tsx'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
