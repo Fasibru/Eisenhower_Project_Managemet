@@ -3,13 +3,13 @@ import * as React from 'react';
 // import PropTypes from 'prop-types';
 
 import { FiltersActionsTypes } from '../../../types/filterActionTypes';
-import { Filters } from '../../../types/storeTypes';
+import { Filter } from '../../../types/storeTypes';
 
 interface DateFilterProps {
   dateRangeStart: string;
   dateRangeEnd: string;
   dateRangeEndDefaultToday: boolean;
-  filters: Filters;
+  filters: Filter;
   minDate: string;
   userId: string;
   updateFilters(

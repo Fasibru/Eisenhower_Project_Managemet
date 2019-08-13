@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 
-import DateFilter from '../components/js/DateFilter';
 import { updateFilters } from '../actions/actionsFilters';
+import DateFilter from '../components/js/DateFilter';
+
+import { Store, TaskType } from '../../types/storeTypes';
 
 // eslint-disable-next-line max-len
-const getMinDate = (tasks) => {
+const getMinDate = (tasks: TaskType[]) => {
   if (tasks.length === 0) {
     return new Date().toISOString();
   }
@@ -13,19 +15,19 @@ const getMinDate = (tasks) => {
   );
 };
 
-const formatDate = date => date.substr(0, 10);
+const formatDate = (date: string) => date.substr(0, 10);
 
-const mapStateToProps = state => ({
-  dateRangeStart: formatDate(state.filters.filters.dateRangeStart),
-  // dateRangeEnd: formatDate(state.filters.filters.dateRangeEnd),
+const mapStateToProps = (state: Store) => ({
   dateRangeEnd: formatDate(
     state.filters.filters.dateRangeEndDefaultToday
       ? new Date().toISOString()
       : state.filters.filters.dateRangeEnd,
   ),
   dateRangeEndDefaultToday: state.filters.filters.dateRangeEndDefaultToday,
-  minDate: getMinDate(state.tasks.tasks).substr(0, 10),
+  dateRangeStart: formatDate(state.filters.filters.dateRangeStart),
+  // dateRangeEnd: formatDate(state.filters.filters.dateRangeEnd),
   filters: state.filters.filters,
+  minDate: getMinDate(state.tasks.tasks).substr(0, 10),
   userId: state.user.userId,
 });
 
