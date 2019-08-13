@@ -1,12 +1,17 @@
+import { Request, Response } from 'express';
 import mongoose from 'mongoose';
-import { TasksSchema, FiltersSchema } from '../models/model';
+
+import { FiltersSchemaType, TasksSchemaType } from '../../types/modelTypes';
+import { FiltersSchema, TasksSchema } from '../models/model';
 
 // create collections by leveraging the Schemas
-const Tasks = mongoose.model('Tasks', TasksSchema);
-const Filters = mongoose.model('Filters', FiltersSchema);
+// tslint:disable: variable-name
+const Filters = mongoose.model<FiltersSchemaType>('Filters', FiltersSchema);
+const Tasks = mongoose.model<TasksSchemaType>('Tasks', TasksSchema);
+// tslint:enable: variable-name
 
 // for POST endpoint to create new task
-export const addNewTask = (req, res) => {
+export const addNewTask = (req: Request, res: Response) => {
   const newTask = new Tasks(req.body);
   newTask.save((err, task) => {
     if (err) {
@@ -17,7 +22,7 @@ export const addNewTask = (req, res) => {
 };
 
 // for PUT endpoint to edit task
-export const editTask = (req, res) => {
+export const editTask = (req: Request, res: Response) => {
   Tasks.findOneAndUpdate({ _id: req.params.id }, req.body, { upsert: true }, (err) => {
     if (err) {
       res.send(err);
@@ -27,7 +32,7 @@ export const editTask = (req, res) => {
 };
 
 // for GET endpoint for all tasks
-export const getTasks = (req, res) => {
+export const getTasks = (req: Request, res: Response) => {
   Tasks.find({}, (err, tasks) => {
     if (err) {
       res.send(err);
@@ -37,7 +42,7 @@ export const getTasks = (req, res) => {
 };
 
 // for GET endpoint for user specific tasks
-export const getUserTasks = (req, res) => {
+export const getUserTasks = (req: Request, res: Response) => {
   Tasks.find({ members: req.params.userId }, (err, tasks) => {
     if (err) {
       res.status(404).send(err);
@@ -47,7 +52,7 @@ export const getUserTasks = (req, res) => {
 };
 
 // for DELETE endpoint to delete a single task
-export const deleteTask = (req, res) => {
+export const deleteTask = (req: Request, res: Response) => {
   Tasks.findOneAndDelete({ _id: req.params.id }, (err) => {
     if (err) {
       res.send(err);
@@ -57,7 +62,7 @@ export const deleteTask = (req, res) => {
 };
 
 // for GET endpoint to get filter settings
-export const getFilters = (req, res) => {
+export const getFilters = (req: Request, res: Response) => {
   Filters.find({}, (err, filters) => {
     if (err) {
       res.send(err);
@@ -66,7 +71,7 @@ export const getFilters = (req, res) => {
   });
 };
 
-export const getUserFilters = (req, res) => {
+export const getUserFilters = (req: Request, res: Response) => {
   Filters.find({ userID: req.params.userId }, (err, filters) => {
     if (err) {
       res.status(404).send(err);
@@ -76,7 +81,7 @@ export const getUserFilters = (req, res) => {
 };
 
 // for PUT endpoint to update filter settings
-export const updateFilters = (req, res) => {
+export const updateFilters = (req: Request, res: Response) => {
   // update filter settings
   Filters.findOneAndUpdate({ userID: req.params.userId }, req.body, (err) => {
     if (err) {
