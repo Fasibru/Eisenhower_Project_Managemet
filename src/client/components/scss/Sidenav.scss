@@ -5,6 +5,7 @@
   display: -ms-flexbox;  /* TWEENER - IE 10 */
   display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
   display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+  -webkit-flex-direction: column;
   flex-direction: column;
   height: 100%;
   width: 220px;
@@ -36,6 +37,7 @@
   display: -ms-flexbox;  /* TWEENER - IE 10 */
   display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
   display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+  -webkit-flex-direction: column;
   flex-direction: column;
 
   p {
@@ -56,6 +58,7 @@
   -webkit-flex: 1;       /* Safari 6.1+. iOS 7.1+, BB10 */
   -ms-flex: 1;           /* IE 10 */
   flex: 1;               /* NEW, Spec - Firefox, Chrome, Opera */
+  -webkit-flex-direction: column;
   flex-direction: column;
 }
 
@@ -79,6 +82,7 @@
   -webkit-flex: 1;       /* Safari 6.1+. iOS 7.1+, BB10 */
   -ms-flex: 1;           /* IE 10 */
   flex: 1;               /* NEW, Spec - Firefox, Chrome, Opera */
+  -webkit-flex-direction: column;
   flex-direction: column;
 }
 
@@ -92,6 +96,7 @@
   display: -ms-flexbox;  /* TWEENER - IE 10 */
   display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
   display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+  -webkit-align-items: center;
   align-items: center;
   padding-top: 5px;
 
