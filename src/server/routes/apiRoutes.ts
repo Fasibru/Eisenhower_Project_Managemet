@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import {
   // getTasks,
-  getUserTasks,
+  // getFilters,
   addNewTask,
   deleteTask,
   editTask,
-  // getFilters,
   getUserFilters,
+  getUserTasks,
   updateFilters,
 } from '../controllers/apiControllers';
 
@@ -26,13 +26,6 @@ router.delete('/task/:id', deleteTask);
 
 router.get('/filters/:userId', getUserFilters);
 
-// router.put('/filters', updateFilters);
-
 router.put('/filters/:userId', updateFilters);
-
-// router.get('/error', (req, res) => {
-//   res.send('Error');
-// });
-
 
 export default router;
