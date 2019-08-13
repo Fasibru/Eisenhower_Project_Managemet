@@ -4,16 +4,18 @@
   "description": "Project organization based on Eisenhower matrix",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && set NODE_ENV=production&& node -r esm src/server/server.js",
+    "start": "npm run build && set NODE_ENV=production&& npm run tsc-server && node -r esm dist/server/server.js",
     "build": "webpack -p --env=prod",
     "client": "webpack-dev-server -d --env=dev --hot",
-    "server": "nodemon --exec babel-node src/server/server.js",
+    "server": "ts-node-dev src/server/server.ts",
     "dev": "set NODE_ENV=development&&concurrently \"npm run server\" \"npm run client\"",
-    "serverTS": "ts-node-dev src/server/server.ts",
-    "devTS": "set NODE_ENV=development&&concurrently \"npm run serverTS\" \"npm run client\"",
+    "tsc-server": "tsc --project tsconfig.server.json",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --verbose --coverage"
+    "test:coverage": "jest --verbose --coverage",
+    "start-deprecated": "npm run build && set NODE_ENV=production&& node -r esm dist/server/server.js",
+    "dev-deprecated": "set NODE_ENV=development&&concurrently \"npm run server\" \"npm run client\"",
+    "server-deprecated": "nodemon --exec babel-node src/server/server.js"
   },
   "engines": {
     "node": "10.13.0"
@@ -84,6 +86,7 @@
     "style-loader": "^0.23.1",
     "terser-webpack-plugin": "^1.4.1",
     "typescript": "^3.5.3",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "uuid-random": "^1.0.9",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6"
