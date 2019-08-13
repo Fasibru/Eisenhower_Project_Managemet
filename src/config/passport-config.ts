@@ -1,22 +1,32 @@
 import 'dotenv/config';
-import { Strategy as LocalStrategy } from 'passport-local';
+
+import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 import passport from 'passport';
-import bcrypt from 'bcrypt';
+import { Strategy as LocalStrategy } from 'passport-local';
+
 import { UserSchema } from '../server/models/model';
 
-const User = mongoose.model('Users', UserSchema);
+import { UserSchemaType } from '../types/modelTypes';
+
+declare module 'passport-local' {
+  interface IVerifyOptions {
+    status: number;
+  }
+}
+
+const userEntry = mongoose.model<UserSchemaType>('Users', UserSchema);
 
 passport.use(
   'login',
   new LocalStrategy(
     {
-      usernameField: 'emailAddress',
       passwordField: 'password',
       session: false,
+      usernameField: 'emailAddress',
     },
     (username, password, done) => {
-      User.findOne({ emailAddress: username })
+      userEntry.findOne({ emailAddress: username })
         .then((user) => {
           if (!user) {
             return done(null, false, {
@@ -26,7 +36,7 @@ passport.use(
           }
           bcrypt.compare(password, user.password)
             .then((match) => {
-              if (match !== true) {
+              if (!match) {
                 return done(null, false, {
                   message: "Sorry, we couldn't find you with the provided email and password.",
                   status: 404,
