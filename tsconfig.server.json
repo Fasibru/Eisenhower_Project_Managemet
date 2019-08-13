@@ -6,8 +6,8 @@
     "module": "commonjs",
     "target": "es5",
     "moduleResolution": "node",
-    "jsx": "react",
-    "allowJs": true,
+    // "jsx": "react",
+    // "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "plugins": [
@@ -17,6 +17,6 @@
     ],
   },
   "include": [
-    "src"
+    "src/server"
   ]
 }
