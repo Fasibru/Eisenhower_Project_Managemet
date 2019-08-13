@@ -9,7 +9,7 @@ import { getUserTasks } from '../../actions/actionsTasks';
 import { getUser } from '../../actions/actionsUser';
 
 import { FiltersActionsTypes } from '../../../types/filterActionTypes';
-import { Filters, Store, TaskType, UserType } from '../../../types/storeTypes';
+import { Filters, Store, Tasks, TaskType, UserType } from '../../../types/storeTypes';
 import { TaskActionsTypes } from '../../../types/taskActionTypes';
 import { UserActionsTypes } from '../../../types/userActionTypes';
 
@@ -25,13 +25,13 @@ import Sidenav from './Sidenav';
 import '../scss/App.scss';
 
 interface AppProps {
-  newTaskPopup: boolean;
-  editTaskPopup: boolean;
-  userId: string;
-  userError: string;
-  isFetchingTasks: boolean;
-  isFetchingUser: boolean;
-  isFetchingFilters: boolean;
+  newTaskPopup: Tasks['newTaskPopup'];
+  editTaskPopup: Tasks['editTaskPopup'];
+  userId: UserType['userId'];
+  userError: UserType['userError'];
+  isFetchingTasks: Tasks['isFetchingTasks'];
+  isFetchingUser: UserType['isFetchingUser'];
+  isFetchingFilters: Filters['isFetchingFilters'];
   getUserTasks(userId: string): ThunkAction<
     void,
     TaskType[],
