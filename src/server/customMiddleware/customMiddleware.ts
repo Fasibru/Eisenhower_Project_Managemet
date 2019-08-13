@@ -1,6 +1,8 @@
+import { NextFunction, Request, Response } from 'express';
+// tslint:disable-next-line: import-name
 import jwt from 'jsonwebtoken';
 
-const verifyJWT = (req, res, next) => {
+const verifyJWT = (req: Request, res: Response, next: NextFunction) => {
   const authCookieName = process.env.AUTH_COOKIE_NAME;
 
   const jwtToken = req.cookies[authCookieName];
@@ -8,7 +10,7 @@ const verifyJWT = (req, res, next) => {
   if (!jwtToken) {
     res.status(403).json({ message: 'No JWT provided.' });
   } else if (jwtToken) {
-    jwt.verify(jwtToken, process.env.SECRET, { algorithms: 'HS256' }, (err) => {
+    jwt.verify(jwtToken, process.env.SECRET, { algorithms: ['HS256'] }, (err) => {
       if (err) {
         res.status(403).json({ message: err });
       } else {
