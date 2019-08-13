@@ -37,6 +37,8 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@types/axios": "^0.14.0",
     "@types/bcrypt": "^3.0.0",
+    "@types/express-session": "^1.15.13",
+    "@types/jsonwebtoken": "^8.3.3",
     "@types/mongoose": "^5.5.12",
     "@types/passport": "^1.0.0",
     "@types/passport-local": "^1.0.33",
