@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run build && set NODE_ENV=production&& node -r esm src/server/server.js",
     "build": "webpack -p --env=prod",
-    "client": "webpack-dev-server -d --env=dev --devtool inline-source-map --hot",
+    "client": "webpack-dev-server -d --env=dev --hot",
     "server": "nodemon --exec babel-node src/server/server.js",
     "dev": "set NODE_ENV=development&&concurrently \"npm run server\" \"npm run client\"",
     "serverTS": "ts-node-dev src/server/server.ts",

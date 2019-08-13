@@ -33,7 +33,7 @@ module.exports = {
         enforce: 'pre',
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: ['babel-loader', 'source-map-loader'],
+        loader: ['source-map-loader'],
       },
       {
         // pass all css files through style-loader (injects <style> tag in DOM) and css-loader (translates CSS into CommonJS)
@@ -66,7 +66,7 @@ module.exports = {
   //   'react': 'React',
   //   'react-dom': 'ReactDOM',
   // },
-  devtool: 'spource-map',
+  devtool: 'inline-source-map',
   devServer: {
     https: {
       key: fs.readFileSync(path.join(__dirname, '/security/cert.key')),
