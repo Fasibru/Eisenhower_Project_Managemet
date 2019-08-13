@@ -4,7 +4,7 @@
   "description": "Project organization based on Eisenhower matrix",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && set NODE_ENV=production&& npm run tsc-server && node -r esm dist/server/server.js",
+    "start": "npm run build && npm run tsc-server && set NODE_ENV=production&& node -r esm dist/server/server.js",
     "build": "webpack -p --env=prod",
     "client": "webpack-dev-server -d --env=dev --hot",
     "server": "ts-node-dev src/server/server.ts",
@@ -86,7 +86,6 @@
     "style-loader": "^0.23.1",
     "terser-webpack-plugin": "^1.4.1",
     "typescript": "^3.5.3",
-    "uglifyjs-webpack-plugin": "^2.2.0",
     "uuid-random": "^1.0.9",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6"
