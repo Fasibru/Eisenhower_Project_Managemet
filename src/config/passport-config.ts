@@ -15,7 +15,8 @@ declare module 'passport-local' {
   }
 }
 
-const userEntry = mongoose.model<UserSchemaType>('Users', UserSchema);
+// tslint:disable-next-line: variable-name
+const User = mongoose.model<UserSchemaType>('Users', UserSchema);
 
 passport.use(
   'login',
@@ -26,7 +27,7 @@ passport.use(
       usernameField: 'emailAddress',
     },
     (username, password, done) => {
-      userEntry.findOne({ emailAddress: username })
+      User.findOne({ emailAddress: username })
         .then((user) => {
           if (!user) {
             return done(null, false, {
