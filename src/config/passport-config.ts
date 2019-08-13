@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 import passport from 'passport';
