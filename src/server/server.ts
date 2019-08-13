@@ -1,50 +1,57 @@
+// tslint:disable: no-console
 import 'dotenv/config';
-import express from 'express';
-import session from 'express-session';
-import https from 'https';
-import fs from 'fs';
-import path from 'path';
-import mongoose from 'mongoose';
-import connectMongo from 'connect-mongo';
-import cors from 'cors';
+
 import bodyParser from 'body-parser';
+import connectMongo from 'connect-mongo';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import express from 'express';
+// tslint:disable-next-line: import-name
+import session from 'express-session';
+import fs from 'fs';
+import https from 'https';
+import mongoose from 'mongoose';
 import passport from 'passport';
+import path from 'path';
+
 import '../config/passport-config';
 
-import apiRouter from './routes/apiRoutes';
-import accountRoutes from './routes/accountRoutes';
+// tslint:disable-next-line: import-name
 import verifyJWT from './customMiddleware/customMiddleware';
+import accountRoutes from './routes/accountRoutes';
+// tslint:disable-next-line: import-name
+import apiRouter from './routes/apiRoutes';
 
-const portConfig = JSON.parse(fs.readFileSync('src/config/port-config.json'))[0];
+const portConfig = JSON.parse(fs.readFileSync('src/config/port-config.json').toString())[0];
 const PORT = process.env.PORT || portConfig.BACKEND_SERVER_PORT;
 const mongoDatabaseURL = process.env.DB_URL;
+// tslint:disable-next-line: variable-name
 const MongoStore = connectMongo(session);
 
 // initiate mongoose connection
 mongoose.connect(mongoDatabaseURL, {
-  useNewUrlParser: true,
   useFindAndModify: false,
+  useNewUrlParser: true,
 })
   .then(() => console.log('Successfully connected to mongodb'))
   .catch((err) => {
-    console.log(err);
+    throw new Error(err);
   });
 
 const app = express();
 
 // Session
 app.use(session({
-  store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  cookie: {
+    sameSite: true,
+    secure: true,
+  },
   name: 'sid',
+  proxy: true,
   resave: false,
   saveUninitialized: false,
   secret: process.env.SECRET,
-  proxy: true,
-  cookie: {
-    secure: true,
-    sameSite: true,
-  },
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
 }));
 
 // CORS
@@ -74,14 +81,19 @@ app.get('/*', (req, res) => {
 });
 
 if (process.env.NODE_ENV === 'production') {
-  app.listen(PORT, () => console.log(`${process.env.NODE_ENV} HTTP Express server is running on port:${PORT}`));
+  app.listen(PORT, () => console.log(
+    `${process.env.NODE_ENV} HTTP Express server is running on port:${PORT}`
+  ));
 } else if (process.env.NODE_ENV === 'development') {
   const httpsOptions = {
-    key: fs.readFileSync('security/cert.key'),
     cert: fs.readFileSync('security/cert.pem'),
+    key: fs.readFileSync('security/cert.key'),
   };
   https.createServer(httpsOptions, app)
-    .listen(PORT, () => console.log(`${process.env.NODE_ENV} HTTPS Express backend server is running on port:${PORT}.\nFrontend dev server running on port:${portConfig.DEV_FRONTEND_SERVER_PORT} --> https://localhost:${portConfig.DEV_FRONTEND_SERVER_PORT}`));
+    .listen(PORT, () => console.log(
+      `${process.env.NODE_ENV} HTTPS Express backend server is running on port:${PORT}.`
+      + `\nFrontend dev server running on port:${portConfig.DEV_FRONTEND_SERVER_PORT}`
+      + ` --> https://localhost:${portConfig.DEV_FRONTEND_SERVER_PORT}`));
 } else {
   console.log('process.env.NODE_ENV neither set to production nor development');
 }
