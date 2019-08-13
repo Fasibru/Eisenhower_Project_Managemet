@@ -1,7 +1,10 @@
 @import './variables';
 
 .sidenav {
-  display: flex;
+  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
   flex-direction: column;
   height: 100%;
   width: 220px;
@@ -29,7 +32,10 @@
 .sidenav__list-elem {
   color: $element-color;
   padding: 20px 0px 20px 0px;
-  display: flex;
+  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
   flex-direction: column;
 
   p {
@@ -42,19 +48,37 @@
 }
 
 .sidenav__status {
-  display: flex;
-  flex: 1;
+  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+  -webkit-box-flex: 1;   /* OLD - iOS 6-, Safari 3.1-6 */
+  -webkit-flex: 1;       /* Safari 6.1+. iOS 7.1+, BB10 */
+  -ms-flex: 1;           /* IE 10 */
+  flex: 1;               /* NEW, Spec - Firefox, Chrome, Opera */
   flex-direction: column;
 }
 
 .sidenav__showTasks {
-  display: flex;
-  flex: 1;
+  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+  -webkit-box-flex: 1;   /* OLD - iOS 6-, Safari 3.1-6 */
+  -webkit-flex: 1;       /* Safari 6.1+. iOS 7.1+, BB10 */
+  -ms-flex: 1;           /* IE 10 */
+  flex: 1;               /* NEW, Spec - Firefox, Chrome, Opera */
 }
 
 .sidenav__date {
-  display: flex;
-  flex: 1;
+  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+  -webkit-box-flex: 1;   /* OLD - iOS 6-, Safari 3.1-6 */
+  -webkit-flex: 1;       /* Safari 6.1+. iOS 7.1+, BB10 */
+  -ms-flex: 1;           /* IE 10 */
+  flex: 1;               /* NEW, Spec - Firefox, Chrome, Opera */
   flex-direction: column;
 }
 
@@ -64,7 +88,10 @@
 }
 
 .sidenav__date-default-today {
-  display: flex;
+  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
   align-items: center;
   padding-top: 5px;
 
@@ -75,7 +102,10 @@
 
 
 .sidenav__btn {
-  flex: 1;
+  -webkit-box-flex: 1;   /* OLD - iOS 6-, Safari 3.1-6 */
+  -webkit-flex: 1;       /* Safari 6.1+. iOS 7.1+, BB10 */
+  -ms-flex: 1;           /* IE 10 */
+  flex: 1;               /* NEW, Spec - Firefox, Chrome, Opera */
   font-family: $font-stack;
   background: $element-color;
   border: none;
@@ -109,7 +139,10 @@
   z-index: 1;
   color: $element-color;
   cursor: pointer;
-  display: flex;
+  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
   background-color: $color-darkest;
   font-family: $font-stack;
   font-size: 1rem;
