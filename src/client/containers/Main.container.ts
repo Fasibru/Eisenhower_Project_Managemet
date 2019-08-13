@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
 import Main from '../components/js/Main';
 
-const formatDate = date => date.substr(0, 10);
+import { Filter, Store, TaskType } from '../../types/storeTypes';
 
-const filterTasksByDate = (tasks, filters) => {
+const formatDate = (date: string) => date.substr(0, 10);
+
+const filterTasksByDate = (tasks: TaskType[], filters: Filter) => {
   const today = new Date().toISOString().substring(0, 10);
   const dynamicDateRangeEnd = filters.dateRangeEndDefaultToday ? today : filters.dateRangeEnd;
   return tasks.filter(
@@ -12,20 +14,20 @@ const filterTasksByDate = (tasks, filters) => {
   );
 };
 
-const filterTasksByStatus = (tasks, filters) => {
+const filterTasksByStatus = (tasks: TaskType[], filters: Filter) => {
   switch (filters.showTasks) {
     case 'all':
       return tasks;
     case 'completed':
-      return tasks.filter(task => task.completed === true);
+      return tasks.filter(task => task.completed);
     case 'open':
-      return tasks.filter(task => task.completed === false);
+      return tasks.filter(task => !task.completed);
     default:
       throw new Error(`Unknown status filter: ${filters.showTasks}`);
   }
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: Store) => ({
   filteredTasks: filterTasksByStatus(
     filterTasksByDate(state.tasks.tasks, state.filters.filters), state.filters.filters,
   ),
