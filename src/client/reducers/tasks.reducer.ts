@@ -19,11 +19,11 @@ import {
 
 const initialState: Tasks = {
   tasks: [],
-  newTaskPopup: false,
   newTask: {
-    title: '',
     description: '',
+    title: '',
   },
+  newTaskPopup: false,
   editTaskPopup: false,
   editTask: {
     __v: -999,
@@ -32,6 +32,7 @@ const initialState: Tasks = {
     completed: false,
     date: '',
     description: '',
+    members: [],
     rank: -999,
     title: '',
   },

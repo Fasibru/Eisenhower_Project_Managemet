@@ -3,6 +3,7 @@ export interface TaskType {
   category: string;
   completed: boolean;
   _id: string;
+  members: string[];
   title: string;
   description: string;
   date: string;
