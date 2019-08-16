@@ -42,7 +42,8 @@
 @media only screen and (min-width: 992px) {
   .main {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    // grid-template-columns: 1fr 1fr;
+    grid-template-columns: 50% 50%;
     grid-template-areas:
       "column-A column-B"
       "column-C column-D"
@@ -57,7 +58,8 @@
 @media only screen and (min-width: 1400px) {
   .main {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    // grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 25% 25% 25% 25%;
     grid-template-areas:
       "column-A column-B column-C column-D"
     }
