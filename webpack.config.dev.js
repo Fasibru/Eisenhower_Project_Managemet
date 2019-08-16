@@ -35,18 +35,13 @@ module.exports = {
         exclude: /node_modules/,
         loader: ['source-map-loader'],
       },
+      /* pass all scss files through
+        1. sass-loader (compiles Sass to CSS, using Node Sass by default)
+        2. css-loader (translates CSS into CommonJS)
+        3. style-loader (injects <style> tag in DOM)
+      */
       {
-        // pass all css files through style-loader (injects <style> tag in DOM) and css-loader (translates CSS into CommonJS)
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-        // use: [MiniCssExtractPlugin.loader, 'css-loader'],
-      },
-      {
-        // pass all scss files through style-loader, css-loader and sass-loader (compiles Sass to CSS, using Node Sass by default)
-        test: /\.scss$/,
-        resolve: {
-          extensions: ['.scss'],
-        },
+        test: /\.(sa|sc|c)ss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
         // use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
