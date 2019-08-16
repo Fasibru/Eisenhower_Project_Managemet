@@ -38,11 +38,12 @@ module.exports = {
       /* pass all scss files through
         1. sass-loader (compiles Sass to CSS, using Node Sass by default)
         2. css-loader (translates CSS into CommonJS)
-        3. style-loader (injects <style> tag in DOM)
+        3. postcss-loader (apply postCSS fixes like autoprefixer)
+        4. style-loader (injects <style> tag in DOM)
       */
       {
         test: /\.(sa|sc|c)ss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
         // use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
