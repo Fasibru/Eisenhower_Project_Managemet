@@ -1,10 +1,27 @@
 @import './variables';
 
-.sidenav {
+@mixin display-flex() {
   display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
   display: -ms-flexbox;  /* TWEENER - IE 10 */
   display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
   display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+}
+
+@mixin flex($property) {
+  -webkit-box-flex: $property;   /* OLD - iOS 6-, Safari 3.1-6 */
+  -webkit-flex: $property;       /* Safari 6.1+. iOS 7.1+, BB10 */
+  -ms-flex: $property;           /* IE 10 */
+  flex: $property;               /* NEW, Spec - Firefox, Chrome, Opera */
+}
+
+@mixin transform($property) {
+  -webkit-transform: $property;
+  -ms-transform: $property;
+  transform: $property;
+}
+
+.sidenav {
+  @include display-flex();
   -webkit-flex-direction: column;
   flex-direction: column;
   height: 100%;
@@ -12,7 +29,8 @@
   position: fixed;
   background-color: $component-color-sidenav;
   overflow: auto;
-  transform: translateX(-220px);
+  // transform: translateX(-220px);
+  @include transform(translateX(-220px));
   transition: all .6s ease-in-out;
   z-index: 2;
 }
@@ -33,10 +51,7 @@
 .sidenav__list-elem {
   color: $element-color;
   padding: 20px 0px 20px 0px;
-  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-  display: -ms-flexbox;  /* TWEENER - IE 10 */
-  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+  @include display-flex();
   -webkit-flex-direction: column;
   flex-direction: column;
 
@@ -50,38 +65,20 @@
 }
 
 .sidenav__status {
-  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-  display: -ms-flexbox;  /* TWEENER - IE 10 */
-  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
-  -webkit-box-flex: 1;   /* OLD - iOS 6-, Safari 3.1-6 */
-  -webkit-flex: 1;       /* Safari 6.1+. iOS 7.1+, BB10 */
-  -ms-flex: 1;           /* IE 10 */
-  flex: 1;               /* NEW, Spec - Firefox, Chrome, Opera */
+  @include display-flex();
+  @include flex(1);
   -webkit-flex-direction: column;
   flex-direction: column;
 }
 
 .sidenav__showTasks {
-  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-  display: -ms-flexbox;  /* TWEENER - IE 10 */
-  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
-  -webkit-box-flex: 1;   /* OLD - iOS 6-, Safari 3.1-6 */
-  -webkit-flex: 1;       /* Safari 6.1+. iOS 7.1+, BB10 */
-  -ms-flex: 1;           /* IE 10 */
-  flex: 1;               /* NEW, Spec - Firefox, Chrome, Opera */
+  @include display-flex();
+  @include flex(1);
 }
 
 .sidenav__date {
-  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-  display: -ms-flexbox;  /* TWEENER - IE 10 */
-  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
-  -webkit-box-flex: 1;   /* OLD - iOS 6-, Safari 3.1-6 */
-  -webkit-flex: 1;       /* Safari 6.1+. iOS 7.1+, BB10 */
-  -ms-flex: 1;           /* IE 10 */
-  flex: 1;               /* NEW, Spec - Firefox, Chrome, Opera */
+  @include display-flex();
+  @include flex(1);
   -webkit-flex-direction: column;
   flex-direction: column;
 }
@@ -92,10 +89,7 @@
 }
 
 .sidenav__date-default-today {
-  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-  display: -ms-flexbox;  /* TWEENER - IE 10 */
-  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+  @include display-flex();
   -webkit-align-items: center;
   align-items: center;
   padding-top: 5px;
@@ -107,10 +101,7 @@
 
 
 .sidenav__btn {
-  -webkit-box-flex: 1;   /* OLD - iOS 6-, Safari 3.1-6 */
-  -webkit-flex: 1;       /* Safari 6.1+. iOS 7.1+, BB10 */
-  -ms-flex: 1;           /* IE 10 */
-  flex: 1;               /* NEW, Spec - Firefox, Chrome, Opera */
+  @include flex(1);
   font-family: $font-stack;
   background: $element-color;
   border: none;
@@ -144,10 +135,7 @@
   z-index: 1;
   color: $element-color;
   cursor: pointer;
-  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-  display: -ms-flexbox;  /* TWEENER - IE 10 */
-  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+  @include display-flex();
   background-color: $color-darkest;
   font-family: $font-stack;
   font-size: 1rem;
