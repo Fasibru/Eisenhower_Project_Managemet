@@ -43,6 +43,7 @@ export const Task: React.FC<TaskProps> = ({
           type="button"
           className="task__interaction-icon-button
             task__interaction-icon--push-right"
+          onClick={populateEditTask}
           onMouseDown={e => e.preventDefault()} /* to remove focus after button is clicked */
         >
           <FontAwesomeIcon
