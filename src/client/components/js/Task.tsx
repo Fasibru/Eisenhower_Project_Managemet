@@ -1,4 +1,6 @@
 // import PropTypes from 'prop-types';
+import { faCheckSquare, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { TaskType } from '../../../types/storeTypes';
@@ -36,6 +38,39 @@ export const Task: React.FC<TaskProps> = ({
     >
       <p className="task__title--bold">{task.title}</p>
       <p style={{ whiteSpace: 'pre-wrap' }}>{task.description}</p>
+      <p className="task__interaction-icons">
+        <button
+          type="button"
+          className="task__interaction-icon-button
+            task__interaction-icon--push-right"
+          onMouseDown={e => e.preventDefault()} /* to remove focus after button is clicked */
+        >
+          <FontAwesomeIcon
+            icon={faPen}
+            // className="task__interaction-icon--push-right"
+          />
+        </button>
+        <button
+          type="button"
+          className="task__interaction-icon-button
+            task__interaction-icon--increased-margin"
+          onMouseDown={e => e.preventDefault()} /* to remove focus after button is clicked */
+        >
+          <FontAwesomeIcon
+            icon={faCheckSquare}
+            // className="task__interaction-icon--increased-margin"
+          />
+        </button>
+        <button
+          type="button"
+          className="task__interaction-icon-button"
+          onMouseDown={e => e.preventDefault()} /* to remove focus after button is clicked */
+        >
+          <FontAwesomeIcon
+            icon={faTrash}
+          />
+        </button>
+      </p>
     </div>
   );
 };

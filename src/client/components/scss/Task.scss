@@ -41,6 +41,32 @@
   font-weight: bold;
 }
 
+.task__interaction-icons {
+  display: flex;
+  margin-bottom: 0;
+}
+
+.task__interaction-icon--push-right{
+  margin-left: auto;  
+}
+
+.task__interaction-icon--increased-margin{
+  margin: 0 15px;
+}
+
+.task__interaction-icon-button {
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  color: $color-dark-font;
+  font-size: 1rem;
+}
+
+.task__interaction-icon-button:hover {
+  color: #000000;
+  cursor: pointer;
+}
+
 // Medium screens breakpoint
 @media only screen and (min-width: 992px) {
   .task--orange, .task--lightgray {
