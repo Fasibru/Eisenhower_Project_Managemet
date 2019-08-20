@@ -22,7 +22,6 @@ import { TaskActionsTypes } from '../../../types/taskActionTypes';
 
 interface EditTaskProps {
   editTask: TaskType;
-  tasks: TaskType[];
   closeEditTaskPopup(): TaskActionsTypes;
   deleteTask(id: string): TaskActionsTypes;
   saveEditedTask(task: TaskType): TaskActionsTypes;
@@ -31,13 +30,12 @@ interface EditTaskProps {
 
 const mapStateToProps = (state: Store) => ({
   editTask: state.tasks.editTask,
-  tasks: state.tasks.tasks,
 });
 
+// tslint:disable-next-line: variable-name
 export const EditTask: React.FC<EditTaskProps> = ({
   // tslint:disable: no-shadowed-variable
   editTask,
-  tasks,
   closeEditTaskPopup,
   deleteTask,
   saveEditedTask,
@@ -152,7 +150,6 @@ export const EditTask: React.FC<EditTaskProps> = ({
 //   storeEditTaskFormChange: PropTypes.func.isRequired,
 //   saveEditedTask: PropTypes.func.isRequired,
 //   deleteTask: PropTypes.func.isRequired,
-//   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
 // };
 
 export default connect(mapStateToProps, {
