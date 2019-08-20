@@ -7,10 +7,6 @@
   word-wrap: break-word;
   hyphens: auto;
   background-color: $component-color-Task;
-
-  p {
-    margin-bottom: 5px;
-  }
 }
 
 .task:first-child {
@@ -49,6 +45,8 @@
   display: flex;
   margin-bottom: 0;
   margin-top: 0;
+  color: $color-dark-font;
+  font-size: 1rem;
 }
 
 .task__interaction-icon--push-right{

@@ -61,6 +61,13 @@ export const Task: React.FC<TaskProps> = ({
       });
   };
 
+  const oneDay = 24 * 60 * 60 * 1000;
+  const taskCreationDate = new Date(task.date);
+  const today = new Date();
+  const daysPassedSinceTaskCreated = Math.ceil(
+    (today.getTime() - taskCreationDate.getTime())
+    / oneDay);
+
   return (
     <div
       className={className}
@@ -69,6 +76,11 @@ export const Task: React.FC<TaskProps> = ({
       <p className="task__title--bold">{task.title}</p>
       <p style={{ whiteSpace: 'pre-wrap' }}>{task.description}</p>
       <p className="task__interaction-icons">
+        {!task.completed
+          && (
+            <span>Open since {daysPassedSinceTaskCreated} days</span>
+          )
+        }
         <button
           type="button"
           className="task__interaction-icon-button
@@ -78,7 +90,6 @@ export const Task: React.FC<TaskProps> = ({
         >
           <FontAwesomeIcon
             icon={faPen}
-            // className="task__interaction-icon--push-right"
           />
         </button>
         <button
