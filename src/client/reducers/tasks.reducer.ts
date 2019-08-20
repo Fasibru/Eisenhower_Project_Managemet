@@ -100,8 +100,8 @@ const tasksReducer = (state = initialState, action: TaskActionsTypes): Tasks => 
       });
     case SAVE_EDITED_TASK:
       return Object.assign({}, state, {
-        tasks: state.tasks.map((task, index) => {
-          if (index === action.index) {
+        tasks: state.tasks.map((task) => {
+          if (task._id === action.task._id) {
             return action.task;
           }
           return task;

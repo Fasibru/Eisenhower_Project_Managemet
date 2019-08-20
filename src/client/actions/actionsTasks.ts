@@ -71,8 +71,7 @@ export const getUserTasks = (userId: string): ThunkAction<
     });
 };
 
-export const saveEditedTask = (task: TaskType, index: number): TaskActionsTypes => ({
-  index,
+export const saveEditedTask = (task: TaskType): TaskActionsTypes => ({
   task,
   type: SAVE_EDITED_TASK,
 });

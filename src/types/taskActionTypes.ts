@@ -39,7 +39,6 @@ interface GetTasksFailureAction {
 interface SaveEditedTaskAction {
   type: typeof SAVE_EDITED_TASK;
   task: TaskType;
-  index: number;
 }
 
 interface DeleteTaskAction {

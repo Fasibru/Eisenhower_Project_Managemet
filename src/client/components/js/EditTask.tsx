@@ -25,7 +25,7 @@ interface EditTaskProps {
   tasks: TaskType[];
   closeEditTaskPopup(): TaskActionsTypes;
   deleteTask(index: number): TaskActionsTypes;
-  saveEditedTask(task: TaskType, index: number): TaskActionsTypes;
+  saveEditedTask(task: TaskType): TaskActionsTypes;
   storeEditTaskFormChange(name: string, value: boolean | string): TaskActionsTypes;
 }
 
@@ -61,11 +61,8 @@ export const EditTask: React.FC<EditTaskProps> = ({
     // save changes to the DB and if successful to UI as well
     axios.put(`/api/task/${editTask._id}`, editTask)
       .then(() => {
-        // find index of task to update:
-        const editTaskIndex = tasks.findIndex(task => task._id === editTask._id);
-
-        // save changes in tasks array as well to avoid additional GET of all tasks
-        saveEditedTask(editTask, editTaskIndex);
+        // save changes in tasks array for UI
+        saveEditedTask(editTask);
 
         // close the dialog after submit
         closeEditTaskPopup();
