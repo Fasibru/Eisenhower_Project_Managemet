@@ -76,8 +76,8 @@ export const saveEditedTask = (task: TaskType): TaskActionsTypes => ({
   type: SAVE_EDITED_TASK,
 });
 
-export const deleteTask = (index: number): TaskActionsTypes => ({
-  index,
+export const deleteTask = (id: string): TaskActionsTypes => ({
+  id,
   type: DELETE_TASK,
 });
 

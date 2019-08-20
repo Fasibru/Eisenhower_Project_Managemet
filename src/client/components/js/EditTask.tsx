@@ -24,7 +24,7 @@ interface EditTaskProps {
   editTask: TaskType;
   tasks: TaskType[];
   closeEditTaskPopup(): TaskActionsTypes;
-  deleteTask(index: number): TaskActionsTypes;
+  deleteTask(id: string): TaskActionsTypes;
   saveEditedTask(task: TaskType): TaskActionsTypes;
   storeEditTaskFormChange(name: string, value: boolean | string): TaskActionsTypes;
 }
@@ -73,13 +73,11 @@ export const EditTask: React.FC<EditTaskProps> = ({
       });
   };
 
+  // delete task from the DB and if successful in UI as well
   const handleDelete = () => {
     axios.delete(`/api/task/${editTask._id}`)
       .then(() => {
-        // remove deleted task from tasks array
-        const deleteTaskIndex = tasks
-          .findIndex(task => task._id === editTask._id);
-        deleteTask(deleteTaskIndex);
+        deleteTask(editTask._id);
 
         // close the popup after submit
         closeEditTaskPopup();

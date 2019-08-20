@@ -43,7 +43,7 @@ interface SaveEditedTaskAction {
 
 interface DeleteTaskAction {
   type: typeof DELETE_TASK;
-  index: number;
+  id: string;
 }
 
 interface OpenNewTaskPopupAction {

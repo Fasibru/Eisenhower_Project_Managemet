@@ -115,10 +115,14 @@ const tasksReducer = (state = initialState, action: TaskActionsTypes): Tasks => 
         ],
       });
     case DELETE_TASK:
+      const deletedTaskIndex = state.tasks.findIndex(
+        task => task._id === action.id,
+      );
+
       return Object.assign({}, state, {
         tasks: [
-          ...state.tasks.slice(0, action.index),
-          ...state.tasks.slice(action.index + 1),
+          ...state.tasks.slice(0, deletedTaskIndex),
+          ...state.tasks.slice(deletedTaskIndex + 1),
         ],
       });
     case RESET_TASKS_STORE:
