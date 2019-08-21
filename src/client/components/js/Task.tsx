@@ -65,7 +65,7 @@ export const Task: React.FC<TaskProps> = ({
   const taskCreationDate = new Date(task.date);
   const today = new Date();
   const daysPassedSinceTaskCreated = Math.ceil(
-    (today.getTime() - taskCreationDate.getTime())
+    (today.setHours(0, 0, 0, 0) - taskCreationDate.setHours(0, 0, 0, 0))
     / oneDay);
 
   return (
