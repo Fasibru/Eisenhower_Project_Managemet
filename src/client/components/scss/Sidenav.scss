@@ -76,6 +76,13 @@
   @include flex(1);
 }
 
+.sidenav__search {
+  @include display-flex();
+  @include flex(1);
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
 .sidenav__date {
   @include display-flex();
   @include flex(1);

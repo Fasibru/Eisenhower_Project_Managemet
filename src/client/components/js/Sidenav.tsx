@@ -9,6 +9,7 @@ import { openNewTaskPopup } from '../../actions/actionsTasks';
 import '../scss/Sidenav.scss';
 
 import DateFilterContainer from '../../containers/DateFilter.container';
+import SearchFilter from './SearchFilter';
 import StatusFilter from './StatusFilter';
 
 import { TaskActionsTypes } from '../../../types/taskActionTypes';
@@ -49,12 +50,7 @@ export const Sidenav: React.FC<SidenavProps> = ({
           </button>
         </li>
         <li className="sidenav__list-elem">
-          <p>Search tasks:</p>
-          <input
-            className="sidenav__input"
-            type="search"
-            placeholder="...to be implemented..."
-          />
+          <SearchFilter />
         </li>
         <li className="sidenav__list-elem">
           <StatusFilter />
