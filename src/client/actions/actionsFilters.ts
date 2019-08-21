@@ -1,3 +1,4 @@
+// tslint:disable: object-shorthand-properties-first
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
@@ -8,6 +9,7 @@ import {
   GET_FILTERS_REQUEST,
   GET_FILTERS_SUCCESS,
   RESET_FILTERS_STORE,
+  STORE_SEARCH_QUERY_INPUT,
   UPDATE_FILTERS,
 } from '../constants/actionConstantsFilters';
 
@@ -68,4 +70,9 @@ export const updateFilters =
 
 export const resetFiltersStore = (): FiltersActionsTypes => ({
   type: RESET_FILTERS_STORE,
+});
+
+export const storeSearchQueryInput = (value: string): FiltersActionsTypes => ({
+  type: STORE_SEARCH_QUERY_INPUT,
+  value,
 });

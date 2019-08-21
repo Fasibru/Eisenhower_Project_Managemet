@@ -6,6 +6,7 @@ import {
   GET_FILTERS_SUCCESS,
   RESET_FILTERS_STORE,
   UPDATE_FILTERS,
+  STORE_SEARCH_QUERY_INPUT,
 } from '../constants/actionConstantsFilters';
 
 const initialState = {
@@ -36,8 +37,8 @@ const filtersReducer = (state = initialState, action: FiltersActionsTypes): Filt
       });
     case GET_FILTERS_FAILURE:
       return Object.assign({}, state, {
-        isFetchingFilters: false,
         fetchingError: action.error.message,
+        isFetchingFilters: false,
       });
     case UPDATE_FILTERS:
       return Object.assign({}, state, {
@@ -48,6 +49,13 @@ const filtersReducer = (state = initialState, action: FiltersActionsTypes): Filt
       });
     case RESET_FILTERS_STORE:
       return Object.assign({}, initialState);
+    case STORE_SEARCH_QUERY_INPUT:
+      return Object.assign({}, state, {
+        filters: {
+          ...state.filters,
+          searchQuery: action.value,
+        },
+      });
     default:
       return state;
   }

@@ -4,6 +4,7 @@ import {
   GET_FILTERS_REQUEST,
   GET_FILTERS_SUCCESS,
   RESET_FILTERS_STORE,
+  STORE_SEARCH_QUERY_INPUT,
   UPDATE_FILTERS,
 } from '../client/constants/actionConstantsFilters';
 
@@ -35,9 +36,15 @@ interface UpdateFiltersAction {
   value: boolean | Date | string;
 }
 
+interface StoreSearchQueryInputAction {
+  type: typeof STORE_SEARCH_QUERY_INPUT;
+  value: string;
+}
+
 export type FiltersActionsTypes =
 GetFiltersFailureAction |
 GetFiltersRequestAction |
 GetFiltersSuccessAction |
 ResetFiltersStoreAction |
+StoreSearchQueryInputAction |
 UpdateFiltersAction;
