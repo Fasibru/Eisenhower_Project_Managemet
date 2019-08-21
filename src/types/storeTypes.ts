@@ -22,6 +22,7 @@ export interface Filter {
   dateRangeStart: string;
   dateRangeEnd: string;
   dateRangeEndDefaultToday: boolean;
+  searchQuery: string;
 }
 
 export interface Filters {

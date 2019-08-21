@@ -14,6 +14,7 @@ const initialState = {
     dateRangeStart: new Date().toISOString(),
     dateRangeEnd: new Date().toISOString(),
     dateRangeEndDefaultToday: false,
+    searchQuery: '',
   },
   isFetchingFilters: false,
   fetchingError: '',
@@ -28,7 +29,10 @@ const filtersReducer = (state = initialState, action: FiltersActionsTypes): Filt
     case GET_FILTERS_SUCCESS:
       return Object.assign({}, state, {
         isFetchingFilters: false,
-        filters: action.filters,
+        filters: {
+          ...state.filters,
+          ...action.filters,
+        }
       });
     case GET_FILTERS_FAILURE:
       return Object.assign({}, state, {
