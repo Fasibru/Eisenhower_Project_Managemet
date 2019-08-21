@@ -27,10 +27,25 @@ const filterTasksByStatus = (tasks: TaskType[], filters: Filter) => {
   }
 };
 
+const filterTasksBySearchQuery = (tasks: TaskType[], filters: Filter) => {
+  const searchQuery = filters.searchQuery.toLocaleLowerCase();
+  const tasksAfterSearch = tasks.filter((task) => {
+    if (
+      task.title.toLocaleLowerCase().indexOf(searchQuery) &&
+      task.description.toLocaleLowerCase().indexOf(searchQuery) === -1) {
+      return false;
+    }
+    return task;
+  });
+  return tasksAfterSearch;
+};
+
 const mapStateToProps = (state: Store) => ({
   filteredTasks: filterTasksByStatus(
-    filterTasksByDate(state.tasks.tasks, state.filters.filters), state.filters.filters,
-  ),
+    filterTasksByDate(
+      filterTasksBySearchQuery(state.tasks.tasks, state.filters.filters),
+      state.filters.filters),
+    state.filters.filters),
 });
 
 export default connect(mapStateToProps)(Main);
