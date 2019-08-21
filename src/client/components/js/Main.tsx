@@ -34,6 +34,17 @@ const categorizeFilteredTasks = (filteredTasks: TaskType[]) => {
     TasksCatD: [],
   };
 
+  // sort filteredTasks array based on rank
+  // filteredTasks.sort((a, b) => {
+  //   if (a.rank > b.rank) {
+  //     return 1;
+  //   }
+  //   if (a.rank < b.rank) {
+  //     return -1;
+  //   }
+  //   return 0;
+  // });
+
   filteredTasks.forEach((task) => {
     switch (task.category) {
       case 'A':
@@ -83,10 +94,9 @@ const categorizeFilteredTasks = (filteredTasks: TaskType[]) => {
   return categorizedFilteredTasks;
 };
 
+// tslint:disable-next-line: variable-name
 const Main: React.FC<MainProps> = ({ filteredTasks }) => {
-  const categorizedFilteredTasks = categorizeFilteredTasks(
-    filteredTasks,
-  );
+  const categorizedFilteredTasks = categorizeFilteredTasks(filteredTasks);
 
   return (
     <main className="main" id="main">
@@ -123,7 +133,7 @@ const Main: React.FC<MainProps> = ({ filteredTasks }) => {
       </div>
     </main>
   );
-}
+};
 
 // Main.propTypes = {
 //   filteredTasks: PropTypes.arrayOf(PropTypes.object).isRequired,
