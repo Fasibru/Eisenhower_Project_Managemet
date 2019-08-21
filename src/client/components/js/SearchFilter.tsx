@@ -4,20 +4,13 @@ import { connect } from 'react-redux';
 import { storeSearchQueryInput } from '../../actions/actionsFilters';
 
 import { FiltersActionsTypes } from '../../../types/filterActionTypes';
-import { Store } from '../../../types/storeTypes';
 
 interface SearchFilterProps {
-  searchQuery: string;
   storeSearchQueryInput(value: string): FiltersActionsTypes;
 }
 
-const mapStateToProps = (state: Store) => ({
-  searchQuery: state.filters.filters.searchQuery,
-});
-
 // tslint:disable-next-line: variable-name
 const SearchFilter: React.FC<SearchFilterProps> = ({
-  searchQuery,
   storeSearchQueryInput,
 }) => {
 
@@ -30,7 +23,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
       <p>Search tasks:</p>
       <input
         className="sidenav__input"
-        type="text"
+        type="search"
         placeholder="... search expression ..."
         onChange={handleChange}
       />
@@ -38,4 +31,4 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
   );
 };
 
-export default connect(mapStateToProps, { storeSearchQueryInput })(SearchFilter);
+export default connect(null, { storeSearchQueryInput })(SearchFilter);
