@@ -4,7 +4,7 @@ Caveat: This repo is a fully working web app but since it is also a tool for me 
 # JATLA Project Management
 
 Looking at the title you might think 'Probably that's just another todo list app.' and to be honest as of now there are not a lot of arguments I can bring to the table to proof you wrong.  
-Nevertheless maybe you will change your mind sometime in the future once I have all my ideas implemented because as the title suggests this repo is about project management, not only todo task handling.  As of August 2019 for individual users you can add/edit/remove tasks, assign a priority, change the status to completed and filter on that as well as on the date the tasks where created. A search function will be the next filter to be implemented.  
+Nevertheless maybe you will change your mind sometime in the future once I have all my ideas implemented because as the title suggests this repo is about project management, not only todo task handling.  As of August 2019 for individual users you can add/edit/remove tasks, assign a priority, change the status to completed and filter on that, filter on the date the tasks where created and perform an instant search on the task title and description.  
 I see this evolving to a real project management tool once the following capabilities are implemented:
 
 * ~~User accounts~~ (basic implementation done August 2019)
