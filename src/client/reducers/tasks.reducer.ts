@@ -20,6 +20,7 @@ import {
 const initialState: Tasks = {
   tasks: [],
   newTask: {
+    completed: false,
     description: '',
     title: '',
   },
