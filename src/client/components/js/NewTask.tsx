@@ -1,5 +1,6 @@
 import axios from 'axios';
-import * as React from 'react';
+// tslint:disable-next-line: import-name
+import React, { useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -16,10 +17,13 @@ import TaskFormCategory from './TaskFormCategory';
 import TaskFormDescription from './TaskFormDescription';
 import TaskFormTitle from './TaskFormTitle';
 
-import { NewTaskType, Store, TaskType } from '../../../types/storeTypes';
+import { Filter, NewTaskType, Store, TaskType } from '../../../types/storeTypes';
 import { TaskActionsTypes } from '../../../types/taskActionTypes';
 
+import TaskWarningNote from './TaskWarningNote';
+
 interface NewTaskProps {
+  filters: Filter;
   newTask: NewTaskType;
   userId: string;
   closeNewTaskPopup(): TaskActionsTypes;
@@ -28,6 +32,7 @@ interface NewTaskProps {
 }
 
 const mapStateToProps = (state: Store) => ({
+  filters: state.filters.filters,
   newTask: state.tasks.newTask,
   userId: state.user.userId,
 });
@@ -35,6 +40,7 @@ const mapStateToProps = (state: Store) => ({
 // tslint:disable-next-line: variable-name
 export const NewTask: React.FC<NewTaskProps> = ({
   // tslint:disable: no-shadowed-variable
+  filters,
   newTask,
   userId,
   closeNewTaskPopup,
@@ -66,6 +72,24 @@ export const NewTask: React.FC<NewTaskProps> = ({
         closeNewTaskPopup();
       });
   };
+
+  const violatedFilters: string[] = [];
+  if (newTask.completed && filters.showTasks === 'open') {
+    violatedFilters.push('Show tasks: Open');
+  }
+  if (!newTask.completed && filters.showTasks === 'completed') {
+    violatedFilters.push('Show tasks: Completed');
+  }
+  if (newTask.description.indexOf(filters.searchQuery) === -1
+    && newTask.title.indexOf(filters.searchQuery) === -1
+  ) {
+    violatedFilters.push(`Search tasks: ${filters.searchQuery}`);
+  }
+  if (
+    new Date(filters.dateRangeEnd.substr(0, 10)) < new Date()
+  ) {
+    violatedFilters.push('Creation date out of defined date range');
+  }
 
   return (
     <div className="Task-outer">
@@ -105,6 +129,17 @@ export const NewTask: React.FC<NewTaskProps> = ({
           >
             Cancel
           </button>
+          {
+            // (newTask.completed && filters.showTasks === 'open')
+            //   || (!newTask.completed && filters.showTasks === 'completed')
+            // ? (
+            // <p>Task does not match current status filter settings.</p>
+            // ) : null
+            violatedFilters.length > 0 && (
+              // <TaskWarningNote identifier="New task" violatedFilters={violatedFilters.values} />
+              <TaskWarningNote identifier="New task" violatedFilters={violatedFilters}/>
+            )
+          }
         </form>
       </div>
     </div>

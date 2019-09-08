@@ -9,12 +9,22 @@ interface TaskWarningNoteProps {
 // tslint:disable-next-line: variable-name
 const TaskWarningNote: React.FC<TaskWarningNoteProps> = (
   { identifier, violatedFilters }) => {
+
+  const violations:
+    Array<React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>> = [];
+  violatedFilters.forEach((item) => {
+    violations.push(<li key={item}>{item}</li>);
+  });
+  console.log('violations:', violations);
+
   return (
-    <p>{identifier} does not match the following filter criteria:
+    <React.Fragment>
+      <p>Note: {identifier} does not match the following filter settings:
+      </p>
       <ul>
-        <li>{violatedFilters}</li>
+        {violations}
       </ul>
-    </p>
+    </React.Fragment>
   );
 };
 
