@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // tslint:disable-next-line: import-name
 import React from 'react';
 
+import '../scss/TaskWarningNote.scss';
+
 interface TaskWarningNoteProps {
   identifier: string;
   violatedFilters: string[];
@@ -20,11 +22,11 @@ const TaskWarningNote: React.FC<TaskWarningNoteProps> = (
 
   return (
     <React.Fragment>
-      <p>
-        <span><FontAwesomeIcon icon={faExclamationTriangle} /></span>
+      <p className="warning__title">
+        <span className="warning__icon"><FontAwesomeIcon icon={faExclamationTriangle} /></span>
         {identifier} does not match the following filter settings:
       </p>
-      <ul>
+      <ul className="warning__items">
         {violations}
       </ul>
     </React.Fragment>
