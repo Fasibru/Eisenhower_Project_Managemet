@@ -16,10 +16,12 @@ interface TasksCatProps {
 }
 
 interface CategorizeFilteredTasks {
+  // tslint:disable: prefer-array-literal
   TasksCatA: Array<React.ReactElement<TasksCatProps>>;
   TasksCatB: Array<React.ReactElement<TasksCatProps>>;
   TasksCatC: Array<React.ReactElement<TasksCatProps>>;
   TasksCatD: Array<React.ReactElement<TasksCatProps>>;
+  // tslint:enable: prefer-array-literal
 }
 
 interface MainProps {
@@ -118,7 +120,8 @@ const Main: React.FC<MainProps> = ({ filteredTasks }) => {
       </div>
       <div className="main__column-category main__column-C">
         <span
-          className="main__column-header">
+          className="main__column-header"
+        >
           Urgent ({categorizedFilteredTasks.TasksCatC.length})
         </span>
         {categorizedFilteredTasks.TasksCatC}
