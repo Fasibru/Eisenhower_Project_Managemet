@@ -16,11 +16,13 @@ import '../scss/TaskForm.scss';
 import TaskFormCategory from './TaskFormCategory';
 import TaskFormDescription from './TaskFormDescription';
 import TaskFormTitle from './TaskFormTitle';
+import TaskWarningNote from './TaskWarningNote';
 
-import { Store, TaskType } from '../../../types/storeTypes';
+import { Filter, Store, TaskType } from '../../../types/storeTypes';
 import { TaskActionsTypes } from '../../../types/taskActionTypes';
 
 interface EditTaskProps {
+  filters: Filter;
   editTask: TaskType;
   closeEditTaskPopup(): TaskActionsTypes;
   deleteTask(id: string): TaskActionsTypes;
@@ -30,12 +32,14 @@ interface EditTaskProps {
 
 const mapStateToProps = (state: Store) => ({
   editTask: state.tasks.editTask,
+  filters: state.filters.filters,
 });
 
 // tslint:disable-next-line: variable-name
 export const EditTask: React.FC<EditTaskProps> = ({
   // tslint:disable: no-shadowed-variable
   editTask,
+  filters,
   closeEditTaskPopup,
   deleteTask,
   saveEditedTask,
@@ -86,6 +90,19 @@ export const EditTask: React.FC<EditTaskProps> = ({
       });
   };
 
+  const violatedFilters: string[] = [];
+  if (editTask.description.indexOf(filters.searchQuery) === -1
+    && editTask.title.indexOf(filters.searchQuery) === -1
+  ) {
+    violatedFilters.push(`Search tasks: ${filters.searchQuery}`);
+  }
+  if (editTask.completed && filters.showTasks === 'open') {
+    violatedFilters.push('Show tasks: Open');
+  }
+  if (!editTask.completed && filters.showTasks === 'completed') {
+    violatedFilters.push('Show tasks: Completed');
+  }
+
   return (
     <div className="Task-outer">
       <div className="Task-inner">
@@ -131,6 +148,11 @@ export const EditTask: React.FC<EditTaskProps> = ({
           >
             Cancel
           </button>
+          {
+            violatedFilters.length > 0 && (
+              <TaskWarningNote identifier="New task" violatedFilters={violatedFilters} />
+            )
+          }
         </form>
       </div>
     </div>
