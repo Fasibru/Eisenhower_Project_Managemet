@@ -86,9 +86,10 @@ export const NewTask: React.FC<NewTaskProps> = ({
     violatedFilters.push(`Search tasks: ${filters.searchQuery}`);
   }
   if (
-    new Date(filters.dateRangeEnd.substr(0, 10)) < new Date()
+    new Date(filters.dateRangeEnd.substr(0, 10)).setHours(0, 0, 0, 0) <
+      new Date().setHours(0, 0, 0, 0)
   ) {
-    violatedFilters.push('Creation date out of defined date range');
+    violatedFilters.push('Creation date outside defined date range');
   }
 
   return (
