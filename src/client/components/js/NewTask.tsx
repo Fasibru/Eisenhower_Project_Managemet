@@ -74,16 +74,16 @@ export const NewTask: React.FC<NewTaskProps> = ({
   };
 
   const violatedFilters: string[] = [];
+  if (newTask.description.indexOf(filters.searchQuery) === -1
+    && newTask.title.indexOf(filters.searchQuery) === -1
+  ) {
+    violatedFilters.push(`Search tasks: ${filters.searchQuery}`);
+  }
   if (newTask.completed && filters.showTasks === 'open') {
     violatedFilters.push('Show tasks: Open');
   }
   if (!newTask.completed && filters.showTasks === 'completed') {
     violatedFilters.push('Show tasks: Completed');
-  }
-  if (newTask.description.indexOf(filters.searchQuery) === -1
-    && newTask.title.indexOf(filters.searchQuery) === -1
-  ) {
-    violatedFilters.push(`Search tasks: ${filters.searchQuery}`);
   }
   if (
     new Date(filters.dateRangeEnd.substr(0, 10)).setHours(0, 0, 0, 0) <
