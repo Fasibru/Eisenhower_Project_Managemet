@@ -16,11 +16,11 @@ import '../scss/TaskForm.scss';
 import TaskFormCategory from './TaskFormCategory';
 import TaskFormDescription from './TaskFormDescription';
 import TaskFormTitle from './TaskFormTitle';
+import TaskWarningNote from './TaskWarningNote';
 
 import { Filter, NewTaskType, Store, TaskType } from '../../../types/storeTypes';
 import { TaskActionsTypes } from '../../../types/taskActionTypes';
 
-import TaskWarningNote from './TaskWarningNote';
 
 interface NewTaskProps {
   filters: Filter;
@@ -131,13 +131,7 @@ export const NewTask: React.FC<NewTaskProps> = ({
             Cancel
           </button>
           {
-            // (newTask.completed && filters.showTasks === 'open')
-            //   || (!newTask.completed && filters.showTasks === 'completed')
-            // ? (
-            // <p>Task does not match current status filter settings.</p>
-            // ) : null
             violatedFilters.length > 0 && (
-              // <TaskWarningNote identifier="New task" violatedFilters={violatedFilters.values} />
               <TaskWarningNote identifier="New task" violatedFilters={violatedFilters}/>
             )
           }
