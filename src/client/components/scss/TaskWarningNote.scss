@@ -1,7 +1,9 @@
+@import './variables';
+
 .warning__icon {
   margin-right: 5px;
   font-size: 1rem;
-  color: orange;
+  color: $color-filter-warning;
 }
 
 .warning__title {

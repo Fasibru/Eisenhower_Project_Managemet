@@ -150,7 +150,7 @@ export const EditTask: React.FC<EditTaskProps> = ({
           </button>
           {
             violatedFilters.length > 0 && (
-              <TaskWarningNote identifier="New task" violatedFilters={violatedFilters} />
+              <TaskWarningNote identifier="Edited task" violatedFilters={violatedFilters} />
             )
           }
         </form>
