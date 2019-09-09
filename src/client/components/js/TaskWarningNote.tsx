@@ -1,3 +1,5 @@
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // tslint:disable-next-line: import-name
 import React from 'react';
 
@@ -15,11 +17,12 @@ const TaskWarningNote: React.FC<TaskWarningNoteProps> = (
   violatedFilters.forEach((item) => {
     violations.push(<li key={item}>{item}</li>);
   });
-  console.log('violations:', violations);
 
   return (
     <React.Fragment>
-      <p>Note: {identifier} does not match the following filter settings:
+      <p>
+        <span><FontAwesomeIcon icon={faExclamationTriangle} /></span>
+        {identifier} does not match the following filter settings:
       </p>
       <ul>
         {violations}
