@@ -1,4 +1,4 @@
-Caveat: This repo is a fully working web app but since it is also a tool for me to learn and try out different technologies you should not be surprised to see inconsistencies like mainly using ES6 but sometimes also ES5, or using react class components but trying react hooks as well and so on.
+Caveat: This repo is a fully working web app but since it is also a tool for me to learn and try out different technologies you should not be surprised to see inconsistencies like mainly using ES6 but sometimes also ES5, or using react class components but trying react hooks as well and so on. Also the project hasn't been maintained for a while due to lack of free time ;)
 
 
 # JATLA Project Management
